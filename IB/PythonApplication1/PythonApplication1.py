@@ -17,6 +17,9 @@ def prepare_input(dirty: str) -> str:
     and separating repeated letters with X's
     """
 
+
+
+
     dirty = "".join([c.upper() for c in dirty if c in string.ascii_letters])
     clean = ""
 
@@ -47,6 +50,7 @@ def generate_table(key: str) -> [str]:
     table = []
 
     # copy key chars into the table if they are in `alphabet` ignoring duplicates
+	#upper - из fff в FFF
     for char in key.upper():
         if char not in table and char in alphabet:
             table.append(char)
@@ -104,4 +108,16 @@ def decode(ciphertext: str, key: str) -> str:
     return plaintext
 
 #main
+print("Start our program ")
+str = input("String and key ")
+str = 'chypher'
+result = encode(str,'YTR')
+print(result)
+result2 = decode(result,'YTR')
+print(result2)
 
+count = len(result2)
+for i in range(count):
+	print(i,end=" ")
+	
+#end main
