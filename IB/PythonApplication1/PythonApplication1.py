@@ -107,14 +107,32 @@ def decode(ciphertext: str, key: str) -> str:
 
     return plaintext
 
+
+#cesar encryp function
+def cesar_encrypt(input_str:str, shift:int)->str:
+	
+	alphabet='абвгдеёжзийклмнопрстуфхцчшщъьыэюя_,.'
+	encrypted_message = ""
+
+	for char in input_str:
+		if char not in alphabet:
+			encrypted_message += char
+		else:
+			new_key = (alphabet.index(character) + shift) % len(alphabet)
+		   # Append the encoded character to the alphabet
+			encrypted_message += alpha[new_key]		
+
+	return encrypted_message
+
+
 #main
 print("Start our program ")
 str = input("String and key ")
 str = 'chypher'
 result = encode(str,'YTR')
-print(result)
+print("Ваше зашифрованное сообщение:{}".format(result))
 result2 = decode(result,'YTR')
-print(result2)
+print("Ваше исходное сообщение:{}".format(result2))
 
 count = len(result2)
 for i in range(count):
