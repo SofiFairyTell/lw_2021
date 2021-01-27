@@ -1,5 +1,6 @@
 import itertools
 import string
+import sys
 
 #глобальные переменные
 alphabet='абвгдеёжзийклмнопрстуфхцчшщъьыэюя_,.'
@@ -134,34 +135,65 @@ def gcd(a: int, b: int) -> int:
         a, b = b % a, a
     return b
 
+#TIPS: В модульной арифметике каждое целое число имеет аддитивную инверсию. 
+#Сумма целого числа и его аддитивной инверсии сравнима с 0 по модулю n .
+#В модульной арифметике целое число может или не может иметь мультипликативную инверсию. 
+#Целое число и его мультипликативная инверсия сравнимы с 1 по модулю n .
+
 #Ищем здесь k^-1
 def findModInverse(a: int, m: int) -> int:
     if gcd(a, m) != 1:#это означает, что a и m не взаимно простые числа
         return None 
-    u1, u2, u3 = 1, 0, a
-    v1, v2, v3 = 0, 1, m
+	#Далее рассматривается расширенный алгоритм Евклида
+    u1, u2, u3 = 1, 0, a #шаг 1
+    v1, v2, v3 = 0, 1, m #шаг 2
 
-    while v3 != 0:
+    while v3 != 0: #шаг3 пока не 
         q = u3 // v3
-        v1, v2, v3, u1, u2, u3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3), v1, v2, v3
+        t1,t2,t3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3) #с вспомгательным вектором
+        v1, v2, v3 = u1, u2, u3
+        u1, u2, u3 = t1, t2, t3 
+       #v1, v2, v3, u1, u2, u3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3), v1, v2, v3
     return u1 % m
 
+#Т.к. ключ один разделим его на две части
+def divide_key(key):
+	keyA = key//len(alphabet)
+	keyB = key%len(alphabet)
+	return (keyA,keyB)
 
-def affin_encrypt(input_str:str, shift:int)->str:
+def check_keys(keyA, keyB, mode):
+    if keyA == 1 or keyB == 0  and mode == 'encrypt':
+       sys.exit('Ключ слаб для шифрования. Выберите другой ключ')
+   
+
+def affin_encrypt(input_str:str, key:int)->str:
 	
-	multi_key = 2
+	keyA, keyB = divide_key(key) #выполним разделение нашего ключа на две части
 	encrypted_message = ""
 
 	for char in input_str:
 		if char not in alphabet:
 			encrypted_message += char
 		else:
-			new_key = (alphabet.index(char)*multi_key + shift) % len(alphabet)
+			index = (alphabet.index(char)*keyA + keyB) % len(alphabet)
 			#Добавим закодированный символ 
-			encrypted_message += alphabet[new_key]		
+			encrypted_message += alphabet[index]		
 
 	return encrypted_message
 
+def affin_decrypt(input_str:str, key:int)->str:
+	keyA, keyB = divide_key(key) #выполним разделение нашего ключа на две части
+	
+	for char in input_str:
+		if char not in alphabet:
+			encrypted_message += char
+		else:
+			index = (alphabet.index(char)*keyA + keyB) % len(alphabet)
+			#Добавим закодированный символ 
+			decrypted_message += alphabet[index]
+
+	return decrypted_message
 
 #main
 print("Start our program ")
