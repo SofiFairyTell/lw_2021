@@ -1,6 +1,8 @@
 import itertools
 import string
 
+#глобальные переменные
+alphabet='абвгдеёжзийклмнопрстуфхцчшщъьыэюя_,.'
 
 def chunker(seq, size):
     it = iter(seq)
@@ -108,19 +110,55 @@ def decode(ciphertext: str, key: str) -> str:
     return plaintext
 
 
-#cesar encryp function
+#Аддитивный моноалфавитный шрифт с задаваемым смещением
 def cesar_encrypt(input_str:str, shift:int)->str:
-	
-	alphabet='абвгдеёжзийклмнопрстуфхцчшщъьыэюя_,.'
+
 	encrypted_message = ""
 
 	for char in input_str:
 		if char not in alphabet:
 			encrypted_message += char
 		else:
-			new_key = (alphabet.index(character) + shift) % len(alphabet)
-		   # Append the encoded character to the alphabet
-			encrypted_message += alpha[new_key]		
+			new_key = (alphabet.index(char) + shift) % len(alphabet)
+			#Добавим закодированный символ 
+			encrypted_message += alphabet[new_key]		
+
+	return encrypted_message
+
+
+#Мультипликативный моноалфавитный шрифт с задаваемым смещением (Афинный шифр)
+
+#Функция для поиска наименьшего общего делителя GCD
+def gcd(a: int, b: int) -> int:
+    while a != 0:
+        a, b = b % a, a
+    return b
+
+#Ищем здесь k^-1
+def findModInverse(a: int, m: int) -> int:
+    if gcd(a, m) != 1:#это означает, что a и m не взаимно простые числа
+        return None 
+    u1, u2, u3 = 1, 0, a
+    v1, v2, v3 = 0, 1, m
+
+    while v3 != 0:
+        q = u3 // v3
+        v1, v2, v3, u1, u2, u3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3), v1, v2, v3
+    return u1 % m
+
+
+def affin_encrypt(input_str:str, shift:int)->str:
+	
+	multi_key = 2
+	encrypted_message = ""
+
+	for char in input_str:
+		if char not in alphabet:
+			encrypted_message += char
+		else:
+			new_key = (alphabet.index(char)*multi_key + shift) % len(alphabet)
+			#Добавим закодированный символ 
+			encrypted_message += alphabet[new_key]		
 
 	return encrypted_message
 
@@ -131,10 +169,15 @@ str = input("String and key ")
 str = 'chypher'
 result = encode(str,'YTR')
 print("Ваше зашифрованное сообщение:{}".format(result))
-result2 = decode(result,'YTR')
-print("Ваше исходное сообщение:{}".format(result2))
+result = decode(result,'YTR')
+print("Ваше исходное сообщение:{}".format(result))
 
-count = len(result2)
+str = 'цезарь'
+result = cesar_encrypt(str,1)
+print("Ваше зашифрованное сообщение:{}".format(result))
+
+
+count = len(result)
 for i in range(count):
 	print(i,end=" ")
 	
