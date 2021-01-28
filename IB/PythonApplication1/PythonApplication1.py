@@ -150,48 +150,65 @@ def findModInverse(a: int, m: int) -> int:
 
     while v3 != 0: #шаг3 пока не 
         q = u3 // v3
-        t1,t2,t3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3) #с вспомгательным вектором
-        v1, v2, v3 = u1, u2, u3
-        u1, u2, u3 = t1, t2, t3 
-       #v1, v2, v3, u1, u2, u3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3), v1, v2, v3
+        #t1,t2,t3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3) #с вспомгательным вектором
+        #v1, v2, v3 = u1, u2, u3
+        #u1, u2, u3 = t1, t2, t3 
+        v1, v2, v3, u1, u2, u3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3), v1, v2, v3
     return u1 % m
+
+
+
+#Здесь проверяем правильность введенного ключа
+def check_keys(keyA, keyB, mode)-> None:
+	if mode == 'encrypt':
+	   if keyA == 1: sys.exit("Ключ слаб для шифрования. Выберите другой ключ")
+	   if keyB == 0: sys.exit('Ключ слаб для шифрования. Выберите другой ключ') 
+
+	if keyA < 0 or keyB < 0 or keyB > len(alphabet) - 1: sys.exit("Первая часть ключа должна быть >0 и вторая часть ключа должна быть от 0 до {(len(alphabet)-1)}")
+	if gcd(keyA,len(alphabet)) != 1: sys.exit(f'Первая часть ключа {keyA} и число символов в алфавите {len(alphabet)} не взаимно простые.Выбрать другой ключ')
+		
 
 #Т.к. ключ один разделим его на две части
 def divide_key(key):
 	keyA = key//len(alphabet)
-	keyB = key%len(alphabet)
+	keyB = key%len(alphabet) 
 	return (keyA,keyB)
 
-def check_keys(keyA, keyB, mode):
-    if keyA == 1 or keyB == 0  and mode == 'encrypt':
-       sys.exit('Ключ слаб для шифрования. Выберите другой ключ')
-   
 
+#Афинный шифр
+#Зашифруем сообщение
 def affin_encrypt(input_str:str, key:int)->str:
 	
-	keyA, keyB = divide_key(key) #выполним разделение нашего ключа на две части
-	encrypted_message = ""
+	encrypted_message = ''#инициализация строки для сообщения
 
+	keyA, keyB = divide_key(key) #выполним разделение нашего ключа на две части
+	check_keys(keyA, keyB, 'encrypt') #проверим ключ
+	
 	for char in input_str:
 		if char not in alphabet:
-			encrypted_message += char
+			encrypted_message += char #символа нет в алфавите, добавим незашифрованным
 		else:
-			index = (alphabet.index(char)*keyA + keyB) % len(alphabet)
-			#Добавим закодированный символ 
-			encrypted_message += alphabet[index]		
+			index = alphabet.find(char)
+			encrypted_message += alphabet[(index*keyA + keyB) % len(alphabet)]	#Добавим закодированный символ в сообщение
 
 	return encrypted_message
 
+#Расшифруем сообщение
 def affin_decrypt(input_str:str, key:int)->str:
-	keyA, keyB = divide_key(key) #выполним разделение нашего ключа на две части
 	
+	decrypted_message = '' #инициализация строки для сообщения 
+	keyA, keyB = divide_key(key) #выполним разделение нашего ключа на две части
+	check_keys(keyA, keyB,'decrypt') #проверим ключ
+
+	inverse_keyA = findModInverse(keyA, len(alphabet)) #получим мультипликативную инверсию первой части ключа
+
 	for char in input_str:
 		if char not in alphabet:
-			encrypted_message += char
+			decrypted_message += char
 		else:
-			index = (alphabet.index(char)*keyA + keyB) % len(alphabet)
+			index = alphabet.find(char)
 			#Добавим закодированный символ 
-			decrypted_message += alphabet[index]
+			decrypted_message += alphabet[( index - keyB)*inverse_keyA % len(alphabet)]
 
 	return decrypted_message
 
@@ -208,6 +225,11 @@ str = 'цезарь'
 result = cesar_encrypt(str,1)
 print("Ваше зашифрованное сообщение:{}".format(result))
 
+str = "ваше исходное сообщение"
+result = affin_encrypt(str,1334)
+print("Ваше зашифрованное сообщение:{}".format(result))
+result = affin_decrypt(result,1334)
+print("Ваше исходное сообщение:{}".format(result))
 
 count = len(result)
 for i in range(count):
