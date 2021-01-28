@@ -141,6 +141,7 @@ def gcd(a: int, b: int) -> int:
 #Целое число и его мультипликативная инверсия сравнимы с 1 по модулю n .
 
 #Ищем здесь k^-1
+#оптимально, если вернется 1
 def findModInverse(a: int, m: int) -> int:
     if gcd(a, m) != 1:#это означает, что a и m не взаимно простые числа
         return None 
@@ -150,9 +151,6 @@ def findModInverse(a: int, m: int) -> int:
 
     while v3 != 0: #шаг3 пока не 
         q = u3 // v3
-        #t1,t2,t3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3) #с вспомгательным вектором
-        #v1, v2, v3 = u1, u2, u3
-        #u1, u2, u3 = t1, t2, t3 
         v1, v2, v3, u1, u2, u3 = (u1 - q * v1), (u2 - q * v2), (u3 - q * v3), v1, v2, v3
     return u1 % m
 
@@ -226,9 +224,9 @@ result = cesar_encrypt(str,1)
 print("Ваше зашифрованное сообщение:{}".format(result))
 
 str = "ваше исходное сообщение"
-result = affin_encrypt(str,1334)
+result = affin_encrypt(str,1327) #тест на key = 1334 проходит хорошо
 print("Ваше зашифрованное сообщение:{}".format(result))
-result = affin_decrypt(result,1334)
+result = affin_decrypt(result,1327)
 print("Ваше исходное сообщение:{}".format(result))
 
 count = len(result)
