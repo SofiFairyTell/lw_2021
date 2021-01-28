@@ -114,6 +114,7 @@ def decode(ciphertext: str, key: str) -> str:
 #Аддитивный моноалфавитный шрифт с задаваемым смещением
 def cesar_encrypt(input_str:str, shift:int)->str:
 
+
 	encrypted_message = ""
 
 	for char in input_str:
@@ -212,25 +213,33 @@ def affin_decrypt(input_str:str, key:int)->str:
 
 #main
 print("Start our program ")
-str = input("String and key ")
-str = 'chypher'
-result = encode(str,'YTR')
-print("Ваше зашифрованное сообщение:{}".format(result))
-result = decode(result,'YTR')
-print("Ваше исходное сообщение:{}".format(result))
 
-str = 'цезарь'
-result = cesar_encrypt(str,1)
-print("Ваше зашифрованное сообщение:{}".format(result))
+#str = input("String and key ")
+#str = 'chypher'
+#result = encode(str,'YTR')
+#print("Ваше зашифрованное сообщение:{}".format(result))
+#result = decode(result,'YTR')
+#print("Ваше исходное сообщение:{}".format(result))
 
-str = "ваше исходное сообщение"
-result = affin_encrypt(str,1327) #тест на key = 1334 проходит хорошо
-print("Ваше зашифрованное сообщение:{}".format(result))
-result = affin_decrypt(result,1327)
-print("Ваше исходное сообщение:{}".format(result))
+str = input("Сообщение: ")
+key = int(input("Ключ: "))
 
-count = len(result)
-for i in range(count):
-	print(i,end=" ")
+while True:
+    cypher_method = int(input("Введите номер метода шифрования:"))
+    if cypher_method == 1: 
+       result = cesar_encrypt(str,key)
+       print("Ваше зашифрованное сообщение:{}".format(result))
+       #break
+    elif cypher_method == 2:
+       result = affin_encrypt(str,key) #тест на key = 1334 проходит хорошо
+       print("Ваше зашифрованное сообщение:{}".format(result))
+       result = affin_decrypt(result,key)
+       print("Ваше исходное сообщение:{}".format(result))
+       #break
+    else: break
+
+#count = len(result)
+#for i in range(len(result)):
+#	print(i,end=" ")
 	
 #end main
