@@ -212,19 +212,14 @@ def affin_decrypt(input_str:str, key:int)->str:
 	return decrypted_message
 
 #main
-print("Start our program ")
+print("Начало выполнения программы")
 
-#str = input("String and key ")
-#str = 'chypher'
-#result = encode(str,'YTR')
-#print("Ваше зашифрованное сообщение:{}".format(result))
-#result = decode(result,'YTR')
-#print("Ваше исходное сообщение:{}".format(result))
-
-str = input("Сообщение: ")
-key = int(input("Ключ: "))
+#str = input("Сообщение: ")
+#key = int(input("Ключ: "))
 
 while True:
+    str = input("Сообщение: ")
+    key = int(input("Ключ: "))
     cypher_method = int(input("Введите номер метода шифрования:"))
     if cypher_method == 1: 
        result = cesar_encrypt(str,key)
@@ -238,8 +233,4 @@ while True:
        #break
     else: break
 
-#count = len(result)
-#for i in range(len(result)):
-#	print(i,end=" ")
-	
 #end main
