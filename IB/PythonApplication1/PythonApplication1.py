@@ -14,28 +14,22 @@ def chunker(seq, size):
         yield chunk
 
 
-def prepare_input(plaintext: str) -> str:
-    """
-    Prepare the plaintext by up-casing it
-    and separating repeated letters with X's
-    """
-
-    start = ""
-
+def my_input(plaintext: str) -> str:
+    
 	#здесь все буквы сделаем строчными 
-    plaintext = start.join([c.upper() for c in plaintext if c in string.ascii_letters])
+    alphabet='абвгдеёжзийклмнопрстуфхцчшщъьыэюя'
+	#генерируем список 
+    plaintext = "".join([c.lower() for c in plaintext if c in alphabet])
     #срока котору ю вернем для шифра
     plaintext_return = ""
 	#не менее 2 символов в строке должно быть
     if len(plaintext) < 2:
         return plaintext
-
     for i in range(len(plaintext) - 1):
         plaintext_return += plaintext[i]
 		#если два символа будут одинаковыми в слове то укажем менее используемый символ
         if plaintext[i] == plaintext[i + 1]:
             plaintext_return += "ё"
-
     plaintext_return += plaintext[-1]
 
     if len(plaintext_return) & 1:
@@ -44,7 +38,7 @@ def prepare_input(plaintext: str) -> str:
     print("БИГРАММЫ:{}".format(plaintext_return))
     return plaintext_return
 
-def prepare_input2(dirty: str) -> str:
+def prepare_input(dirty: str) -> str:
     """
     Prepare the plaintext by up-casing it
     and separating repeated letters with X's
@@ -68,28 +62,6 @@ def prepare_input2(dirty: str) -> str:
         clean += "X"
 
     return clean
-def generate_table(key: str) -> [str]:
-
-    # I and J are used interchangeably to allow
-    # us to use a 5x5 table (25 letters)
-
-    #alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
-    # we're using a list instead of a '2d' array because it makes the math
-    # for setting up the table and doing the actual encoding/decoding simpler
-    table = []
-
-    # copy key chars into the table if they are in `alphabet` ignoring duplicates
-	#upper - из fff в FFF
-    for char in key.upper():
-        if char not in table and char in alphabet:
-            table.append(char)
-
-    # fill the rest of the table in with the remaining alphabet chars
-    for char in alphabet:
-        if char not in table:
-            table.append(char)
-
-    return table
 
 #шифр Плейфера
 #шаг 1: составление матрицы. Входные данные : алфавит и ключевое слово
@@ -99,6 +71,8 @@ def generate_table(key: str) -> [str]:
 
 def generate_matrix(key:str)->[str] :
     matrix = [] 
+
+    #alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
 	#Изменим регистр символов в строке
     for char in key.lower():
 		#если символа нет в таблице, но он есть в алфавите
@@ -112,18 +86,23 @@ def generate_matrix(key:str)->[str] :
 
 def playfair_encrypt(plaintext:str, key:str)->str:
     table = generate_matrix(key)
-    table2 = generate_table(key)
 
-    plaintext2 = prepare_input2(plaintext)
-    plaintext = prepare_input(plaintext)
+    plaintext = my_input(plaintext)
+    #plaintext = prepare_input(plaintext)
 
     print("ТАБЛИЦА ШИФРОВ:{}".format(table))
-    #print("БИГРАММЫ:{}".format(plaintext))
+	#print("БИГРАММЫ:{}".format(plaintext))
     ciphertext = ""
+    for char1, char2 in chunker(plaintext, 2):
+        row1, col1 = divmod(table.index(char1), 5)
+        row2, col2 = divmod(table.index(char2), 5)   
+
     return ciphertext
 
 def encode(plaintext: str, key: str) -> str:
     #table = generate_table(key)
+    key = "abcd"
+    plaintext
     table = generate_matrix(key)
 
     plaintext = prepare_input(plaintext)
