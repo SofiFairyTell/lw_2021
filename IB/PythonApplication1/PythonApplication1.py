@@ -14,14 +14,41 @@ def chunker(seq, size):
         yield chunk
 
 
-def prepare_input(dirty: str) -> str:
+def prepare_input(plaintext: str) -> str:
     """
     Prepare the plaintext by up-casing it
     and separating repeated letters with X's
     """
 
+    start = ""
 
+	#здесь все буквы сделаем строчными 
+    plaintext = start.join([c.upper() for c in plaintext if c in string.ascii_letters])
+    #срока котору ю вернем для шифра
+    plaintext_return = ""
+	#не менее 2 символов в строке должно быть
+    if len(plaintext) < 2:
+        return plaintext
 
+    for i in range(len(plaintext) - 1):
+        plaintext_return += plaintext[i]
+		#если два символа будут одинаковыми в слове то укажем менее используемый символ
+        if plaintext[i] == plaintext[i + 1]:
+            plaintext_return += "ё"
+
+    plaintext_return += plaintext[-1]
+
+    if len(plaintext_return) & 1:
+        plaintext_return += "ё"
+
+    print("БИГРАММЫ:{}".format(plaintext_return))
+    return plaintext_return
+
+def prepare_input2(dirty: str) -> str:
+    """
+    Prepare the plaintext by up-casing it
+    and separating repeated letters with X's
+    """
 
     dirty = "".join([c.upper() for c in dirty if c in string.ascii_letters])
     clean = ""
@@ -41,13 +68,12 @@ def prepare_input(dirty: str) -> str:
         clean += "X"
 
     return clean
-
-
 def generate_table(key: str) -> [str]:
 
     # I and J are used interchangeably to allow
     # us to use a 5x5 table (25 letters)
-    alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+
+    #alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
     # we're using a list instead of a '2d' array because it makes the math
     # for setting up the table and doing the actual encoding/decoding simpler
     table = []
@@ -65,9 +91,41 @@ def generate_table(key: str) -> [str]:
 
     return table
 
+#шифр Плейфера
+#шаг 1: составление матрицы. Входные данные : алфавит и ключевое слово
+#Первая строка заполняется содержимым ключевого слова. 
+#Символы не должны повторяться. 
+#Остальная часть таблицы - по порядку те буквы алфавита, которых нет в слове. 
+
+def generate_matrix(key:str)->[str] :
+    matrix = [] 
+	#Изменим регистр символов в строке
+    for char in key.lower():
+		#если символа нет в таблице, но он есть в алфавите
+		# то добавим его в матрицу
+        if char not in matrix and char in alphabet:
+           matrix.append(char)
+    for char in alphabet:
+        if char not in matrix:
+           matrix.append(char)
+    return matrix
+
+def playfair_encrypt(plaintext:str, key:str)->str:
+    table = generate_matrix(key)
+    table2 = generate_table(key)
+
+    plaintext2 = prepare_input2(plaintext)
+    plaintext = prepare_input(plaintext)
+
+    print("ТАБЛИЦА ШИФРОВ:{}".format(table))
+    #print("БИГРАММЫ:{}".format(plaintext))
+    ciphertext = ""
+    return ciphertext
 
 def encode(plaintext: str, key: str) -> str:
-    table = generate_table(key)
+    #table = generate_table(key)
+    table = generate_matrix(key)
+
     plaintext = prepare_input(plaintext)
     ciphertext = ""
 
@@ -113,8 +171,6 @@ def decode(ciphertext: str, key: str) -> str:
 
 #Аддитивный моноалфавитный шрифт с задаваемым смещением
 def cesar_encrypt(input_str:str, shift:int)->str:
-
-
 	encrypted_message = ""
 
 	for char in input_str:
@@ -159,13 +215,13 @@ def findModInverse(a: int, m: int) -> int:
 
 #Здесь проверяем правильность введенного ключа
 def check_keys(keyA, keyB, mode)-> None:
-	if mode == 'encrypt':
-	   if keyA == 1: sys.exit("Ключ слаб для шифрования. Выберите другой ключ")
-	   if keyB == 0: sys.exit('Ключ слаб для шифрования. Выберите другой ключ') 
-
-	if keyA < 0 or keyB < 0 or keyB > len(alphabet) - 1: sys.exit("Первая часть ключа должна быть >0 и вторая часть ключа должна быть от 0 до {(len(alphabet)-1)}")
-	if gcd(keyA,len(alphabet)) != 1: sys.exit(f'Первая часть ключа {keyA} и число символов в алфавите {len(alphabet)} не взаимно простые.Выбрать другой ключ')
-		
+	if mode == 'encrypt' and keyA == 1 or keyB == 0: sys.exit("Ключ слаб для шифрования. Выберите другой ключ")
+	#if mode == 'encrypt'  and : sys.exit('Ключ слаб для шифрования. Выберите другой ключ') 
+	if keyA < 0 or keyB < 0 or keyB > len(alphabet) - 1: 
+	      sys.exit("Первая часть ключа должна быть >0 и вторая часть ключа должна быть от 0 до {(len(alphabet)-1)}")
+	if gcd(keyA,len(alphabet)) != 1: 
+		  sys.exit('Первая часть ключа и число символов в алфавите не взаимно простые.Выбрать другой ключ')		
+	else: print("Проверка пройдена")
 
 #Т.к. ключ один разделим его на две части
 def divide_key(key):
@@ -218,19 +274,23 @@ print("Начало выполнения программы")
 #key = int(input("Ключ: "))
 
 while True:
-    str = input("Сообщение: ")
-    key = int(input("Ключ: "))
+    mess = input("Сообщение: ")
     cypher_method = int(input("Введите номер метода шифрования:"))
     if cypher_method == 1: 
-       result = cesar_encrypt(str,key)
+       key = int(input("Ключ: "))
+       result = cesar_encrypt(mess,key)
        print("Ваше зашифрованное сообщение:{}".format(result))
        #break
     elif cypher_method == 2:
-       result = affin_encrypt(str,key) #тест на key = 1334 проходит хорошо
+       key = int(input("Ключ: "))
+       result = affin_encrypt(mess,key) #тест на key = 1334 проходит хорошо
        print("Ваше зашифрованное сообщение:{}".format(result))
        result = affin_decrypt(result,key)
        print("Ваше исходное сообщение:{}".format(result))
        #break
+    elif cypher_method == 3:
+       key_phrase = input("Ключевая фраза:")
+       playfair_encrypt(mess,key_phrase)
     else: break
 
 #end main
