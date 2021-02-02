@@ -1,0 +1,196 @@
+.knopki
+{
+position: absolute;
+width: 957px;
+height: 71px;
+left: 240px;
+top: 15px;
+
+background: #C4C4C4;
+border: 1px solid #000000;
+box-sizing: border-box;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 73px;
+}
+
+html {
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar;
+}
+.intro 
+{
+	overflow: hidden;
+	white-space: nowrap;
+	font-size: 1.4em;
+	color: #007eff;
+	width: 300px;
+	border-right:2px solid rgba(0,0,0,.87);
+	animation: animIntro 4.5s steps(23, end),
+	animBar 1s step-end infinite;
+}
+@keyframes animIntro 
+{
+ 0%{width: 0;}
+ 100%{width: 265px;} 
+}
+@keyframes animBar 
+{
+	0%, 100%{border-color: rgba(0,0,0,0);}
+ 50%{border-color:0,0,0,.87 ;} 
+}
+
+/* Desktop - 1 */
+.desktop
+{
+z-index: 2;
+position: relative;
+/*width: 1440px*/
+width: 100%;
+height: 3186px;
+/*background-color: black;*/
+}
+
+.header
+{
+/* header */
+position: absolute;
+/*width: 1510px;*/
+width: 100%;
+height: 128px;
+/*left: 75px;*/
+top: 44px;
+background: #C4C4C4;
+}
+
+@font-face
+{
+ font-family: Star Jedi;
+ /*font-family-color: yellow;*/
+ src: url(Star Jedi (regular).ttf);
+}
+
+.texthead
+{
+	z-index: 1;
+	font-family: Star Jedi, serif;
+	font-size: 52px;
+	font-weight: normal;
+	/*font-kerning: 20px;*/
+	/*font-stretch: 30px;*/
+	letter-spacing: 20px;
+	color: rgb(251, 251, 15);
+	line-height: 4px;
+	text-align: center;
+}
+.textitleh 
+{
+position: absolute;
+width: 100%;
+height: 162px;
+left: 0px;
+top: 150px;
+letter-spacing: 5px;
+font-family:Star Jedi, serif;
+font-style: normal;
+font-weight: normal;
+font-size: 72px;
+line-height: 84px;
+text-align: center;
+color: rgb(251, 251, 15);
+}
+.textcit
+ {
+position: absolute;
+width: 883px;
+height: 84px;
+left: calc(50% - 883px/2 + 19.5px);
+top: calc(50% - 84px/2 + 127px);
+
+font-family: Star Jedi;
+font-style: normal;
+font-weight: normal;
+font-size: 36px;
+line-height: 42px;
+text-align: center;
+color: rgb(251, 251, 15);
+}
+.leftcol
+{
+/* leftcol */
+position: absolute;
+width: 799;
+height: 500px;
+left: 0px;
+top: 50px;
+background: #C4C4C4;
+}
+.leftcoltext
+{
+font-family: Star Jedi, serif;
+font-style: italic;
+font-weight: normal;
+font-size: 30px;
+line-height: 42px;
+text-align: justify;
+color:  rgb(251, 251, 15);
+}
+.rightcol
+{
+	/* rightcol */
+position: absolute;
+width: 799px;
+height: 500px;
+left: 608px;
+top: 582px;
+background: #C4C4C4;
+}
+.sometext
+{
+	/* sometext */
+position: absolute;
+width: 768px;
+height: 47px;
+left: 336px;
+top: 643px;
+background: #C4C4C4;
+}
+.sometext2
+{
+	/* sometext */
+position: absolute;
+width: 768px;
+height: 47px;
+left: 336px;
+top: 755px;
+background: #C4C4C4;
+}
+.sometext3
+{
+	/* sometext */
+position: absolute;
+width: 768px;
+height: 47px;
+left: 336px;
+top: 699px;
+background: #C4C4C4;
+}
+.sometext4
+{
+	/* sometext */
+position: absolute;
+width: 768px;
+height: 47px;
+left: 336px;
+top: 811px;
+background: #C4C4C4;
+}
+.spaceimg
+{
+position: absolute;
+width: 768px;
+height: 432px;
+left: 332px;
+top: 202px;
+
+background: url(spacemen.jpg), #C4C4C4;
+}

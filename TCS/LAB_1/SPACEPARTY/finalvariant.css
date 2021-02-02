@@ -1,0 +1,539 @@
+/* desktop */
+.desktop{
+position: relative;
+width: 1510px;
+height: 3186px;
+
+background: url(background.png), rgba(0, 0, 0, 0.44);
+}
+
+/* Desktop - 2 */
+.desktop2{
+position: absolute;
+width: 1440px;
+height: 1024px;
+left: 36px;
+top: 1048px;
+}
+
+
+/* Rectangle 6 */
+.rectangle6{
+position: absolute;
+width: 665px;
+height: 432px;
+left: 0px;
+top: 0px;
+
+background: #C4C4C4;
+border-radius: 73px;
+}
+
+/* Rectangle 7 */
+.rectangle7{
+position: absolute;
+width: 665px;
+height: 432px;
+left: 777px;
+top: 592px;
+
+background: #C4C4C4;
+border-radius: 73px;
+}
+/* мЕРОПРИЯТИЕ СВЯЗАНО С ВЫПУСКОМ В 2020 */
+.textreason{
+position: absolute;
+width: 665px;
+height: 334px;
+left: 1px;
+top: 48px;
+
+font-family: Star Jedi,serif;
+font-style: normal;
+font-weight: 500;
+font-size: 48px;
+line-height: 54px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color: rgb(210,160,11);
+}
+
+
+/* пРИХОДИТЕ ПО АДРЕСУ: Г.бЕЛГОРОД ПРОСПЕКТ БОГДАНА ХМЕЛЬНИЦКОГО, Д. */
+.textadress{
+position: absolute;
+width: 665px;
+height: 334px;
+left: 1px;
+top: 50px;
+
+font-family: Star Jedi,serif;
+font-style: normal;
+font-weight: 500;
+font-size: 48px;
+line-height: 54px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color: rgb(210,160,11);
+}
+
+
+/* Rectangle 6 */
+.rectangleimg6{
+position: absolute;
+width: 768px;
+height: 432px;
+left: 672px;
+top: 99px;
+
+background: url(spacemen.jpg), #C4C4C4;
+border-radius: 73px;
+}
+
+/* Rectangle 7 */
+.rectangleimg7{
+position: absolute;
+width: 768px;
+height: 432px;
+left: 0px;
+top: 531px;
+
+background: url(SPACEMAP.jpg), #C4C4C4;
+border-radius: 73px;
+}
+
+/* Desktop - 1 */
+.desktop1{
+position: absolute;
+width: 1440px;
+height: 1024px;
+left: 34px;
+top: 8px;
+
+background: #FFFFFF;
+}
+
+/* Rectangle 2 */
+.rectangle2{
+position: absolute;
+width: 1440px;
+height: 1024px;
+left: 0px;
+top: 0px;
+
+background: url(background.png), #C4C4C4;
+}
+
+/* Rectangle 1 */
+.rectangle1{
+position: absolute;
+width: 1440px;
+height: 203px;
+left: 2px;
+top: 113px;
+
+background: #C4C4C4;
+border-radius: 73px;
+}
+@font-face
+{
+ font-family: Star Jedi;
+ /*font-family-color: yellow;*/
+ src: url(Star Jedi (regular).ttf);
+}
+
+/* YOUR SPACE PARTY */
+.headertext{
+position: absolute;
+width: 1352px;
+height: 155px;
+left: 115px;
+top: 137px;
+
+font-family: Star Jedi, serif;
+font-weight: bold;
+font-size: 72px;
+letter-spacing: 5px;
+line-height: 163px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color: #D4E417;
+
+border: 4px solid #000000;
+}
+
+/* buttons */
+.button1{
+position: absolute;
+width: 310px;
+height: 71px;
+left: 240px;
+top: 15px;
+z-index: 2;
+background: rgb(236,236,236);
+border: 1px solid #000000;
+box-sizing: border-box;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 73px;
+}
+.button2{
+position: absolute;
+width: 310px;
+height: 71px;
+left: 600px;
+top: 15px;
+z-index: 2;
+background: rgb(236,236,236);
+border: 1px solid #000000;
+box-sizing: border-box;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 73px;
+}
+.button3{
+position: absolute;
+width: 319px;
+height: 71px;
+left: 960px;
+top: 15px;
+z-index: 2;
+background: rgb(236,236,236);
+border: 1px solid #000000;
+box-sizing: border-box;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 73px;
+}
+/* maibutt */
+.mainbutttext{
+position: absolute;
+width: 181px;
+height: 34px;
+left: 60px;
+top: auto;
+z-index: 1;
+font-family: Star Jedi, serif;
+font-style: normal;
+
+font-size: 36px;
+line-height: 1px;
+
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color: #D4E417;
+}
+
+
+/* conbutt */
+.contbutttext{
+position: absolute;
+width: 181px;
+height: 34px;
+left: 60px;
+top: auto;
+z-index: 1;
+font-family:Star Jedi, serif;
+font-style: normal;
+font-size: 36px;
+line-height: 1px;
+
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color:#D4E417;
+}
+
+
+/* faqbutt */
+.faqbutttext{
+position: absolute;
+width: 181px;
+height: 34px;
+left: 60px;
+top: auto;
+z-index: 1;
+font-family: Star Jedi, serif;
+font-style: normal;
+
+font-size: 36px;
+line-height: 1px;
+
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color:#D4E417;
+}
+
+
+/* citattext */
+.citattext{
+position: absolute;
+width: 1438px;
+height: 139px;
+left: 6px;
+top: 327px;
+
+font-family:Star Jedi,serif;
+font-style: normal;
+font-weight: 500;
+font-size: 32px;
+letter-spacing: 5px;
+line-height: 41px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color: #D4E417;
+}
+
+
+/* Desktop - 3 */
+.desktop3{
+position: absolute;
+width: 1440px;
+height: 1024px;
+left: 38px;
+top: 2104px;
+}
+
+
+/* askingperson1 */
+.askperson1img{
+position: absolute;
+width: 180px;
+height: 179px;
+left: 0px;
+top: 169px;
+
+background: url(portret2.jpg);
+border-radius: 128px;
+}
+
+/* askingperson2 */
+.askperson2img{
+position: absolute;
+width: 180px;
+height: 179px;
+left: 0px;
+top: 506px;
+
+background:url(portret2.jpg);
+border-radius: 128px;
+}
+
+/* answerperson2 */
+.answperson2img{
+position: absolute;
+width: 180px;
+height: 179px;
+left: 1217px;
+top: 731px;
+
+background: url(portret1.jpg);
+border-radius: 128px;
+}
+
+/* answerperson1 */
+.answperson1img{
+position: absolute;
+width: 180px;
+height: 179px;
+left: 1217px;
+top: 327px;
+
+background:url(portret1.jpg);
+border-radius: 128px;
+}
+
+/* header */
+.headdesk3{
+position: absolute;
+width: 954px;
+height: 175px;
+left: 243px;
+top: 20px;
+z-index: 1;
+font-family: Star Jedi,serif;
+font-style: normal;
+font-weight: 500;
+font-size: 48px;
+line-height: 54px;
+display: flex;
+align-items: center;
+text-align: center;
+text-transform: uppercase;
+
+color:  #D4E417;
+}
+
+
+/* question1box */
+.questbox1{
+position: absolute;
+width: 954px;
+height: 120px;
+left: 243px;
+top: 206px;
+z-index: 2;
+background: rgb(223,223,223);
+border-radius: 45px;
+}
+
+/* answer1box */
+.answbox1{
+position: absolute;
+width: 954px;
+height: 120px;
+left: 243px;
+top: 379px;
+z-index: 2;
+background: rgb(238,238,238);
+border-radius: 45px;
+}
+
+/* question2box */
+.questbox2{
+position: absolute;
+width: 954px;
+height: 120px;
+left: 243px;
+top: 552px;
+z-index: 2;
+background: rgb(223,223,223);
+border-radius: 45px;
+
+}
+/* answer2box */
+.answbox2
+{position: absolute;
+width: 954px;
+height: 120px;
+left: 243px;
+top: 725px;
+z-index: 2;
+background: rgb(238,238,238);
+border-radius: 45px;
+}
+
+/* question1 */
+.questbox1text{
+position: absolute;
+width: 954px;
+height: 92px;
+left: 0px;
+top: 0px;
+z-index: 1;
+font-family: MedievalSharp;
+font-style: normal;
+font-weight: 500;
+font-size: 30px;
+line-height: 30px;
+display: flex;
+align-items: center;
+text-transform: uppercase;
+
+color: rgb(210,160,11);
+}
+
+
+/* question2 */
+.questbox2text
+{position: absolute;
+width: 954px;
+height: 92px;
+left: 0px;
+top: 0px;
+z-index: 1;
+font-family: MedievalSharp;
+font-style: normal;
+font-weight: 500;
+font-size: 30px;
+line-height: 1px;
+display: flex;
+align-items: center;
+text-transform: uppercase;
+
+color: rgb(210,160,11);
+}
+
+
+/* answer1 */
+.answbox1text{
+position: absolute;
+width: 954px;
+height: 92px;
+left: 0px;
+top: 0px;
+z-index: 1;
+font-family: MedievalSharp;
+font-style: normal;
+font-weight: 500;
+font-size: 30px;
+line-height: 27px;
+display: flex;
+align-items: center;
+text-align: right;
+text-transform: uppercase;
+
+color: rgb(210,160,11);}
+
+
+
+/* answer2 */
+.answbox2text{
+position: absolute;
+width: 954px;
+height: 92px;
+left: 0px;
+top: 0px;
+z-index: 1;
+font-family: MedievalSharp;
+font-style: normal;
+font-weight: 500;
+font-size: 30px;
+line-height: 27px;
+display: flex;
+align-items: center;
+text-align: right;
+text-transform: uppercase;
+
+color: rgb(210,160,11);}
+
+/*анимация ввода букв*/
+.intro 
+{
+	overflow: hidden;
+	white-space: nowrap;
+	font-size: 32px;
+	color: #D4E417;
+	width: 1440px;
+	/*border-right:2px solid rgba(0,0,0,.87);*/
+	animation: animIntro 2.5s steps(253, end),
+	animBar 1s step-end infinite;
+}
+@keyframes animIntro 
+{
+ 0%{width: 0;}
+ 100%{width: 1440px;} 
+}
+@keyframes animBar 
+{
+	0%, 100%{border-color: rgba(0,0,0,0);}
+ 50%{border-color:0,0,0,.87 ;} 
+}
+a
+{
+	
+}
