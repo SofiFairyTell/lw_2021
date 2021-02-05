@@ -1,0 +1,4 @@
+﻿  Board.cpp
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_1\lw_1\board.cpp(97): warning C4101: hdc: неиспользованная локальная переменная
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_1\lw_1\board.cpp(98): warning C4101: ps: неиспользованная локальная переменная
+  lw_1.vcxproj -> C:\Users\Kurbatova\source\LW2020\lw_2021\CGG\lw_1\Debug\lw_1.exe
