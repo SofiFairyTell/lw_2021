@@ -70,4 +70,12 @@ class MenuCommand
             System.exit(-1);
         }
     }
+    static void TrigonometryFunctionMenu()
+    {
+        ComputeMethod.TrigonometryFunction();
+    }
+    static void SummOfNumberMenu()
+    {
+        ComputeMethod.SummOfNumber();
+    }
 }
