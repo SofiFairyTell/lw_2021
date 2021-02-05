@@ -6,13 +6,13 @@ import java.util.Scanner;
 //Новый класс для исключений связанных с неправильным вводом
 class InputException extends Exception
         {
-            public InputException(String message)
+            InputException(String message)
             {
                 super(message);
             }
         }
 
-public class MenuCommand
+class MenuCommand
 {
     static void TriangleInCircleMenu()
     {
@@ -35,17 +35,19 @@ public class MenuCommand
         catch (InputException ex)
         {
             System.out.println(ex.getMessage());
+            System.exit(-1);
         }
         catch(InputMismatchException ex)
         {
             System.out.println(ex.getMessage());
+            System.exit(-1);
         }
     }
     static void MarkTranslationMenu()
     {
+        Scanner input = new Scanner(System.in);
         try
         {
-            Scanner input = new Scanner(System.in);
             System.out.print("Введите оценку:");
             int mark= input.nextInt();
             if( mark <=0 )
@@ -60,10 +62,12 @@ public class MenuCommand
         catch (InputException ex)
         {
             System.out.println(ex.getMessage());
+            System.exit(-1);
         }
         catch(InputMismatchException ex)
         {
             System.out.println(ex.getMessage());
+            System.exit(-1);
         }
     }
 }
