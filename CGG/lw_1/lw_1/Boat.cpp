@@ -5,6 +5,8 @@
 #include <fstream>
 #include <string>
 #include <gdiplus.h>
+#include <gdiplusgraphics.h>
+
 
 #pragma comment(lib, "GdiPlus.lib")
 
@@ -53,7 +55,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 
 	wcex.lpszClassName = TEXT("MainWindowProcess"); // имя класса
 	wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-	wcex.hbrBackground = brushes[brush_index];
+	//wcex.hbrBackground = brushes[brush_index];
 
 	if (0 == RegisterClassEx(&wcex))
 	{
@@ -115,26 +117,19 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		}break;
 		case WM_LBUTTONDOWN:
 		{
-			DWORD xPos, yPos, nSize;
+			DWORD xPos = NULL, yPos = NULL, nSize = NULL;
 			TCHAR szBuf[80];
 
+			hdc = GetDC(hwnd);
 			// Сохраняем координаты курсора мыши
 			xPos = LOWORD(lParam);
 			yPos = HIWORD(lParam);
+			nSize = wsprintf(szBuf, TEXT("(%d, %d)"), xPos, yPos);
+			TextOut(hdc, xPos, yPos, szBuf, nSize);
 
-			/*Отследим точки над первым и вторым editbox
-			Если да, то откроем для соответствующего editbox окна для их заполнения*/
-			if ((xPos > 312 & xPos < 544)&(yPos > 39 & yPos < 81))
-			{
-				TextOut(hdc, xPos, yPos, szBuf, nSize);
+			Graphics g(hdc);
+			g.Clear(Color::Black);
 
-			}
-			else
-				if ((xPos > 36 & xPos < 250)&(yPos > 39 & yPos < 81))
-				{
-					TextOut(hdc, xPos, yPos, szBuf, nSize);
-
-				}
 		}break;
 	}
 	return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -143,6 +138,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCRStr)
 	{
 		DWORD dwStyle = WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_HSCROLL | ES_MULTILINE | ES_AUTOHSCROLL | ES_AUTOVSCROLL;
+
 		return TRUE;
 	}
 
@@ -158,14 +154,24 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	void Display(HDC hdc)
 	{
 		Graphics g(hdc);
-		g.Clear(Color::White);
-		Pen penBrown(Color::Brown);//Для рисования контура
-		SolidBrush brush(Color::Black);
-		//Для первого прямоугольника
-		Point pt1(200,200);
-		Point pt2(300,300);
-		g.FillRectangle(&brush, 320, 330, 500, 70);
-		
-		
+		g.Clear(Color::Black);
+
+		//Rect rect;
+		//g.GetVisibleClipBounds(&rect);
+		//Bitmap buffer(rect.Width, rect.Height, &g);
+		//Graphics temp(&buffer);
+
+
+		//temp.Clear(Color::Aqua);
+		//SolidBrush brush(Color::Black);
+		//Pen penBrown(&brush,6.f);//Для рисования контура
+		//
+		////Для первого прямоугольника
+		//Point pt1(10,10);
+		//Point pt2(300,300);
+		//temp.FillRectangle(&brush, 320, 330, 500, 70);
+		//temp.DrawLine(&penBrown, pt1, pt2);
+		//
+		//g.DrawImage(&buffer, rect);
 	}
 

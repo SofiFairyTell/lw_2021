@@ -1,6 +1,2 @@
 ﻿  Boat.cpp
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_1\lw_1\boat.cpp(127): warning C4554: "&": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_1\lw_1\boat.cpp(133): warning C4554: "&": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_1\lw_1\boat.cpp(103): warning C4101: ps: неиспользованная локальная переменная
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_1\lw_1\boat.cpp(129): error C4700: использована неинициализированная локальная переменная "nSize"
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_1\lw_1\boat.cpp(129): error C4700: использована неинициализированная локальная переменная "hdc"
+  lw_1.vcxproj -> C:\Users\Kurbatova\source\LW2020\lw_2021\CGG\lw_1\x64\Debug\lw_1.exe
