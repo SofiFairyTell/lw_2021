@@ -4,6 +4,11 @@
 #include <tchar.h>
 #include <fstream>
 #include <string>
+#include <gdiplus.h>
+
+#pragma comment(lib, "GdiPlus.lib")
+
+using namespace Gdiplus;
 
 #pragma comment(linker,"\"/manifestdependency:type                  = 'win32' \
                                               name                  = 'Microsoft.Windows.Common-Controls' \
@@ -14,10 +19,9 @@
 #pragma warning(disable : 4996) //отключает Ошибку deprecate. Возникает, когда используется устаревшая функция 
 
 //Объявления
-#pragma comment(lib, "GdiPlus.lib")
-using namespace Gdiplus;
-HWND hwnd = NULL; //дескриптор окна
 
+HWND hwnd = NULL; //дескриптор окна
+void Display(HDC hdc);
 /*Для изменения цвета окна, когда было обработано WM_SYSCHAR */
 RECT rc;
 HBRUSH brushes[3]; //кисти для изменения цвета окна
@@ -48,7 +52,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 	wcex.hbrBackground = (HBRUSH)(COLOR_BTNFACE + 1);
 
 	wcex.lpszClassName = TEXT("MainWindowProcess"); // имя класса
-	wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 	wcex.hbrBackground = brushes[brush_index];
 
 	if (0 == RegisterClassEx(&wcex))
@@ -88,7 +92,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 	}
 
 	return (int)msg.wParam;
-
+	//yjdsq rjvvtynfhb
 
 }
 
@@ -102,6 +106,36 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	{
 		HANDLE_MSG(hwnd, WM_CREATE, OnCreate);
 		//HANDLE_MSG(hwnd, WM_COMMAND, OnCommand)
+		case WM_PAINT:
+			{
+				PAINTSTRUCT pstruct;
+				HDC hdc = BeginPaint(hwnd, &pstruct);
+				Display(hdc);
+				EndPaint(hwnd,&ps);
+		}break;
+		case WM_LBUTTONDOWN:
+		{
+			DWORD xPos, yPos, nSize;
+			TCHAR szBuf[80];
+
+			// Сохраняем координаты курсора мыши
+			xPos = LOWORD(lParam);
+			yPos = HIWORD(lParam);
+
+			/*Отследим точки над первым и вторым editbox
+			Если да, то откроем для соответствующего editbox окна для их заполнения*/
+			if ((xPos > 312 & xPos < 544)&(yPos > 39 & yPos < 81))
+			{
+				TextOut(hdc, xPos, yPos, szBuf, nSize);
+
+			}
+			else
+				if ((xPos > 36 & xPos < 250)&(yPos > 39 & yPos < 81))
+				{
+					TextOut(hdc, xPos, yPos, szBuf, nSize);
+
+				}
+		}break;
 	}
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
@@ -120,3 +154,18 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	{
 		PostQuitMessage(0); // отправляем сообщение WM_QUIT
 	}
+	
+	void Display(HDC hdc)
+	{
+		Graphics g(hdc);
+		g.Clear(Color::White);
+		Pen penBrown(Color::Brown);//Для рисования контура
+		SolidBrush brush(Color::Black);
+		//Для первого прямоугольника
+		Point pt1(200,200);
+		Point pt2(300,300);
+		g.FillRectangle(&brush, 320, 330, 500, 70);
+		
+		
+	}
+
