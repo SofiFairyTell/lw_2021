@@ -26,8 +26,7 @@ class ComputeMethod
          * 1 — «плохо», 2 — «неудовлетворительно», 3-«удовлетворительно»,  4— «хорошо», 5 — «отлично»
          * @param mark Школьная отметка
          */
-        switch(mark)
-        {
+        switch(mark) {
             case 1:
                 System.out.println("'Плохо'");
                 break;
@@ -46,6 +45,30 @@ class ComputeMethod
             default:
                 System.out.println("'Данных для такой оценки нет");
         }
+    }
+    static void TrigonometryFunction(double start, double end, double step)
+    {
+        System.out.println("Ghbdtgfg");
+        int rows = (int) ((end - start) / step);
+        double[][] array = new double[2][rows];
+        for (int i = 0; i < rows; rows++)
+        {
+            for (double x = start; x < end; x += step)
+            {
+                double y = Math.sin(x) + 0.5 * Math.cos(x);
+                array[0][i] = x;
+                array[1][i] = y;
+                System.out.println(x);
+            }
+        }
 
+        for (int i = 0; i < array.length; i++)
+        {
+            for (int j = 0; j < array[i].length; j++)
+            {
+                System.out.print(array[i][j] + "\t");
+            }
+            System.out.println();
+        }
     }
 }

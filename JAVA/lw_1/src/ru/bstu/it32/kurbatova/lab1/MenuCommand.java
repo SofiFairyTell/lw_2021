@@ -3,14 +3,7 @@ package ru.bstu.it32.kurbatova.lab1;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-//Новый класс для исключений связанных с неправильным вводом
-class InputException extends Exception
-        {
-            InputException(String message)
-            {
-                super(message);
-            }
-        }
+
 
 class MenuCommand
 {
@@ -70,12 +63,5 @@ class MenuCommand
             System.exit(-1);
         }
     }
-    static void TrigonometryFunctionMenu()
-    {
-        ComputeMethod.TrigonometryFunction();
-    }
-    static void SummOfNumberMenu()
-    {
-        ComputeMethod.SummOfNumber();
-    }
+
 }
