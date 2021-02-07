@@ -64,7 +64,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 	/*---------------------------------------------*/
 
 	LoadLibrary(TEXT("ComCtl32.dll"));
-
+	/*Инициализаци GDI+*/
+	ULONG_PTR gdToken;
+	GdiplusStartupInput gdInput;
+	
+	LSTATUS retRes = GdiplusStartup(&gdToken, &gdInput, NULL);
+		
 	/*Создание главного файла и обработка ошибки */
 	hwnd = CreateWindowEx(0, TEXT("MainWindowProcess"), TEXT("Chat"),
 		WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, 0, 900, 600, NULL, NULL, hInstance, NULL);
@@ -92,6 +97,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 			DispatchMessage(&msg);
 		}
 	}
+
+	GdiplusShutdown(gdToken);
 
 	return (int)msg.wParam;
 
@@ -126,9 +133,6 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 			nSize = wsprintf(szBuf, TEXT("(%d, %d)"), xPos, yPos);
 			TextOut(hdc, xPos, yPos, szBuf, nSize);
 
-			Graphics g(hdc);
-			g.Clear(Color::Black);
-
 		}break;
 	}
 	return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -155,22 +159,22 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		Graphics g(hdc);
 		g.Clear(Color::Black);
 
-		//Rect rect;
-		//g.GetVisibleClipBounds(&rect);
-		//Bitmap buffer(rect.Width, rect.Height, &g);
-		//Graphics temp(&buffer);
+		Rect rect;
+		g.GetVisibleClipBounds(&rect);
+		Bitmap buffer(rect.Width, rect.Height, &g);
+		Graphics temp(&buffer);
 
 
-		//temp.Clear(Color::Aqua);
-		//SolidBrush brush(Color::Black);
-		//Pen penBrown(&brush,6.f);//Для рисования контура
-		//
-		////Для первого прямоугольника
-		//Point pt1(10,10);
-		//Point pt2(300,300);
-		//temp.FillRectangle(&brush, 320, 330, 500, 70);
-		//temp.DrawLine(&penBrown, pt1, pt2);
-		//
-		//g.DrawImage(&buffer, rect);
+		temp.Clear(Color::Aqua);
+		SolidBrush brush(Color::Black);
+		Pen penBrown(&brush,6.f);//Для рисования контура
+		
+		//Для первого прямоугольника
+		Point pt1(10,10);
+		Point pt2(300,300);
+		temp.FillRectangle(&brush, 320, 330, 500, 70);
+		temp.DrawLine(&penBrown, pt1, pt2);
+		
+		g.DrawImage(&buffer, rect);
 	}
 
