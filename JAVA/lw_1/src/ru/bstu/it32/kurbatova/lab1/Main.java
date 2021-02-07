@@ -2,6 +2,10 @@ package ru.bstu.it32.kurbatova.lab1;
 
 import java.util.*;
 
+
+
+
+
 public class Main
 {
     public static void main(String[] args)
@@ -20,7 +24,7 @@ public class Main
                     MenuCommand.MarkTranslationMenu();
                     break;
                 case "tree":
-                    ComputeMethod.TrigonometryFunction(0.0,6.0,2.0);
+                    MenuCommand.TrigonometryFunction();
                     break;
             }
         }while(command.equals("далее"));

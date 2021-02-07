@@ -48,27 +48,27 @@ class ComputeMethod
     }
     static void TrigonometryFunction(double start, double end, double step)
     {
-        System.out.println("Ghbdtgfg");
+
         int rows = (int) ((end - start) / step);
-        double[][] array = new double[2][rows];
-        for (int i = 0; i < rows; rows++)
+        //массив из двух столбцов: 0- значение аргумента, 1 - значение функции
+        double[][] array = new double[rows][2];
+        double x = start;
+        while(x<end)
         {
-            for (double x = start; x < end; x += step)
+            for (int i = 0; i < rows; ++i)
             {
                 double y = Math.sin(x) + 0.5 * Math.cos(x);
-                array[0][i] = x;
-                array[1][i] = y;
-                System.out.println(x);
+                array[i][0] = x;
+                array[i][1] = y;
+                x+=step;
             }
         }
-
+        //вывод в табличном виде
+        System.out.printf("%-10s%-25s%n","Аргумент","Значение");
+        System.out.println("-----------------------------------------------------");
         for (int i = 0; i < array.length; i++)
         {
-            for (int j = 0; j < array[i].length; j++)
-            {
-                System.out.print(array[i][j] + "\t");
-            }
-            System.out.println();
+            System.out.printf("%-10.2f%-27.2f%n", array[i][0], array[i][1]);
         }
     }
 }

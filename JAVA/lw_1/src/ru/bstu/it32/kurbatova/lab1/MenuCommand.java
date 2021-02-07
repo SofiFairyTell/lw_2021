@@ -63,5 +63,34 @@ class MenuCommand
             System.exit(-1);
         }
     }
-
+    static void TrigonometryFunction()
+    {
+        Scanner input = new Scanner(System.in);
+        try
+        {
+            System.out.print("Введите начало и конец:");
+            double start = input.nextDouble();
+            double end  =  input.nextDouble();
+            System.out.print("Введите шаг:");
+            double step = input.nextDouble();
+            if( step <=0 )
+            {
+                throw new InputException("Шаг не может быть меньше или равны 0");
+            }
+            else
+            {
+                ComputeMethod.TrigonometryFunction(start,end,step);
+            }
+        }
+        catch (InputException ex)
+        {
+            System.out.println(ex.getMessage());
+            System.exit(-1);
+        }
+        catch(InputMismatchException ex)
+        {
+            System.out.println(ex.getMessage());
+            System.exit(-1);
+        }
+    }
 }
