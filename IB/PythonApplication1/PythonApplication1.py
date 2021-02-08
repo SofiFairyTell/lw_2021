@@ -35,33 +35,8 @@ def my_input(plaintext: str) -> str:
     if len(plaintext_return) & 1:
         plaintext_return += "ё"
 
-    print("БИГРАММЫ:{}".format(plaintext_return))
+    #print("БИГРАММЫ:{}".format(plaintext_return))
     return plaintext_return
-
-def prepare_input(dirty: str) -> str:
-    """
-    Prepare the plaintext by up-casing it
-    and separating repeated letters with X's
-    """
-
-    dirty = "".join([c.upper() for c in dirty if c in string.ascii_letters])
-    clean = ""
-
-    if len(dirty) < 2:
-        return dirty
-
-    for i in range(len(dirty) - 1):
-        clean += dirty[i]
-
-        if dirty[i] == dirty[i + 1]:
-            clean += "X"
-
-    clean += dirty[-1]
-
-    if len(clean) & 1:
-        clean += "X"
-
-    return clean
 
 #шифр Плейфера
 #шаг 1: составление матрицы. Входные данные : алфавит и ключевое слово
@@ -88,62 +63,45 @@ def playfair_encrypt(plaintext:str, key:str)->str:
     table = generate_matrix(key)
 
     plaintext = my_input(plaintext)
-    #plaintext = prepare_input(plaintext)
 
-    print("ТАБЛИЦА ШИФРОВ:{}".format(table))
-	#print("БИГРАММЫ:{}".format(plaintext))
+   # print("ТАБЛИЦА ШИФРОВ:{}".format(table))
+
     ciphertext = ""
     for char1, char2 in chunker(plaintext, 2):
-        row1, col1 = divmod(table.index(char1), 5)
-        row2, col2 = divmod(table.index(char2), 5)   
-
-    return ciphertext
-
-def encode(plaintext: str, key: str) -> str:
-    #table = generate_table(key)
-    key = "abcd"
-    plaintext
-    table = generate_matrix(key)
-
-    plaintext = prepare_input(plaintext)
-    ciphertext = ""
-
-    # https://en.wikipedia.org/wiki/Playfair_cipher#Description
-    for char1, char2 in chunker(plaintext, 2):
-        row1, col1 = divmod(table.index(char1), 5)
-        row2, col2 = divmod(table.index(char2), 5)
-
+        row1, col1 = divmod(table.index(char1), 6)
+        row2, col2 = divmod(table.index(char2), 6)   
         if row1 == row2:
-            ciphertext += table[row1 * 5 + (col1 + 1) % 5]
-            ciphertext += table[row2 * 5 + (col2 + 1) % 5]
+            ciphertext += table[row1 * 6 + (col1 + 1) % 6]
+            ciphertext += table[row2 * 6 + (col2 + 1) % 6]
         elif col1 == col2:
-            ciphertext += table[((row1 + 1) % 5) * 5 + col1]
-            ciphertext += table[((row2 + 1) % 5) * 5 + col2]
+            ciphertext += table[((row1 + 1) % 6) * 6 + col1]
+            ciphertext += table[((row2 + 1) % 6) * 6 + col2]
         else:  # rectangle
-            ciphertext += table[row1 * 5 + col2]
-            ciphertext += table[row2 * 5 + col1]
+            ciphertext += table[row1 * 6 + col2]
+            ciphertext += table[row2 * 6 + col1]
 
     return ciphertext
 
 
-def decode(ciphertext: str, key: str) -> str:
-    table = generate_table(key)
+
+def playfair_decode(ciphertext: str, key: str) -> str:
+    table = generate_matrix(key)
     plaintext = ""
 
     # https://en.wikipedia.org/wiki/Playfair_cipher#Description
     for char1, char2 in chunker(ciphertext, 2):
-        row1, col1 = divmod(table.index(char1), 5)
-        row2, col2 = divmod(table.index(char2), 5)
+        row1, col1 = divmod(table.index(char1), 6)
+        row2, col2 = divmod(table.index(char2), 6)
 
         if row1 == row2:
-            plaintext += table[row1 * 5 + (col1 - 1) % 5]
-            plaintext += table[row2 * 5 + (col2 - 1) % 5]
+            plaintext += table[row1 * 6 + (col1 - 1) % 6]
+            plaintext += table[row2 * 6 + (col2 - 1) % 6]
         elif col1 == col2:
-            plaintext += table[((row1 - 1) % 5) * 5 + col1]
-            plaintext += table[((row2 - 1) % 5) * 5 + col2]
+            plaintext += table[((row1 - 1) % 6) * 6 + col1]
+            plaintext += table[((row2 - 1) % 6) * 6 + col2]
         else:  # rectangle
-            plaintext += table[row1 * 5 + col2]
-            plaintext += table[row2 * 5 + col1]
+            plaintext += table[row1 * 6 + col2]
+            plaintext += table[row2 * 6 + col1]
 
     return plaintext
 
@@ -269,7 +227,11 @@ while True:
        #break
     elif cypher_method == 3:
        key_phrase = input("Ключевая фраза:")
-       playfair_encrypt(mess,key_phrase)
+       result = playfair_encrypt(mess,key_phrase)
+       print("Ваше зашифрованое сообщение:{}".format(result))
+       result = playfair_decode(result, key_phrase)
+       print("Ваше исходное сообщение:{}".format(result))
+
     else: break
 
 #end main
