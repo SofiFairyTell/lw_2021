@@ -1,0 +1,213 @@
+/* Desktop - 2 */
+/*.desktop
+{
+position: relative;
+width: 1440px;
+height: 1435.02px;
+
+background: #8341D7;
+}*/
+
+/* Rectangle 1 */
+.rectangle1
+{
+
+position: absolute;
+width: 1290px;
+height: 293px;
+left: 75px;
+top: 12px;
+
+background: url(space1.jpg), #C4C4C4;
+}
+
+
+
+/* Rectangle 4 */
+.rectangle3
+{
+position: absolute;
+width: 521px;
+height: 268px;
+left: 845px;
+top: 483px;
+
+background: #C4C4C4;
+}
+
+/* Rectangle 8 */
+.rectangle4
+{
+position: absolute;
+width: 521px;
+height: 268px;
+left: 845px;
+top: 835px;
+
+background: #C4C4C4;
+}
+
+/* Rectangle 9 */
+.rectangle5
+{
+position: absolute;
+width: 521px;
+height: 268px;
+left: 845px;
+top: 802px;
+
+background: #C4C4C4;
+}
+
+/* Rectangle 10 */
+.rectangle6
+{
+position: absolute;
+width: 521px;
+height: 268px;
+left: 844px;
+top: 1137px;
+
+background: #C4C4C4;
+}
+
+/* Rectangle 5 */
+.rectangle7
+{
+position: absolute;
+width: 387px;
+height: 712px;
+left: 76px;
+top: 463px;
+
+background: #EABABA;
+border-radius: 16px;
+}
+
+/* Rectangle 6 */
+.rectangle8
+{
+
+position: absolute;
+width: 387px;
+height: 712px;
+left: 223px;
+top: 613px;
+
+background: #A27979;
+border-radius: 16px;
+}
+
+/* Rectangle 7 */
+.rectangle9
+{
+position: absolute;
+width: 382px;
+height: 712px;
+left: 433px;
+top: 676px;
+
+background: #D2A0A0;
+border-radius: 16px;
+}
+
+/* ВЫПУСК - 2020 */
+.text1
+{
+position: absolute;
+width: 630px;
+height: 86px;
+left: 736px;
+top: 97px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 64px;
+line-height: 75px;
+
+color: #000000;
+}
+
+
+/* ВЫПУСК - 2020 */
+.text2
+{
+position: absolute;
+width: 502px;
+height: 86px;
+left: 874px;
+top: 590px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 64px;
+line-height: 75px;
+
+color: #000000;
+}
+
+
+/* ВЫПУСК - 2020 */
+.text3
+{
+position: absolute;
+width: 492px;
+height: 86px;
+left: 874px;
+top: 936px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 64px;
+line-height: 75px;
+
+color: #000000;
+
+}
+
+
+/* ВЫПУСК - 2020 */
+.text3
+{
+position: absolute;
+width: 491px;
+height: 75px;
+left: 874px;
+top: 1239px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 64px;
+line-height: 75px;
+color: #000000
+}
+
+.text4
+{
+/* ВЫПУСК - 2022 */
+
+position: absolute;
+width: 630px;
+height: 86px;
+left: 148px;
+top: 319px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 64px;
+line-height: 75px;
+
+color: #000000;
+
+}
+
+/* identical to box height */ 
+
+
+
+
