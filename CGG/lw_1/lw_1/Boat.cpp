@@ -7,6 +7,15 @@
 #include <gdiplus.h>
 #include <gdiplusgraphics.h>
 
+/*
+* Рисунок - КАТЕР
+* Объекты - 
+*	Кисти линейного градиента
+*	Составные перья
+*	Штриховые кисти
+*Текст: название рисунка
+*Допнительное: вывод растроового изображения рисунка
+*/
 
 #pragma comment(lib, "GdiPlus.lib")
 
@@ -157,24 +166,110 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	void Display(HDC hdc)
 	{
 		Graphics g(hdc);
-		g.Clear(Color::Black);
+		g.Clear(Color::LightCyan);
 
-		Rect rect;
-		g.GetVisibleClipBounds(&rect);
-		Bitmap buffer(rect.Width, rect.Height, &g);
-		Graphics temp(&buffer);
-
-
-		temp.Clear(Color::Aqua);
-		SolidBrush brush(Color::Black);
-		Pen penBrown(&brush,6.f);//Для рисования контура
+		Rect rect(0,0,600,600);
 		
-		//Для первого прямоугольника
-		Point pt1(10,10);
-		Point pt2(300,300);
-		temp.FillRectangle(&brush, 320, 330, 500, 70);
-		temp.DrawLine(&penBrown, pt1, pt2);
+		//Части катера
+		Rect kater_part[4] = 
+		{
+			Rect(250,200,360,200),//тело катера
+			Rect(610,290,100,100),//мотор катера
+			Rect(318,130,160,70),//стул или крыша??
+			Rect(40,100,360, 300)//нос катера
+		};
+		//углы для сектора носа
+		float angle = 0.f, angle2 = 78.f,angle3 = 130.f;
+		//Точки для многоугольника
+		Point kater_noseTops[4] =
+		{
+			Point(48,170),
+			Point(250,200),
+			Point(250,400),
+			Point(218,250)
+		};
+		//Точки для многоугольника
+		Point kater_nose[3] =
+		{
+			Point(40,200),
+			Point(250,200),
+			Point(250,400),
+		};
+
+		Point kater_glass[4] =
+		{
+			Point(250,200),
+			Point(330,77),
+			Point(480,77),
+			Point(520,200)
+		};
+		//Кисти для заполнения цветом
+		Pen kater_border(Color::Blue);
+
+		LinearGradientBrush linBrush(rect,Color::Indigo,Color::Goldenrod,40.f);
 		
-		g.DrawImage(&buffer, rect);
+		Color gradient_color[3] =
+		{
+			Color(255,255,0,0),//red
+			Color(255,0,0,255),//blue
+			Color(255,0,255,0)//green
+		};
+		float pos[4] =
+		{
+			0.0f,//начало градиента
+			0.3f,
+			0.6f,
+			1.0f
+		};
+		//Задаем значения фактовров наложения. Т.е. процент от конечного числа линейного градиента
+		float factors[4] =
+		{
+			0.0f,//начало градиента
+			0.2f,
+			0.8f,
+			1.0f
+		};
+		//linBrush.SetInterpolationColors(gradient_color,pos,4);
+
+		linBrush.SetBlend(factors,pos,4);
+		linBrush.SetGammaCorrection(TRUE);
+
+		SolidBrush brush(Color::LightSkyBlue);
+		SolidBrush brush2(Color::Yellow);
+
+		//Рисование катера
+		
+		g.FillRectangle(&linBrush,kater_part[0]); //корпус
+		//g.FillPie(&linBrush, kater_part[3], angle2, angle3); //корпус
+		//g.FillPolygon(&linBrush,kater_noseTops,4);
+		g.FillPolygon(&linBrush,kater_nose,3);
+		g.DrawPolygon(&kater_border, kater_glass, 4);//стекло над креслами
+
+		g.FillRectangle(&brush, kater_part[1]);
+		g.FillRectangle(&brush2, kater_part[2]);
+
+		g.DrawRectangles(&kater_border, kater_part,3);
+
+	
+		//g.DrawPie(&kater_border, kater_part[3], angle2, angle3);//линия вокруг сектора
+		//g.DrawPolygon(&kater_border, kater_noseTops,4); //линия вокруг полигона
+
+		//g.GetVisibleClipBounds(&rect);
+		
+		//Bitmap buffer(rect.Width, rect.Height, &g);
+		//Graphics temp(&buffer);
+
+
+		//temp.Clear(Color::Aqua);
+		//SolidBrush brush(Color::Black);
+		//Pen penBrown(&brush,6.f);//Для рисования контура
+		//
+		////Для первого прямоугольника
+		//Point pt1(10,10);
+		//Point pt2(300,300);
+		//temp.FillRectangle(&brush, 320, 330, 500, 70);
+		//temp.DrawLine(&penBrown, pt1, pt2);
+		
+		//g.DrawImage(&buffer, rect);
 	}
 
