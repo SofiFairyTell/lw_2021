@@ -168,7 +168,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		Graphics g(hdc);
 		g.Clear(Color::LightCyan);
 
-		Rect rect(0,0,600,600);
+		Rect rect(0,0,600,600); //Многоугольник для градиента
 		
 		//Части катера
 		Rect kater_part[4] = 
@@ -178,16 +178,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 			Rect(318,130,160,70),//стул или крыша??
 			Rect(40,100,360, 300)//нос катера
 		};
-		//углы для сектора носа
-		float angle = 0.f, angle2 = 78.f,angle3 = 130.f;
-		//Точки для многоугольника
-		Point kater_noseTops[4] =
-		{
-			Point(48,170),
-			Point(250,200),
-			Point(250,400),
-			Point(218,250)
-		};
+
 		//Точки для многоугольника
 		Point kater_nose[3] =
 		{
@@ -214,23 +205,11 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 			Color(255,0,0,255),//blue
 			Color(255,0,255,0)//green
 		};
-		float pos[4] =
-		{
-			0.0f,//начало градиента
-			0.3f,
-			0.6f,
-			1.0f
-		};
-		//Задаем значения фактовров наложения. Т.е. процент от конечного числа линейного градиента
-		float factors[4] =
-		{
-			0.0f,//начало градиента
-			0.2f,
-			0.8f,
-			1.0f
-		};
-		//linBrush.SetInterpolationColors(gradient_color,pos,4);
-
+		//Точки для изменения цвета
+		float pos[4] = { 0.0f, 0.3f, 0.6f, 1.0f	};
+		//Задаем значения факторов наложения. Т.е. процент от конечного числа линейного градиента
+		float factors[4] = { 0.0f, 0.2f, 0.8f, 1.0f};
+		//Установка линейного градиента с неоднородным изменением цвета и гаммнокоррецией
 		linBrush.SetBlend(factors,pos,4);
 		linBrush.SetGammaCorrection(TRUE);
 
@@ -238,21 +217,16 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		SolidBrush brush2(Color::Yellow);
 
 		//Рисование катера
-		
+
 		g.FillRectangle(&linBrush,kater_part[0]); //корпус
-		//g.FillPie(&linBrush, kater_part[3], angle2, angle3); //корпус
-		//g.FillPolygon(&linBrush,kater_noseTops,4);
-		g.FillPolygon(&linBrush,kater_nose,3);
+		g.FillPolygon(&linBrush,kater_nose,3);//nose
 		g.DrawPolygon(&kater_border, kater_glass, 4);//стекло над креслами
 
 		g.FillRectangle(&brush, kater_part[1]);
 		g.FillRectangle(&brush2, kater_part[2]);
 
 		g.DrawRectangles(&kater_border, kater_part,3);
-
-	
-		//g.DrawPie(&kater_border, kater_part[3], angle2, angle3);//линия вокруг сектора
-		//g.DrawPolygon(&kater_border, kater_noseTops,4); //линия вокруг полигона
+		
 
 		//g.GetVisibleClipBounds(&rect);
 		
