@@ -32,7 +32,8 @@ using namespace Gdiplus;
 //Объявления
 
 HWND hwnd = NULL; //дескриптор окна
-void Display(HDC hdc);
+void Display(HDC hdc); //функция для показа катера на экране
+					   
 /*Для изменения цвета окна, когда было обработано WM_SYSCHAR */
 RECT rc;
 HBRUSH brushes[3]; //кисти для изменения цвета окна
@@ -173,8 +174,8 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		//Части катера
 		Rect kater_part[3] = 
 		{
-			Rect(250,200,360,200),//тело катера
-			Rect(610,290,100,100),//мотор катера
+			Rect(250,200,460,200),//тело катера
+			Rect(710,290,80,90),//мотор катера
 			Rect(318,130,160,70),//стул или крыша??
 		};
 
@@ -203,8 +204,8 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		};
 
 		kater_border.SetCompoundArray(border_part, 6); //составное перо
-		HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine,Color::Bisque);
-		LinearGradientBrush linBrush(rect,Color::Indigo,Color::Goldenrod,40.f);
+		HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine,Color::Bisque);//Штриховая кисть
+		LinearGradientBrush linBrush(rect,Color::Indigo,Color::Goldenrod,40.f); //кисть с линейным градиентом
 		
 		Color gradient_color[3] =
 		{
@@ -217,7 +218,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		//Задаем значения факторов наложения. Т.е. процент от конечного числа линейного градиента
 		float factors[4] = { 0.0f, 0.2f, 0.8f, 1.0f};
 
-		//Установка линейного градиента с неоднородным изменением цвета и гаммнокоррецией
+		//Установка линейного градиента с неоднородным изменением цвета и гаммокоррецией
 		linBrush.SetBlend(factors,pos,4);
 		linBrush.SetGammaCorrection(TRUE);
 
@@ -226,27 +227,27 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
 		//Рисование катера
 
-		g.FillRectangle(&linBrush, kater_part[0]);	//корпус
+		g.FillRectangle(&linBrush, kater_part[0]);		//корпус
 		g.FillRectangle(&hatchBrush, kater_part[1]);	//мотор
+	
 		
-		
-		g.FillRectangle(&brush2, kater_part[2]);	//кресла
+		g.FillRectangle(&brush2, kater_part[2]);		//кресла
 		g.DrawPolygon(&kater_border, kater_glass, 4);	//стекло над креслами
 
-		g.DrawRectangles(&kater_border, kater_part,3);	//нарисованные части катера
+		g.DrawRectangles(&kater_border, kater_part,3);	//нарисованные контуры элементов катера
 
-		g.FillPolygon(&linBrush,kater_nose,3);//нос
-		g.DrawPolygon(&kater_border, kater_nose, 3);//нос
+		g.FillPolygon(&linBrush,kater_nose,3);			//нос закршенный
+		g.DrawPolygon(&kater_border, kater_nose, 3);	//нос контур
 		
-
+		FontFamily fontFamily(L"Times New Roman");
+		Font font(&fontFamily, 30.f, FontStyleBoldItalic);
+		//StringFormat sf(int formatFlags = StringAlignmentCenter, LANGID language = (LANGID)SUBLANG_RUSSIAN_RUSSIA);
+		LANGID lang = MAKELANGID(LANG_RUSSIAN, SUBLANG_RUSSIAN_RUSSIA);
+		StringFormat sf = new StringFormat(0, lang);
+		sf.SetFormatFlags(StringAlignmentNear);
+		RectF rectF(470.f, 310.f, 150.f, 90.f);
 		
-		
-
-		
-
-		
-		
-
+		g.DrawString(L"Kater-1",-1,&font,rectF,&sf,&hatchBrush);
 		//g.GetVisibleClipBounds(&rect);
 		
 		//Bitmap buffer(rect.Width, rect.Height, &g);
