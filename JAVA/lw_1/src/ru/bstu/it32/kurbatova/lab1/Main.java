@@ -24,7 +24,10 @@ public class Main
                     MenuCommand.MarkTranslationMenu();
                     break;
                 case "tree":
-                    MenuCommand.TrigonometryFunction();
+                    MenuCommand.TrigonometryFunctionMenu();
+                    break;
+                case "four":
+                    MenuCommand.ArraySumMenu();
                     break;
             }
         }while(command.equals("далее"));

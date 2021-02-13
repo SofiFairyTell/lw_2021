@@ -101,9 +101,8 @@ void draw(HDC hdc)
                                       1. Must be global (doesn't matter how). You must draw image when window is called.
                                       2. Clearing image from memory.
                                       */
-    ///Car body
-    gf.DrawRectangle(&pen, 320, 330, 500, 70);
-    gf.FillRectangle(&linearBrush, 320, 330, 500, 70);
+    ///C
+	.FillRectangle(&linearBrush, 320, 330, 500, 70);
   
     gf.DrawRectangle(&pen, 325, 330, 15, 6);
     gf.FillRectangle(&brushLightsBack, 325, 330, 15, 6);

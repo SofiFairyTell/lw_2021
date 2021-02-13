@@ -63,7 +63,7 @@ class MenuCommand
             System.exit(-1);
         }
     }
-    static void TrigonometryFunction()
+    static void TrigonometryFunctionMenu()
     {
         Scanner input = new Scanner(System.in);
         try
@@ -80,6 +80,40 @@ class MenuCommand
             else
             {
                 ComputeMethod.TrigonometryFunction(start,end,step);
+            }
+        }
+        catch (InputException ex)
+        {
+            System.out.println(ex.getMessage());
+            System.exit(-1);
+        }
+        catch(InputMismatchException ex)
+        {
+            System.out.println(ex.getMessage());
+            System.exit(-1);
+        }
+    }
+    static  void ArraySumMenu()
+    {
+        Scanner input = new Scanner(System.in);
+        try
+        {
+            System.out.print("Введите количество элементов массива: ");
+            int size  = input.nextInt();
+            int array[] = new int[size];
+            System.out.print("Введите последовательность чисел: ");
+
+            if( size <=0 )
+            {
+                throw new InputException("Шаг не может быть меньше или равны 0");
+            }
+            else
+            {
+                for (int i=0;i<size;i++)
+                    {
+                        array[i] = input.nextInt();
+                    }
+                ComputeMethod.ArraySum(array);
             }
         }
         catch (InputException ex)

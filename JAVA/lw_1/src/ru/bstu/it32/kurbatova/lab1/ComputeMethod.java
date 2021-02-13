@@ -71,4 +71,27 @@ class ComputeMethod
             System.out.printf("%-10.2f%-27.2f%n", array[i][0], array[i][1]);
         }
     }
+    static void ArraySum(int[] array)
+    {
+        //int[] array = {2, 1, -1, -2, 0};
+        int min = 0, max = 0;
+        for (int i = 0; i < array.length; ++i)
+        {
+            if (array[i] < array[min])
+            {
+                min = i;
+            }
+            if (array[i] > array[max])
+            {
+                max = i;
+            }
+        }
+
+        int left = (min < max) ? min : max;
+        int right = (min < max) ? max : min;
+
+        for (int i = left + 1; i < right; ++i) {
+            System.out.print(array[i] + " ");
+        }
+    }
 }
