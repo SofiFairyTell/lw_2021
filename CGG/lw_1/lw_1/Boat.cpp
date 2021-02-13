@@ -33,7 +33,7 @@ using namespace Gdiplus;
 
 HWND hwnd = NULL; //дескриптор окна
 void Display(HDC hdc); //функция для показа катера на экране
-					   
+void DrawImg(); //загрузка изображения на экран
 /*Для изменения цвета окна, когда было обработано WM_SYSCHAR */
 RECT rc;
 HBRUSH brushes[3]; //кисти для изменения цвета окна
@@ -144,6 +144,10 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 			TextOut(hdc, xPos, yPos, szBuf, nSize);
 
 		}break;
+		case WM_RBUTTONDOWN:
+		{
+			DrawImg();
+		}break;
 	}
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
@@ -151,10 +155,9 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCRStr)
 	{
 		DWORD dwStyle = WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_HSCROLL | ES_MULTILINE | ES_AUTOHSCROLL | ES_AUTOVSCROLL;
-
 		return TRUE;
 	}
-
+	
 	void OnCommand(HWND hWnd, int id, HWND hwnCTRL, UINT codeNotify)
 	{
 	}
@@ -164,6 +167,35 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		PostQuitMessage(0); // отправляем сообщение WM_QUIT
 	}
 	
+	void DrawImg()
+	{
+		HDC hdc = GetDC(hwnd);
+		Graphics g(hdc);
+		//g.Clear(Color::LightCyan);
+		Image img(L"C:\\Users\\Kurbatova\\source\\LW2020\\lw_2021\\CGG\\lw_1\\KATER1.png");
+
+		
+		//Если изображение будет больишм, его надо уменьшить
+		RectF rectImg;
+		RectF layout(0, 0, 200.f, 150.f);
+		float fRat = (float)img.GetWidth() / (float)img.GetHeight();
+		if (fRat > (layout.Width / layout.Height))
+		{
+			rectImg.Width = layout.Width;
+			rectImg.Height = layout.Width/fRat;
+			rectImg.X = layout.GetLeft();
+			rectImg.Y = layout.GetTop();
+		}
+		else
+		{
+			rectImg.Width = fRat * layout.Height;
+			rectImg.Height = layout.Height;
+			rectImg.X = layout.GetLeft();
+		}
+
+
+		g.DrawImage(&img, rectImg);
+	}
 	void Display(HDC hdc)
 	{
 		Graphics g(hdc);
@@ -189,7 +221,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
 		Point kater_glass[4] =
 		{
-			Point(250,200),
+			Point(170,200),
 			Point(330,77),
 			Point(480,77),
 			Point(520,200)
@@ -204,7 +236,8 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		};
 
 		kater_border.SetCompoundArray(border_part, 6); //составное перо
-		HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine,Color::Bisque);//Штриховая кисть
+		HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine, Color::Bisque);//Штриховая кисть
+		HatchBrush hatchBrushText(HatchStyleDiagonalBrick, Color::Black,Color::Red);//Штриховая кисть
 		LinearGradientBrush linBrush(rect,Color::Indigo,Color::Goldenrod,40.f); //кисть с линейным градиентом
 		
 		Color gradient_color[3] =
@@ -222,8 +255,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		linBrush.SetBlend(factors,pos,4);
 		linBrush.SetGammaCorrection(TRUE);
 
-		SolidBrush brush(Color::LightSkyBlue);
-		SolidBrush brush2(Color::Yellow);
+		SolidBrush brushYellow(Color::Yellow);
 
 		//Рисование катера
 
@@ -231,7 +263,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		g.FillRectangle(&hatchBrush, kater_part[1]);	//мотор
 	
 		
-		g.FillRectangle(&brush2, kater_part[2]);		//кресла
+		g.FillRectangle(&brushYellow, kater_part[2]);		//кресла
 		g.DrawPolygon(&kater_border, kater_glass, 4);	//стекло над креслами
 
 		g.DrawRectangles(&kater_border, kater_part,3);	//нарисованные контуры элементов катера
@@ -240,30 +272,13 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		g.DrawPolygon(&kater_border, kater_nose, 3);	//нос контур
 		
 		FontFamily fontFamily(L"Times New Roman");
-		Font font(&fontFamily, 30.f, FontStyleBoldItalic);
+		Font font(&fontFamily, 40.f, FontStyleBoldItalic);
 		//StringFormat sf(int formatFlags = StringAlignmentCenter, LANGID language = (LANGID)SUBLANG_RUSSIAN_RUSSIA);
 		LANGID lang = MAKELANGID(LANG_RUSSIAN, SUBLANG_RUSSIAN_RUSSIA);
 		StringFormat sf = new StringFormat(0, lang);
 		sf.SetFormatFlags(StringAlignmentNear);
-		RectF rectF(470.f, 310.f, 150.f, 90.f);
-		
-		g.DrawString(L"Kater-1",-1,&font,rectF,&sf,&hatchBrush);
-		//g.GetVisibleClipBounds(&rect);
-		
-		//Bitmap buffer(rect.Width, rect.Height, &g);
-		//Graphics temp(&buffer);
-
-
-		//temp.Clear(Color::Aqua);
-		//SolidBrush brush(Color::Black);
-		//Pen penBrown(&brush,6.f);//Для рисования контура
-		//
-		////Для первого прямоугольника
-		//Point pt1(10,10);
-		//Point pt2(300,300);
-		//temp.FillRectangle(&brush, 320, 330, 500, 70);
-		//temp.DrawLine(&penBrown, pt1, pt2);
-		
-		//g.DrawImage(&buffer, rect);
+		RectF rectF(470.f, 310.f, 250.f, 100.f);
+	
+		g.DrawString(L"Kater-1", -1, &font, rectF, &sf, &hatchBrushText);
 	}
 
