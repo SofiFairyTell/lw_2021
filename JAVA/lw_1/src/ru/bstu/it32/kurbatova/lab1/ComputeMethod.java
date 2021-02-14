@@ -4,7 +4,7 @@ import javax.lang.model.type.NullType;
 
 class ComputeMethod
 {
-    static void isTriangleInCircle(double radius, double length)
+    static void isTriangleInCircle(int radius, int length)
     {
         /**
          * Определяет поместиться ли правильный треугольник в круге
@@ -48,7 +48,7 @@ class ComputeMethod
                 System.out.println("'Данных для такой оценки нет");
         }
     }
-    static void TrigonometryFunction(double start, double end, double step)
+    static void TrigonometryFunction(int start, int end, int step)
     {
 
         int rows = (int) ((end - start) / step);
