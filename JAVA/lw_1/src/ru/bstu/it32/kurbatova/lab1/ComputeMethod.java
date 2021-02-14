@@ -2,7 +2,7 @@ package ru.bstu.it32.kurbatova.lab1;
 
 import javax.lang.model.type.NullType;
 
-class ComputeMethod
+public class ComputeMethod
 {
     static void isTriangleInCircle(int radius, int length)
     {
@@ -54,9 +54,9 @@ class ComputeMethod
         int rows = (int) ((end - start) / step);
         //массив из двух столбцов: 0- значение аргумента, 1 - значение функции
         double[][] array = new double[rows][2];
-        double x = start;
-        while(x<end)
-        {
+        int x = start;
+
+        do {
             for (int i = 0; i < rows; ++i)
             {
                 double y = Math.sin(x) + 0.5 * Math.cos(x);
@@ -64,7 +64,7 @@ class ComputeMethod
                 array[i][1] = y;
                 x+=step;
             }
-        }
+        }while(x<end);
         //вывод в табличном виде
         System.out.printf("%-10s%-25s%n","Аргумент","Значение");
         System.out.println("-----------------------------------------------------");
@@ -88,14 +88,38 @@ class ComputeMethod
                 max = i;
             }
         }
-
-
         int left = (min < max) ? min : max;
         int right = (min < max) ? max : min;
         int Summ = 0;
         for (int i = left; i <= right; i++)
         {
             Summ = Summ + array[i];
+        }
+        System.out.printf("Сумма между максимальным и минимальным элементов %d", Summ);
+    }
+
+    static void ArraySumWhile(int[] array)
+    {
+        int min = 0, max = 0;
+        int i = 0;
+        while (i<array.length)
+        {
+            if (array[i] < array[min])
+            {
+                min = i;
+            }
+            if (array[i] > array[max])
+            {
+                max = i;
+            }
+            i++;
+        }
+        int left = (min < max) ? min : max;
+        int right = (min < max) ? max : min;
+        int Summ = 0;
+        for (int j = left; j <= right; j++)
+        {
+            Summ = Summ + array[j];
         }
         System.out.printf("Сумма между максимальным и минимальным элементов %d", Summ);
     }

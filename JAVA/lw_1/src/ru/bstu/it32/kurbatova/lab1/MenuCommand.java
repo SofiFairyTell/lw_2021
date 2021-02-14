@@ -7,14 +7,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-
-class MenuCommand {
+public class MenuCommand
+{
     static void TriangleInCircleMenu() {
         Scanner input = new Scanner(System.in);
-        System.out.print("Консоль или файл?: ");
+        System.out.print("Консоль (console) или файл (file)?: ");
         String answer = input.next();
         switch (answer) {
-            case "консоль": {
+            case "console":
+                {
                 try {
                     System.out.print("Длина стороны треугольника: ");
                     int triangleLength = input.nextInt();
@@ -34,7 +35,7 @@ class MenuCommand {
                 }
             }
             break;
-            case "файл": {
+            case "file": {
                 int arg[] = MenuCommand.FileReader();
                 ComputeMethod.isTriangleInCircle(arg[0], arg[1]);
             }
@@ -46,10 +47,10 @@ class MenuCommand {
     static void MarkTranslationMenu() {
 
         Scanner input = new Scanner(System.in);
-        System.out.print("Консоль или файл?: ");
+        System.out.print("Консоль (console) или файл (file)?: ");
         String answer = input.next();
         switch (answer) {
-            case "консоль": {
+            case "console": {
                 try {
                     System.out.print("Введите оценку:");
                     int mark = input.nextInt();
@@ -67,7 +68,7 @@ class MenuCommand {
                 }
             }
             break;
-            case "файл": {
+            case "file": {
                 int arg[] = MenuCommand.FileReader();
                 ComputeMethod.markTranslator(arg[0]);
             }
@@ -77,10 +78,10 @@ class MenuCommand {
 
     static void TrigonometryFunctionMenu() {
         Scanner input = new Scanner(System.in);
-        System.out.print("Консоль или файл?: ");
+        System.out.print("Консоль (console) или файл (file)?: ");
         String answer = input.next();
         switch (answer) {
-            case "консоль": {
+            case "console": {
                 try {
                     System.out.print("Введите начало и конец:");
                     int start = input.nextInt();
@@ -101,7 +102,7 @@ class MenuCommand {
                 }
             }
             break;
-            case "файл": {
+            case "file": {
                 int arg[] = MenuCommand.FileReader();
                 ComputeMethod.TrigonometryFunction(arg[0], arg[1], arg[2]);
             }
@@ -111,10 +112,10 @@ class MenuCommand {
 
     static void ArraySumMenu() {
         Scanner input = new Scanner(System.in);
-        System.out.print("Консоль или файл?: ");
+        System.out.print("Консоль (console) или файл (file)?: ");
         String answer = input.next();
         switch (answer) {
-            case "консоль": {
+            case "console": {
                 try {
                     System.out.print("Введите количество элементов массива: ");
                     int size = input.nextInt();
@@ -138,9 +139,9 @@ class MenuCommand {
                 }
             }
             break;
-            case "файл": {
+            case "file": {
                 int arg[] = MenuCommand.FileReader();
-                ComputeMethod.ArraySum(arg);
+                ComputeMethod.ArraySumWhile(arg);
             }
             break;
         }
@@ -149,14 +150,14 @@ class MenuCommand {
     static int[] FileReader() {
         Scanner input = new Scanner(System.in);
         System.out.print("Введите путь: ");
-         String path = input.nextLine();
+        String path = input.nextLine();
         try {
             File file = new File(path);
             if (!file.exists()) {
                 file.createNewFile();
                 // добавим информацию в указанный файл
                 PrintWriter printWriter = new PrintWriter(file);
-                printWriter.println("2 5 6");
+                printWriter.println("2 5 1");
                 printWriter.close();
             }
             Scanner file_read = new Scanner(file);
