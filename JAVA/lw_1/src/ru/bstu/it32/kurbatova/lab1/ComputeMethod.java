@@ -1,5 +1,7 @@
 package ru.bstu.it32.kurbatova.lab1;
 
+import javax.lang.model.type.NullType;
+
 class ComputeMethod
 {
     static void isTriangleInCircle(double radius, double length)
@@ -87,11 +89,14 @@ class ComputeMethod
             }
         }
 
+
         int left = (min < max) ? min : max;
         int right = (min < max) ? max : min;
-
-        for (int i = left + 1; i < right; ++i) {
-            System.out.print(array[i] + " ");
+        int Summ = 0;
+        for (int i = left; i <= right; i++)
+        {
+            Summ = Summ + array[i];
         }
+        System.out.printf("Сумма между максимальным и минимальным элементов %d", Summ);
     }
 }
