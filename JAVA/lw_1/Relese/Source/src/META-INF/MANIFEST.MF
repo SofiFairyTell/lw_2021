@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: ru.bstu.it32.kurbatova.lab1.Main
+Class-Path: .
+
