@@ -8,9 +8,9 @@ public class Main
     {
         String command;
         Scanner input = new Scanner(System.in);
-        do {
-            System.out.print("Введите команду: ");
-            command = input.next();
+        System.out.print("Введите команду: ");
+        command = input.next();
+        do{
             switch(command)
             {
                 case "first":
@@ -26,6 +26,8 @@ public class Main
                     MenuCommand.ArraySumMenu();
                     break;
             }
-        }while(command.equals("далее"));
+            System.out.print("Введите команду: ");
+            command = input.next();
+        }while(!command.equals("end"));
     }
 }

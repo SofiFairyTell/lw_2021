@@ -14,11 +14,11 @@ public class ComputeMethod
             double triangle = length*(Math.sqrt(3)/3);
             if(radius >= triangle)
             {
-                System.out.print("Поместиться!");
+                System.out.print("Поместиться!\n");
             }
             else
             {
-                System.out.print(" Не поместиться!");
+                System.out.print(" Не поместиться!\n");
             }
     }
     static void markTranslator(int mark)
@@ -33,19 +33,19 @@ public class ComputeMethod
                 System.out.println("'Плохо'");
                 break;
             case 2:
-                System.out.println("'Неудовлетворительно'");
+                System.out.println("'Неудовлетворительно'\n");
                 break;
             case 3:
-                System.out.println("'Удовлетворительно'");
+                System.out.println("'Удовлетворительно'\n");
                 break;
             case 4:
-                System.out.println("'Хорошо'");
+                System.out.println("'Хорошо'\n");
                 break;
             case 5:
-                System.out.println("'Отлично'");
+                System.out.println("'Отлично'\n");
                 break;
             default:
-                System.out.println("'Данных для такой оценки нет");
+                System.out.println("'Данных для такой оценки нет'\n");
         }
     }
     static void TrigonometryFunction(int start, int end, int step)
@@ -77,6 +77,7 @@ public class ComputeMethod
     {
         //int[] array = {2, 1, -1, -2, 0};
         int min = 0, max = 0;
+
         for (int i = 0; i < array.length; ++i)
         {
             if (array[i] < array[min])
@@ -95,13 +96,14 @@ public class ComputeMethod
         {
             Summ = Summ + array[i];
         }
-        System.out.printf("Сумма между максимальным и минимальным элементов %d", Summ);
+        System.out.printf("Сумма между максимальным и минимальным элементов %d\n", Summ);
     }
 
     static void ArraySumWhile(int[] array)
     {
         int min = 0, max = 0;
         int i = 0;
+        System.out.print("Метод с циклом While");
         while (i<array.length)
         {
             if (array[i] < array[min])
@@ -121,6 +123,6 @@ public class ComputeMethod
         {
             Summ = Summ + array[j];
         }
-        System.out.printf("Сумма между максимальным и минимальным элементов %d", Summ);
+        System.out.printf("Сумма между максимальным и минимальным элементов %d\n", Summ);
     }
 }
