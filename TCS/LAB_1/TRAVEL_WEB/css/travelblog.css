@@ -1,0 +1,109 @@
+body
+{
+	font-family: 'Times New Roman', sans-serif;
+	line-height: 1.6;/*межстрочный интервал*/
+	/*font-size: 15px;
+	color: #c7cedf;*/
+	
+}
+
+*, *:before,*:after
+{
+	box-sizing: border-box;
+}
+ .contain
+ {
+ 	width: 100%;
+ 	max-width: 900px;
+ 	margin: 0 auto; /*выравнивание по центру*/
+ }
+
+ .intro_travel
+ {
+ 	display: flex;
+ 	flex-direction: column;
+ 	justify-content: center;
+ 	width: 100%;
+ 	height: 100vh;
+ 	background: url(.././img/background_alternative.jpg) center no-repeat;
+ 	-webkit-background-size:cover;
+ 	background-size: cover;
+ }
+ .intro_title
+{
+	font-size: 250px;
+	font-weight: 700;
+	text-transform: uppercase;
+	text-align: center;
+	line-height: 1;
+}
+.intro_inner
+{
+	width: 100%;
+	max-width:700px;
+	margin: 0 auto;
+}
+
+
+/*----HEADER-----*/
+header
+{
+	width: 100%;
+	padding-top: 40px;
+	position: absolute;
+	top: 0;
+	left:0;
+	right: 0;
+	z-index: 1000;/*разместим поверх всего */
+}
+.header_innner
+{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.header_logo
+{
+	font-size:40px;
+	font-weight: 700;
+	color:#4d2a16;
+}
+
+.nav
+{
+	font-size: 14px;
+	text-transform: uppercase;;
+}
+.nav_link
+{
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	margin: 0 15px;
+	color:#4d2a16;
+	text-decoration:none;
+	transition: color 0.1s linear; /*плавное изменение цвета*/
+}
+.nav_link:after
+{
+	content: "";
+	display: block;
+	width: 100%;
+	height: 4px;	
+	opacity: 0;
+	transition: opacity 0.1s linear;
+	background-color: #4d2a16;
+	position: absolute;/*выраванивани относиельно родительского класса*/
+	top: 100%;
+	left:0;
+	z-index: 1;
+
+}
+.nav_link:hover
+{
+	color: #007a79;
+}
+.nav_link:hover:after
+{
+	opacity: 1;
+}
