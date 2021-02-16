@@ -3,8 +3,8 @@ import sys
 import itertools
 import re
 # имя файла
-FILENAME = "C:\\Users\\Kurbatova\\source\\LW2020\\lw_2021\\TIPIS\esperanto_full.txt"
-FILENAME2 = "C:\\Users\\Kurbatova\\source\\LW2020\\lw_2021\\TIPIS\esperanto_stemm.txt"
+FILENAME = "..\\TIPIS\esperanto_full.txt"
+FILENAME2 = "..\\TIPIS\m.txt"
 
 # определяем пустой список
 messages = list()
