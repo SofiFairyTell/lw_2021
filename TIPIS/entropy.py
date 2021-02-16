@@ -10,9 +10,9 @@ def entropy():
         byteArr = list(f.read())
     fileSize = len(byteArr)
     print
-    print('File size in bytes: {:,d}'.format(fileSize))
+    print('Размер файла в байтах: {:,d}'.format(fileSize))
     # calculate the frequency of each byte value in the file
-    print('Calculating Shannon entropy of file. Please wait...')
+    print('Вычисляю реальную энтропию...')
     freqList = []
     for b in range(256):
         ctr = 0
@@ -26,7 +26,7 @@ def entropy():
         if freq > 0:
             ent = ent + freq * math.log(freq, 2)
     ent = -ent
-    print('Shannon entropy: {}'.format(ent))
+    print('Реальная энтропия: {}'.format(ent))
     print
  
 if __name__== "__main__":
