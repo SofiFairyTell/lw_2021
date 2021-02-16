@@ -52,6 +52,8 @@ header
 {
 	width: 100%;
 	padding-top: 30px;
+	/*изначально позволяет 
+	относительно верхнего угла браузера выставить*/
 	position: absolute;
 	top: 0;
 	left:0;

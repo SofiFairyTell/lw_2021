@@ -51,27 +51,25 @@ public class ComputeMethod
     static void TrigonometryFunction(int start, int end, int step)
     {
 
-        int rows = (int) ((end - start) / step);
+        int rows = (int) ((end - start) / step) + 1;
         //массив из двух столбцов: 0- значение аргумента, 1 - значение функции
-        double[][] array = new double[rows][2];
-        int x = start;
-
-        do {
-            for (int i = 0; i < rows; ++i)
-            {
-                double y = Math.sin(x) + 0.5 * Math.cos(x);
-                array[i][0] = x;
-                array[i][1] = y;
-                x+=step;
-            }
-        }while(x<end);
         //вывод в табличном виде
         System.out.printf("%-10s%-25s%n","Аргумент","Значение");
         System.out.println("-----------------------------------------------------");
+        double[][] array = new double[rows][2];
+        for (int i = 0; i < rows; i++)
+            {
+                double y = Math.sin(start) + 0.5 * Math.cos(start);
+                array[i][0] = start;
+                array[i][1] = y;
+                start += step;
+                System.out.printf("%-10.2f%-27.2f%n", array[i][0], array[i][1]);
+            }
+ /*
         for (int i = 0; i < array.length; i++)
         {
             System.out.printf("%-10.2f%-27.2f%n", array[i][0], array[i][1]);
-        }
+        }*/
     }
     static void ArraySum(int[] array)
     {

@@ -1,8 +1,6 @@
 package ru.bstu.it32.kurbatova.lab1;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -88,11 +86,14 @@ public class MenuCommand
                     int end = input.nextInt();
                     System.out.print("Введите шаг:");
                     int step = input.nextInt();
-                    if (step <= 0) {
-                        throw new InputException("Шаг не может быть меньше или равны 0");
-                    } else {
-                        ComputeMethod.TrigonometryFunction(start, end, step);
+                    if (step <= 0 || step > end)
+                    {
+                        throw new InputException("Шаг не может быть меньше или равны 0 или больше конечной точки");
                     }
+                    else
+                        {
+                        ComputeMethod.TrigonometryFunction(start, end, step);
+                        }
                 } catch (InputException ex) {
                     System.out.println(ex.getMessage());
                     System.exit(-1);
@@ -153,12 +154,44 @@ public class MenuCommand
         String path = input.nextLine();
         try {
             File file = new File(path);
-            if (!file.exists()) {
-                file.createNewFile();
-                // добавим информацию в указанный файл
-                PrintWriter printWriter = new PrintWriter(file);
-                printWriter.println("2 5 1");
-                printWriter.close();
+            if (!file.exists())
+            {
+                try
+                {
+                    boolean created =  file.createNewFile();
+                    if(created)
+                    {
+                        System.out.println("Файл создан!");
+                        // добавим информацию в указанный файл
+                        PrintWriter printWriter = new PrintWriter(file);
+                        printWriter.println("2 5 1");
+                        printWriter.close();
+                        /*Выведем содержимое файла*/
+                        try(FileReader fin = new FileReader(file))
+                        {
+                                BufferedReader reader = new BufferedReader(fin);
+                                String line = reader.readLine();
+                                while(line !=null)
+                                {
+                                    System.out.println(line);
+                                    line = reader.readLine();
+                                }
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            e.printStackTrace();
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                catch (IOException ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
+
             }
             Scanner file_read = new Scanner(file);
             String string = "";
@@ -176,4 +209,9 @@ public class MenuCommand
             return new int[0];
         }
     }
+
+    static void FileWriter()
+        {
+
+        }
 }
