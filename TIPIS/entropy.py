@@ -22,9 +22,11 @@ def entropy():
         freqList.append(float(ctr) / fileSize)
     # Shannon entropy
     ent = 0.0
-    for freq in freqList:
-        if freq > 0:
-            ent = ent + freq * math.log(freq, 2)
+    
+    for i in range(len(freqList)):
+        if freqList[i] > 0:
+            ent = ent + freqList[i] * math.log(freqList[i], 2)
+            print('{}: Частота: {}'.format(chr(byteArr[i]),freqList[i]))
     ent = -ent
     print('Реальная энтропия: {}'.format(ent))
     print
