@@ -1,85 +1,88 @@
 body
 {
 	font-family: 'Times New Roman', sans-serif;
-	line-height: 1.6;/*межстрочный интервал*/
+	line-height: 1.6;/* межстрочный интервал */
 	font-size: 15px;
-	color: #2f1e26;
-	
 }
-/*Псевдоэлементы для линий*/
-*, *:before,*:after
+
+/* Псевдоэлементы для линий */
+*, *: before,*: after
 {
 	box-sizing: border-box;
 }
- .contain
- {
+.contain
+{
  	width: 100%;
- 	max-width: 1230px;
- 	margin: 0 auto; /*выравнивание по центру*/
+ 	max-width: 1200px;
+ 	margin: 0 auto; /* выравнивание по центру */
  }
-/*Рабочая область*/
- .intro_main
+ 
+/* Рабочая область */
+.intro_main
  {
  	display: flex;
  	flex-direction: column;
- 	justify-content: center;
+ 	justify-content: center;	
+ 	padding: auto;
  	width: 100%;
  	height: 100vh;
  	background: url(.././img/background_main.jpg) center no-repeat;
- 	-webkit-background-size:cover;
+ 	-webkit-background-size: cover;
  	background-size: cover;
   }
-
-
- /*главный заголвоок*/
- .intro_title
+.intro_inner
 {
+	width: 100%;
+	max-width: 700px;
+	margin: 0 auto;
+	text-align: center;
+}
+/* главный заголвоок */
+.intro_title
+{
+	font-family: Times New Roman, italic;
 	font-size: 100px;
 	font-weight: 700;
+	color: #8DB42D;
 	text-transform: uppercase;
-    text-shadow: red 1px 1px 0, red -1px -1px 0, 
-             red -1px 1px 0, red 1px -1px 0;
+  	text-shadow: red 1px 1px 0, red -1px -1px 0;
 	line-height: 1;
 }
 .intro_suptitle
 {
 	margin-bottom: 10px;
 	font-family: Times New Roman, italic;
-	font-size: 60px;
-	color: #6f1e14;
+	font-size: 50px;
+	color:#A64500;
 }
-/*Линия под главным заголовком*/
-.intro_title:after
+
+/* Линия под главным заголовком */
+.intro_title: after
 {
 	content: "";
-	display: block; 
+	display: block;
 	width: 100px;
 	height: 5px;
 	background-color: #fff;
 	margin: 60px auto 60px;
 }
-.intro_inner
-{
-	width: 100%;
-	max-width:700px;
-	margin: 0 auto;
-	text-align: center;
-}
 
-/*----HEADER-----*/
+
+/* ----HEADER----- */
 header
 {
 	width: 100%;
-	padding-top: 30px;
-	/*изначально позволяет 
-	относительно верхнего угла браузера выставить*/
+	padding-top: 30px; 
+  
+  /* изначально позволяет 
+	относительно верхнего угла браузера выставить */
 	position: absolute;
 	top: 0;
-	left:0;
+	left: 0;
 	right: 0;
-	z-index: 1000;/*разместим поверх всего */
+	z-index: 1000;/* разместим поверх всего */
 }
-.header_innner
+.header_inner
 {
 	display: flex;
 	justify-content: space-between;
@@ -87,39 +90,42 @@ header
 }
 .header_logo
 {
-	font-size:30px;
+	font-size: 30px;
 	font-weight: 700;
-	color:#4d2a16;
+	color: #A65000;
 }
 
+/* Блок навигации по разделам сайта */
 .nav
 {
 	font-size: 20px;
 	text-transform: uppercase;
-
 }
 .nav_link
 {
 	display: inline-block;
 	vertical-align: top;
-	position: relative;
 	margin: 0 15px;
-	color:#4d2a16;
-	text-decoration:none;
-	transition: color 0.1s linear; /*плавное изменение цвета*/
+	position: relative;
+	
+	color: #4d2a16;
+	text-decoration: none;
+	transition: color 0.1s linear; /* плавное изменение цвета */
 }
-.nav_link:after
+.nav_link: after
 {
 	content: "";
 	display: block;
 	width: 100%;
-	height: 4px;	
+	height: 4px;
 	opacity: 0;
+
 	transition: opacity 0.1s linear;
 	background-color: #4d2a16;
-	position: absolute;/*выраванивани относиельно родительского класса*/
+	position: absolute;/* выраванивани относиельно родительского класса */
+	
 	top: 100%;
-	left:0;
+	left: 0;
 	z-index: 1;
 
 }
@@ -132,6 +138,7 @@ header
 	opacity: 1;
 }
 
+/* Кнопка для перехода  */
 .button 
 {
 	display: inline-block;
@@ -173,6 +180,7 @@ header
 	padding: 10px 0;
 	border-top: 4px solid #fff;
 	opacity: .7;
+	position: relative;
 }
 .slider_item.active
 {
@@ -183,10 +191,47 @@ header
 	content: "";
 	display: block;
 	width: 70px;
-	height: 3px;
+	height: 4px;
 	position: absolute;
 	top: -4px;
 	left: 0;
 	z-index: 1;
-	background-color: #f3e181;
+	background-color: #333;
+}
+
+/*Section*/
+.section
+{
+	padding: 80px 0;
+}
+.section_header
+{
+	margin-bottom: 40px;
+	width: 100%;
+	max-width: 950px;
+	margin: 0 auto 40px;
+	text-align: center;
+}
+.section_suptitle
+{
+	font-size: 24px;
+	font-color: #200772;
+}
+
+.section_title
+{
+	font-size: 24px;
+	font-color: #200772;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.section_title:after
+{
+	content: "";
+	display: block;
+	width: 60px;
+	height: 5px;
+	background-color: #FF9400;
+	margin: 30px auto;
 }
