@@ -15,7 +15,6 @@ def file_cypher(file_input: str, file_output: str, crypt) -> None:
             # content = file_i.readlines()
             line = file_i.readline()
             while line:
-                print(line)
                 result = crypt(line, 4)
                 file_o.write(result)
                 line = file_i.readline()
@@ -81,7 +80,6 @@ def rail_fence_decrypt(input_string: str, key: int) -> str:
         output_string += grid[num][0]
         grid[num].pop(0)
     return output_string
-
 
 # main
 def main():

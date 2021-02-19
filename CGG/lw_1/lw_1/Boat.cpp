@@ -226,6 +226,13 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 			Point(480,77),
 			Point(520,200)
 		};
+		Point kater_handline[4] =
+		{
+			Point(507,140),
+			Point(585,150),
+			Point(661,160),
+			Point(709,192),
+		};
 		//Кисти для заполнения цветом
 		Pen kater_border(Color::Blue, 10.f);
 		float border_part[6] =
@@ -263,7 +270,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		g.FillRectangle(&hatchBrush, kater_part[1]);	//мотор
 	
 		
-		g.FillRectangle(&brushYellow, kater_part[2]);		//кресла
+		g.FillRectangle(&brushYellow, kater_part[2]);	//кресла
 		g.DrawPolygon(&kater_border, kater_glass, 4);	//стекло над креслами
 
 		g.DrawRectangles(&kater_border, kater_part,3);	//нарисованные контуры элементов катера
@@ -271,6 +278,10 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		g.FillPolygon(&linBrush,kater_nose,3);			//нос закршенный
 		g.DrawPolygon(&kater_border, kater_nose, 3);	//нос контур
 		
+		//Нарисуем ручку
+		g.FillClosedCurve(&brushYellow, kater_handline, 4);
+		g.DrawClosedCurve(&kater_border, kater_handline, 4);
+
 		FontFamily fontFamily(L"Times New Roman");
 		Font font(&fontFamily, 40.f, FontStyleBoldItalic);
 		//StringFormat sf(int formatFlags = StringAlignmentCenter, LANGID language = (LANGID)SUBLANG_RUSSIAN_RUSSIA);
