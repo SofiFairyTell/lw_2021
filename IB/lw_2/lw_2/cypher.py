@@ -15,7 +15,8 @@ def file_cypher(file_input: str, file_output: str, crypt) -> None:
             # content = file_i.readlines()
             line = file_i.readline()
             while line:
-                result = crypt(line, 4)
+                # result = crypt(line, 4)
+                result = crypt(line, "2 5 1 3 4")
                 file_o.write(result)
                 line = file_i.readline()
     file_o.close()
@@ -82,6 +83,22 @@ def rail_fence_decrypt(input_string: str, key: int) -> str:
     return output_string
 
 
+class KeyCypher:
+    #     encrypt
+    def key_encrypt(self, input_string: str, key: str) -> str:
+        output_string = ""
+        key_array = key.split(" ")
+        # for ch in key: key_array.append(ch)
+        for i in range(0, len(input_string) % len(key_array), 1):
+            # промежуточный блок для переставленных данных
+            transposition = [len(key_array)]
+            # перестановка символов внутри блока
+            for j in range(0, len(key_array), 1):
+                transposition[j] = input_string[i + int(key_array[j]) -1]
+            for j in range(0, len(key_array), 1):
+                output_string += transposition[j]
+        return output_string
+
 # main
 def main():
     print("Начало выполнения программы")
@@ -96,13 +113,15 @@ def main():
 
         if cypher_method == 1:
             print("\t\vШифр : 'Железнодорожная изгородь'")
-            file_cypher(filename_i, filename_o, rail_fence_encrypt)
+            #file_cypher(filename_i, filename_o, rail_fence_encrypt)
             # filename_input = input("Имя зашифрованного файла:")
             # filename_output = input("Имя для дешифрованного файла:")
-            file_cypher(filename_o, filename_o_d, rail_fence_decrypt)
+            # file_cypher(filename_o, filename_o_d, rail_fence_decrypt)
 
             # print("Ваше зашифрованное сообщение:  {}".format(result))
         elif cypher_method == 2:
+            keyrypt = KeyCypher()
+            file_cypher(filename_i, filename_o, keyrypt.key_encrypt)
             print("Ваше зашифрованное сообщение:  {}".format())
             print("Ваше исходное сообщение:  {}".format())
         elif cypher_method == 3:
