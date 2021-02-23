@@ -81,6 +81,7 @@ def rail_fence_decrypt(input_string: str, key: int) -> str:
         grid[num].pop(0)
     return output_string
 
+
 # main
 def main():
     print("Начало выполнения программы")
