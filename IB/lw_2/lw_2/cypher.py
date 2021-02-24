@@ -15,7 +15,7 @@ def file_cypher(file_input: str, file_output: str, crypt) -> None:
             line = file_i.readline()
             while line:
                 # result = crypt(line, 4) # для первого метода
-                result = crypt(line, 'сон') # для второго метода
+                result = crypt(line, 'сон')  # для второго метода
                 file_o.write(result)
                 line = file_i.readline()
     file_o.close()
@@ -80,6 +80,8 @@ class RailFence:
             grid[num].pop(0)
         return output_string
 
+
+# http://www.crypto-it.net/eng/simple/columnar-transposition.html
 
 class KeyCypher:
     #     encrypt
@@ -165,6 +167,12 @@ class KeyCypher:
             sequence.append(new_number)
         return sequence
 
+    def brute_force(self, keyword):
+        keyword_sequence = self.get_sequence(keyword)
+        n = len(keyword_sequence)
+        j = n - 2;
+        while j!=-1 & keyword_sequence[j]>=keyword_sequence[j + 1]:
+            j--
 
 # main
 def main():
