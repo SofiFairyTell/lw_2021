@@ -255,5 +255,25 @@ header
 }
 .photo_item
 {
-	width: 30%;
+	width: 31,5%;
+
+}
+.photo_item:hover .photo_img
+{
+	transform: translate3d(-10px,-10px,0px);
+}
+.photo_item:hover .photo_img img
+{
+	opacity: .1;
+}
+
+.photo_img
+{
+	background: linear-gradient(to bottom,#3DC837,#37C87A);
+	transition: transform .1s linear; 
+}
+.photo_img img
+{
+	display: block;
+	transition: opacity .1s linear;
 }
