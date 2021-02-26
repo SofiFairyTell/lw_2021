@@ -340,37 +340,6 @@ header
 }
 .contact_item
 {
-	width: 50%;
+	width: 100%;
 }
 
-/*Acordion*/
-.accordion_item
-{
-	border: 1px solid #fff;
-}
-.accordion_header
-{
-	padding: 15px 20px 15px 65px;
-	position: relative;
-	border-bottom: 1px solid #fff;
-}
-.accordion_content
-{
-	padding: 15px 20px;
-	font-size: 15px;
-	color: #333;
-}	
-.accoreon_title
-{
-	font-size: 14px;
-	color:#333;
-	text-transform: uppercase;
-}
-.accordeon_icon
-{
-	position: absolute;
-	top:50%;
-	left: 20px;
-	z-index: 1;
-	transform: translateY(-50%);
-}

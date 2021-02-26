@@ -1,11 +1,11 @@
 /*Acordion*/
 .accordion_item
 {
-  border: 1px solid #fff;
+  /*border: 1px solid #fff;*/
 }
 .accordion_header
 {
-  padding: 0px 0px 15px 65px;
+  padding: 0px 0px 5px 65px;
   position: relative;
   border-bottom: 1px solid #fff;
 }
@@ -24,10 +24,10 @@
 .accordeon_icon
 {
   position: absolute;
-  top:50%;
-  left: 20px;
+  top:20%;
+  left: 10px;
   z-index: 1;
-  transform: translateY(-50%);
+  transform: translateY(-20%);
 }
 
 
@@ -35,7 +35,7 @@
 
 /*Collapse*/
 .collapse-content {
-  width: 50vw;
+  width: 70vw;
   margin: auto;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
@@ -50,24 +50,25 @@
   font-weight: 500;
   padding: 0.9rem 1.8rem;
   color: #fff;
+  background:#A956A9;
   position: relative;
 }
 
-.collapse a.instagram {
-  background: #db2e7d;
+
+.collapse a.contact {
+  background: #56A956;
+}
+.collapse a.network {
+
+  padding: 0.1rem 1.0rem;
+  background: #85F5CF;
+  color:#280310;
+}
+.collapse a.official {
+  background: #EA1578;
 }
 
-.collapse a.twitter {
-  background: #1dabdd;
-}
 
-.collapse a.dribbble {
-  background: #444;
-}
-
-.collapse a.youtube {
-  background: #ff0000;
-}
 
 .collapse a:before {
   content: "";
@@ -80,9 +81,12 @@
 }
 
 .inner-content {
-  padding: 1.8rem;
+  padding: 0.5rem;
 }
-
+.inner-content ul
+{
+  text-transform: uppercase;
+}
 .content {
   max-height: 0em;
   transition: 0.3s linear 0s;
