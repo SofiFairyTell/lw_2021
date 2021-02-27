@@ -11,7 +11,7 @@
 /*Оболочки для слайбдов*/
 .wrapper {
   height: 600px;
-  margin: 100px auto 0;
+  margin: 20px auto 0;
   position: relative;
   width: 1000px;
 }
@@ -75,7 +75,7 @@
 
 .wrapper label:after 
 {
-  border: 6px solid #E1341E;
+  border: 1px solid #E1341E;
   content: " ";
   display: block;
   height: 12px;
@@ -153,6 +153,11 @@
   opacity: 1;
   color: #333;
   transition: .2s linear;
-  font-size: 70px;
-  background-color: #37C8C2;
+  font-size: 25px;
+}
+
+.secti 
+{
+  top: -350px;
+  padding: 20px 20px 20px 20px;
 }
