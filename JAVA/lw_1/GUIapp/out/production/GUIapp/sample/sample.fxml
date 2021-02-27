@@ -27,7 +27,8 @@
                            </font>
                         </TextArea>
                      </children></AnchorPane>
-               </content></Tab>
+               </content>
+          </Tab>
           <Tab id="task2" text="Задание 2">
             <content>
               <AnchorPane id="task2_space" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #CCDF92;">
