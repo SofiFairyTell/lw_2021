@@ -1,30 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
-
-
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TabPane prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Задание 1">
-            <content>
-                <AnchorPane id="task1" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #DF92A5;">
-                    <children>
-                        <TextArea>
 
-                        </TextArea>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #5CD079;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane id="workspace" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #B3D05C;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+        <tabs>
+          <Tab id="task2" text="Задание 1">
+            <content>
+                <AnchorPane id="task1_space" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #DF92A5;">
+                    <children>
+                        <Accordion layoutX="1.0" prefHeight="130.0" prefWidth="700.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                          <panes>
+                            <TitledPane animated="false" prefHeight="100.0" prefWidth="700.0" text="Назначение">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+                                       <children>
+                                          <TextArea id="task_description" editable="false" layoutX="-1.0" prefHeight="64.0" prefWidth="691.0" style="-fx-border-color: #DF92A5;" text=" Определить поместиться ли правильный треугольник со стороной А в окружность с радиусом R" wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </TitledPane>
+                            <TitledPane animated="false" prefHeight="100.0" prefWidth="700.0" text="Входные данные">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+                                       <children>
+                                          <TextArea id="task_description" editable="false" prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: #DF92A5;" text="R - известный радиус окружности&#10;A- сторона правильного треугольника" wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </TitledPane>
+                            <TitledPane animated="false" prefHeight="100.0" prefWidth="700.0" text="Результат">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+                                       <children>
+                                          <TextArea id="task_description" editable="false" prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: #DF92A5;" text="Ответ &quot;ДА&quot; или &quot;НЕТ&quot;" wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </TitledPane>
+                          </panes>
+                        </Accordion>
+                        <Circle fill="#40da71" layoutX="221.0" layoutY="286.0" radius="96.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Line endX="-67.00001525878906" endY="-5.999969482421875" layoutX="193.0" layoutY="292.0" startX="27.999984741210938" startY="-5.999969482421875" />
+                        <Polygon fill="#51aa54" layoutX="431.0" layoutY="234.0" points="-65.39996337890625, 130.60000610351562, 120.20001220703125, 130.60000610351562, 26.60003662109375, -30.399993896484375" stroke="BLACK" strokeType="INSIDE" />
+                        <TextField layoutX="133.0" layoutY="257.0" prefHeight="26.0" prefWidth="81.0" promptText="R" />
+                        <TextField layoutX="416.0" layoutY="331.0" prefHeight="26.0" prefWidth="81.0" promptText="A" />
+                        <TextArea layoutX="232.0" layoutY="415.0" prefHeight="50.0" prefWidth="304.0" />
+                        <Label layoutX="119.0" layoutY="415.0" prefHeight="51.0" prefWidth="111.0" text="Результат">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
                     </children>
                 </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Untitled Tab 2">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <Tab id="task2" text="Задание 2">
+              <content>
+                  <AnchorPane id="task2_space" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #CCDF92;">
+                      <TextArea id="task_description" editable="false" prefHeight="170.0" prefWidth="700.0" style="-fx-border-color: #DF92A5;" wrapText="true">
+                      </TextArea>
+                  </AnchorPane>
             </content>
           </Tab>
         </tabs>
