@@ -1,29 +1,79 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #5CD079;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane id="workspace" layoutX="10.0" layoutY="80.0" prefHeight="500.0" prefWidth="680.0" style="-fx-background-color: #795CD0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
-      <MenuBar layoutX="10.0" layoutY="2.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Выбрать команду">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Задание 1" />
-                  <MenuItem mnemonicParsing="false" text="Задание 2" />
-                  <MenuItem mnemonicParsing="false" text="Звдание 3" />
-                  <MenuItem mnemonicParsing="false" text="Звдание 4" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Справка">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Описание" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+      <TabPane id="workspace" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #B3D05C;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+        <tabs>
+          <Tab id="task1_space" text="Задание 1">
+               <content>
+                  <AnchorPane id="task1" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #CCDF92;">
+                     <children>
+                        <TextArea id="task_description" editable="false" layoutX="3.0" layoutY="14.0" prefHeight="100.0"
+                                  prefWidth="680.0" style="-fx-border-color: #DF92A5;"
+                                  wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
+                                  AnchorPane.topAnchor="10.0">
+                            <text>Назначение: определить поместиться ли правильный треугольник со стороной А в
+                                окружность с радиусом R.&#10;Входные данные: &#10;R - известный радиус окружности&#10;A
+                                - сторона правильного треугольника&#10;Результат: ответ &quot;да&quot; или &quot;нет&quot;
+                            </text>
+                            <font>
+                              <Font name="Consolas Italic" size="12.0" />
+                           </font>
+                        </TextArea>
+                     </children></AnchorPane>
+               </content></Tab>
+          <Tab id="task2" text="Задание 2">
+            <content>
+              <AnchorPane id="task2_space" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #CCDF92;">
+                     <children>
+                        <TextArea id="task_description" editable="false" prefHeight="170.0" prefWidth="680.0"
+                                  style="-fx-border-color: #DF92A5;"
+                                  wrapText="true">
+                            <text>Назначение: получить словесное описание школьных отметок.&#10;
+                                Входные данные: &#10;
+                                цифра- числовой вид отметки&#10;Результат:&#10;1 —&quot;плохо&quot;&#10;2 — &quot;неудовлетворительно&quot;&#10;
+                                3-&quot;удовлетворительно&quot;&#10;4 - &quot;хорошо&quot;&#10;5 — &quot;отлично&quot;&#10;
+                            </text>
+                            <font>
+                              <Font name="Consolas Italic" size="12.0" />
+                           </font>
+                        </TextArea>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab id="task2" text="Задание 3">
+               <content>
+                  <AnchorPane id="task2_space" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #CCDF92;">
+                     <children>
+                        <TextArea id="task_description" editable="false" prefHeight="100.0" prefWidth="680.0" style="-fx-border-color: #DF92A5;" text="Назначение: определить поместиться ли правильный треугольник со стороной А в окружность с радиусом R.&#10;Входные данные: &#10;R - известный радиус окружности&#10;A - сторона правильного треугольника&#10;Результат: ответ &quot;да&quot; или &quot;нет&quot;" wrapText="true">
+                           <font>
+                              <Font name="Consolas Italic" size="12.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab id="task2" text="Задание 4">
+               <content>
+                  <AnchorPane id="task2_space" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #CCDF92;">
+                     <children>
+                        <TextArea id="task_description" editable="false" prefHeight="100.0" prefWidth="680.0" style="-fx-border-color: #DF92A5;" text="Назначение: определить поместиться ли правильный треугольник со стороной А в окружность с радиусом R.&#10;Входные данные: &#10;R - известный радиус окружности&#10;A - сторона правильного треугольника&#10;Результат: ответ &quot;да&quot; или &quot;нет&quot;" wrapText="true">
+                           <font>
+                              <Font name="Consolas Italic" size="12.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

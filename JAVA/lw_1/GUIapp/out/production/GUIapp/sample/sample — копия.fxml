@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -27,8 +27,7 @@
                            </font>
                         </TextArea>
                      </children></AnchorPane>
-               </content>
-          </Tab>
+               </content></Tab>
           <Tab id="task2" text="Задание 2">
             <content>
               <AnchorPane id="task2_space" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #CCDF92;">
@@ -38,7 +37,8 @@
                                   wrapText="true">
                             <text>Назначение: получить словесное описание школьных отметок.&#10;
                                 Входные данные: &#10;
-                                цифра- числовой вид отметки&#10;Результат:&#10;1 —&quot;плохо&quot;&#10;2 — &quot;неудовлетворительно&quot;&#10;
+                                цифра- числовой вид отметки&#10;
+                                Результат:&#10;1 —&quot;плохо&quot;&#10;2 — &quot;неудовлетворительно&quot;&#10;
                                 3-&quot;удовлетворительно&quot;&#10;4 - &quot;хорошо&quot;&#10;5 — &quot;отлично&quot;&#10;
                             </text>
                             <font>
