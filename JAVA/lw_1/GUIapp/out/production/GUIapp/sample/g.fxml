@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -106,18 +108,18 @@
                         </Accordion>
                         <TextField fx:id="mark" layoutX="294.0" layoutY="154.0" prefHeight="62.0" prefWidth="306.0" promptText="Mark">
                            <font>
-                              <Font name="Times New Roman" size="28.0" />
+                              <Font name="Times New Roman" size="24.0" />
                            </font></TextField>
                         <TextArea fx:id="result_mark" layoutX="296.0" layoutY="244.0" prefHeight="50.0" prefWidth="304.0">
                            <font>
-                              <Font name="Times New Roman" size="28.0" />
+                              <Font name="Times New Roman" size="24.0" />
                            </font></TextArea>
                         <Label layoutX="76.0" layoutY="244.0" prefHeight="51.0" prefWidth="178.0" text="Результат">
                            <font>
                               <Font name="Times New Roman" size="28.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btn1" layoutX="457.0" layoutY="347.0" mnemonicParsing="false" onAction="#markTranslator_click" prefHeight="55.0" prefWidth="142.0" text="Узнать">
+                        <Button fx:id="btn_mark" layoutX="457.0" layoutY="347.0" mnemonicParsing="false" onAction="#markTranslator_click" prefHeight="55.0" prefWidth="142.0" text="Узнать">
                            <font>
                               <Font name="Times New Roman" size="28.0" />
                            </font></Button>
@@ -126,6 +128,72 @@
                               <Font name="Times New Roman" size="28.0" />
                            </font>
                         </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab id="task2" text="Задание 3">
+               <content>
+                  <AnchorPane id="task3_space" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #DF92A5;">
+                     <children>
+                        <Accordion layoutX="1.0" prefHeight="130.0" prefWidth="700.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                           <panes>
+                              <TitledPane animated="false" prefHeight="100.0" prefWidth="700.0" text="Назначение">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+                                       <children>
+                                          <TextArea id="task_description" editable="false" layoutX="-1.0" prefHeight="64.0" prefWidth="691.0" style="-fx-border-color: #DF92A5;" text="Вычисление промежуточных точек на прямой" wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" prefHeight="100.0" prefWidth="700.0" text="Входные данные">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+                                       <children>
+                                          <TextArea id="task_description" editable="false" prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: #DF92A5;" text="A - начальная точка&#10;Б - конечная точка&#10; Шаг - интервал отсчета&#10;" wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" prefHeight="100.0" prefWidth="700.0" text="Результат">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+                                       <children>
+                                          <TextArea id="task_description" editable="false" prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: #DF92A5;" text="Промежуточный шаги в табличном представлении" wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                           </panes>
+                        </Accordion>
+                        <TextField fx:id="start" layoutX="14.0" layoutY="146.0" prefHeight="62.0" prefWidth="62.0" promptText="А">
+                           <font>
+                              <Font name="Times New Roman" size="24.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="end" layoutX="105.0" layoutY="146.0" prefHeight="62.0" prefWidth="62.0" promptText="Б">
+                           <font>
+                              <Font name="Times New Roman" size="24.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="btn_tri" layoutX="277.0" layoutY="445.0" mnemonicParsing="false" onAction="#TrigonometryFunction_click" prefHeight="55.0" prefWidth="142.0" text="Рассчитать">
+                           <font>
+                              <Font name="Times New Roman" size="28.0" />
+                           </font>
+                        </Button>
+                        <Line endX="-19.000015258789062" endY="9.1552734375E-5" layoutX="179.0" layoutY="221.0" startX="-156.1999969482422" startY="6.103515625E-5" strokeWidth="12.0" />
+                        <TextField fx:id="step" layoutX="53.0" layoutY="229.0" prefHeight="62.0" prefWidth="76.0" promptText="Шаг">
+                           <font>
+                              <Font name="Times New Roman" size="24.0" />
+                           </font>
+                        </TextField>
+                        <TableView fx:id="table" layoutX="358.0" layoutY="142.0" prefHeight="240.0" prefWidth="326.0">
+                          <columns>
+                            <TableColumn fx:id="column" prefWidth="160.0" text="X" />
+                            <TableColumn fx:id="column1" minWidth="0.0" prefWidth="160.0" text="Y" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                </content>
