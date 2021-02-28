@@ -102,9 +102,22 @@ header
 }
 .logo
 {
+	float: left;
+	display: flex;
 	border-radius: 100px;
 	border: 3px solid #fff;
-	
+	width: 55.5px;
+	height: 55.5px;
+}
+.logoref a 
+{
+	width: 100px;
+	height: 10px;
+	cursor: pointer;
+}
+.ref 
+{
+	text-decoration: none;
 }
 /* Блок навигации по разделам сайта */
 .nav
@@ -152,7 +165,8 @@ header
 /* Кнопка для перехода  */
 .button 
 {
-	display: inline-block;
+	/*display: inline-block;*/
+	display: inline-flex;
 	vertical-align: top;
 	padding: 10px 15px;
 	border: 2px solid #fff;
@@ -259,6 +273,11 @@ header
 	display: flex;
 	margin-top:40px;
 	justify-content: space-between;
+}
+.photo img
+{
+	width: 300px;
+	height: auto;
 }
 .photo_item
 {
