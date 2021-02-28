@@ -12,11 +12,15 @@ import ru.bstu.it32.kurbatova.lab1.*;
 public class Controller
 {
     @FXML
+    private TextArea result_mark;
+    @FXML
+    private TextField mark;
+    @FXML
     private TextField radius;
     @FXML
     private TextField length;
     @FXML
-    private TextArea result;
+    private TextArea result_TrInCir;
     @FXML
     private Button btn;
 
@@ -30,13 +34,16 @@ public class Controller
         });
     }
     @FXML
-    private void click(ActionEvent event)
+    private void isTriangleInCircle_click(ActionEvent event)
     {
-        btn.setText("You've clicked!");
         int len = Integer.parseInt(length.getText());
         int rad = Integer.parseInt(radius.getText());
-        ComputeMethod t;
-        t = new ComputeMethod();
-        result.setText(ComputeMethod.isTriangleInCircle(rad,len));
+        result_TrInCir.setText(ComputeMethod.isTriangleInCircle(rad,len));
+    }
+    @FXML
+    private void markTranslator_click(ActionEvent actionEvent)
+    {
+        int mark_i = Integer.parseInt(mark.getText());
+        result_mark.setText(ComputeMethod.markTranslator(mark_i));
     }
 }
