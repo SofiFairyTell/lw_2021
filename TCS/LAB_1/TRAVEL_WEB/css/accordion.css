@@ -65,6 +65,7 @@
   background: #85F5CF;
   color:#280310;
 }
+
 .collapse a.official {
   background: #A956A9;
 }
@@ -81,8 +82,11 @@
   right: 30px;
 }
 
+
+
 .inner-content {
   padding: 0.5rem;
+
 }
 .inner-content ul
 {
@@ -99,9 +103,12 @@
 }
 
 h3 {
-  margin-bottom: 15px;
+  margin-bottom: 0px;
 }
-
+.title 
+{
+  margin-left: 200px;
+}
 .collapse:target .content {
   max-height: 15em;
 }
@@ -147,3 +154,42 @@ h3 {
 }
 
 
+.rounded {
+counter-reset: li; 
+list-style: none; 
+font: 14px "Trebuchet MS", "Lucida Sans";
+padding: 0;
+text-shadow: 0 1px 0 rgba(255,255,255,.5);
+width: 100%;
+margin-left: 40px;
+}
+.rounded a {
+position: relative;
+display: block;
+padding: .4em .4em .4em 2em;
+margin: .5em 0;
+background: #DAD2CA;
+color: #444;
+text-decoration: none;
+border-radius: .3em;
+transition: .3s ease-out;
+}
+.rounded a:hover {background: #E9E4E0;}
+.rounded a:hover:before {transform: rotate(360deg);}
+.rounded a:before {
+content: counter(li);
+counter-increment: li;
+position: absolute;
+left: -1.3em;
+top: 50%;
+margin-top: -1.3em;
+background: #8FD4C1;
+height: 2em;
+width: 2em;
+line-height: 2em;
+border: .3em solid white;
+text-align: center;
+font-weight: bold;
+border-radius: 2em;
+transition: all .3s ease-out;
+}
