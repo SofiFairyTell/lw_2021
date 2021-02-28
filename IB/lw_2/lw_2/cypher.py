@@ -1,9 +1,12 @@
 from random import choice
+import itertools
 # Важная информация! По ссылке объяснение как .py файлы компилировать в .exe
 # http://nikovit.ru/blog/samyy-prostoy-sposob-skompilirovat-python-fayl-v-exe/
 
 # глобальные переменные
-alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъьыэюя_,.АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯ'
+from typing import List
+
+alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъьыэюя_,.—АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯ'
 
 
 def file_cypher(file_input: str, file_output: str, crypt, key, mode) -> None:
@@ -23,7 +26,7 @@ def file_cypher(file_input: str, file_output: str, crypt, key, mode) -> None:
                 line = file_i.readline()
                 while line:
                     result = crypt(line, key_key)  # для второго метода
-                    file_o.write(result)
+                    file_o.write(result+"\n")
                     line = file_i.readline()
     file_o.close()
     file_i.close()
@@ -172,6 +175,7 @@ class KeyCypher:
                 else:
                     new_number += 1
             sequence.append(new_number)
+            print(sequence)
         return sequence
 
 
@@ -231,9 +235,16 @@ def main():
             # print("Ваше исходное сообщение:  {}".format())
         elif cypher_method == 4:
             crypt = KeyCypher()
-            key = KeySearch.generator(15)
-            file_cypher(filename_i, filename_o, crypt.encrypt, key, 2)
-            file_cypher(filename_o, filename_o_d, crypt.decrypt, key, 2)
+            with open(filename_i) as file_i:
+                line = file_i.readline()
+            file_i.close()
+
+            for i in range(2, 4, 1):
+                key = KeySearch.generator(i)
+                perm = itertools.permutations(key)
+                for i in list(perm):
+                  file_cypher(filename_i, filename_o, crypt.decrypt, i , 2)
+                # file_cypher(filename_o, filename_o_d, crypt.decrypt, key, 2)
         else:
             break
 
