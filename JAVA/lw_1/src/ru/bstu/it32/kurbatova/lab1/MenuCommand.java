@@ -22,7 +22,7 @@ public class MenuCommand
                     if (triangleLength <= 0 && radius <= 0) {
                         throw new InputException("Значения длин не могут быть меньше или равны 0");
                     } else {
-                        ComputeMethod.isTriangleInCircle(radius, triangleLength);
+                       System.out.print(ComputeMethod.isTriangleInCircle(radius, triangleLength));
                     }
                 } catch (InputException ex) {
                     System.out.println(ex.getMessage());
@@ -35,7 +35,7 @@ public class MenuCommand
             break;
             case "file": {
                 int arg[] = MenuCommand.FileReader();
-                ComputeMethod.isTriangleInCircle(arg[0], arg[1]);
+                System.out.println(ComputeMethod.isTriangleInCircle(arg[0], arg[1]));
             }
             break;
         }
@@ -55,7 +55,7 @@ public class MenuCommand
                     if (mark <= 0) {
                         throw new InputException("Значение не может быть меньше или равны 0");
                     } else {
-                        ComputeMethod.markTranslator(mark);
+                      System.out.println(ComputeMethod.markTranslator(mark));
                     }
                 } catch (InputException ex) {
                     System.out.println(ex.getMessage());
@@ -68,7 +68,7 @@ public class MenuCommand
             break;
             case "file": {
                 int arg[] = MenuCommand.FileReader();
-                ComputeMethod.markTranslator(arg[0]);
+                System.out.println(ComputeMethod.markTranslator(arg[0]));
             }
             break;
         }
@@ -92,7 +92,8 @@ public class MenuCommand
                     }
                     else
                         {
-                        ComputeMethod.TrigonometryFunction(start, end, step);
+                        double[][] array = ComputeMethod.TrigonometryFunction(start, end, step);
+                        TableView(array);
                         }
                 } catch (InputException ex) {
                     System.out.println(ex.getMessage());
@@ -105,12 +106,23 @@ public class MenuCommand
             break;
             case "file": {
                 int arg[] = MenuCommand.FileReader();
-                ComputeMethod.TrigonometryFunction(arg[0], arg[1], arg[2]);
+                double[][] array = ComputeMethod.TrigonometryFunction(arg[0], arg[1], arg[2]);
+                TableView(array);
             }
             break;
         }
     }
 
+    static void TableView (double[][] array)
+    {
+        //вывод в табличном виде
+        System.out.printf("%-10s%-25s%n","Аргумент","Значение");
+        System.out.println("-----------------------------------------------------");
+        for (int i = 0; i < array.length; i++)
+        {
+            System.out.printf("%-10.2f%-27.2f%n", array[i][0], array[i][1]);
+        }
+    }
     static void ArraySumMenu() {
         Scanner input = new Scanner(System.in);
         System.out.print("Консоль (console) или файл (file)?: ");
@@ -129,7 +141,7 @@ public class MenuCommand
                         for (int i = 0; i < size; i++) {
                             array[i] = input.nextInt();
                         }
-                        ComputeMethod.ArraySum(array);
+                        System.out.printf("Сумма между максимальным и минимальным элементов %s\n",ComputeMethod.ArraySum(array));
                     }
                 } catch (InputException ex) {
                     System.out.println(ex.getMessage());
@@ -142,7 +154,7 @@ public class MenuCommand
             break;
             case "file": {
                 int arg[] = MenuCommand.FileReader();
-                ComputeMethod.ArraySumWhile(arg);
+                System.out.printf("Сумма между максимальным и минимальным элементов %s\n",ComputeMethod.ArraySumWhile(arg));
             }
             break;
         }
@@ -210,8 +222,4 @@ public class MenuCommand
         }
     }
 
-    static void FileWriter()
-        {
-
-        }
 }

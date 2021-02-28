@@ -4,58 +4,54 @@ import javax.lang.model.type.NullType;
 
 public class ComputeMethod
 {
-    static void isTriangleInCircle(int radius, int length)
+    static String isTriangleInCircle(int radius, int length)
     {
         /**
          * Определяет поместиться ли правильный треугольник в круге
          * @param radius Радиус круга для размещения
          * @param length Длина стороны треугольника
          */
+            String result;
             double triangle = length*(Math.sqrt(3)/3);
             if(radius >= triangle)
             {
-                System.out.print("Поместиться!\n");
+                return "Поместиться!\n";
             }
             else
             {
-                System.out.print(" Не поместиться!\n");
+                return "Не поместиться!\n";
             }
     }
-    static void markTranslator(int mark)
+    static String markTranslator(int mark)
     {
         /**
          * Позволяет получить словесное описание школьных отметок
          * 1 — «плохо», 2 — «неудовлетворительно», 3-«удовлетворительно»,  4— «хорошо», 5 — «отлично»
          * @param mark Школьная отметка
          */
-        switch(mark) {
+        String result;
+        switch(mark)
+        {
             case 1:
-                System.out.println("'Плохо'");
-                break;
+                return "'Плохо'\n";
             case 2:
-                System.out.println("'Неудовлетворительно'\n");
-                break;
+                return "'Неудовлетворительно'\n";
             case 3:
-                System.out.println("'Удовлетворительно'\n");
-                break;
+                return  "'Удовлетворительно'\n";
             case 4:
-                System.out.println("'Хорошо'\n");
-                break;
+                return  "'Хорошо'\n";
             case 5:
-                System.out.println("'Отлично'\n");
-                break;
+                return  "'Отлично'\n";
             default:
-                System.out.println("'Данных для такой оценки нет'\n");
+                return "'Данных для такой оценки нет'\n";
         }
     }
-    static void TrigonometryFunction(int start, int end, int step)
+    static double[][] TrigonometryFunction(int start, int end, int step)
     {
 
         int rows = (int) ((end - start) / step) + 1;
         //массив из двух столбцов: 0- значение аргумента, 1 - значение функции
         //вывод в табличном виде
-        System.out.printf("%-10s%-25s%n","Аргумент","Значение");
-        System.out.println("-----------------------------------------------------");
         double[][] array = new double[rows][2];
         for (int i = 0; i < rows; i++)
             {
@@ -63,15 +59,10 @@ public class ComputeMethod
                 array[i][0] = start;
                 array[i][1] = y;
                 start += step;
-                System.out.printf("%-10.2f%-27.2f%n", array[i][0], array[i][1]);
             }
- /*
-        for (int i = 0; i < array.length; i++)
-        {
-            System.out.printf("%-10.2f%-27.2f%n", array[i][0], array[i][1]);
-        }*/
+        return array;
     }
-    static void ArraySum(int[] array)
+    static String ArraySum(int[] array)
     {
         //int[] array = {2, 1, -1, -2, 0};
         int min = 0, max = 0;
@@ -94,10 +85,10 @@ public class ComputeMethod
         {
             Summ = Summ + array[i];
         }
-        System.out.printf("Сумма между максимальным и минимальным элементов %d\n", Summ);
+        return Integer.toString(Summ);
     }
 
-    static void ArraySumWhile(int[] array)
+    static String ArraySumWhile(int[] array)
     {
         int min = 0, max = 0;
         int i = 0;
@@ -121,6 +112,6 @@ public class ComputeMethod
         {
             Summ = Summ + array[j];
         }
-        System.out.printf("Сумма между максимальным и минимальным элементов %d\n", Summ);
+        return Integer.toString(Summ);
     }
 }
