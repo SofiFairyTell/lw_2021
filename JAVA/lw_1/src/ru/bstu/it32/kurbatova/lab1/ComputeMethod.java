@@ -4,7 +4,7 @@ import javax.lang.model.type.NullType;
 
 public class ComputeMethod
 {
-    static String isTriangleInCircle(int radius, int length)
+    public static String isTriangleInCircle(int radius, int length)
     {
         /**
          * Определяет поместиться ли правильный треугольник в круге
@@ -22,7 +22,7 @@ public class ComputeMethod
                 return "Не поместиться!\n";
             }
     }
-    static String markTranslator(int mark)
+   public static String markTranslator(int mark)
     {
         /**
          * Позволяет получить словесное описание школьных отметок
@@ -46,7 +46,7 @@ public class ComputeMethod
                 return "'Данных для такой оценки нет'\n";
         }
     }
-    static double[][] TrigonometryFunction(int start, int end, int step)
+    public static double[][] TrigonometryFunction(int start, int end, int step)
     {
 
         int rows = (int) ((end - start) / step) + 1;
@@ -62,7 +62,7 @@ public class ComputeMethod
             }
         return array;
     }
-    static String ArraySum(int[] array)
+   public static String ArraySum(int[] array)
     {
         //int[] array = {2, 1, -1, -2, 0};
         int min = 0, max = 0;
@@ -88,7 +88,7 @@ public class ComputeMethod
         return Integer.toString(Summ);
     }
 
-    static String ArraySumWhile(int[] array)
+    public static String ArraySumWhile(int[] array)
     {
         int min = 0, max = 0;
         int i = 0;

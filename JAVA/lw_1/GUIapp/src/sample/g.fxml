@@ -56,8 +56,8 @@
                         <Circle fill="#40da71" layoutX="221.0" layoutY="286.0" radius="96.0" stroke="BLACK" strokeType="INSIDE" />
                         <Line endX="-67.00001525878906" endY="-5.999969482421875" layoutX="193.0" layoutY="292.0" startX="27.999984741210938" startY="-5.999969482421875" />
                         <Polygon fill="#51aa54" layoutX="431.0" layoutY="234.0" points="-65.39996337890625, 130.60000610351562, 120.20001220703125, 130.60000610351562, 26.60003662109375, -30.399993896484375" stroke="BLACK" strokeType="INSIDE" />
-                        <TextField layoutX="133.0" layoutY="257.0" prefHeight="26.0" prefWidth="81.0" promptText="R" />
-                        <TextField layoutX="416.0" layoutY="331.0" prefHeight="26.0" prefWidth="81.0" promptText="A" fx:id="textField"/>
+                        <TextField layoutX="133.0" layoutY="257.0" prefHeight="26.0" prefWidth="81.0" promptText="R" fx:id="radius"/>
+                        <TextField layoutX="416.0" layoutY="331.0" prefHeight="26.0" prefWidth="81.0" promptText="A" fx:id="length"/>
                         <TextArea layoutX="232.0" layoutY="415.0" prefHeight="50.0" prefWidth="304.0" fx:id="textArea"/>
                         <Label layoutX="119.0" layoutY="415.0" prefHeight="51.0" prefWidth="111.0" text="Результат">
                            <font>
