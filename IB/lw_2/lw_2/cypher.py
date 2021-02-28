@@ -1,7 +1,4 @@
-import itertools
-import string
-import sys
-
+from random import choice
 # Важная информация! По ссылке объяснение как .py файлы компилировать в .exe
 # http://nikovit.ru/blog/samyy-prostoy-sposob-skompilirovat-python-fayl-v-exe/
 
@@ -9,15 +6,25 @@ import sys
 alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъьыэюя_,.АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯ'
 
 
-def file_cypher(file_input: str, file_output: str, crypt) -> None:
-    with open(file_input) as file_i:
-        with open(file_output, "a") as file_o:  # файл для записи
-            line = file_i.readline()
-            while line:
-                # result = crypt(line, 4) # для первого метода
-                result = crypt(line, 'сон')  # для второго метода
-                file_o.write(result)
+def file_cypher(file_input: str, file_output: str, crypt, key, mode) -> None:
+    key_rail = len(key)  # length of keyword
+    key_key = key  # keyword
+    if mode == 1:
+        with open(file_input) as file_i:
+            with open(file_output, "a") as file_o:  # файл для записи
                 line = file_i.readline()
+                while line:
+                    result = crypt(line, key_rail)  # для первого метода
+                    file_o.write(result)
+                    line = file_i.readline()
+    elif mode == 2:
+        with open(file_input) as file_i:
+            with open(file_output, "a") as file_o:  # файл для записи
+                line = file_i.readline()
+                while line:
+                    result = crypt(line, key_key)  # для второго метода
+                    file_o.write(result)
+                    line = file_i.readline()
     file_o.close()
     file_i.close()
 
@@ -167,12 +174,17 @@ class KeyCypher:
             sequence.append(new_number)
         return sequence
 
-    def brute_force(self, keyword):
-        keyword_sequence = self.get_sequence(keyword)
-        n = len(keyword_sequence)
-        j = n - 2;
-        while j!=-1 & keyword_sequence[j]>=keyword_sequence[j + 1]:
-            j--
+
+class KeySearch:
+    # из доступного алфавита генерирует последовательность символов, которые могут быть использованы в качестве ключа
+    def generator(len:int) -> str:
+        out = ''.join(choice(alphabet) for i in range(len))
+        return out
+
+
+
+
+
 
 # main
 def main():
@@ -184,26 +196,44 @@ def main():
         # filename_output = input("Имя для зашифрованного файла:")
         filename_i = "..\\lw_2\input.txt"
         filename_o = "..\\lw_2\output.txt"
+        filename_t = "..\\lw_2\out_temp.txt"
+        filename_t2 = "..\\lw_2\out_temp2.txt"
         filename_o_d = "..\\lw_2\out_d.txt"
+        filename_o_d2 = "..\\lw_2\out_d2.txt"
 
         if cypher_method == 1:
             print("\t\vШифр : 'Железнодорожная изгородь'")
             rail_fence = RailFence()
-            file_cypher(filename_i, filename_o, rail_fence.rail_fence_encrypt)
+            file_cypher(filename_i, filename_o, rail_fence.rail_fence_encrypt, 'сон', 1)
             # filename_input = input("Имя зашифрованного файла:")
             # filename_output = input("Имя для дешифрованного файла:")
-            file_cypher(filename_o, filename_o_d, rail_fence.rail_fence_decrypt)
+            file_cypher(filename_o, filename_o_d, rail_fence.rail_fence_decrypt, 'сон', 1)
 
             # print("Ваше зашифрованное сообщение:  {}".format(result))
         elif cypher_method == 2:
+            print("\t\vШифр : 'Перестановка с ключом'")
             crypt = KeyCypher()
-            file_cypher(filename_i, filename_o, crypt.encrypt)
+            file_cypher(filename_i, filename_o, crypt.encrypt, 'coн', 2)
             # print("Ваше зашифрованное сообщение:  {}".format())
             # print("Ваше исходное сообщение:  {}".format())
-            file_cypher(filename_o, filename_o_d, crypt.decrypt)
+            file_cypher(filename_o, filename_o_d, crypt.decrypt, 'сон', 2)
         elif cypher_method == 3:
-            print("Ваше зашифрованое сообщение:  {}".format())
-            print("Ваше исходное сообщение:  {}".format())
+            print("\t\vШифр : 'Комбинированный шифр'")
+            crypt = RailFence()
+            crypt2 = KeyCypher()
+            file_cypher(filename_i, filename_t, crypt.rail_fence_encrypt, 'сон', 1)
+            file_cypher(filename_t, filename_o, crypt2.encrypt, 'сон', 2)
+            # дешифровка
+            file_cypher(filename_o, filename_t2, crypt2.decrypt, 'сон', 2)
+            file_cypher(filename_t2, filename_o_d2, crypt.rail_fence_decrypt, 'сон', 1)
+
+            # print("Ваше зашифрованое сообщение:  {}".format())
+            # print("Ваше исходное сообщение:  {}".format())
+        elif cypher_method == 4:
+            crypt = KeyCypher()
+            key = KeySearch.generator(15)
+            file_cypher(filename_i, filename_o, crypt.encrypt, key, 2)
+            file_cypher(filename_o, filename_o_d, crypt.decrypt, key, 2)
         else:
             break
 
