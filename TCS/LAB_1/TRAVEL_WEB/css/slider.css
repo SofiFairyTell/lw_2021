@@ -8,12 +8,16 @@
 }*/
 
 
-/*Оболочки для слайбдов*/
+/*Оболочки для слайдов*/
 .wrapper {
+ 
+  top: 100px;
+  padding: 20px 20px 20px 20px;
   height: 600px;
-  margin: 20px auto 0;
-  position: relative;
-  width: 1000px;
+ /* margin: auto;  выравнивание по центру */
+  margin: 20px auto 0px;*/
+  position: absolute;
+  width: 964px ;
 }
 
 .slider {
@@ -75,7 +79,7 @@
 
 .wrapper label:after 
 {
-  border: 1px solid #E1341E;
+  border: 2px solid #E1341E;
   content: " ";
   display: block;
   height: 12px;
@@ -100,7 +104,7 @@
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -o-border-radius: 50%;
-  border-radius: 50%;
+  border-radius: 20%;
   -webkit-transition: background ease-in-out .5s;
   -moz-transition: background ease-in-out .5s;
   -o-transition: background ease-in-out .5s;
@@ -156,8 +160,3 @@
   font-size: 25px;
 }
 
-.secti 
-{
-  top: -350px;
-  padding: 20px 20px 20px 20px;
-}
