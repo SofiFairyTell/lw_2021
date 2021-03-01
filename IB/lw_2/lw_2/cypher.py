@@ -208,28 +208,31 @@ def main():
         if cypher_method == 1:
             print("\t\vШифр : 'Железнодорожная изгородь'")
             rail_fence = RailFence()
-            file_cypher(filename_i, filename_o, rail_fence.rail_fence_encrypt, 'сон', 1)
+            key_len = input("Введите ключ:  ")
+            file_cypher(filename_i, filename_o, rail_fence.rail_fence_encrypt, key_len, 1)
             # filename_input = input("Имя зашифрованного файла:")
             # filename_output = input("Имя для дешифрованного файла:")
-            file_cypher(filename_o, filename_o_d, rail_fence.rail_fence_decrypt, 'сон', 1)
+            file_cypher(filename_o, filename_o_d, rail_fence.rail_fence_decrypt, key_len, 1)
 
             # print("Ваше зашифрованное сообщение:  {}".format(result))
         elif cypher_method == 2:
             print("\t\vШифр : 'Перестановка с ключом'")
             crypt = KeyCypher()
-            file_cypher(filename_i, filename_o, crypt.encrypt, 'лея', 2)
+            key_len = input("Введите ключ:  ")
+            file_cypher(filename_i, filename_o, crypt.encrypt, key_len, 2)
             # print("Ваше зашифрованное сообщение:  {}".format())
             # print("Ваше исходное сообщение:  {}".format())
-            file_cypher(filename_o, filename_o_d, crypt.decrypt, 'лея', 2)
+            file_cypher(filename_o, filename_o_d, crypt.decrypt, key_len, 2)
         elif cypher_method == 3:
             print("\t\vШифр : 'Комбинированный шифр'")
             crypt = RailFence()
             crypt2 = KeyCypher()
-            file_cypher(filename_i, filename_t, crypt.rail_fence_encrypt, 'сон', 1)
-            file_cypher(filename_t, filename_o, crypt2.encrypt, 'сон', 2)
+            key_len = input("Введите ключ:  ")
+            file_cypher(filename_i, filename_t, crypt.rail_fence_encrypt, key_len, 1)
+            file_cypher(filename_t, filename_o, crypt2.encrypt, key_len, 2)
             # дешифровка
-            file_cypher(filename_o, filename_t2, crypt2.decrypt, 'сон', 2)
-            file_cypher(filename_t2, filename_o_d2, crypt.rail_fence_decrypt, 'сон', 1)
+            file_cypher(filename_o, filename_t2, crypt2.decrypt, key_len, 2)
+            file_cypher(filename_t2, filename_o_d2, crypt.rail_fence_decrypt, key_len, 1)
 
             # print("Ваше зашифрованое сообщение:  {}".format())
             # print("Ваше исходное сообщение:  {}".format())
@@ -238,19 +241,17 @@ def main():
             with open(filename_i) as file_i:
                 line = file_i.readline()
             file_i.close()
-
-            for i in range(1,len(line), 3):
+            key_len = int(input("Введите длину ключа:  "))
+            for i in range(1,  key_len, 1):
                 key = KeySearch.generator(i)
                 perm = itertools.permutations(key)
                 for j in list(perm):
-                  file_cypher(filename_i, filename_o, crypt.decrypt, j , 2)
+                  file_cypher(filename_i, filename_o, crypt.encrypt, j , 2)
                 # file_cypher(filename_o, filename_o_d, crypt.decrypt, key, 2)
         else:
             break
 
 
 # end main
-
-
 if __name__ == '__main__':
     main()
