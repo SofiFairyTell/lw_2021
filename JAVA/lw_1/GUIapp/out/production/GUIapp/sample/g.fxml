@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
@@ -188,12 +186,7 @@
                               <Font name="Times New Roman" size="24.0" />
                            </font>
                         </TextField>
-                        <TableView fx:id="table" layoutX="358.0" layoutY="142.0" prefHeight="240.0" prefWidth="326.0">
-                          <columns>
-                            <TableColumn fx:id="column" prefWidth="160.0" text="X" />
-                            <TableColumn fx:id="column1" minWidth="0.0" prefWidth="160.0" text="Y" />
-                          </columns>
-                        </TableView>
+                        <TextArea fx:id="table_result" layoutX="250.0" layoutY="113.0" prefHeight="200.0" prefWidth="427.0" />
                      </children>
                   </AnchorPane>
                </content>

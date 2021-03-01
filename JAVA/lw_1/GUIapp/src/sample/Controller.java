@@ -1,4 +1,5 @@
 package sample;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,11 +20,13 @@ public class Controller
 {
 
     @FXML
-    private TableView<ObservableList<Double>> table;
+    private TableView<double[]> table;
     @FXML
-    private TableColumn<Double,Double> column;
+    private TextArea table_result;
     @FXML
-    private  TableColumn<Double,Double> column1;
+    private double column;
+    @FXML
+    private double column1;
     @FXML
     private TextField start;
     @FXML
@@ -74,14 +77,10 @@ public class Controller
         int end_i = Integer.parseInt(end.getText());
         int step_i = Integer.parseInt(step.getText());
         double[][] array = ComputeMethod.TrigonometryFunction(start_i,end_i,step_i);
-
-    ObservableList<Double>
-        TableColumn x = new TableColumn("X");
-        TableColumn y = new TableColumn("Y");
-        table.getColumns().addAll(x,y);
-        table.setItems();
-
-
+        //            table_result.setText(String.valueOf(array[i][0]));
+        ////            String.valueOf(array[i][1]);
+        for(int i = 0; i < array.length; ++i)
+            table_result.appendText(String.format("%-10.2f%-27.2f%n", array[i][0], array[i][1]));
+    }
 
     }
-}
