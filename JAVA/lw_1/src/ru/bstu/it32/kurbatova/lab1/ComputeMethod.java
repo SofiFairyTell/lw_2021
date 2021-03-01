@@ -4,30 +4,30 @@ import javax.lang.model.type.NullType;
 
 public class ComputeMethod
 {
+
     public static String isTriangleInCircle(int radius, int length)
     {
         /**
+            <p> Описание метода "Треугольник в Окружности"</p>
          * Определяет поместиться ли правильный треугольник в круге
          * @param radius Радиус круга для размещения
          * @param length Длина стороны треугольника
+         * @return answer Ответ в виде строки
          */
-            String result;
-            double triangle = length*(Math.sqrt(3)/3);
-            if(radius >= triangle)
-            {
-                return "Поместиться!\n";
-            }
-            else
-            {
-                return "Не поместиться!\n";
-            }
+        String result;
+        double triangle = length*(Math.sqrt(3)/3);
+        if(radius >= triangle) return "Поместиться!\n";
+        else return "Не поместиться!\n";
     }
+
    public static String markTranslator(int mark)
     {
         /**
+         * <p>Описание метода "Перевод оценок"</p>
          * Позволяет получить словесное описание школьных отметок
          * 1 — «плохо», 2 — «неудовлетворительно», 3-«удовлетворительно»,  4— «хорошо», 5 — «отлично»
          * @param mark Школьная отметка
+         * @return translate Словесное описание школьных отметок
          */
         String result;
         switch(mark)
@@ -46,12 +46,18 @@ public class ComputeMethod
                 return "'Данных для такой оценки нет'\n";
         }
     }
+
     public static double[][] TrigonometryFunction(int start, int end, int step)
     {
-
+        /**
+         * <p>Описание метода "Тригонометрическая функция"</p>
+         * Строит промежуточные точки между началом линии и ее концом с определенным шагом
+         * @param start Начальная точка
+         * @param end Конечная точка
+         * @param step Шаг
+         * @return array Массив значений в видет аргумент - значение функции
+         */
         int rows = (int) ((end - start) / step) + 1;
-        //массив из двух столбцов: 0- значение аргумента, 1 - значение функции
-        //вывод в табличном виде
         double[][] array = new double[rows][2];
         for (int i = 0; i < rows; i++)
             {
@@ -62,11 +68,15 @@ public class ComputeMethod
             }
         return array;
     }
-   public static String ArraySum(int[] array)
-    {
-        //int[] array = {2, 1, -1, -2, 0};
-        int min = 0, max = 0;
 
+   public static String ArraySum(int[] array) {
+       /**
+        * <p>Описание метода "Сумма массива"</p>
+        * Вычислияет сумму элементов массива между максимальным и минимальным элементом
+        * @param array массив элементов
+        * @return sum сумма между максимальным и минимальным элементом
+        */
+        int min = 0, max = 0;
         for (int i = 0; i < array.length; ++i)
         {
             if (array[i] < array[min])
@@ -80,16 +90,20 @@ public class ComputeMethod
         }
         int left = (min < max) ? min : max;
         int right = (min < max) ? max : min;
-        int Summ = 0;
-        for (int i = left; i <= right; i++)
-        {
-            Summ = Summ + array[i];
+        int Sum = 0;
+        for (int i = left; i <= right; i++) {
+            Sum += array[i];
         }
-        return Integer.toString(Summ);
+        return Integer.toString(Sum);
     }
 
-    public static String ArraySumWhile(int[] array)
-    {
+   public static String ArraySumWhile(int[] array) {
+       /**
+        * <p>Описание метода "Сумма массива"</p>
+        * Вычислияет сумму элементов массива между максимальным и минимальным элементом
+        * @param array массив элементов
+        * @return sum сумма между максимальным и минимальным элементом
+        */
         int min = 0, max = 0;
         int i = 0;
         System.out.print("Метод с циклом While");
@@ -107,11 +121,10 @@ public class ComputeMethod
         }
         int left = (min < max) ? min : max;
         int right = (min < max) ? max : min;
-        int Summ = 0;
+        int Sum;
+        Sum = 0;
         for (int j = left; j <= right; j++)
-        {
-            Summ = Summ + array[j];
-        }
-        return Integer.toString(Summ);
+            Sum += array[j];
+        return Integer.toString(Sum);
     }
 }
