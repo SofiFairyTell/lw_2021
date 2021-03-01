@@ -217,10 +217,10 @@ def main():
         elif cypher_method == 2:
             print("\t\vШифр : 'Перестановка с ключом'")
             crypt = KeyCypher()
-            file_cypher(filename_i, filename_o, crypt.encrypt, 'coн', 2)
+            file_cypher(filename_i, filename_o, crypt.encrypt, 'лея', 2)
             # print("Ваше зашифрованное сообщение:  {}".format())
             # print("Ваше исходное сообщение:  {}".format())
-            file_cypher(filename_o, filename_o_d, crypt.decrypt, 'сон', 2)
+            file_cypher(filename_o, filename_o_d, crypt.decrypt, 'лея', 2)
         elif cypher_method == 3:
             print("\t\vШифр : 'Комбинированный шифр'")
             crypt = RailFence()
@@ -239,11 +239,11 @@ def main():
                 line = file_i.readline()
             file_i.close()
 
-            for i in range(2, 4, 1):
+            for i in range(1,len(line), 3):
                 key = KeySearch.generator(i)
                 perm = itertools.permutations(key)
-                for i in list(perm):
-                  file_cypher(filename_i, filename_o, crypt.decrypt, i , 2)
+                for j in list(perm):
+                  file_cypher(filename_i, filename_o, crypt.decrypt, j , 2)
                 # file_cypher(filename_o, filename_o_d, crypt.decrypt, key, 2)
         else:
             break
