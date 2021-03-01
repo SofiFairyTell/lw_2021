@@ -26,7 +26,7 @@ def file_cypher(file_input: str, file_output: str, crypt, key, mode) -> None:
                 line = file_i.readline()
                 while line:
                     result = crypt(line, key_key)  # для второго метода
-                    file_o.write(result+"\n")
+                    file_o.write(result + "\n")
                     line = file_i.readline()
     file_o.close()
     file_i.close()
@@ -181,13 +181,9 @@ class KeyCypher:
 
 class KeySearch:
     # из доступного алфавита генерирует последовательность символов, которые могут быть использованы в качестве ключа
-    def generator(len:int) -> str:
+    def generator(len: int) -> str:
         out = ''.join(choice(alphabet) for i in range(len))
         return out
-
-
-
-
 
 
 # main
@@ -196,22 +192,26 @@ def main():
     while True:
         # mess = input("Сообщение:  ")
         cypher_method = int(input("Введите номер метода шифрования:  "))
-        # filename_input = input("Имя файла для шифрования:")
-        # filename_output = input("Имя для зашифрованного файла:")
-        filename_i = "..\\lw_2\input.txt"
-        filename_o = "..\\lw_2\output.txt"
-        filename_t = "..\\lw_2\out_temp.txt"
-        filename_t2 = "..\\lw_2\out_temp2.txt"
-        filename_o_d = "..\\lw_2\out_d.txt"
-        filename_o_d2 = "..\\lw_2\out_d2.txt"
+        directory = input("Имя директорию для файлов шифрования:")
+        filename = input("Имя файла для шифрования [\<имя файла>]:")
+        # filename_o = input("Имя для зашифрованного файла:")
+        # filename_o_d = input("Имя для расшифрованного файла:")
+        filename_i = directory + filename
+        filename_o = directory +"\output.txt"
+        filename_o_d = directory + "\out_d.txt"
+        # filename_i = "..\\lw_2\input.txt"
+        # filename_o = "..\\lw_2\output.txt"
+        filename_t = "..\\out_temp.txt"
+        filename_t2 = "..\\out_temp2.txt"
+        # filename_o_d = "..\\out_d.txt"
+        filename_o_d2 = "..\\out_d2.txt"
 
         if cypher_method == 1:
             print("\t\vШифр : 'Железнодорожная изгородь'")
             rail_fence = RailFence()
             key_len = input("Введите ключ:  ")
             file_cypher(filename_i, filename_o, rail_fence.rail_fence_encrypt, key_len, 1)
-            # filename_input = input("Имя зашифрованного файла:")
-            # filename_output = input("Имя для дешифрованного файла:")
+
             file_cypher(filename_o, filename_o_d, rail_fence.rail_fence_decrypt, key_len, 1)
 
             # print("Ваше зашифрованное сообщение:  {}".format(result))
@@ -242,11 +242,11 @@ def main():
                 line = file_i.readline()
             file_i.close()
             key_len = int(input("Введите длину ключа:  "))
-            for i in range(1,  key_len, 1):
+            for i in range(1, key_len, 1):
                 key = KeySearch.generator(i)
                 perm = itertools.permutations(key)
                 for j in list(perm):
-                  file_cypher(filename_i, filename_o, crypt.encrypt, j , 2)
+                    file_cypher(filename_i, filename_o, crypt.encrypt, j, 2)
                 # file_cypher(filename_o, filename_o_d, crypt.decrypt, key, 2)
         else:
             break
