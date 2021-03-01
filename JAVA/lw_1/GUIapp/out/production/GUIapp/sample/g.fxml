@@ -175,7 +175,7 @@
                               <Font name="Times New Roman" size="24.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="btn_tri" layoutX="277.0" layoutY="445.0" mnemonicParsing="false" onAction="#TrigonometryFunction_click" prefHeight="55.0" prefWidth="142.0" text="Рассчитать">
+                        <Button fx:id="btn_tri" layoutX="178.0" layoutY="443.0" mnemonicParsing="false" onAction="#TrigonometryFunction_click" prefHeight="55.0" prefWidth="194.0" text="Рассчитать">
                            <font>
                               <Font name="Times New Roman" size="28.0" />
                            </font>
@@ -186,7 +186,64 @@
                               <Font name="Times New Roman" size="24.0" />
                            </font>
                         </TextField>
-                        <TextArea fx:id="table_result" layoutX="250.0" layoutY="113.0" prefHeight="200.0" prefWidth="427.0" />
+                        <TextArea fx:id="table_result" layoutX="426.0" layoutY="113.0" prefHeight="294.0" prefWidth="223.0">
+                           <font>
+                              <Font size="22.0" />
+                           </font></TextArea>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab id="task2" text="Задание 4">
+               <content>
+                  <AnchorPane id="task3_space" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #DF92A5;">
+                     <children>
+                        <Accordion layoutX="1.0" prefHeight="130.0" prefWidth="700.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                           <panes>
+                              <TitledPane animated="false" prefHeight="100.0" prefWidth="700.0" text="Назначение">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+                                       <children>
+                                          <TextArea id="task_description" editable="false" layoutX="-1.0" prefHeight="64.0" prefWidth="691.0" style="-fx-border-color: #DF92A5;" text="Подсчет элементов суммы между максимальным и минимальным элементом последовательности" wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" prefHeight="100.0" prefWidth="700.0" text="Входные данные">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+                                       <children>
+                                          <TextArea id="task_description" editable="false" prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: #DF92A5;" text="Последовательность цифр через запятую" wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" prefHeight="100.0" prefWidth="700.0" text="Результат">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+                                       <children>
+                                          <TextArea id="task_description" editable="false" prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: #DF92A5;" text="Сумма элементов" wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </TitledPane>
+                           </panes>
+                        </Accordion>
+                        <Button fx:id="btn_tri1" layoutX="250.0" layoutY="417.0" mnemonicParsing="false" onAction="#ArraySum_click" prefHeight="55.0" prefWidth="194.0" text="Рассчитать">
+                           <font>
+                              <Font name="Times New Roman" size="28.0" />
+                           </font>
+                        </Button>
+                        <TextArea fx:id="summ_result" layoutX="15.0" layoutY="305.0" prefHeight="20.0" prefWidth="666.0" promptText="Сумма элементов">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </TextArea>
+                        <TextField fx:id="array" layoutX="14.0" layoutY="199.0" prefHeight="70.0" prefWidth="667.0" promptText="Введите элементы">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </TextField>
                      </children>
                   </AnchorPane>
                </content>

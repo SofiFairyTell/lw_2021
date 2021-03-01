@@ -18,7 +18,8 @@ import java.util.List;
 
 public class Controller
 {
-
+    @FXML
+    private TextArea summ_result;
     @FXML
     private TableView<double[]> table;
     @FXML
@@ -42,9 +43,12 @@ public class Controller
     @FXML
     private TextField length;
     @FXML
+    private  TextField array;
+    @FXML
     private TextArea result_TrInCir;
     @FXML
     private Button btn;
+    @FXML
     private Button btn_mark;
     public Button btn_tri;
 
@@ -60,6 +64,7 @@ public class Controller
     @FXML
     private void isTriangleInCircle_click(ActionEvent event)
     {
+        if (length.getText().equals("") || radius.getText().equals("")) return;
         int len = Integer.parseInt(length.getText());
         int rad = Integer.parseInt(radius.getText());
         result_TrInCir.setText(ComputeMethod.isTriangleInCircle(rad,len));
@@ -67,20 +72,31 @@ public class Controller
     @FXML
     private void markTranslator_click(ActionEvent actionEvent)
     {
+        if (mark.getText().equals("")) return;
         int mark_i = Integer.parseInt(mark.getText());
         result_mark.setText(ComputeMethod.markTranslator(mark_i));
     }
     @FXML
     private void TrigonometryFunction_click(ActionEvent actionEvent)
+        {
+            if (start.getText().equals("") || end.getText().equals("")|| step.getText().equals("")) return;
+            int start_i = Integer.parseInt(start.getText());
+            int end_i = Integer.parseInt(end.getText());
+            int step_i = Integer.parseInt(step.getText());
+            double[][] array = ComputeMethod.TrigonometryFunction(start_i,end_i,step_i);
+            for(int i = 0; i < array.length; ++i)
+                table_result.appendText(String.format("%-10.2f%-27.2f%n", array[i][0], array[i][1]));
+        }
+    @FXML
+    private void ArraySum_click(ActionEvent actionEvent)
     {
-        int start_i = Integer.parseInt(start.getText());
-        int end_i = Integer.parseInt(end.getText());
-        int step_i = Integer.parseInt(step.getText());
-        double[][] array = ComputeMethod.TrigonometryFunction(start_i,end_i,step_i);
-        //            table_result.setText(String.valueOf(array[i][0]));
-        ////            String.valueOf(array[i][1]);
-        for(int i = 0; i < array.length; ++i)
-            table_result.appendText(String.format("%-10.2f%-27.2f%n", array[i][0], array[i][1]));
+        if (array.getText().equals("")) return;
+        String[] arr = array.getText().split(",");
+        int[] arr_int = new int[arr.length];
+        for (int i = 0; i<arr.length; i++)
+        {
+            arr_int[i] = Integer.parseInt(arr[i]);
+        }
+        summ_result.setText(ComputeMethod.ArraySum(arr_int));
     }
-
     }
