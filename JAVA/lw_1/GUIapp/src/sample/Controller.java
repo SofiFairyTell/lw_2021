@@ -97,6 +97,7 @@ public class Controller
         {
             arr_int[i] = Integer.parseInt(arr[i]);
         }
+
         summ_result.setText(ComputeMethod.ArraySum(arr_int));
     }
     }
