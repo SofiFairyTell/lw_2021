@@ -14,6 +14,7 @@ public class GlobalMembers {
             res += String.valueOf(bit);
         }
         return res;
+
     }
     public static double ConditionalProbability(char received_letter, char sent_letter)
     {
@@ -55,7 +56,7 @@ public class GlobalMembers {
         String source_alphabet = new String('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k');
         String receiver_alphabet = source_alphabet + '?';
 // conditional probability
-        Object tangible;
+        
         p = tangible.VectorHelper.<Double>nestedArrayList(2, 2);
         p.get(0).set(0, 0.58);
         p.get(1).set(0, 0.42);
