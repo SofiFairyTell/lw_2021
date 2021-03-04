@@ -1,16 +1,21 @@
 package ru.bstu.it32.kurbatova.lab1;
 
-import javax.lang.model.type.NullType;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ComputeMethod
 {
     /**
- <p> Описание метода "isTriangleInCircle"</p>
- * Определяет поместиться ли правильный треугольник в круге
- * @param radius Радиус круга для размещения
- * @param length Длина стороны треугольника
- * @return answer Ответ в виде строки
- */
+     <p> Описание метода "isTriangleInCircle"</p>
+     * Определяет поместиться ли правильный треугольник в круге
+     * @param radius Радиус круга для размещения
+     * @param length Длина стороны треугольника
+     * @return answer Ответ в виде строки
+    */
+    @NotNull
+    @Contract(pure = true)
     public static String isTriangleInCircle(int radius, int length)
     {
         String result;
@@ -25,10 +30,10 @@ public class ComputeMethod
      * @param mark Школьная отметка
      * @return translate Словесное описание школьных отметок
      */
+   @NotNull
+   @Contract(pure = true)
    public static String markTranslator(int mark)
     {
-
-        String result;
         switch(mark)
         {
             case 1:
@@ -55,9 +60,9 @@ public class ComputeMethod
      */
     public static double[][] TrigonometryFunction(int start, int end, int step)
     {
-
         int rows = (int) ((end - start) / step) + 1;
-        double[][] array = new double[rows][2];
+        double[][] array;
+        array = new double[rows][2];
         for (int i = 0; i < rows; i++)
             {
                 double y = Math.sin(start) + 0.5 * Math.cos(start);
@@ -69,48 +74,46 @@ public class ComputeMethod
     }
     /**
      * <p>Описание метода "ArraySum"</p>
-     * Вычислияет сумму элементов массива между максимальным и минимальным элементом
+     * Вычисляет сумму элементов массива между максимальным и минимальным элементом.
+     * Механизм поиска реализован с использованием в цикле for
      * @param array массив элементов
      * @return sum сумма между максимальным и минимальным элементом
      */
-   public static String ArraySum(int[] array) {
-
+   public static String ArraySum(int[] array)
+   {
         int min = 0, max = 0;
         for (int i = 0; i < array.length; ++i)
         {
             if (array[i] < array[min])
-            {
                 min = i;
-            }
             if (array[i] > array[max])
-            {
                 max = i;
-            }
         }
-        int left = (min < max) ? min : max;
+        int left = (min >= max) ? max : min;
         int right = (min < max) ? max : min;
-        int Sum = 0;
-        for (int i = left; i <= right; i++) {
-            Sum += array[i];
-        }
-        return Integer.toString(Sum);
+        AtomicInteger Sum = new AtomicInteger();
+        for (int i = left; i <= right; i++)
+           Sum.addAndGet(array[i]);
+        return Integer.toString(Sum.get());
     }
+    /**
+     * <p>Описание метода "ArraySumWhile"</p>
+     * Вычисляет сумму элементов массива между максимальным и минимальным элементом.
+     * Механизм поиска реализован с использованием в цикле while
+     * @param array массив элементов
+     * @return sum сумма между максимальным и минимальным элементом
+     */
 
-   public static String ArraySumWhile(int[] array) {
-
-        int min = 0, max = 0;
-        int i = 0;
+   public static String ArraySumWhile(int[] array)
+   {
+        int min = 0, max = 0, i = 0;
         System.out.print("Метод с циклом While");
-        while (i<array.length)
+        while (i < array.length)
         {
             if (array[i] < array[min])
-            {
                 min = i;
-            }
             if (array[i] > array[max])
-            {
                 max = i;
-            }
             i++;
         }
         int left = (min < max) ? min : max;
@@ -120,5 +123,5 @@ public class ComputeMethod
         for (int j = left; j <= right; j++)
             Sum += array[j];
         return Integer.toString(Sum);
-    }
+   }
 }

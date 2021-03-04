@@ -1,10 +1,18 @@
 package ru.bstu.it32.kurbatova.lab1;
 
-//Новый класс для исключений связанных с неправильным вводом
-class InputException extends Exception
+
+public class InputException extends Exception
 {
+    private final String message;
+
+    /**
+ *  Новый класс для исключений связанных с неправильным вводом
+ *
+ * */
+
     InputException(String message)
     {
         super(message);
+        this.message = message;
     }
 }

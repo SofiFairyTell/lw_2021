@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_lw_1" default="compile.module.lw_1">
+  <dirname property="module.lw_1.basedir" file="${ant.file.module_lw_1}"/>
+  
+  <property name="module.jdk.home.lw_1" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.lw_1" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.lw_1" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.lw_1" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="lw_1.output.dir" value="${module.lw_1.basedir}/out/production/lw_1"/>
+  <property name="lw_1.testoutput.dir" value="${module.lw_1.basedir}/out/test/lw_1"/>
+  
+  <path id="lw_1.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="lw_1.module.production.classpath">
+    <path refid="${module.jdk.classpath.lw_1}"/>
+    <pathelement location="${path.variable.maven_repository}/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar"/>
+  </path>
+  
+  <path id="lw_1.runtime.production.module.classpath">
+    <pathelement location="${lw_1.output.dir}"/>
+    <pathelement location="${path.variable.maven_repository}/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar"/>
+  </path>
+  
+  <path id="lw_1.module.classpath">
+    <path refid="${module.jdk.classpath.lw_1}"/>
+    <pathelement location="${lw_1.output.dir}"/>
+    <pathelement location="${path.variable.maven_repository}/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar"/>
+  </path>
+  
+  <path id="lw_1.runtime.module.classpath">
+    <pathelement location="${lw_1.testoutput.dir}"/>
+    <pathelement location="${lw_1.output.dir}"/>
+    <pathelement location="${path.variable.maven_repository}/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.lw_1">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.lw_1">
+    <patternset refid="excluded.from.module.lw_1"/>
+  </patternset>
+  
+  <path id="lw_1.module.sourcepath">
+    <dirset dir="${module.lw_1.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.lw_1" depends="compile.module.lw_1.production,compile.module.lw_1.tests" description="Compile module lw_1"/>
+  
+  <target name="compile.module.lw_1.production" depends="register.custom.compilers" description="Compile module lw_1; production classes">
+    <mkdir dir="${lw_1.output.dir}"/>
+    <javac2 destdir="${lw_1.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.lw_1}/javac">
+      <compilerarg line="${compiler.args.lw_1}"/>
+      <bootclasspath refid="lw_1.module.bootclasspath"/>
+      <classpath refid="lw_1.module.production.classpath"/>
+      <src refid="lw_1.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.lw_1"/>
+    </javac2>
+    
+    <copy todir="${lw_1.output.dir}">
+      <fileset dir="${module.lw_1.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.lw_1.tests" depends="register.custom.compilers,compile.module.lw_1.production" description="compile module lw_1; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.lw_1" description="cleanup module">
+    <delete dir="${lw_1.output.dir}"/>
+    <delete dir="${lw_1.testoutput.dir}"/>
+  </target>
+</project>
