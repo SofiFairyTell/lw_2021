@@ -1,8 +1,10 @@
 package ru.bstu.it32.kurbatova.lab1;
 
 import java.io.*;
+import java.text.MessageFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 
 public class MenuCommand
@@ -22,7 +24,9 @@ public class MenuCommand
                     if (triangleLength <= 0 && radius <= 0) {
                         throw new InputException("Значения длин не могут быть меньше или равны 0");
                     } else {
-                       System.out.print(ComputeMethod.isTriangleInCircle(radius, triangleLength));
+                        String varLogger = MessageFormat.format("Введены: радиус = {0}, длина стороны = {1}",radius,triangleLength);
+                        Main.logger.log(Level.FINE, varLogger);
+                        System.out.print(ComputeMethod.isTriangleInCircle(radius, triangleLength));
                     }
                 } catch (InputException ex) {
                     System.out.println(ex.getMessage());
@@ -88,12 +92,14 @@ public class MenuCommand
                     int step = input.nextInt();
                     if (step <= 0 || step > end)
                     {
+                        String varLogger = MessageFormat.format("Введены: шаг = {0}, конечная точка = {1}. Шаг не может быть меньше или равty 0 или больше конечной точки", step, end);
+                        Main.logger.log(Level.SEVERE, varLogger);
                         throw new InputException("Шаг не может быть меньше или равны 0 или больше конечной точки");
                     }
                     else
                         {
-                        double[][] array = ComputeMethod.TrigonometryFunction(start, end, step);
-                        TableView(array);
+                            double[][] array = ComputeMethod.TrigonometryFunction(start, end, step);
+                            TableView(array);
                         }
                 } catch (InputException ex) {
                     System.out.println(ex.getMessage());

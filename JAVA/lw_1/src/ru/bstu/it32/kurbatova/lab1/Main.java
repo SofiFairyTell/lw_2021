@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 public class Main
 {
+    public static Logger logger = LoggerClass.setLog("logger");
     public static void main(String[] args)
     {
         String command;

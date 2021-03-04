@@ -1,12 +1,13 @@
 package ru.bstu.it32.kurbatova.lab1;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.*;
 
 public class LoggerClass {
-    private static Logger setLog(String loggerName)
+    public static Logger setLog(String loggerName)
     {
         Logger log =  Logger.getLogger(loggerName) ;
         log.setLevel(Level.FINE);
@@ -15,7 +16,7 @@ public class LoggerClass {
         FileHandler fileHandler = null;
         try
         {
-            fileHandler = new FileHandler("./"+loggerName +".txt",true);
+            fileHandler = new FileHandler("./_log/"+loggerName +".txt",true);
         }
         catch(IOException e)
         {
@@ -30,7 +31,7 @@ public class LoggerClass {
         FileHandler fileHandler1 = null;
         try
         {
-            fileHandler1 = new FileHandler("./"+loggerName + "Full"+".txt",true);
+            fileHandler1 = new FileHandler("./_log/"+loggerName + "Full"+".txt",true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,12 +55,11 @@ static  class Format extends Formatter
         {
             Date currentDate = new Date();
             SimpleDateFormat timeFormat = new SimpleDateFormat("E yyyy.MM.dd hh:mm:ss a zzz");
-            String output =
-                    "LEVEL: " + record.getLevel() +"DATE: "+ timeFormat.format(currentDate)
-                            + "CLASS NAME: " + record.getSourceClassName() + "TEXT: " + record.getMessage();
+            String output;
+            output = String.format("LEVEL: %-10s Date: %-10s  Class_name: %-10s  Text:  %-10s  ", record.getLevel(),timeFormat.format(currentDate), record.getSourceClassName(),record.getMessage());
             if (record.getThrown()!=null)
             {
-                output += "EXCEPTION";
+                output += " EXCEPTION";
                 StackTraceElement[] stackTraceElements = record.getThrown().getStackTrace();
                 for (StackTraceElement traceElement:stackTraceElements)
                     output += traceElement.toString() +"\n";
