@@ -16,7 +16,7 @@ public class LoggerClass {
         FileHandler fileHandler = null;
         try
         {
-            fileHandler = new FileHandler("./_log/"+loggerName +".txt",true);
+            fileHandler = new FileHandler("./"+loggerName +".txt",true);
         }
         catch(IOException e)
         {
@@ -31,7 +31,7 @@ public class LoggerClass {
         FileHandler fileHandler1 = null;
         try
         {
-            fileHandler1 = new FileHandler("./_log/"+loggerName + "Full"+".txt",true);
+            fileHandler1 = new FileHandler("./"+loggerName + "Full"+".txt",true);
         } catch (IOException e) {
             e.printStackTrace();
         }

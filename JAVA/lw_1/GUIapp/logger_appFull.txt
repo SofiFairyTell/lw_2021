@@ -1,0 +1,3 @@
+LEVEL: FINE       Date: чт 2021.03.04 05:05:32 PM MSK  Class_name: sample.Controller  Text:  Введено:5 4. Возвращено: {3}Поместиться!
+  
+

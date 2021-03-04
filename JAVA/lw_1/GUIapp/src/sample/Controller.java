@@ -12,9 +12,11 @@ import javafx.scene.shape.Polygon;
 import ru.bstu.it32.kurbatova.lab1.*;
 
 import java.lang.reflect.Array;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 
 public class Controller
 {
@@ -53,29 +55,34 @@ public class Controller
     public Button btn_tri;
 
     @FXML
-    public void initialize(){
-        btn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                btn.setText("Thanks!");
-            }
-        });
-    }
+    public void initialize()
+        {
+            btn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    btn.setText("Thanks!");
+                }
+            });
+        }
     @FXML
     private void isTriangleInCircle_click(ActionEvent event)
-    {
-        if (length.getText().equals("") || radius.getText().equals("")) return;
-        int len = Integer.parseInt(length.getText());
-        int rad = Integer.parseInt(radius.getText());
-        result_TrInCir.setText(ComputeMethod.isTriangleInCircle(rad,len));
-    }
+        {
+            if (length.getText().equals("") || radius.getText().equals("")) return;
+            int len = Integer.parseInt(length.getText());
+            int rad = Integer.parseInt(radius.getText());
+            String msg, res;
+            res = ComputeMethod.isTriangleInCircle(rad,len);
+            msg = MessageFormat.format("Введено:{0} {1}. Возвращено: {2}", len, rad, res);
+            Main.logs.log(Level.FINE,msg+res);
+            result_TrInCir.setText(res);
+        }
     @FXML
     private void markTranslator_click(ActionEvent actionEvent)
-    {
-        if (mark.getText().equals("")) return;
-        int mark_i = Integer.parseInt(mark.getText());
-        result_mark.setText(ComputeMethod.markTranslator(mark_i));
-    }
+        {
+            if (mark.getText().equals("")) return;
+            int mark_i = Integer.parseInt(mark.getText());
+            result_mark.setText(ComputeMethod.markTranslator(mark_i));
+        }
     @FXML
     private void TrigonometryFunction_click(ActionEvent actionEvent)
         {
@@ -89,15 +96,15 @@ public class Controller
         }
     @FXML
     private void ArraySum_click(ActionEvent actionEvent)
-    {
-        if (array.getText().equals("")) return;
-        String[] arr = array.getText().split(",");
-        int[] arr_int = new int[arr.length];
-        for (int i = 0; i<arr.length; i++)
         {
-            arr_int[i] = Integer.parseInt(arr[i]);
-        }
+            if (array.getText().equals("")) return;
+            String[] arr = array.getText().split(",");
+            int[] arr_int = new int[arr.length];
+            for (int i = 0; i<arr.length; i++)
+            {
+                arr_int[i] = Integer.parseInt(arr[i]);
+            }
 
-        summ_result.setText(ComputeMethod.ArraySum(arr_int));
-    }
+            summ_result.setText(ComputeMethod.ArraySum(arr_int));
+        }
     }

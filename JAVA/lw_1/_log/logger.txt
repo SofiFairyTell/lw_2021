@@ -1,2 +1,0 @@
-LEVEL: SEVERE     Date: чт 2021.03.04 04:43:04 PM MSK  Class_name: ru.bstu.it32.kurbatova.lab1.MenuCommand  Text:  Введены: шаг = 0, конечная точка = 5. Шаг не может быть меньше или равны 0 или больше конечной точки  
-
