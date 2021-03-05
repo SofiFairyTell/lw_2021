@@ -1,0 +1,2 @@
+LEVEL: FINE       Date: пт 2021.03.05 07:23:02 PM MSK  Class_name: ru.bstu.it32.kurbatova.lab1.MenuCommand  Text:  ¬ведены: радиус = 6, длина стороны = 5  
+

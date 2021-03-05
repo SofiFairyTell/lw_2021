@@ -6,6 +6,15 @@ import java.util.logging.Logger;
 public class Main
 {
     public static Logger logger = LoggerClass.setLog("logger_gui");
+    /**<p>Описание команд управления</p>
+     * Для управленияп программной предусмотрены такие команды:
+     *<ul>
+     * <li>first    -   для запуска функции TriangleInCircle</li>
+     * <li>second   -   для запуска функции MarkTranslator </li>
+     * <li>tree     -   для запуска функции TrigonometryFunction </li>
+     * <li>four     -   для запуска функции ArraySum</li>
+     * <li>end      -   для завершения работы с программой</li>
+     * </ul> */
     public static void main(String[] args)
     {
         String command;
