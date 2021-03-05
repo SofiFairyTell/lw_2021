@@ -28,8 +28,8 @@ public class ComputeMethod
     {
         String result;
         double triangle = length*(Math.sqrt(3)/3);
-        if(radius >= triangle) return "Поместиться!\n";
-        else return "Не поместиться!\n";
+        if(radius >= triangle) return "Поместится!\n";
+        else return "Не поместится!\n";
     }
     /**
      * <p>Описание метода "markTranslator"</p>

@@ -1,11 +1,15 @@
 package guiapp;
 
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+
+import java.io.*;
 import java.text.MessageFormat;
+import java.util.Scanner;
 import java.util.logging.Level;
 import ru.bstu.it32.kurbatova.lab1.*;
 
@@ -36,11 +40,18 @@ public class Controller {
     private Button btn;
     @FXML
     private Button btn_tri;
+    //Для логов
+    @FXML
+    private Button btn_load;
+    @FXML
+    private TextArea log_info;
+    @FXML
+    private TextArea log_error;
 
-/**
- * <p> Инициализация</p>
- * При нажатии на кнопку на первой вкладке на ней появляется надпись
- * */
+    /**
+     * <p> Инициализация</p>
+     * При нажатии на кнопку на первой вкладке на ней появляется надпись
+     */
     @FXML
     public void initialize() {
         btn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -53,10 +64,10 @@ public class Controller {
 
     /**
      * <p>Описание метода isTriangleInCircle_click</p>
-     *  len длина стороны целое число
-     *  rad радиус круг целое число
-     *  return добавление текста в TextArea result_TrInCir
-     * */
+     * len длина стороны целое число
+     * rad радиус круг целое число
+     * return добавление текста в TextArea result_TrInCir
+     */
     @FXML
     public void isTriangleInCircle_click(ActionEvent event) {
         if (length.getText().equals("") || radius.getText().equals("")) {
@@ -78,9 +89,9 @@ public class Controller {
 
     /**
      * <p>Описание метода markTranslator_click</p>
-     *  mark  оценка целое число
-     *  return добавление текста в TextArea result_mark
-     * */
+     * mark  оценка целое число
+     * return добавление текста в TextArea result_mark
+     */
     @FXML
     public void markTranslator_click(ActionEvent actionEvent) {
         if (mark.getText().equals("")) {
@@ -94,11 +105,11 @@ public class Controller {
 
     /**
      * <p>Описание метода TrigonometryFunction_click</p>
-     *  start  начальная точка целое число
-     *  end конечная точка целое число
-     *  step шаг целое число
-     *  return добавление текста в TextArea table_result
-     * */
+     * start  начальная точка целое число
+     * end конечная точка целое число
+     * step шаг целое число
+     * return добавление текста в TextArea table_result
+     */
     @FXML
     public void TrigonometryFunction_click(ActionEvent actionEvent) throws Exception {
         if (start.getText().equals("") || end.getText().equals("") || step.getText().equals("")) {
@@ -120,9 +131,9 @@ public class Controller {
 
     /**
      * <p>Описание метода ArraySum_click</p>
-     *  arr_int последовательность чисел целое число
-     *  return добавление текста в TextArea summ_result
-     * */
+     * arr_int последовательность чисел целое число
+     * return добавление текста в TextArea summ_result
+     */
     @FXML
     public void ArraySum_click(ActionEvent actionEvent) {
         if (array.getText().equals("")) return;
@@ -138,4 +149,40 @@ public class Controller {
             Main.logs.log(Level.SEVERE, e.getMessage());
         }
     }
-}
+
+    @FXML
+    public void GetLogFromFile_click(ActionEvent actionEvent) {
+       if(!log_error.equals("") && !log_info.equals("")) {
+           log_info.clear();
+           log_error.clear();
+       }
+        Scanner input = new Scanner(System.in);
+        String path_info = "./logger_app.txt";
+        String path_erro = "./logger_appWARNING.txt";
+
+        File file_info = new File(path_info);
+        File file_erro = new File(path_erro);
+        if (file_info.exists() || file_erro.exists()) {
+            Scanner scaner_inf = null;
+            Scanner scaner_err = null;
+            try {
+                scaner_inf = new Scanner(file_info);
+                scaner_err = new Scanner(file_erro);
+            } catch (FileNotFoundException e)
+            {
+                Main.logs.log(Level.WARNING, "Файл не найден: " + e.getMessage());
+                e.printStackTrace();
+            }
+            log_info.appendText(scaner_inf.nextLine());
+            while (scaner_inf.hasNextLine())
+            {
+                log_info.appendText(scaner_inf.nextLine());
+            }
+            log_error.appendText(scaner_err.nextLine());
+            while (scaner_err.hasNextLine())
+            {
+                log_error.appendText(scaner_err.nextLine());
+            }
+            }
+        }
+    }

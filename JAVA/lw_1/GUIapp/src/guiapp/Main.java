@@ -5,10 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ru.bstu.it32.kurbatova.lab1.LoggerClass;
-
 import java.util.logging.Logger;
 
+import ru.bstu.it32.kurbatova.lab1.*;
 public class Main extends Application {
 
     public static Logger logs = LoggerClass.setLog("logger_app");

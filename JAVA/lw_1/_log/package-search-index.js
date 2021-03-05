@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.bstu.it32.kurbatova.lab1"}];updateSearchResults();
