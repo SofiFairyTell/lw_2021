@@ -2,9 +2,17 @@ package ru.bstu.it32.kurbatova.lab1;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.events.EventException;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
+import java.util.logging.Level;
+/**
+ * <p>Описание класса ComputeMethod</p>
+ * Содержит методы длярешения задач:
+ * <ul>
+ *     <li>из школьной геометрии</li>
+ *     <li>перевода оценок в словесное описание</li>
+ * </ul>*/
 public class ComputeMethod
 {
     /**
@@ -63,14 +71,19 @@ public class ComputeMethod
         int rows = (int) ((end - start) / step) + 1;
         double[][] array;
         array = new double[rows][2];
-        for (int i = 0; i < rows; i++)
-            {
-                double y = Math.sin(start) + 0.5 * Math.cos(start);
-                array[i][0] = start;
-                array[i][1] = y;
-                start += step;
-            }
-        return array;
+        try {
+                for (int i = 0; i < rows; i++)
+                {
+                    double y = Math.sin(start) + 0.5 * Math.cos(start);
+                    array[i][0] = start;
+                    array[i][1] = y;
+                    start += step;
+                }
+                return array;
+        }catch (EventException e){
+            Main.logger.log(Level.SEVERE, "Проблема с созданием массива: " + e.getMessage());
+            return null;
+        }
     }
     /**
      * <p>Описание метода "ArraySum"</p>
@@ -94,6 +107,7 @@ public class ComputeMethod
         AtomicInteger Sum = new AtomicInteger();
         for (int i = left; i <= right; i++)
            Sum.addAndGet(array[i]);
+        Main.logger.log(Level.INFO, "Сумма вычислена");
         return Integer.toString(Sum.get());
     }
     /**

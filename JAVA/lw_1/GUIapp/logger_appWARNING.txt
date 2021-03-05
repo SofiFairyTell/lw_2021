@@ -1,0 +1,2 @@
+LEVEL: SEVERE     Date: пт 2021.03.05 02:33:34 PM MSK  Class_name: guiapp.Controller  Text:  / by zero   
+

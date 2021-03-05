@@ -6,7 +6,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-
+/**
+ * <p>Описание класса MenuCommand</p>
+ * Описаны методы управления программой. */
 public class MenuCommand
 {
     static void TriangleInCircleMenu() {
@@ -92,7 +94,8 @@ public class MenuCommand
                     int step = input.nextInt();
                     if (step <= 0 || step > end)
                     {
-                        String varLogger = MessageFormat.format("Введены: шаг = {0}, конечная точка = {1}. Шаг не может быть меньше или равty 0 или больше конечной точки", step, end);
+                        String varLogger = MessageFormat.format("Введены: шаг = {0}, конечная точка = {1}. " +
+                                "Шаг не может быть меньше или равен 0 или больше конечной точки", step, end);
                         Main.logger.log(Level.SEVERE, varLogger);
                         throw new InputException("Шаг не может быть меньше или равны 0 или больше конечной точки");
                     }
@@ -102,10 +105,11 @@ public class MenuCommand
                             TableView(array);
                         }
                 } catch (InputException ex) {
-                    System.out.println(ex.getMessage());
+                    Main.logger.log(Level.SEVERE, ex.getMessage());
+                    //System.out.println(ex.getMessage());
                     System.exit(-1);
                 } catch (InputMismatchException ex) {
-                    System.out.println(ex.getMessage());
+                    Main.logger.log(Level.SEVERE, ex.getMessage());
                     System.exit(-1);
                 }
             }
@@ -128,6 +132,7 @@ public class MenuCommand
         {
             System.out.printf("%-10.2f%-27.2f%n", array[i][0], array[i][1]);
         }
+
     }
     static void ArraySumMenu() {
         Scanner input = new Scanner(System.in);
@@ -142,7 +147,9 @@ public class MenuCommand
                     System.out.print("Введите последовательность чисел: ");
 
                     if (size <= 0) {
+                        Main.logger.log(Level.SEVERE,"Шаг не может быть меньше или равны 0");
                         throw new InputException("Шаг не может быть меньше или равны 0");
+
                     } else {
                         for (int i = 0; i < size; i++) {
                             array[i] = input.nextInt();
@@ -150,9 +157,11 @@ public class MenuCommand
                         System.out.printf("Сумма между максимальным и минимальным элементов %s\n",ComputeMethod.ArraySum(array));
                     }
                 } catch (InputException ex) {
+                    Main.logger.log(Level.SEVERE, ex.getMessage());
                     System.out.println(ex.getMessage());
                     System.exit(-1);
                 } catch (InputMismatchException ex) {
+                    Main.logger.log(Level.SEVERE, ex.getMessage());
                     System.out.println(ex.getMessage());
                     System.exit(-1);
                 }
@@ -197,10 +206,12 @@ public class MenuCommand
                         }
                         catch (FileNotFoundException e)
                         {
+                            Main.logger.log(Level.WARNING, "Файл не найден: "+e.getMessage());
                             e.printStackTrace();
                         }
                         catch (IOException e)
                         {
+                            Main.logger.log(Level.SEVERE, e.getMessage());
                             e.printStackTrace();
                         }
                     }

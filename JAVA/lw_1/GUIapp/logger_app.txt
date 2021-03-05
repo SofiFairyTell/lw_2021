@@ -1,0 +1,8 @@
+LEVEL: INFO       Date: пт 2021.03.05 02:33:27 PM MSK  Class_name: guiapp.Controller  Text:  Передана пустая строка  
+
+LEVEL: SEVERE     Date: пт 2021.03.05 02:33:34 PM MSK  Class_name: guiapp.Controller  Text:  / by zero   
+
+LEVEL: FINE       Date: пт 2021.03.05 02:34:25 PM MSK  Class_name: guiapp.Controller  Text:  Введено:4 6. Возвращено: Поместиться!
+Поместиться!
+  
+
