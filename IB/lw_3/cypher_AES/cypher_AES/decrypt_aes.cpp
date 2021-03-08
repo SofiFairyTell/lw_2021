@@ -135,9 +135,10 @@ void AESDecrypt(unsigned char * encryptedMessage, unsigned char * expandedKey, u
 	}
 }
 
-/*
-int main() {
 
+
+void mode_aes::decrypt_aes()
+{
 	cout << "=============================" << endl;
 	cout << " 128-bit AES Decryption Tool " << endl;
 	cout << "=============================" << endl;
@@ -217,7 +218,4 @@ int main() {
 		cout << decryptedMessage[i];
 	}
 	cout << endl;
-
-	return 0;
 }
-*/

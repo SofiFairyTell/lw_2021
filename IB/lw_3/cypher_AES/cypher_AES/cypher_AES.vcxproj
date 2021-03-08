@@ -146,7 +146,6 @@
     <ClCompile Include="encrypt_aes.cpp" />
     <ClCompile Include="decrypt_aes.cpp" />
     <ClCompile Include="start_aes.cpp" />
-    <ClCompile Include="union_AES.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="declaration_aes.h" />

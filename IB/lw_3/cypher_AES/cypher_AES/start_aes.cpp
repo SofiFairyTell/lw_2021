@@ -7,10 +7,10 @@
 
 #include "declaration_aes.h"
 using namespace std;
-int main(int argc, LPCTSTR argv[])
+int _tmain(int argc, LPCTSTR argv[])
 {
 	mode_aes enc, dec;
-	setlocale(LC_ALL, "");
+	_tsetlocale(LC_ALL, TEXT(""));
 	if (2 == argc)
 	{
 		
@@ -19,7 +19,7 @@ int main(int argc, LPCTSTR argv[])
 			enc.encrypt_aes();
 		}
 		else
-			if (_tcsicmp(argv[1], TEXT("/start_encrypt")) == 0)
+			if (_tcsicmp(argv[1], TEXT("/start_decrypt")) == 0)
 			{
 				dec.decrypt_aes();
 			}

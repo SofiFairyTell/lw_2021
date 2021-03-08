@@ -2,9 +2,9 @@
 #include <cstring>
 #include <fstream>
 #include <sstream>
-
+#include "header_aes.h"
 #include "declaration_aes.h"
-#include "Header_encr.h"
+
 
 using namespace std;
 
@@ -131,4 +131,90 @@ void AESEncrypt(unsigned char * message, unsigned char * expandedKey, unsigned c
 	for (int i = 0; i < 16; i++) {
 		encryptedMessage[i] = state[i];
 	}
+}
+
+
+void mode_aes::encrypt_aes()
+{
+	cout << "=============================" << endl;
+	cout << " 128-bit AES Encryption Tool   " << endl;
+	cout << "=============================" << endl;
+	static char message[1024];
+	cout << "Enter the message to encrypt: ";
+	cin.getline(message, sizeof(message));
+	cout << message << endl;
+
+	// Pad message to 16 bytes
+	int originalLen = strlen((const char *)message);
+
+	int paddedMessageLen = originalLen;
+
+	if ((paddedMessageLen % 16) != 0) {
+		paddedMessageLen = (paddedMessageLen / 16 + 1) * 16;
+	}
+
+	unsigned char * paddedMessage = new unsigned char[paddedMessageLen];
+	for (int i = 0; i < paddedMessageLen; i++) {
+		if (i >= originalLen) {
+			paddedMessage[i] = 0;
+		}
+		else {
+			paddedMessage[i] = message[i];
+		}
+	}
+
+	unsigned char * encryptedMessage = new unsigned char[paddedMessageLen];
+
+	string str;
+	ifstream infile;
+	infile.open("keyfile", ios::in | ios::binary);
+
+	if (infile.is_open())
+	{
+		getline(infile, str); // The first line of file should be the key
+		infile.close();
+	}
+
+	else cout << "Unable to open file";
+
+	istringstream hex_chars_stream(str);
+	unsigned char key[16];
+	int i = 0;
+	unsigned int c;
+	while (hex_chars_stream >> hex >> c)
+	{
+		key[i] = c;
+		i++;
+	}
+
+	unsigned char expandedKey[176];
+	KeyExpansion(key, expandedKey);
+
+	for (int i = 0; i < paddedMessageLen; i += 16) {
+		AESEncrypt(paddedMessage + i, expandedKey, encryptedMessage + i);
+	}
+
+	cout << "Encrypted message in hex:" << endl;
+	for (int i = 0; i < paddedMessageLen; i++) {
+		cout << hex << (int)encryptedMessage[i];
+		cout << " ";
+	}
+
+	cout << endl;
+
+	// Write the encrypted string out to file "message.aes"
+	ofstream outfile;
+	outfile.open("message.aes", ios::out | ios::binary);
+	if (outfile.is_open())
+	{
+		outfile << encryptedMessage;
+		outfile.close();
+		cout << "Wrote encrypted message to file message.aes" << endl;
+	}
+
+	else cout << "Unable to open file";
+
+	// Free memory
+	delete[] paddedMessage;
+	delete[] encryptedMessage;
 }

@@ -21,9 +21,6 @@
     <ClCompile Include="encrypt_aes.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="union_AES.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="start_aes.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
