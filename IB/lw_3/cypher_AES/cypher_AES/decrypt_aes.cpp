@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include "header_aes.h"
+#include "declaration_aes.h"
 #pragma warning(disable : 4996) // Disable strcpy
 using namespace std;
 
@@ -48,7 +49,7 @@ void InverseMixColumns(unsigned char * state) {
 }
 
 // Shifts rows right (rather than left) for decryption
-void ShiftRows(unsigned char * state) {
+void ShiftRows_right(unsigned char * state) {
 	unsigned char tmp[16];
 
 	/* Column 1 */
@@ -83,7 +84,7 @@ void ShiftRows(unsigned char * state) {
 /* Perform substitution to each of the 16 bytes
 * Uses inverse S-box as lookup table
 */
-void SubBytes(unsigned char * state) {
+void SubBytes_inv(unsigned char * state) {
 	for (int i = 0; i < 16; i++) { // Perform substitution to each of the 16 bytes
 		state[i] = inv_s[state[i]];
 	}
@@ -93,18 +94,18 @@ void SubBytes(unsigned char * state) {
 * The number of rounds is defined in AESDecrypt()
 * Not surprisingly, the steps are the encryption steps but reversed
 */
-void Round(unsigned char * state, unsigned char * key) {
+void Round_decr(unsigned char * state, unsigned char * key) {
 	SubRoundKey(state, key);
 	InverseMixColumns(state);
-	ShiftRows(state);
-	SubBytes(state);
+	ShiftRows_right(state);
+	SubBytes_inv(state);
 }
 
 // Same as Round() but no InverseMixColumns
 void InitialRound(unsigned char * state, unsigned char * key) {
 	SubRoundKey(state, key);
-	ShiftRows(state);
-	SubBytes(state);
+	ShiftRows_right(state);
+	SubBytes_inv(state);
 }
 
 /* The AES decryption function
@@ -123,7 +124,7 @@ void AESDecrypt(unsigned char * encryptedMessage, unsigned char * expandedKey, u
 	int numberOfRounds = 9;
 
 	for (int i = 8; i >= 0; i--) {
-		Round(state, expandedKey + (16 * (i + 1)));
+		Round_decr(state, expandedKey + (16 * (i + 1)));
 	}
 
 	SubRoundKey(state, expandedKey); // Final round
@@ -134,6 +135,7 @@ void AESDecrypt(unsigned char * encryptedMessage, unsigned char * expandedKey, u
 	}
 }
 
+/*
 int main() {
 
 	cout << "=============================" << endl;
@@ -218,3 +220,4 @@ int main() {
 
 	return 0;
 }
+*/

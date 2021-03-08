@@ -1,4 +1,28 @@
-﻿  decrypt_aes.cpp
-  encrypt_aes.cpp
+﻿  encrypt_aes.cpp
+  decrypt_aes.cpp
+  start_aes.cpp
+  union_AES.cpp
   Создание кода...
-  cypher_AES.vcxproj -> C:\Users\Kurbatova\source\LW2020\lw_2021\IB\lw_3\cypher_AES\Debug\cypher_AES.exe
+decrypt_aes.obj : error LNK2005: "void __cdecl KeyExpansion(unsigned char * const,unsigned char * const)" (?KeyExpansion@@YAXQAE0@Z) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "void __cdecl KeyExpansionCore(unsigned char *,unsigned char)" (?KeyExpansionCore@@YAXPAEE@Z) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "unsigned char * s" (?s@@3PAEA) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "unsigned char * mul2" (?mul2@@3PAEA) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "unsigned char * mul3" (?mul3@@3PAEA) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "unsigned char * rcon" (?rcon@@3PAEA) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "unsigned char * inv_s" (?inv_s@@3PAEA) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "unsigned char * mul9" (?mul9@@3PAEA) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "unsigned char * mul11" (?mul11@@3PAEA) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "unsigned char * mul13" (?mul13@@3PAEA) уже определен в encrypt_aes.obj
+decrypt_aes.obj : error LNK2005: "unsigned char * mul14" (?mul14@@3PAEA) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "void __cdecl KeyExpansion(unsigned char * const,unsigned char * const)" (?KeyExpansion@@YAXQAE0@Z) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "void __cdecl KeyExpansionCore(unsigned char *,unsigned char)" (?KeyExpansionCore@@YAXPAEE@Z) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "unsigned char * s" (?s@@3PAEA) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "unsigned char * mul2" (?mul2@@3PAEA) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "unsigned char * mul3" (?mul3@@3PAEA) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "unsigned char * rcon" (?rcon@@3PAEA) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "unsigned char * inv_s" (?inv_s@@3PAEA) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "unsigned char * mul9" (?mul9@@3PAEA) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "unsigned char * mul11" (?mul11@@3PAEA) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "unsigned char * mul13" (?mul13@@3PAEA) уже определен в encrypt_aes.obj
+union_AES.obj : error LNK2005: "unsigned char * mul14" (?mul14@@3PAEA) уже определен в encrypt_aes.obj
+C:\Users\Kurbatova\source\LW2020\lw_2021\IB\lw_3\cypher_AES\Debug\cypher_AES.exe : fatal error LNK1169: обнаружен многократно определенный символ - один или более
