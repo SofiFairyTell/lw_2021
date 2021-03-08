@@ -1,11 +1,10 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.*;
+
 
 public class GlobalMembers {
 
         public static ArrayList<ArrayList<Double>> p = new ArrayList<ArrayList<Double>>();
         public static HashMap<Character, ArrayList<Integer>> bin_representation_for_letter = new HashMap<Character, ArrayList<Integer>>();
+		
     public static String ToBitString(char letter)
     {
         String res = "";
@@ -25,6 +24,7 @@ public class GlobalMembers {
         }
         return res;
     }
+	
     public static <ofstream> void main(String[] args)
     {
         char letter = 'a';
