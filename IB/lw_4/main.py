@@ -1,16 +1,24 @@
-# This is a sample Python script.
+# Важная информация! По ссылке объяснение как .py файлы компилировать в .exe
+# http://nikovit.ru/blog/samyy-prostoy-sposob-skompilirovat-python-fayl-v-exe/
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import math as math
+import random as random
 
+class TestForNumbers:
+    def Pherma_test(self, number):
+        if (number):
+            print("Введено число Кармайкла")
+        # Todo
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    def RabinMiller_test(self, number, test_step):
+        if(number):
+            print("Задано количество проверок")
+            # Todo
+    def Partibility_test(self, number)->str:
+        time = ""
+        # Todo
+        return time
+class LargestPrimeNumber:
+    def LPN_generator(self,test_step,length_bytes):
+        #Todo
+        return
