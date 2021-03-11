@@ -2,24 +2,33 @@
 
 using namespace std;
 
+/*TODO
+1. Создать точки треугольника ABC с координамами в виде x,y
+2. Обеспечить ввод точки пользователем.
+
+*/
+
+
 class Dot {
 private:
 	int x;
 	int y;
 public:
+    //Getters for X and Y
 	int X() { return x; }
 	int Y() { return y; }
-	Dot(int value1, int value2)
-	{
-		x = value1;
-		y = value2;
-	}
+
+    //Setters for X and Y
+	void setX(int value){x = value;}
+    void setY(int value){y = value;}     
+    int SetCoords()
+    {
+        return 0;
+    }
 };
 
 int main()
 {
-	cout << "Dot coordinates are: \n";
-	Dot A(3, 3);
-	cout << A.X() <<"\t" << A.Y();
+
 	return 0;
 }
