@@ -141,8 +141,10 @@ string Baricenter_menthod(Dot &A, Dot &B, Dot &C, Dot &P)
 	// a = (By - Cy)(Px-Cx) + (Cx-Bx)(Py-Cy) / denominate
 	// b = (Cy - Ay)(Px - Cx) + (Ax - Cx)(Py - Cy)/ denominate
 	// c = (Ay - By)(Px - Ax) + (Bx -  Ax)(Py - Ay)/ denominate
-	flo
-	flao
+	float denominate = (B.Y()-C.Y())
+
+
+	float b = (((C.Y() - A.Y())*(P.X()-C.X())) + ((A.X()-C.X())*(P.Y() - C.Y()))) / denominate 
 	
 	
 	string answer;
