@@ -69,10 +69,8 @@ bool EqualDot(Dot &first, Dot &second)
 		return false;
 }
 
-string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P )
-{
-	string answer;
-	//внутри, снаружи, на границе
+
+//внутри, снаружи, на границе
 	// P - ее местоположение нужно определить
 	//  A, B,C - координаты вершин
 	// Формула: a*b = |a||b| cos y , 
@@ -92,7 +90,11 @@ string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P )
 	// Совпадение координат 
 		// Если P.x = A.x и P.y = A.y, то P - совпадает с A, 
 		// answer = границе треугольника
-	if (EqualDot(P,B) == true || EqualDot(P,A) = true || EqualDot(P,C))
+string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P )
+{
+	string answer;
+	
+	if(EqualDot(P,B) == true || EqualDot(P,A)== true || EqualDot(P,C)==true)
 	{
 		cout<<"Точка совпала с одной из вершин"<<endl;
 	}
@@ -126,6 +128,16 @@ string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P )
 };
 string Baricenter_menthod()
 {
+	// P. = aA + bB + cC where  (a,b,c) - барицентрические координаты
+	// P = aA + bB + cC where  (a,b,c) - барицентрические координаты
+	
+	//(a+b+c=1) and a >=0 and b >=0 and c >=0 (*)
+	
+	// Выходные данные:
+	//  Если * верно и хотя бы одна координат (a, b,c) = 0, то на границе
+	//  Если * верно и хотя бы одна координат (a, b,c) = 1, то совпадение с вершиной
+	// 	Если * не верно, то вне треугольника
+
 	string answer;
 	return answer;
 }
