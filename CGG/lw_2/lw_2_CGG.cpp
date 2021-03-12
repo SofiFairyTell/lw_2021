@@ -1,5 +1,5 @@
 #include <iostream>
-#include<cmath>
+#include <cmath>
 #include <string>
 
 #define PI 3.1415
@@ -127,7 +127,7 @@ string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P)
 	}
 
 };
-string Baricenter_menthod(Dot& A, Dot& B, Dot& C, Dot& P)
+string Baricenter_method(Dot& A, Dot& B, Dot& C, Dot& P)
 {
 	string answer;
 	// P = aA + b + cC where  (a,b,c) - барицентрические координаты
@@ -145,13 +145,15 @@ string Baricenter_menthod(Dot& A, Dot& B, Dot& C, Dot& P)
 	// c = (Ay - By)(Px - Ax) + (Bx -  Ax)(Py - Ay)/ denominate
 	float denominate = ((B.Y() - C.Y()) * (A.X() - C.X())) + ((C.X() - B.X()) * (A.Y() - C.Y()));
 
-
+// float a = 0.6 int a = 0
 	float a = (((B.Y() - C.Y()) * (P.X() - C.X())) + ((C.X() - B.X()) * (P.Y() - C.Y()))) / denominate;
 	float b = (((C.Y() - A.Y()) * (P.X() - C.X())) + ((A.X() - C.X()) * (P.Y() - C.Y()))) / denominate;
 	float c = (((A.Y() - B.Y()) * (P.X() - C.X())) + ((B.X() - A.X()) * (P.Y() - A.Y()))) / denominate;
 
 
-	if ((a + b + c) == 1 && (a >= 0 && b >= 0 && c >= 0))
+	int check_sum = (abs(a) + abs(b) + abs(c)); //без abs вернет 0, т.к. отрицательные значения в весах
+
+	if (check_sum == 1 && (abs(a) >= 0 && abs(b) >= 0 && abs(c) >= 0))
 	{
 		answer = "The dot is in the triangle";
 		// уточнение, т.е. где именно она в треугольнике
@@ -164,13 +166,15 @@ string Baricenter_menthod(Dot& A, Dot& B, Dot& C, Dot& P)
 			{
 				answer += "\nThe dot is on the border";
 			}
-
 			else
-				answer = "\nGiven dot is not in the triangle";
+				answer = "\nGiven dot in the triangle";
 
 
 		return answer;
 	}
+	else
+		answer = "\nGiven dot is not in the triangle";
+	return answer;
 }
 
 
@@ -191,9 +195,14 @@ int main()
 	C.setCoordinates(C);
 	cout << "P \n";
 	P.setCoordinates(P);
-	cout << "-------------Check----------------------- \n";
+	cout << "-------------Check by triangle method----------------------- \n";
 	string result = Triangle_method(A, B, C, P);
+	cout << "\n";
 	cout << result;
+
+	cout << "---------------Check by baricentric method---------------------\n";
+	string BarResult = Baricenter_method(A, B, C, P);
+	cout << BarResult;
 
 	return 0;
 }
