@@ -1,5 +1,6 @@
 #include <iostream>
 #include<cmath>
+#include <string>
 
 #define PI 3.1415
 
@@ -9,26 +10,26 @@ using namespace std;
 // Определить принадлежность через Барицентрические координаты
 class Dot {
 private:
-	int x;
-	int y;
+	float x;
+	float y;
 public:
 	//getters
-	int X() { return x; }
-	int Y() { return y; }
+	float X() { return x; }
+	float Y() { return y; }
 	//setters
-	void setX(int value) { x = value; }
-	void setY(int value) { y = value; }
+	void setX(float value) { x = value; }
+	void setY(float value) { y = value; }
 
-	void setCoordinates(Dot &dot)
+	void setCoordinates(Dot& dot)
 	{
-		int value1, value2;
+		float value1, value2;
 		cout << "Enter the coordinates: \n";
-		cin >> value1; cout << "\t"; cin >> value2;
-		dot.setX(value1); 
+		cin >> value1; cout << "\n"; cin >> value2;
+		dot.setX(value1);
 		dot.setY(value2);
 	}
-	
-	
+
+
 };
 
 class Vector
@@ -36,28 +37,28 @@ class Vector
 private:
 	float x;
 	float y;
-	public:
-		float X() { return x; }
-		float Y() { return y; }
+public:
+	float X() { return x; }
+	float Y() { return y; }
 
-		void setX(float value) { x = value; }
-		void setY(float value) { y = value; }
+	void setX(float value) { x = value; }
+	void setY(float value) { y = value; }
 
 	void set_coordinats(Dot& dot1, Dot& dot2)
 	{
-		setX (dot2.X() - dot1.X());
-		setY ( dot2.Y() - dot1.Y());
+		setX(dot2.X() - dot1.X());
+		setY(dot2.Y() - dot1.Y());
 	}
 
 	double VectorLength()
 	{
-		double result = sqrt( pow(X(),2)+pow(Y(),2));
+		double result = sqrt(pow(X(), 2) + pow(Y(), 2));
 		return result;
 	}
 };
 
 
-bool EqualDot(Dot &first, Dot &second)
+bool EqualDot(Dot& first, Dot& second)
 {
 	string answer;
 	if (first.X() == second.X() && first.Y() == second.Y())
@@ -90,13 +91,13 @@ bool EqualDot(Dot &first, Dot &second)
 	// Совпадение координат 
 		// Если P.x = A.x и P.y = A.y, то P - совпадает с A, 
 		// answer = границе треугольника
-string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P )
+string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P)
 {
 	string answer;
-	
-	if(EqualDot(P,B) == true || EqualDot(P,A)== true || EqualDot(P,C)==true)
+
+	if (EqualDot(P, B) == true || EqualDot(P, A) == true || EqualDot(P, C) == true)
 	{
-		cout<<"Точка совпала с одной из вершин"<<endl;
+		return "Dot is equal to one of the triangle's heights";
 	}
 	else
 	{
@@ -111,28 +112,29 @@ string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P )
 		vector_pc.set_coordinats(P, C);
 
 		// углы
-		float angle_apb = (acos((vector_pa.X()*vector_pb.X()+vector_pa.Y()*vector_pb.Y())/(vector_pa.VectorLength()*vector_pb.VectorLength())) *180)/ PI ; //в градусах
-		float angle_bpc = (acos((vector_pb.X()*vector_pc.X()+vector_pb.Y()*vector_pc.Y())/(vector_pb.VectorLength()*vector_pc.VectorLength())) *180)/ PI ; //в градусах
-		float angle_apc = (acos((vector_pa.X()*vector_pc.X()+vector_pa.Y()*vector_pc.Y())/(vector_pa.VectorLength()*vector_pc.VectorLength())) *180)/ PI ; //в градусах
+		float angle_apb = (acos((vector_pa.X() * vector_pb.X() + vector_pa.Y() * vector_pb.Y()) / (vector_pa.VectorLength() * vector_pb.VectorLength())) * 180) / PI; //в градусах
+		float angle_bpc = (acos((vector_pb.X() * vector_pc.X() + vector_pb.Y() * vector_pc.Y()) / (vector_pb.VectorLength() * vector_pc.VectorLength())) * 180) / PI; //в градусах
+		float angle_apc = (acos((vector_pa.X() * vector_pc.X() + vector_pa.Y() * vector_pc.Y()) / (vector_pa.VectorLength() * vector_pc.VectorLength())) * 180) / PI; //в градусах
 		// сумма углов
-		float sum_angle = angle_apb + angle_bpc + angle_apc;
+		int sum_angle = angle_apb + angle_bpc + angle_apc;
 		if (sum_angle != 360)
 		{
-			cout << "Точка вне обозначенной области";
+			return "Dot is out of bounds";
 		}
 		else
-			cout << "Точка внутри обозначенной области";
+			return "Dot is in the bounds";
 
 	}
 
-}; 
-string Baricenter_menthod(Dot &A, Dot &B, Dot &C, Dot &P)
+};
+string Baricenter_menthod(Dot& A, Dot& B, Dot& C, Dot& P)
 {
+	string answer;
 	// P = aA + b + cC where  (a,b,c) - барицентрические координаты
 	// P.y = aA + bB + cC where  (a,b,c) - барицентрические координаты
-	
+
 	//(a+b+c=1) and a >=0 and b >=0 and c >=0 (*)
-	
+
 	// Выходные данные:
 	//  Если * верно и хотя бы одна координат (a, b,c) = 0, то на границе
 	//  Если * верно и хотя бы одна координат (a, b,c) = 1, то совпадение с вершиной
@@ -141,29 +143,57 @@ string Baricenter_menthod(Dot &A, Dot &B, Dot &C, Dot &P)
 	// a = (By - Cy)(Px-Cx) + (Cx-Bx)(Py-Cy) / denominate
 	// b = (Cy - Ay)(Px - Cx) + (Ax - Cx)(Py - Cy)/ denominate
 	// c = (Ay - By)(Px - Ax) + (Bx -  Ax)(Py - Ay)/ denominate
-	float denominate = (B.Y()-C.Y())
+	float denominate = ((B.Y() - C.Y()) * (A.X() - C.X())) + ((C.X() - B.X()) * (A.Y() - C.Y()));
 
 
-	float b = (((C.Y() - A.Y())*(P.X()-C.X())) + ((A.X()-C.X())*(P.Y() - C.Y()))) / denominate 
-	
-	
-	string answer;
-	return answer;
+	float a = (((B.Y() - C.Y()) * (P.X() - C.X())) + ((C.X() - B.X()) * (P.Y() - C.Y()))) / denominate;
+	float b = (((C.Y() - A.Y()) * (P.X() - C.X())) + ((A.X() - C.X()) * (P.Y() - C.Y()))) / denominate;
+	float c = (((A.Y() - B.Y()) * (P.X() - C.X())) + ((B.X() - A.X()) * (P.Y() - A.Y()))) / denominate;
+
+
+	if ((a + b + c) == 1 && (a >= 0 && b >= 0 && c >= 0))
+	{
+		answer = "The dot is in the triangle";
+		// уточнение, т.е. где именно она в треугольнике
+		if (a == 1 || b == 1 || c == 1)
+		{
+			answer += "\nGiven dot is equal to one of the triangle's heights";
+		}
+		else
+			if (a == 0 || b == 0 || c == 0)
+			{
+				answer += "\nThe dot is on the border";
+			}
+
+			else
+				answer = "\nGiven dot is not in the triangle";
+
+
+		return answer;
+	}
 }
 
 
 
 int main()
 {
-	cout << "---------------START--------------------"; 
+	cout << "---------------START--------------------\n";
 	cout << "Enter the coordinates for the following dots:\n";
 	Dot A = Dot();
 	Dot B = Dot();
 	Dot C = Dot();
 	Dot P = Dot(); // Точка которую будем проверять
-	cout << "A";
-	cout << "B";
-	cout << "C";
-	cout << "P";
+	cout << "A \n";
+	A.setCoordinates(A);
+	cout << "B \n";
+	B.setCoordinates(B);
+	cout << "C \n";
+	C.setCoordinates(C);
+	cout << "P \n";
+	P.setCoordinates(P);
+	cout << "-------------Check----------------------- \n";
+	string result = Triangle_method(A, B, C, P);
+	cout << result;
+
 	return 0;
 }
