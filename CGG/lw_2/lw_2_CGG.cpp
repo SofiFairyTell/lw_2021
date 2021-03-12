@@ -1,6 +1,7 @@
 #include <iostream>
 #include<cmath>
 
+#define PI 3.1415
 
 using namespace std;
 // To do 
@@ -23,11 +24,38 @@ public:
 		int value1, value2;
 		cout << "Enter the coordinates: \n";
 		cin >> value1; cout << "\t"; cin >> value2;
-		dot.setX(value1); dot.setY(value2);
+		dot.setX(value1); 
+		dot.setY(value2);
 	}
 	
 	
 };
+
+class Vector
+{
+private:
+	float x;
+	float y;
+	public:
+		float X() { return x; }
+		float Y() { return y; }
+
+		void setX(float value) { x = value; }
+		void setY(float value) { y = value; }
+
+	void set_coordinats(Dot& dot1, Dot& dot2)
+	{
+		setX (dot2.X() - dot1.X());
+		setY ( dot2.Y() - dot1.Y());
+	}
+
+	double VectorLength()
+	{
+		double result = sqrt( pow(X(),2)+pow(Y(),2));
+		return result;
+	}
+};
+
 
 bool EqualDot(Dot &first, Dot &second)
 {
@@ -71,31 +99,27 @@ string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P )
 	else
 	{
 		//координаты векторов
-		// Может не точки?? 
-		Dot vector_pa = Dot();
-		Dot vector_pb = Dot();
-		Dot vector_pc = Dot();
 
-		vector_pa.setCoordinates(P.X() - A.X(), P.Y() -A.Y());
-		vector_pb.setCoordinates(P.X() - B.X(), P.Y() - B.Y());
-		vector_pc.setCoordinates(P.X() - C.X(), P.Y() - C.Y());
-	
-		// векторы длины
-		float pa = sqrt(pow((P.X() - A.X()),2)+pow(P.Y() - A.Y(),2));
-		float pb = sqrt(pow((P.X() - B.X()),2)+pow(P.Y() - B.Y(),2));
-		float pc = sqrt(pow((P.X() - C.X()),2)+pow(P.Y() - C.Y(),2));
+		Vector vector_pa = Vector();
+		Vector vector_pb = Vector();
+		Vector vector_pc = Vector();
+
+		vector_pa.set_coordinats(P, A);
+		vector_pb.set_coordinats(P, B);
+		vector_pc.set_coordinats(P, C);
+
 		// углы
-		float angle_apb = (acos((vector_pa.X()*vector_pb.X()+vector_pa.Y()*vector_pb.Y())/(pa*pb)) *180)/ PI ; //в градусах
-		float angle_bpc = (acos((vector_pb.X()*vector_pc.X()+vector_pb.Y()*vector_pc.Y())/(pb*pc)) *180)/ PI ; //в градусах
-		float angle_apc = (acos((vector_pa.X()*vector_pc.X()+vector_pa.Y()*vector_pc.Y())/(pa*pc)) *180)/ PI ; //в градусах
+		float angle_apb = (acos((vector_pa.X()*vector_pb.X()+vector_pa.Y()*vector_pb.Y())/(vector_pa.VectorLength()*vector_pb.VectorLength())) *180)/ PI ; //в градусах
+		float angle_bpc = (acos((vector_pb.X()*vector_pc.X()+vector_pb.Y()*vector_pc.Y())/(vector_pb.VectorLength()*vector_pc.VectorLength())) *180)/ PI ; //в градусах
+		float angle_apc = (acos((vector_pa.X()*vector_pc.X()+vector_pa.Y()*vector_pc.Y())/(vector_pa.VectorLength()*vector_pc.VectorLength())) *180)/ PI ; //в градусах
 		// сумма углов
 		float sum_angle = angle_apb + angle_bpc + angle_apc;
 		if (sum_angle != 360)
 		{
-			cout << "Точка вне обозначенной области"
+			cout << "Точка вне обозначенной области";
 		}
-		else 
-			cout << "Точка внутри обозначенной области"
+		else
+			cout << "Точка внутри обозначенной области";
 
 	}
 
