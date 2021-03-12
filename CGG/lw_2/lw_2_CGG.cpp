@@ -6,7 +6,7 @@
 using namespace std;
 // To do 
 //Определить принадлежность через Треугольники
-// Определеить принадлежность через Барицентрические координаты
+// Определить принадлежность через Барицентрические координаты
 class Dot {
 private:
 	int x;
@@ -125,11 +125,11 @@ string Triangle_method(Dot& A, Dot& B, Dot& C, Dot& P )
 
 	}
 
-};
-string Baricenter_menthod()
+}; 
+string Baricenter_menthod(Dot &A, Dot &B, Dot &C, Dot &P)
 {
-	// P. = aA + bB + cC where  (a,b,c) - барицентрические координаты
-	// P = aA + bB + cC where  (a,b,c) - барицентрические координаты
+	// P = aA + b + cC where  (a,b,c) - барицентрические координаты
+	// P.y = aA + bB + cC where  (a,b,c) - барицентрические координаты
 	
 	//(a+b+c=1) and a >=0 and b >=0 and c >=0 (*)
 	
@@ -137,7 +137,14 @@ string Baricenter_menthod()
 	//  Если * верно и хотя бы одна координат (a, b,c) = 0, то на границе
 	//  Если * верно и хотя бы одна координат (a, b,c) = 1, то совпадение с вершиной
 	// 	Если * не верно, то вне треугольника
-
+	// denominate = (By - Cy)(Ax - Cx) + (Cx - Bx)(Ay - Cy)
+	// a = (By - Cy)(Px-Cx) + (Cx-Bx)(Py-Cy) / denominate
+	// b = (Cy - Ay)(Px - Cx) + (Ax - Cx)(Py - Cy)/ denominate
+	// c = (Ay - By)(Px - Ax) + (Bx -  Ax)(Py - Ay)/ denominate
+	flo
+	flao
+	
+	
 	string answer;
 	return answer;
 }
