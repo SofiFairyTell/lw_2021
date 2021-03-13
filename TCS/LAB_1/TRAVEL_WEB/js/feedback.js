@@ -1,53 +1,43 @@
-const form = document.querySelector("form[name='contact-form']");
-const nameInput = document.querySelector("input[name='name']");
-const emailInput = document.querySelector("input[name='email']");
-const phoneInput = document.querySelector("input[name='phone']");
-const messageInput = document.querySelector("textarea[name='message']");
+$(document).ready(function(){
+			
+    var validName = false;
+    var validEmail = false;
 
-nameInput.isValid = () => !!nameInput.value;
-emailInput.isValid = () => isValidEmail(emailInput.value);
-phoneInput.isValid = () => isValidPhone(phoneInput.value);
-messageInput.isValid = () => !!messageInput.value;
+    $("form").submit(function(event){
+        event.preventDefault();
 
-const inputFields = [nameInput, emailInput, phoneInput, messageInput];
+        var name = $("#name").val();
+        var email = $("#email").val();
 
-const isValidEmail = (email) => {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-};
+        if(name == "") {
+            $("#name").parent().removeClass("has-success").addClass("has-error");	
+            $(".nameBlock").append("<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>");
+            $(".nameBlock .glyphicon-ok").remove();
+            validName = false;
+        } else {
+            $("#name").parent().removeClass("has-error").addClass("has-success");	
+            $(".nameBlock").append("<span class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>");
+            $(".nameBlock .glyphicon-remove").remove();
+            validName = true;
+        }
 
-const isValidPhone = (phone) => {
-  const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-  return re.test(String(phone).toLowerCase());
-};
+        if(email == "") {
+            $("#email").parent().removeClass("has-success").addClass("has-error");	
+            $(".emailBlock").append("<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>");
+            $(".emailBlock .glyphicon-ok").remove();
+            validEmail = false;	
+        } else {
+            $("#email").parent().removeClass("has-error").addClass("has-success");	
+            $(".emailBlock").append("<span class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>");
+            $(".emailBlock .glyphicon-remove").remove();
+            validEmail = true;	
+        }
 
-let shouldValidate = false;
-let isFormValid = false;
 
-const validateInputs = () => {
-  console.log("we are here");
-  if (!shouldValidate) return;
+        if(validName == true && validEmail == true) {
+            $("form").unbind('submit').submit();
+        }
 
-  isFormValid = true;
-  inputFields.forEach((input) => {
-    input.classList.remove("invalid");
-    input.nextElementSibling.classList.add("hide");
+    });
 
-    if (!input.isValid()) {
-      input.classList.add("invalid");
-      isFormValid = false;
-      input.nextElementSibling.classList.remove("hide");
-    }
-  });
-};
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  shouldValidate = true;
-  validateInputs();
-  if (isFormValid) {
-    // TODO: DO AJAX REQUEST
-  }
 });
-
-inputFields.forEach((input) => input.addEventListener("input", validateInputs));
