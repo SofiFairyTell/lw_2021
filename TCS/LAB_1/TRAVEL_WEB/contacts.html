@@ -7,6 +7,7 @@
 	    <link rel="stylesheet" type="text/css" href="./css/table.css"> -->
 	  <link rel="stylesheet" type="text/css" href="css/travelstyle.css">
 	  <link rel="stylesheet" type="text/css" href="css/form.css">
+	  <link rel="stylesheet" type="text/css" href="css/feedback.css">
 </head>
 <body>
 <header class="header">
@@ -109,7 +110,7 @@
 		</div><!--contain-->
 	</section><!--section-->
 	<section class="section">
-		<div class="container-contact2 ">
+		<!-- <div class="container-contact2 ">
 			<div class="wrap-contact2">
 				<form class="contact2-form validate-form">
 					<span class="contact2-form-title">
@@ -122,7 +123,7 @@
 					</div>
 
 					<div class="wrap-input2 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input2" type="text" name="email">
+						<input class="input2" type="text" name="email" addEventListener = >
 						<span class="focus-input2" data-placeholder="EMAIL"></span>
 					</div>
 
@@ -139,12 +140,52 @@
 							</button>
 						</div>
 					</div>
-				</form> <!--contact2-form validate-form-->
-			</div><!--wrap-contact2-->
-		</div><!--contain-->
+				</form> <--contact2-form validate-form-->
+			<!-- </div>wrap-contact2 --> 
+		<!-- </div>	 -->
+			<script src="./js/feedback.js"></script>
+	<div class="contain">	
+		<div class="wrap-contact2">
+		<div class="contact-banner">
+			<h1>Напишите нам!</h1>
+		</div>
+		<form name="contact-form">
+				<div class = "form-control">
+					<label>Имя</label>
+					<input name="name" placeholder="Имя и Фамилия"/>
+					<div class="error hide">Name is required</div>
+				</div><!--form-control-->
+
+				<div class="form-control">
+					<label>Email</label>
+					<input
+					name="email"
+					placeholder="e.g. your_email@example.com"
+					/>
+					<div class="error hide">Email is invalid</div>
+				</div> <!--form-control-->
+			
+				<div class="form-control">
+					<label>Телефон</label>
+					<input name="phone"
+					></input>
+					<div class="error hide">Phone is invalid</div>
+				</div><!--form-control-->
+			
+				<div class="form-control">
+					<label>Сообщение</label>
+					<textarea name="message"></textarea>
+					<div class="error hide">Message is required</div>
+				</div><!--form-control-->
+			<hr />
+
+			<button type="submit" class="btn">SUBMIT FORM</button>
+		</form><!--contact-form-->
+		</div><!--wrap-contact2-->
+		</div>
 		
 	</section> <!--section-->
 
-<script src="./js/form.js"></script>
+
 </body>
 </html>
