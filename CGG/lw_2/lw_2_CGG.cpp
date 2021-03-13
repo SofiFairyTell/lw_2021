@@ -174,6 +174,7 @@ string Baricenter_method(Dot& A, Dot& B, Dot& C, Dot& P)
 	}
 	else
 		answer = "\nGiven dot is not in the triangle";
+	
 	return answer;
 }
 
