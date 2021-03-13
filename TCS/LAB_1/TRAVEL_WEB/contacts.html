@@ -38,7 +38,6 @@
 		</div><!--contain-->
 	</header><!--header-->
 	<section class="section">
-		
 		<div class="contain">
 				<div class="section_header">
 					<h2 class="section_title">Контакты & ссылки & координаты</h3>
@@ -108,10 +107,63 @@
 				</div><!--contact_item-->
 			</div><!--contact_main-->
 		</div><!--contain-->
+		
 	</section><!--section-->	
 
 
+
+
+	<button class="open-button" onclick="openForm()">Отправить сообщение</button>
+
+	<div class="form-popup" id="myForm">
+	  <form action="../action_page.php" class="form-container">
+		<h1>Связаться</h1>
 	
+		<label for="email"><b>Почта</b></label>
+		<input type="text" placeholder="Ваша почта" name="email" required>
+	
+		<label for="psw"><b>Сообщение</b></label>
+		<!-- <input type="text" placeholder="Ваше сообщение" name="mess" required> -->
+		<textarea class="input2" placeholder="Ваше сообщение" name="message" id="msg" oninput="getCount()" required ></textarea>
+
+		<div class="under">
+			<p class="counter"><span id="count"></span> /10 знаков</p>
+		</div>
+
+		<button type="submit" class="btn">Отправить</button>
+		<button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
+	  </form>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+function openForm() 
+{
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() 
+{
+  document.getElementById("myForm").style.display = "none";
+}
+var startCount = 0;
+var maxCount = 10;
+var submitBtn = $("#submit");
+$("#count").text(startCount);
+		function getCount() {
+			var count = startCount + $("#msg").val().length;
+			$("#count").text(count);
+			if (count >= maxCount) {
+				$(".counter").addClass("red");
+			} else if (count < 10 && $(".counter").hasClass("red")) {
+				$(".counter").removeClass("red");
+				submitBtn.prop('disabled', false);
+			}
+			if (count >= 10) {
+				submitBtn.prop('disabled', true);
+			}
+		}
+	</script>
 	
 	
 	
