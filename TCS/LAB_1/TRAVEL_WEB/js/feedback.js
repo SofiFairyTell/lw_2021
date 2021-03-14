@@ -26,3 +26,35 @@ function getCount() {
         submitBtn.prop('disabled', true);
     }
 }
+
+var validName = false;
+var validEmail = false;
+var validMessage = false;
+
+$("form").submit(function(event){
+    event.preventDefault();
+    
+    var name = $("#name").val();
+    var email = $("#email").val();
+    var message = $("#msg").val();
+    if(name == "" && message == "" && email == "") {
+    
+        validName = false;
+        validEmail = false;	
+        validMessage = false;	
+        console.log('Не ок!')    
+    } 
+    else {      
+
+        console.log('Все ок!')        
+        validName = true;
+        validEmail = true;	
+        validMessage = true;
+    }
+
+
+    if(validName == true && validEmail == true) {
+        $("form").unbind('submit').submit();
+    }
+
+});
