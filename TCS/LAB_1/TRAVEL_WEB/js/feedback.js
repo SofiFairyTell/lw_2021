@@ -1,43 +1,28 @@
-$(document).ready(function(){
-			
-    var validName = false;
-    var validEmail = false;
+function openForm() 
+{
+  document.getElementById("myForm").style.display = "block";
+}
 
-    $("form").submit(function(event){
-        event.preventDefault();
+function closeForm() 
+{
+  document.getElementById("myForm").style.display = "none";
+}
 
-        var name = $("#name").val();
-        var email = $("#email").val();
+var startCount = 0;
+var maxCount = 10;
+var submitBtn = $("#submit");
+$("#count").text(startCount);
 
-        if(name == "") {
-            $("#name").parent().removeClass("has-success").addClass("has-error");	
-            $(".nameBlock").append("<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>");
-            $(".nameBlock .glyphicon-ok").remove();
-            validName = false;
-        } else {
-            $("#name").parent().removeClass("has-error").addClass("has-success");	
-            $(".nameBlock").append("<span class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>");
-            $(".nameBlock .glyphicon-remove").remove();
-            validName = true;
-        }
-
-        if(email == "") {
-            $("#email").parent().removeClass("has-success").addClass("has-error");	
-            $(".emailBlock").append("<span class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>");
-            $(".emailBlock .glyphicon-ok").remove();
-            validEmail = false;	
-        } else {
-            $("#email").parent().removeClass("has-error").addClass("has-success");	
-            $(".emailBlock").append("<span class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>");
-            $(".emailBlock .glyphicon-remove").remove();
-            validEmail = true;	
-        }
-
-
-        if(validName == true && validEmail == true) {
-            $("form").unbind('submit').submit();
-        }
-
-    });
-
-});
+function getCount() {
+    var count = startCount + $("#msg").val().length;
+    $("#count").text(count);
+    if (count >= maxCount) {
+        $(".counter").addClass("red");
+    } else if (count < 10 && $(".counter").hasClass("red")) {
+        $(".counter").removeClass("red");
+        submitBtn.prop('disabled', false);
+    }
+    if (count >= 10) {
+        submitBtn.prop('disabled', true);
+    }
+}
