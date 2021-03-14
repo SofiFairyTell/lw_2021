@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!-- saved from url=(0099)https://cdpn.io/cp/internal/boomboom/index.html?key=index.html-5ec71016-c082-5562-2cf6-d3f7681dd1de -->
+<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  
+  <title>CodePen Demo</title>
+
+  <meta name="robots" content="noindex">
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+  <link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+  <link rel="canonical" href="https://codepen.io/brandondward/pen/qmWKLz">
+
+  
+  
+
+  
+
+  
+<script src="./iframeConsoleRunner-d8236034cc3508e70b0763f2575a8bb5850f9aea541206ce56704c013047d712.js.загрузка"></script>
+<script src="./iframeRefreshCSS-bb9a2ba1f03f6147732cb3cd52ac86c6b24524aa87a05ed0b726f11e46d7e277.js.загрузка"></script>
+<script src="./iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js.загрузка"></script>
+<style type="text/css" class="INLINE_PEN_STYLESHEET_ID">@charset "UTF-8";
+.contain {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  /* выравнивание по центру */
+}
+
+.inner-container {
+  position: relative;
+  max-width: 20%;
+  min-width: 360px;
+  height: 300px;
+  width: 100%;
+  margin: 0 auto 100px;
+}
+
+.content {
+  position: absolute;
+  opacity: 0;
+  top: 2em;
+  left: 10%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.active {
+  display: block !important;
+  margin: 0 auto;
+  opacity: 1;
+  transition: ease-in-out 1s;
+}
+
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: 5px;
+  padding: 2em 0;
+  height: 300px;
+  box-sizing: border-box;
+  transition: 0.3s ease;
+  box-shadow: 0 3px 10px -2px rgba(0, 0, 0, 0.35);
+}
+.card:first-child, .card:nth-child(2) {
+  background: #00c4c7;
+  height: 8px;
+  border-radius: 5px 5px 0 0;
+  padding: 0;
+  box-shadow: none;
+}
+.card:first-child {
+  margin: 0 20px;
+  background: #00b0b2;
+}
+.card:nth-child(2) {
+  margin: 0 10px;
+}
+.card .progress-container {
+  background: rgba(37, 117, 252, 0.2);
+  height: 6px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 0 0 5px 5px;
+}
+.card .progress-container .step {
+  background-color: #2575fc;
+  height: 6px;
+  width: 33%;
+  border-radius: 0 0 0 5px;
+}
+
+h1 {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #00bfc2;
+  margin: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
+a {
+  color: #00CED1;
+  text-decoration: none;
+  position: relative;
+}
+a:before {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 0%;
+  border-bottom: 2px solid #00CED1;
+  transition: 0.3s;
+}
+a:hover:before {
+  width: 80%;
+}</style></head>
+
+<body>
+  <div class="contain">
+    <div class="inner-container">          
+        <div class="card inactive-1"></div>
+        <div class="card inactive-2"></div>
+        <div class="card">
+            <div class="content active">
+                <h1>Step 1</h1>
+                <p>Make perfectly hot homemade coffee. Carefully pour into coffee cup. <i class="em em-coffee"></i></p>
+                <a class="button" href="https://cdpn.io/cp/internal/boomboom/index.html?key=index.html-5ec71016-c082-5562-2cf6-d3f7681dd1de#">Next step →</a>
+            </div>
+            <div class="content">
+                <h1>Step 2</h1>
+                <p>Trip. Spill all over the place.</p>
+                <a class="button" href="https://cdpn.io/cp/internal/boomboom/index.html?key=index.html-5ec71016-c082-5562-2cf6-d3f7681dd1de#">Next step →</a>
+            </div>
+            <div class="content">
+                <h1>Step 3</h1>
+                <p>Repeat.</p>
+                <a class="button" href="https://cdpn.io/cp/internal/boomboom/index.html?key=index.html-5ec71016-c082-5562-2cf6-d3f7681dd1de#">Next step →</a>
+            </div>
+            <div class="progress-container">
+                <div class="step"></div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<script src="./stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js.загрузка"></script>
+<script src="./jquery.min.js.загрузка"></script>
+  <script src="./pen.js.загрузка" crossorigin=""></script>
+
+
+</body></html>

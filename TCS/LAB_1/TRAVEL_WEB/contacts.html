@@ -7,33 +7,47 @@
 	  <!-- <link rel="stylesheet" type="text/css" href="css/feedback.css"> -->
 </head>
 <body>
+	<script>
+	$(window).scroll(function(e) {
+  frames = 17;
+  step = ($("body").height() - $(window).height()) / frames;
+  scrollStep = parseInt($(window).scrollTop() / step);
+  maskPosition = 100 - ( 100 / frames * scrollStep);
+  $("#cover").css({
+    "mask-position": maskPosition + "% 50%",
+    "-webkit-mask-position": maskPosition + "% 50%"
+  });
+});
+	</script>
+	<style>
+		
+
+	</style>
 <header class="header">
 		<div class="contain">
-
 			<div class="header_inner">
 				<a class="logoref" href="travelblog.html"><img src="img/logo.jpg" class="logo"> </a>
-
 				<div class="header_logo"> <a class="ref" href="travelblog.html">TRAVEL NOTES</a></div>	
 				
 				<nav class="nav">
-					<div class="dropdown">     					
+					<div class ="dropdown">     					
 							<a class="nav_link" href="#"> Поездки </a>
 					  <div class="dropdown-content">
 						<a href="#">Тобольск</a>
 						<a href="#">Омск</a>
 						<a href="#">Москва</a>
-					  </div>
-					</div>		
-					<a class="nav_link" href="https://travel-notes.club/" target="_blank">Гайды</a>
-					<a class="nav_link" href="travelblog.html">Повод</a>
-					<a class="nav_link" href="travelblog.html">Лайфхаки</a>
-					<a class="nav_link" href="aboutus.html">О нас</a>
-					<a class="nav_link" href="contacts.html"> Контакты </a>
+					  </div> <!--dropdown-content-->
+					</div>	<!--dropdown-->	
+					 <a class="nav_link" href="https://travel-notes.club/" target="_blank">Гайды</a>
+					 <a class="nav_link" href="travelblog.html">Повод</a> 
+					<a class="nav_link" href="lifehack.html">Лайфхаки</a> 
+					<a class="nav_link" href="aboutus.html">О нас</a> 
+					<a class="nav_link" href= "contacts.html"> Контакты </a> 
 				</nav> <!--nav-->
 			</div><!--header_inner-->
 		</div><!--contain-->
 	</header><!--header-->
-	<section class="section">
+	<section class="section" >
 		<div class="contain">
 				<div class="section_header">
 					<h2 class="section_title">Контакты & ссылки & координаты</h3>
@@ -105,7 +119,6 @@
 		</div><!--contain-->
 		
 	</section><!--section-->	
-
 
 	<button class="open-button" onclick="openForm()">Отправить сообщение</button>
 
