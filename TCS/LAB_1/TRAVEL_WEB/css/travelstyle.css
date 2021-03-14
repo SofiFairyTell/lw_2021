@@ -1314,6 +1314,11 @@ div.shadow{
 	position:relative;
 
 }
+.carousel img
+{
+  width: 225px;
+  height: auto;
+}
 .carousel ul{
 	position:absolute;
 	top:0;
