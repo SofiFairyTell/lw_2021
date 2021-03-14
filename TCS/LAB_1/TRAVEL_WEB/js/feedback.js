@@ -27,34 +27,45 @@ function getCount() {
     }
 }
 
-var validName = false;
-var validEmail = false;
-var validMessage = false;
 
 $("form").submit(function(event){
     event.preventDefault();
     
-    var name = $("#name").val();
-    var email = $("#email").val();
-    var message = $("#msg").val();
-    if(name == "" && message == "" && email == "") {
-    
-        validName = false;
-        validEmail = false;	
-        validMessage = false;	
-        console.log('Не ок!')    
-    } 
-    else {      
+    var name = $("#name").val().trim();
+    var email = $("#email").val().trim();
+    var message = $("#msg").val().trim();
 
-        console.log('Все ок!')        
-        validName = true;
-        validEmail = true;	
-        validMessage = true;
+    if(name == '' && email == '' && message == ''){
+        // showValidate(name);
+        check=false;
+    }
+    else
+    {
+        if(email.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) 
+        {
+            // showValidate(email);
+            check=false;
+        }
+        else
+        {
+            if(name.match(/^([a-zA-Z-]{1,50})$/)==null)
+            {
+                check=false;
+            }
+            else
+            {
+                check = true;
+                console.log('Проверка пройдена!')  
+            }
+
+        }
+
     }
 
-
-    if(validName == true && validEmail == true) {
+    if(check == true) {
         $("form").unbind('submit').submit();
     }
+
+
 
 });
