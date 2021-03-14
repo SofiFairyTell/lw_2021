@@ -65,3 +65,34 @@
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
+
+
+
+  .input2 {
+    display: block;
+    width: 100%;
+  
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.2;
+  }
+  textarea.input2 {
+    min-height: 115px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+  
+  textarea.input2 + .focus-input2::after {
+    top: 16px;
+    left: 0;
+  }
+  
+  .input2:focus + .focus-input2::after {
+    top: -13px;
+  }
+  
+  .input2:focus + .focus-input2::before {
+    width: 100%;
+  }
