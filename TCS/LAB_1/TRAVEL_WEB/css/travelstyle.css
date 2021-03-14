@@ -187,6 +187,10 @@ header
 	background-color: #fff;
 	color: #333;
 }
+.countdown
+{
+  text-align: center;
+}
 
 /*Slider*/
 .slider_line
