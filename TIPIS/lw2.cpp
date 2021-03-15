@@ -3,12 +3,12 @@
 public class GlobalMembers {
 
         public static ArrayList<ArrayList<Double>> p = new ArrayList<ArrayList<Double>>();
-        public static HashMap<Character, ArrayList<Integer>> bin_representation_for_letter = new HashMap<Character, ArrayList<Integer>>();
+        public static HashMap<Character, ArrayList<Integer>> bin_represent_letter = new HashMap<Character, ArrayList<Integer>>();
 		
     public static String ToBitString(char letter)
     {
         String res = "";
-        for (int bit : bin_representation_for_letter.get(letter))
+        for (int bit : bin_represent_letter.get(letter))
         {
             res += String.valueOf(bit);
         }
@@ -20,7 +20,7 @@ public class GlobalMembers {
         double res = 1;
         for (int i = 0; i < 4; ++i)
         {
-            res *= p.get((bin_representation_for_letter.get(received_letter))[i]).get((bin_representation_for_letter.get(sent_letter))[i]);
+            res *= p.get((bin_represent_letter.get(received_letter))[i]).get((bin_represent_letter.get(sent_letter))[i]);
         }
         return res;
     }
@@ -47,7 +47,7 @@ public class GlobalMembers {
                         {
                             break;
                         }
-                        bin_representation_for_letter.put(letter, {b3, b2, b1, b0});
+                        bin_represent_letter.put(letter, {b3, b2, b1, b0});
                         ++letter;
                     }
                 }
