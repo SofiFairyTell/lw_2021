@@ -7,22 +7,7 @@
 	  <!-- <link rel="stylesheet" type="text/css" href="css/feedback.css"> -->
 </head>
 <body>
-	<script>
-	$(window).scroll(function(e) {
-  frames = 17;
-  step = ($("body").height() - $(window).height()) / frames;
-  scrollStep = parseInt($(window).scrollTop() / step);
-  maskPosition = 100 - ( 100 / frames * scrollStep);
-  $("#cover").css({
-    "mask-position": maskPosition + "% 50%",
-    "-webkit-mask-position": maskPosition + "% 50%"
-  });
-});
-	</script>
-	<style>
-		
-
-	</style>
+	
 <header class="header">
 		<div class="contain">
 			<div class="header_inner">
@@ -128,11 +113,11 @@
 	
 		<label for="email"><b>Ваше имя</b></label>
 		<!-- <input type="text" placeholder="Ваша имя" name="name" required> -->
-		<input type="text" placeholder="Ваша имя" id="name">
+		<input type="text" placeholder="Ваша имя" id="name" required>
 
 		<label for="email"><b>Почта</b></label>
 		<!-- <input type="text" placeholder="Ваша почта" name="email" required> -->
-		<input type="text" placeholder="Ваша почта" id="email" >
+		<input type="text" placeholder="Ваша почта" id="email"required >
 	
 		<label for="psw"><b>Сообщение</b></label>
 		<textarea class="input2" placeholder="Ваше сообщение" id="msg" oninput="getCount()" ></textarea>

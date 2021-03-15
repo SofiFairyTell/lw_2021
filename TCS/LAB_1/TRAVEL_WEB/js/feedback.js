@@ -38,18 +38,22 @@ $("form").submit(function(event){
     if(name == '' && email == '' && message == ''){
         // showValidate(name);
         check=false;
+        
+
     }
     else
     {
         if(email.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) 
         {
             // showValidate(email);
-            check=false;
+             check=false;
+             alert('Неправильная почта');
         }
         else
         {
             if(name.match(/^([a-zA-Z-]{1,50})$/)==null)
             {
+                alert('Ошибка в имени. Не должно быть цифр.');
                 check=false;
             }
             else
