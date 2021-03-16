@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class Main
 {
-    public static Logger logger = LoggerClass.setLog("logger_gui");
+    public static Logger logger = LoggerClass.setLog("logger_Error");
     /**<p>Описание команд управления</p>
      * Для управленияп программной предусмотрены такие команды:
      *<ul>
@@ -35,6 +35,9 @@ public class Main
                     break;
                 case "four":
                     MenuCommand.ArraySumMenu();
+                    break;
+                case "open":
+                    MenuCommand.FileOpen();
                     break;
             }
             System.out.print("Введите команду: ");

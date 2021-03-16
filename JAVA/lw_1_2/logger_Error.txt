@@ -1,0 +1,13 @@
+WARNING    Date: вт 2021.03.16 01:01:43 PM MSK  Class_name: ru.bstu.it32.kurbatova.lab1.MenuCommand  Text:  Файл не найден:fgsfgf   ERRORjava.base/java.io.FileInputStream.open0(Native Method)
+java.base/java.io.FileInputStream.open(FileInputStream.java:211)
+java.base/java.io.FileInputStream.<init>(FileInputStream.java:153)
+java.base/java.io.FileReader.<init>(FileReader.java:75)
+ru.bstu.it32.kurbatova.lab1.MenuCommand.FileOpen(MenuCommand.java:235)
+ru.bstu.it32.kurbatova.lab1.Main.main(Main.java:40)
+java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.base/java.lang.reflect.Method.invoke(Method.java:564)
+com.intellij.rt.execution.application.AppMainV2.main(AppMainV2.java:131)
+
+

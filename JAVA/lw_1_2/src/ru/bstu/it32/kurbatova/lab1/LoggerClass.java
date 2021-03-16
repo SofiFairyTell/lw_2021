@@ -73,7 +73,7 @@ static  class Format extends Formatter
             Date currentDate = new Date();
             SimpleDateFormat timeFormat = new SimpleDateFormat("E yyyy.MM.dd hh:mm:ss a zzz");
             String output;
-            output = String.format("LEVEL: %-10s Date: %-10s  Class_name: %-10s  Text:  %-10s  ", record.getLevel(),timeFormat.format(currentDate), record.getSourceClassName(),record.getMessage());
+            output = String.format("%-10s Date: %-10s  Class_name: %-10s  Text:  %-10s  ", record.getLevel(),timeFormat.format(currentDate), record.getSourceClassName(),record.getMessage());
             if (record.getThrown()!=null)
             {
                 output += " ERROR";

@@ -1,12 +1,2 @@
-LEVEL: FINE       Date: пт 2021.03.05 08:12:20 PM MSK  Class_name: guiapp.Controller  Text:  Введено:6 5. Возвращено: Поместится!
-Поместится!
-  
-
-LEVEL: INFO       Date: пт 2021.03.05 08:12:25 PM MSK  Class_name: guiapp.Controller  Text:  Передана пустая строка  
-
-LEVEL: INFO       Date: пт 2021.03.05 08:12:26 PM MSK  Class_name: guiapp.Controller  Text:  Передана пустая строка  
-
-LEVEL: INFO       Date: пт 2021.03.05 08:12:26 PM MSK  Class_name: guiapp.Controller  Text:  Передана пустая строка  
-
-LEVEL: SEVERE     Date: пт 2021.03.05 08:12:41 PM MSK  Class_name: guiapp.Controller  Text:  / by zero   
+LEVEL: SEVERE     Date: вт 2021.03.16 01:03:33 PM MSK  Class_name: guiapp.Controller  Text:  / by zero   
 
