@@ -178,6 +178,13 @@ string Baricenter_method(Dot& A, Dot& B, Dot& C, Dot& P)
 	return answer;
 }
 
+void Polygon_method(Dot& A, Dot& B, Dot& C, Dot& D, Dot& E, Dot& P)
+{
+	//Из введенных пользователей точек составим список треугольников
+	//Входные данные: точки
+	// В качестве первой точки возьмем первую в списке. Далее по очереди будем брать следующие
+
+}
 
 
 int main()
