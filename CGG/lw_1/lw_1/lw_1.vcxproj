@@ -144,8 +144,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boat.cpp" />
+    <ClCompile Include="Boat_actual.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dot.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
