@@ -18,9 +18,15 @@
     <ClCompile Include="Boat.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Boat_actual.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Dot.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
