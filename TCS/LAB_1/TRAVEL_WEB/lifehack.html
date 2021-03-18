@@ -9,8 +9,21 @@
 		<!-- <link rel="stylesheet" type="text/css" href="css/lifehacks.css"> -->
 </head>
 <body>
-<header class="header green">
-		<div class="contain">
+<div class="preloader">
+	<div class="preloader__row">
+		<div class="preloader__item"></div>
+		<div class="preloader__item"></div>
+	</div>
+</div>
+<script>
+	window.onload = function () {
+	  document.body.classList.add('loaded_hiding');
+	  window.setTimeout(function () {  $('.preloader').fadeOut().end().delay(400).fadeOut('slow'); }, 5000);
+	}
+
+  </script>
+<header class="header">
+		<div class="contain ">
 			<div class="header_inner">
 				<a class="logoref" href="travelblog.html"><img src="img/logo.jpg" class="logo"> </a>
 				<div class="header_logo"> <a class="ref" href="travelblog.html">TRAVEL NOTES</a></div>				
@@ -166,7 +179,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="./js/lifehack.js"></script>
-<script>
+
 
 </body>
 </html>

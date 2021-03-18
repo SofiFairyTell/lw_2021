@@ -37,17 +37,15 @@ $("form").submit(function(event){
 
     if(name == '' && email == '' && message == ''){
         // showValidate(name);
-        check=false;
-        
-
+        check=false;     
     }
     else
     {
         if(email.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) 
         {
             // showValidate(email);
-             check=false;
-             alert('Неправильная почта');
+            check=false;
+            alert('Неправильная почта');
         }
         else
         {

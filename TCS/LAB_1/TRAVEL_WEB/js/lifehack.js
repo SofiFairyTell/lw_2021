@@ -1,7 +1,14 @@
 var a = document.querySelectorAll('.product_card');
-
+// window.onload = function () {
+// 	document.body.classList.add('loaded_hiding');
+// 	window.setTimeout(function () {
+// 	  document.body.classList.add('loaded');
+// 	  document.body.classList.remove('loaded_hiding');
+// 	}, 5000);
+//   }
 $(document).ready(function(){
-	
+
+
 	// Lift card and show stats on Mouseover
 	$('.product-card').hover(function(){
 			$(this).addClass('animate');
@@ -101,10 +108,11 @@ $(document).ready(function(){
 		setTimeout(function(){isAnimating = false;}, 300);			
 	});
   
-    function tick() {
+    function tick() 
+	{
         let head = document.querySelector('.header');
-		head.classList.toggle('green');
-		head.classList.toggle('red');
+		head.classList.toggle('hot_color');
+		head.classList.toggle('cold_color');
 		// if(head.classList.contains('green')) {
 		// 	head.classList.remove('green');
 		// 	head.classList.add('red');
@@ -119,14 +127,15 @@ $(document).ready(function(){
     }
 // цвет: background-color: #46B973
 
-    var interval = 4000;
+    var interval = 5000;
     let timerId = () => {
 		// debugger
 		setInterval(()=> {
 			tick();
 		}, interval);
 	}
-	timerId();
+	
+	// timerId();
 	
 
 });
