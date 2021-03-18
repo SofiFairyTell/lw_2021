@@ -166,7 +166,7 @@ string Baricenter_method(Dot& A, Dot& B, Dot& C, Dot& P)
 		else
 			if (a == 0 || b == 0 || c == 0)
 			{
-				answer += "\nThe dot is on the border";
+				answer = "\nThe dot is on the border";
 			}
 			else
 				answer = "\nGiven dot in the triangle";
@@ -239,16 +239,32 @@ string Polygon_method(vector<Dot> dots, Dot& P)
 		}
 		else
 		{
-			// if(answer.compare("\nThe dot is on the border")==0)
-			// {
-			// 	check_border++; //если встретили на границе точку	
-			// }
-			// if(check_border > 1)
-			// {
-			// 	return answer;
-			// }
-			continue;
-			
+				if(answer.compare("\nThe dot is on the border")==0 && check_border < 2)
+				{
+					check_border++; //если встретили на границе точку
+					continue;	
+				}
+				else
+					if(answer.compare("\nGiven dot is not in the triangle")==0 &&  check_border == 2)
+						{
+							return answer = "\nGiven dot is on the border of the polygon";
+						}
+					else
+					{
+						if(answer.compare("\nGiven dot is not in the triangle")==0 &&  check_border == 1)
+						{
+							return answer = "\nGiven dot is on the outer border";
+						}
+						else
+						{
+							if(answer.compare("\nGiven dot is not in the triangle")==0)
+							{
+								continue;
+							}							
+						}
+					}
+
+
 		}
 	}
 	return answer;
@@ -275,7 +291,15 @@ int main()
 	D.setCoordinates(4.0,2.0);
 	E.setCoordinates(3.0,1.0);
 	
-	P.setCoordinates(3.0,1.9);
+	// Формула для расчета координат середины отрезка: 
+	// XcenterP = (C.X() - A.X())/2
+	// YcenterP = (C.Y() - A.Y())/2
+
+	// TASK: Найти такие координаты точки P, чтобы проверить ее на check_border == 2
+	// (?) x= 1.5 and y = 1.0 - неверное значение
+	float XcenterP = (C.X()- A.X())/2;
+	float YcenterP = (C.Y()- A.Y())/2;
+	P.setCoordinates(XcenterP, YcenterP);
 	//cout << "A \n";
 	// A.setCoordinates(A);
 	// cout << "B \n";
