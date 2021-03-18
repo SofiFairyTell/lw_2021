@@ -292,13 +292,13 @@ int main()
 	E.setCoordinates(3.0,1.0);
 	
 	// Формула для расчета координат середины отрезка: 
-	// XcenterP = (C.X() - A.X())/2
-	// YcenterP = (C.Y() - A.Y())/2
+	// XcenterP = (C.X() + A.X())/2
+	// YcenterP = (C.Y() + A.Y())/2
 
 	// TASK: Найти такие координаты точки P, чтобы проверить ее на check_border == 2
 	// (?) x= 1.5 and y = 1.0 - неверное значение
-	float XcenterP = (C.X()- A.X())/2;
-	float YcenterP = (C.Y()- A.Y())/2;
+	float XcenterP = (C.X()+ A.X())/2;
+	float YcenterP = (C.Y()+ A.Y())/2;
 	P.setCoordinates(XcenterP, YcenterP);
 	//cout << "A \n";
 	// A.setCoordinates(A);
