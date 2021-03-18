@@ -7,6 +7,12 @@
 	    <link rel="stylesheet" type="text/css" href="css/travelstyle.css">
 </head>
 <body >
+<div class="preloader">
+	<div class="preloader__row">
+		<div class="preloader__item"></div>
+		<div class="preloader__item"></div>
+	</div>
+</div>
 <header class="header">
 		<div class="contain">
 
@@ -27,7 +33,7 @@
 					</div>	<!--dropdown-->	
 					<a class="nav_link" href="https://travel-notes.club/" target="_blank">Гайды</a>
 					<a class="nav_link" href="travelblog.html">Повод</a>
-					<a class="nav_link" href="travelblog.html">Лайфхаки</a>
+					<a class="nav_link" href="lifehack.html">Лайфхаки</a>
 					<a class="nav_link" href="aboutus.html">О нас</a>
 					<a class="nav_link" href="contacts.html"> Контакты </a>
 				</nav> <!--nav-->
@@ -64,8 +70,15 @@
 		<label for="slide3"></label>
 	</div> <!--controls-->
 </div> <!--wrapper-->
-
 </section>
-
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+	document.body.classList.add('loaded_hiding');
+	window.setTimeout(function () {
+		document.body.classList.add('loaded');
+		document.body.classList.remove('loaded_hiding');
+	}, 2000);
+	});
+</script>
 </body>
 </html>

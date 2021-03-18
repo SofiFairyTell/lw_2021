@@ -7,7 +7,13 @@
 	  <!-- <link rel="stylesheet" type="text/css" href="css/feedback.css"> -->
 </head>
 <body>
-	
+<div class="preloader">
+	<div class="preloader__row">
+		<div class="preloader__item"></div>
+		<div class="preloader__item"></div>
+	</div>
+</div>
+
 <header class="header">
 		<div class="contain">
 			<div class="header_inner">
@@ -43,7 +49,7 @@
 			<div class="contact_main">
 				<div class="contact_item">
 					<div class="accordion">
-						<div class="accordion_item">
+						<div >
 							   <div class="collapse-content">
 		      						<div class="collapse" id="network">
 		      							<div class="accordion_header">
@@ -133,6 +139,14 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="./js/feedback.js"></script>
-
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+		document.body.classList.add('loaded_hiding');
+		window.setTimeout(function () {
+			document.body.classList.add('loaded');
+			document.body.classList.remove('loaded_hiding');
+		}, 2000);
+		});
+	</script>
 </body>
 </html>

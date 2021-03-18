@@ -250,13 +250,13 @@ header
 .section_suptitle
 {
 	font-size: 24px;
-	font-color: #200772;
+	/* font-color: #200772; */
 }
 
 .section_title
 {
 	font-size: 24px;
-	font-color: #200772;
+	/* font-color: #200772; */
 	font-weight: 700;
 	text-transform: uppercase;
 }
@@ -380,10 +380,6 @@ header
 
 /*from accordeon.css*/
 /*Acordion*/
-.accordion_item
-{
-  /*border: 1px solid #fff;*/
-}
 .accordion_header
 {
   padding: 2px 0px 10px 65px;

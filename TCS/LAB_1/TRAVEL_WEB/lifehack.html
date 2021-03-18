@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<title>Контакты</title>
+	<title>Лайфхаки</title>
 <!-- 	    <link rel="stylesheet" type="text/css" href="./css/travelblog.css">
 	    <link rel="stylesheet" type="text/css" href="./css/accordion.css">
 	    <link rel="stylesheet" type="text/css" href="./css/table.css"> -->
@@ -15,13 +15,7 @@
 		<div class="preloader__item"></div>
 	</div>
 </div>
-<script>
-	window.onload = function () {
-	  document.body.classList.add('loaded_hiding');
-	  window.setTimeout(function () {  $('.preloader').fadeOut().end().delay(400).fadeOut('slow'); }, 5000);
-	}
 
-  </script>
 <header class="header">
 		<div class="contain ">
 			<div class="header_inner">
@@ -42,9 +36,7 @@
 					<a class="nav_link" href="aboutus.html">О нас</a>
 					<a class="nav_link" href="contacts.html"> Контакты </a>
 				</nav> <!--nav-->
-	
 	 </header>
-
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 <section class="section_hack">
 <div class="contain">
@@ -179,7 +171,15 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="./js/lifehack.js"></script>
-
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+	document.body.classList.add('loaded_hiding');
+	window.setTimeout(function () {
+		document.body.classList.add('loaded');
+		document.body.classList.remove('loaded_hiding');
+	}, 2000);
+	});
+</script>
 
 </body>
 </html>
