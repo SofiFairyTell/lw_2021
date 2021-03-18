@@ -1,7 +1,9 @@
 ﻿  lw_2_CGG.cpp
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(115): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(116): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
 c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(117): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(119): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(154): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(118): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(119): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(121): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(156): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(226): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(269): warning C4305: аргумент: усечение из "double" в "float"
   lw_2.vcxproj -> C:\Users\Kurbatova\source\LW2020\lw_2021\CGG\lw_2\lw_2\Debug\lw_2.exe
