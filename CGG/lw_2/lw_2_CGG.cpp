@@ -68,7 +68,6 @@ class EqualMethod
 	public:
 		bool EqualDot(Dot& first, Dot& second)
 		{
-			string answer;
 			if (first.X() == second.X() && first.Y() == second.Y())
 			{
 				return true;
@@ -77,10 +76,9 @@ class EqualMethod
 			else
 				return false;
 		}
-		bool EqualDot(PointF& first, PointF& second)
+		bool EqualDot(PointF& first, PointF& second, float tolerance = 1e-6f)
 		{
-			string answer;
-			if (first.X == second.X && first.Y == second.Y)
+			if (abs(first.X - second.X)<tolerance && abs(first.Y - second.Y)<tolerance)
 			{
 				return true;
 				cout << first.X << first.Y << "\t" << second.X << second.Y;
@@ -346,7 +344,7 @@ public:
 		dots.erase(dots.begin());
 		for (int i = 0; i < dots.size() - 1; ++i)
 		{
-			cout << "WORK WITH TRINAGLE" << i;
+			cout << "WORK WITH TRIANGLE: " << i+1;
 			answer = inPolygon.Baricenter_method(startDot, dots[i], dots[i + 1], P);
 			cout << endl << answer << endl;
 			if (answer.compare("\nGiven dot in the triangle") == 0)
@@ -369,7 +367,7 @@ public:
 					{
 						if (answer.compare("\nGiven dot is not in the triangle") == 0 && check_border == 1)
 						{
-							return answer = "\nGiven dot is on the outer border";
+							return answer = "\nGiven dot is on the outer border previous Trinagle";
 						}
 						else
 						{
