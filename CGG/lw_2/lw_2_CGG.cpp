@@ -388,7 +388,24 @@ public:
 int main()
 {
 	cout << "---------------START--------------------\n";
-	cout << "Enter the coordinates for the following dots:\n";
+	cout << "Enter the coordinates for the following dots:\n"; 
+	int n = 0;
+	int  triangle = n - 2;
+	do
+	{
+		cout << "Enter the number of vertex:\n";
+		cin >> n;
+	} while (n < 2);
+	float x, y;
+	vector<PointF> points;
+	for (int i = 0; i < n; i++)
+	{
+		cout << "Enter the X and Y:\n";
+		cin >> x >> y;
+		PointF point(x, y);
+		points.push_back(point);
+	}
+	
 	/*Инициализаци GDI+*/
 	ULONG_PTR gdToken;
 	GdiplusStartupInput gdInput;
@@ -414,21 +431,25 @@ int main()
 
 	// TASK: Найти такие координаты точки P, чтобы проверить ее на check_border == 2
 
-	float XcenterP = (C.X + A.X) / 2;
-	float YcenterP = (C.Y + A.Y) / 2;
+	/*float XcenterP = (C.X + A.X) / 2;
+	float YcenterP = (C.Y + A.Y) / 2;*/	
+	float XcenterP = (points[2].X + points[0].X) / 2;
+	float YcenterP = (points[2].Y + points[0].Y) / 2;
+
 
 	PointF P(XcenterP, YcenterP); //проверяемая точка ();
 
-	vector<PointF> dots;
-	dots.push_back(A);
-	dots.push_back(B);
-	dots.push_back(C);
-	dots.push_back(D);
-	dots.push_back(E);
+	//vector<PointF> dots;
+	//dots.push_back(A);
+	//dots.push_back(B);
+	//dots.push_back(C);
+	//dots.push_back(D);
+	//dots.push_back(E);
 
 	Method method = Method();
 	cout << "-------------Check by Polygon baricentric method----------------------- \n";
-	string result = method.Polygon_method(dots, P);
+	//string result = method.Polygon_method(dots, P);
+	string result = method.Polygon_method(points, P);
 	cout << result;
 	// cout << "-------------Check by triangle method----------------------- \n";
 	// string result = Triangle_method(A, B, C, P);
