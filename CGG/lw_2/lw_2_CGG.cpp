@@ -94,6 +94,10 @@ class EqualMethod
 		{
 			return (abs(a - b) < tolerance);
 		}
+		inline bool IsZero(float a, float tolerance)
+		{
+			return (abs(a) == tolerance);
+		}
 };
 
 
@@ -227,7 +231,7 @@ class BelongPolygon
 					answer += "\nGiven dot is equal to one of the triangle's heights";
 				}
 				else
-					if (Equal.Equal(a, 0) || Equal.Equal(b, 0) || Equal.Equal(c, 0))
+					if (Equal.IsZero(a, 0.0f) || Equal.IsZero(b, 0.0f) || Equal.IsZero(c, 0.0f))
 					{
 						answer = "\nThe dot is on the border";
 					}
@@ -357,36 +361,44 @@ public:
 			cout << "WORK WITH TRIANGLE: " << i+1;
 			answer = inPolygon.Baricenter_method(startDot, dots[i], dots[i + 1], P);
 			cout << endl << answer << endl;
-			if (answer.compare("\nGiven dot in the triangle") == 0)
+			if (answer.compare("\nGiven dot in the triangle") == 0 && check_border == 1)
 			{
-				return answer;
+				return answer+= "Inside ManyAngle";
 			}
 			else
 			{
-				if (answer.compare("\nThe dot is on the border") == 0 && check_border < 2)
+				if (answer.compare("\nGiven dot in the triangle") == 0)
 				{
-					check_border++; //если встретили на границе точку
-					continue;
+					return answer;
 				}
 				else
-					if (answer.compare("\nGiven dot is not in the triangle") == 0 && check_border == 2)
-					{
-						return answer = "\nGiven dot is on the border of the polygon";
-					}
-					else
-					{
-						if (answer.compare("\nGiven dot is not in the triangle") == 0 && check_border == 1)
-						{
-							return answer = "\nGiven dot is on the outer border previous Trinagle";
-						}
-						else
-						{
-							if (answer.compare("\nGiven dot is not in the triangle") == 0)
+				{
+					if (answer.compare("\nThe dot is on the border") == 0 && check_border < 2)
 							{
+								check_border++; //если встретили на границе точку
 								continue;
 							}
-						}
-					}
+							else
+								if (answer.compare("\nGiven dot is not in the triangle") == 0 && check_border == 2)
+								{
+									return answer = "\nGiven dot is on the border of the polygon";
+								}
+								else
+								{
+									if (answer.compare("\nGiven dot is not in the triangle") == 0 && check_border == 1)
+									{
+										return answer = "\nGiven dot is on the outer border previous Trinagle";
+									}
+									else
+									{
+										if (answer.compare("\nGiven dot is not in the triangle") == 0)
+										{
+											continue;
+										}
+									}
+								}
+				}
+				
 			}
 		}
 		return answer;
