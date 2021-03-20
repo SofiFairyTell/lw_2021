@@ -86,6 +86,14 @@ class EqualMethod
 			else
 				return false;
 		}
+		inline bool GreaterOrEqual(float a, float b, float tolerance = -1e-3f)
+		{
+			return !(b - a) > tolerance;
+		}
+		inline bool Equal(float a, float b, float tolerance = -1e-3f)
+		{
+			return (abs(a - b) < tolerance);
+		}
 };
 
 
@@ -199,25 +207,27 @@ class BelongPolygon
 		string Baricenter_method(PointF& A, PointF& B, PointF& C, PointF& P)
 		{
 			string answer;
-
+			EqualMethod Equal = EqualMethod();
 			float denominate = ((B.Y - C.Y) * (A.X - C.X)) + ((C.X - B.X) * (A.Y - C.Y));
 			float a = (((B.Y - C.Y) * (P.X - C.X)) + ((C.X - B.X) * (P.Y - C.Y))) / denominate;
 			float b = (((C.Y - A.Y) * (P.X - C.X)) + ((A.X - C.X) * (P.Y - C.Y))) / denominate;
 			float c = (((A.Y - B.Y) * (P.X - C.X) + ((B.X - A.X) * (P.Y - A.Y)))) / denominate;
 
+			//Не проверять check_summ
+			//int check_sum = (abs(a) + abs(b) + abs(c)); //без abs вернет 0, т.к. отрицательные значения в весах
+			//float check_sum = ( a+b+c); //без abs вернет 0, т.к. отрицательные значения в весах
 
-			int check_sum = (abs(a) + abs(b) + abs(c)); //без abs вернет 0, т.к. отрицательные значения в весах
-
-			if (check_sum == 1 && (abs(a) >= 0 && abs(b) >= 0 && abs(c) >= 0))
+			/*if (check_sum == 1 && (abs(a) >= 0 && abs(b) >= 0 && abs(c) >= 0))*/
+			if (Equal.GreaterOrEqual(a,0) && Equal.GreaterOrEqual(b, 0)&& Equal.GreaterOrEqual(c, 0))
 			{
 				answer = "The dot is in the triangle";
 				// уточнение, т.е. где именно она в треугольнике
-				if (a == 1 || b == 1 || c == 1)
+				if (Equal.Equal(a, 1.0f) || Equal.Equal(b, 1.0f) || Equal.Equal(c, 1.0f))
 				{
 					answer += "\nGiven dot is equal to one of the triangle's heights";
 				}
 				else
-					if (a == 0 || b == 0 || c == 0)
+					if (Equal.Equal(a, 0) || Equal.Equal(b, 0) || Equal.Equal(c, 0))
 					{
 						answer = "\nThe dot is on the border";
 					}
@@ -387,24 +397,25 @@ public:
 
 int main()
 {
-	cout << "---------------START--------------------\n";
-	cout << "Enter the coordinates for the following dots:\n"; 
-	int n = 0;
-	int  triangle = n - 2;
-	do
-	{
-		cout << "Enter the number of vertex:\n";
-		cin >> n;
-	} while (n < 2);
 	float x, y;
 	vector<PointF> points;
-	for (int i = 0; i < n; i++)
-	{
-		cout << "Enter the X and Y:\n";
-		cin >> x >> y;
-		PointF point(x, y);
-		points.push_back(point);
-	}
+	cout << "---------------START--------------------\n";
+	cout << "Enter the coordinates for the following dots:\n"; 
+	//int n = 0;
+	//int  triangle = n - 2;
+	//do
+	//{
+	//	cout << "Enter the number of vertex:\n";
+	//	cin >> n;
+	//} while (n < 2);
+
+	//for (int i = 0; i < n; i++)
+	//{
+	//	cout << "Enter the X and Y:\n";
+	//	cin >> x >> y;
+	//	PointF point(x, y);
+	//	points.push_back(point);
+	//}
 	
 	/*Инициализаци GDI+*/
 	ULONG_PTR gdToken;
@@ -414,7 +425,7 @@ int main()
 
 	PointF A(1.0f, 2.0f);
 	PointF B(2.0f, 4.0f);
-	PointF C(4.0f, 4.0f);
+	PointF C(4.0f, 4.5f);
 	PointF D(4.0f, 2.0f);
 	PointF E(3.0f, 1.0f);
 
@@ -433,11 +444,7 @@ int main()
 
 	/*float XcenterP = (C.X + A.X) / 2;
 	float YcenterP = (C.Y + A.Y) / 2;*/	
-	float XcenterP = (points[2].X + points[0].X) / 2;
-	float YcenterP = (points[2].Y + points[0].Y) / 2;
 
-
-	PointF P(XcenterP, YcenterP); //проверяемая точка ();
 
 	//vector<PointF> dots;
 	//dots.push_back(A);
@@ -445,6 +452,18 @@ int main()
 	//dots.push_back(C);
 	//dots.push_back(D);
 	//dots.push_back(E);
+
+	points.push_back(A);
+	points.push_back(B);
+	points.push_back(C);
+	points.push_back(D);
+	points.push_back(E);
+
+	float XcenterP = (points[2].X + points[0].X) / 2;
+	float YcenterP = (points[2].Y + points[0].Y) / 2;
+
+
+	PointF P(XcenterP, YcenterP); //проверяемая точка ();
 
 	Method method = Method();
 	cout << "-------------Check by Polygon baricentric method----------------------- \n";

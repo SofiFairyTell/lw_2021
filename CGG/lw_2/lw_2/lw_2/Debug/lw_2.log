@@ -1,10 +1,12 @@
 ﻿  lw_2_CGG.cpp
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(136): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(137): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(138): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(140): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(175): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(209): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(284): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(345): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(91): warning C4804: >: небезопасное использование типа "bool" в операции
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(140): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(141): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(142): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(144): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(179): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(290): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(351): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(396): warning C4101: y: неиспользованная локальная переменная
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2_cgg.cpp(396): warning C4101: x: неиспользованная локальная переменная
   lw_2.vcxproj -> C:\Users\Kurbatova\source\LW2020\lw_2021\CGG\lw_2\lw_2\Debug\lw_2.exe
