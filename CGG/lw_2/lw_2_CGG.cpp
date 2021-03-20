@@ -226,23 +226,26 @@ class BelongPolygon
 			{
 				answer = "The dot is in the triangle";
 				// уточнение, т.е. где именно она в треугольнике
-				if (Equal.Equal(a, 1.0f) || Equal.Equal(b, 1.0f) || Equal.Equal(c, 1.0f))
+				if (OnBorder(a,b,c))
 				{
-					answer += "\nGiven dot is equal to one of the triangle's heights";
-				}
-				else
-					if (Equal.IsZero(a, 0.0f) || Equal.IsZero(b, 0.0f) || Equal.IsZero(c, 0.0f))
-					{
-						answer = "\nThe dot is on the border";
-					}
-					else
-						answer = "\nGiven dot in the triangle";
+					return answer = "The dot is on the border";
+				}			
 				return answer;
 			}
 			else
 				answer = "\nGiven dot is not in the triangle";
 
 			return answer;
+		}
+
+		bool OnBorder(float a, float b, float c)
+		{
+			EqualMethod Equal = EqualMethod();
+			if (Equal.Equal(a, 1.0f) || Equal.Equal(b, 1.0f) || Equal.Equal(c, 1.0f) || Equal.IsZero(a, 0.0f) || Equal.IsZero(b, 0.0f) || Equal.IsZero(c, 0.0f))
+			{
+				return true;
+			}
+			return false;
 		}
 };
 
