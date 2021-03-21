@@ -1,8 +1,10 @@
-import os
-import time
-import aes128
-
 if __name__ == '__main__':
+
+	import os
+	import time
+
+	import aes128
+
 	print('Step 1:')
 	while True:
 		print('Press 1 for encription smth and 2 for decription')
@@ -56,7 +58,7 @@ if __name__ == '__main__':
 		for byte in data:
 			temp.append(byte)
 			if len(temp) == 16:
-				crypted_part = aes128.aes_encrypt.encrypt(temp, key)
+				crypted_part = aes128.encrypt(temp, key)
 				crypted_data.extend(crypted_part)
 				del temp[:]
 		else:
@@ -69,8 +71,8 @@ if __name__ == '__main__':
 				for i in range(empty_spaces - 1):
 					temp.append(0)
 				temp.append(1)
-				crypted_part = aes128.aes_encrypt.encrypt(temp, key)
-				crypted_data.extend(temp)
+				crypted_part = aes128.encrypt(temp, key)
+				crypted_data.extend(crypted_part)
 
 		out_path = os.path.join(os.path.dirname(input_path), 'crypted_' + os.path.basename(input_path))
 
@@ -84,20 +86,21 @@ if __name__ == '__main__':
 		for byte in data:
 			temp.append(byte)
 			if len(temp) == 16:
-				decrypted_part = aes128.aes_encrypt.decrypt(temp, key)
+				decrypted_part = aes128.decrypt(temp, key)
 				decrypted_data.extend(decrypted_part)
 				del temp[:]
-			else:
-				# padding v1
-				# decrypted_data.extend(temp)
-				# padding v2
-				if 0 < len(temp) < 16:
-					empty_spaces = 16 - len(temp)
-					for i in range(empty_spaces - 1):
-						temp.append(0)
-					temp.append(1)
-					decrypted_part = aes128.aes_encrypt.encrypt(temp, key)
-					decrypted_data.extend(temp)
+		else:
+			# padding v1
+			# decrypted_data.extend(temp)
+
+			# padding v2
+			if 0 < len(temp) < 16:
+				empty_spaces = 16 - len(temp)
+				for i in range(empty_spaces - 1):
+					temp.append(0)
+				temp.append(1)
+				decrypted_part = aes128.encrypt(temp, key)
+				decrypted_data.extend(temp)
 
 		out_path = os.path.join(os.path.dirname(input_path), 'decrypted_' + os.path.basename(input_path))
 
@@ -107,5 +110,5 @@ if __name__ == '__main__':
 
 	time_after = time.time()
 
-	print('New file here:', out_path, '--', time_after - time_before, ' seconds')
-	print('If smth wrong check the key you entered')
+print('New file here:', out_path, '--', time_after - time_before, ' seconds')
+print('If smth wrong check the key you entered')
