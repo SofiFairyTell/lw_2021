@@ -2,16 +2,12 @@
 
 import random
 
-
-
 def rabinMiller(num: int) -> bool:
 	s = num - 1
 	t = 0
-
 	while s % 2 == 0:
 		s = s // 2
 		t += 1
-
 	for trials in range(5):
 		a = random.randrange(2, num - 1)
 		v = pow(a, s, num)
@@ -29,7 +25,6 @@ def rabinMiller(num: int) -> bool:
 def isPrime(num: int) -> bool:
 	if num < 2:
 		return False
-
 	lowPrimes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101,
 	             103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199,
 	             211, 223, 227,
@@ -43,14 +38,11 @@ def isPrime(num: int) -> bool:
 	             811, 821, 823, 827,
 	             829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971,
 	             977, 983, 991, 997}
-
 	if num in lowPrimes:
 		return True
-
 	for prime in lowPrimes:
 		if (num % prime) == 0:
 			return False
-
 	return rabinMiller(num)
 
 
@@ -64,7 +56,6 @@ def gcd(a: int, b: int) -> int:
     while a != 0:
         a, b = b % a, a
     return b
-
 
 def findModInverse(a: int, m: int) -> int:
     if gcd(a, m) != 1:

@@ -11,6 +11,7 @@ if __name__ == '__main__':
 		keysize = int(input())
 		print('Press 0 если согласны с предложенным паролем')
 		publicKey, privateKey = rsa.generateKey(keysize)
+		rsa.makeKeyFiles("rsa",keysize)
 		print(publicKey, privateKey)
 		way = input()
 		if way not in ['0']:
