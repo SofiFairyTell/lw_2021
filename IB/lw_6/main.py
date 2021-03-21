@@ -4,7 +4,22 @@ if __name__ == '__main__':
 	import time
 
 	import aes128
-
+	import rsa
+	print('Step 0:')
+	while True:
+		print("Enter size of key less then 16")
+		keysize = int(input())
+		print('Press 0 если согласны с предложенным паролем')
+		publicKey, privateKey = rsa.generateKey(keysize)
+		print(publicKey, privateKey)
+		way = input()
+		if way not in ['0']:
+			print('stop!')
+			continue
+		else:
+			print(publicKey, privateKey)
+			break;
+	print()
 	print('Step 1:')
 	while True:
 		print('Press 1 for encription smth and 2 for decription')
