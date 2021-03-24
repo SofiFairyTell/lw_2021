@@ -1441,7 +1441,7 @@ div.shadow{
 	right: 0;
 	bottom: 0;
 	/* фоновый цвет элемента */
-	background: #4653B9;
+	background: #2be469;
 	/* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
 	z-index: 1001;
   }
@@ -1462,7 +1462,7 @@ div.shadow{
 	position: absolute;
 	display: inline-block;
 	top: 0;
-	background-color: #B9468C;
+	background-color: #ca71a8;
 	border-radius: 100%;
 	width: 35px;
 	height: 35px;
