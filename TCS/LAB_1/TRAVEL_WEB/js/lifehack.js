@@ -9,7 +9,7 @@ var a = document.querySelectorAll('.product_card');
 $(document).ready(function(){
 
 
-	// Lift card and show stats on Mouseover
+	// Дополнительная информация о первой карточке
 	$('.product-card').hover(function(){
 			$(this).addClass('animate');
 			$('div.carouselNext, div.carouselPrev').addClass('visible');			
@@ -18,17 +18,19 @@ $(document).ready(function(){
 			$('div.carouselNext, div.carouselPrev').removeClass('visible');
 	});	
     
-	// Flip card to the back side
-	$('.view_details').click(function(){		
+	//Показать оборотную сторону карты
+	$('.view_details').click(function(){	
+		var self = $(this);	
 		$('div.carouselNext, div.carouselPrev').removeClass('visible');
-		$('.product-card').addClass('flip-10');
+		self.addClass('flip-10');
 		setTimeout(function(){
-			$('.product-card').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, function(){
+			self.removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, function(){
 				$('.product-front, .product-front div.shadow').hide();			
 			});
 		}, 50);
 		
-		setTimeout(function(){
+		setTimeout(function()
+		{
 			$('.product-card').removeClass('flip90').addClass('flip190');
 			$('.product-back').show().find('div.shadow').show().fadeTo( 90 , 0);
 			setTimeout(function(){				
@@ -45,11 +47,12 @@ $(document).ready(function(){
 	});			
     
 
-	// Flip card back to the front side
+	// Перевернуть карту рубашкой вверх
 	$('.flip-back').click(function(){		
 		
 		$('.product-card').removeClass('flip180').addClass('flip190');
-		setTimeout(function(){
+		setTimeout(function()
+		{
 			$('.product-card').removeClass('flip190').addClass('flip90');
 	
 			$('.product-back div.shadow').css('opacity', 0).fadeTo( 100 , 1, function(){
@@ -58,7 +61,8 @@ $(document).ready(function(){
 			});
 		}, 50);
 		
-		setTimeout(function(){
+		setTimeout(function()
+		{
 			$('.product-card').removeClass('flip90').addClass('flip-10');
 			$('.product-front div.shadow').show().fadeTo( 100 , 0);
 			setTimeout(function(){						
@@ -105,7 +109,10 @@ $(document).ready(function(){
 							   "transition": "300ms ease-out"
 							 });
 	    isAnimating = true;
-		setTimeout(function(){isAnimating = false;}, 300);			
+		setTimeout(function()
+		{
+			isAnimating = false;
+		}, 300);			
 	});
   
     function tick() 
@@ -113,29 +120,16 @@ $(document).ready(function(){
         let head = document.querySelector('.header');
 		head.classList.toggle('hot_color');
 		head.classList.toggle('cold_color');
-		// if(head.classList.contains('green')) {
-		// 	head.classList.remove('green');
-		// 	head.classList.add('red');
-			
-		// } else {
-		// 	head.classList.add('green');
-		// 	head.classList.remove('red');
-			
-		// }
-
-
     }
 // цвет: background-color: #46B973
 
     var interval = 5000;
     let timerId = () => {
-		// debugger
+
 		setInterval(()=> {
 			tick();
 		}, interval);
 	}
-	
-	// timerId();
 	
 
 });
