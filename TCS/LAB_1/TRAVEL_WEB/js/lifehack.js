@@ -19,35 +19,38 @@ $(document).ready(function(){
 	});	
     
 	//Показать оборотную сторону карты
-	$('.view_details').click(function(){	
-		var self = $(this);	
+	$('.view_details').click(function()
+	{	
+		var clickId = $('.product-card').attr('id');
+		var clickfront = $('product-front').attr('id');
 		$('div.carouselNext, div.carouselPrev').removeClass('visible');
-		self.addClass('flip-10');
+		$('.product-card#prd').addClass('flip-10');
 		setTimeout(function(){
-			self.removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, function(){
-				$('.product-front, .product-front div.shadow').hide();			
+			$('.product-card#prd').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, function(){
+				$('.product-front#prd, .product-front#prd div.shadow').hide();			
 			});
 		}, 50);
 		
 		setTimeout(function()
 		{
-			$('.product-card').removeClass('flip90').addClass('flip190');
-			$('.product-back').show().find('div.shadow').show().fadeTo( 90 , 0);
+			$('.product-card#prd').removeClass('flip90').addClass('flip190');
+			$('.product-back#prd').show().find('div.shadow').show().fadeTo( 90 , 0);
 			setTimeout(function(){				
-				$('.product-card').removeClass('flip190').addClass('flip180').find('div.shadow').hide();						
+				$('.product-card#prd').removeClass('flip190').addClass('flip180').find('div.shadow').hide();						
 				setTimeout(function(){
-					$('.product-card').css('transition', '100ms ease-out');			
+					$('.product-card#prd').css('transition', '100ms ease-out');			
 					$('.cx, .cy').addClass('s1');
 					setTimeout(function(){$('.cx, .cy').addClass('s2');}, 100);
 					setTimeout(function(){$('.cx, .cy').addClass('s3');}, 200);				
 					$('div.carouselNext, div.carouselPrev').addClass('visible');				
 				}, 100);
 			}, 100);			
-		}, 150);			
+		}, 150);		
+				
 	});			
     
 
-	// Перевернуть карту рубашкой вверх
+	// // Перевернуть карту рубашкой вверх
 	$('.flip-back').click(function(){		
 		
 		$('.product-card').removeClass('flip180').addClass('flip190');
