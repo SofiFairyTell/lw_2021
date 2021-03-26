@@ -51,31 +51,31 @@ $(document).ready(function(){
     
 
 	// // Перевернуть карту рубашкой вверх
-	$('.flip-back').click(function(){		
+	// $('.flip-back').click(function(){		
 		
-		$('.product-card').removeClass('flip180').addClass('flip190');
-		setTimeout(function()
-		{
-			$('.product-card').removeClass('flip190').addClass('flip90');
+	// 	$('.product-card').removeClass('flip180').addClass('flip190');
+	// 	setTimeout(function()
+	// 	{
+	// 		$('.product-card').removeClass('flip190').addClass('flip90');
 	
-			$('.product-back div.shadow').css('opacity', 0).fadeTo( 100 , 1, function(){
-				$('.product-back, .product-back div.shadow').hide();
-				$('.product-front, .product-front div.shadow').show();
-			});
-		}, 50);
+	// 		$('.product-back div.shadow').css('opacity', 0).fadeTo( 100 , 1, function(){
+	// 			$('.product-back, .product-back div.shadow').hide();
+	// 			$('.product-front, .product-front div.shadow').show();
+	// 		});
+	// 	}, 50);
 		
-		setTimeout(function()
-		{
-			$('.product-card').removeClass('flip90').addClass('flip-10');
-			$('.product-front div.shadow').show().fadeTo( 100 , 0);
-			setTimeout(function(){						
-				$('.product-front div.shadow').hide();
-				$('.product-card').removeClass('flip-10').css('transition', '100ms ease-out');		
-				$('.cx, .cy').removeClass('s1 s2 s3');			
-			}, 100);			
-		}, 150);			
+	// 	setTimeout(function()
+	// 	{
+	// 		$('.product-card').removeClass('flip90').addClass('flip-10');
+	// 		$('.product-front div.shadow').show().fadeTo( 100 , 0);
+	// 		setTimeout(function(){						
+	// 			$('.product-front div.shadow').hide();
+	// 			$('.product-card').removeClass('flip-10').css('transition', '100ms ease-out');		
+	// 			$('.cx, .cy').removeClass('s1 s2 s3');			
+	// 		}, 100);			
+	// 	}, 150);			
 		
-	});	
+	// });	
 
 	
 	/* ----  Image Gallery Carousel   ---- */
