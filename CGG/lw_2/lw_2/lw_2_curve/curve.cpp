@@ -7,8 +7,8 @@
 #include <gdiplus.h>
 #include <gdiplusgraphics.h>
 
-
-
+#define  PI 3.1416f 
+#include <cmath>
 #pragma comment(lib, "GdiPlus.lib")
 
 using namespace Gdiplus;
@@ -172,17 +172,25 @@ void Display(HDC hdc)
 	g.Clear(Color::LightCyan);
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
-	int m = 6;
+	int m = 6*PI/0.05f;
 	PointF *dots = new PointF[m];
-	
+	float t = 0.0f;
 	for (int i = 0; i < m; i++)
 	{
-		dots[i].X = 0.1f;
-		dots[i].Y = 0.1f;
+		if (t < 6 * PI)
+		{
+			float X = -2 * cos(t) + 3 * cos(-2 / 3 * t);
+			float Y = -2 * sin(t) - 3 * sin(-2 / 3 * t);
+			dots[i].X = X;
+			dots[i].Y = Y;
+			t += 0.05f;
+		}
 	}
+
 	//Кисти для заполнения цветом
 	Pen curvePen(Color::Blue, 10.f);
 
+	delete [] dots;
 	
 }
 
