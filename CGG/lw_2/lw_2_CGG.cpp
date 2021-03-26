@@ -321,7 +321,8 @@ public:
 		for (int i = 0; i < dots.size() - 1; ++i)
 		{
 			cout << "WORK WITH TRIANGLE: " << i + 1;
-			tie(answ, check) = inPolygon.Baricenter_method(startDot, dots[i], dots[i + 1], P, check_border);
+			tie(answ, check) = inPolygon.Baricenter_method(startDot,dots[i + 1] ,  dots[i], P, check_border);
+			check_border = check;
 			answer = "Belongs polygon";
 			if ( answ == true)
 			{
@@ -334,8 +335,6 @@ public:
 				{
 					answer = "On border";
 				}
-
-
 			}
 			else
 				if (answ == false)
@@ -344,46 +343,6 @@ public:
 					continue;
 				}
 			cout << endl << answer << endl;
-			//	if (answer.compare("\nGiven dot in the triangle") == 0 && check_border == 1)
-			//	{
-			//		return answer+= "Inside ManyAngle";
-			//	}
-			//	else
-			//	{
-			//		if (answer.compare("\nGiven dot in the triangle") == 0)
-			//		{
-			//			return answer;
-			//		}
-			//		else
-			//		{
-			//			if (answer.compare("\nThe dot is on the border") == 0 && check_border < 2)
-			//					{
-			//						check_border++; //если встретили на границе точку
-			//						continue;
-			//					}
-			//					else
-			//						if (answer.compare("\nGiven dot is not in the triangle") == 0 && check_border == 2)
-			//						{
-			//							return answer = "\nGiven dot is on the border of the polygon";
-			//						}
-			//						else
-			//						{
-			//							if (answer.compare("\nGiven dot is not in the triangle") == 0 && check_border == 1)
-			//							{
-			//								return answer = "\nGiven dot is on the outer border previous Trinagle";
-			//							}
-			//							else
-			//							{
-			//								if (answer.compare("\nGiven dot is not in the triangle") == 0)
-			//								{
-			//									continue;
-			//								}
-			//							}
-			//						}
-			//		}
-			//		
-			//	}
-			//}	
 		}
 		return answer;
 	}
@@ -407,7 +366,7 @@ int main()
 	PointF A(1.0f, 2.0f);
 	PointF B(2.0f, 4.0f);
 	PointF C(4.0f, 4.5f);
-	PointF D(4.0f, 2.0f);
+	PointF D(4.5f, 2.0f);
 	PointF E(3.0f, 1.0f);
 
 
@@ -417,8 +376,8 @@ int main()
 	points.push_back(D);
 	points.push_back(E);
 
-	float XcenterP = (points[2].X + points[0].X) / 2;
-	float YcenterP = (points[2].Y + points[0].Y) / 2;
+	float XcenterP = (points[1].X + points[0].X) / 2;
+	float YcenterP = (points[1].Y + points[0].Y) / 2;
 
 	PointF P(XcenterP, YcenterP); //проверяемая точка 
 
