@@ -205,12 +205,12 @@ void Display(HDC hdc)
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 
-	WorldWindow w(0,120,640,400);
-	Viewport vp(0,0,5,5);
-	float A =  (w.Right - w.Left)/vp.Width ;
-	float B =  (w.Bottom - w.Top)/vp.Height;
-	float C = w.Left- A * vp.X ;
-	float D = w.Top - B *vp.Y;
+	WorldWindow w(0.0f,0.0f,640.0f,480.0f);
+	Viewport vp(-2.0f,3.9f,3.0f,-3.0f);
+	float A =  (w.Right - w.Left)/(float)vp.Width ;
+	float B =  (w.Bottom - w.Top)/(float)vp.Height;
+	float C = w.Left - A * vp.X ;
+	float D = w.Top - B * vp.Y;
 
 
 
@@ -225,14 +225,18 @@ void Display(HDC hdc)
 			float Y = -2 * sin(t) - 3 * sin(-2 / 3 * t);
 
 			dots[i].X = A*X+C;
-			dots[i].Y += B*Y+D;
-			t += 0.5f;
+			dots[i].Y = B*Y+D;			
+		
+
+			t += 0.05f;
 		}
 	}
 
+	//должна быть КАРДИОИДА, даже две..
 	//Кисти для заполнения цветом
 	Pen curvePen(Color::Blue, 0.5f);
-	g.DrawBeziers(&curvePen, dots, m);
+	//g.DrawBeziers(&curvePen, dots,m);
+	g.DrawClosedCurve(&curvePen, dots, m);
 	//delete [] dots;
 	
 }
