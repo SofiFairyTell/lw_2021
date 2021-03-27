@@ -42,6 +42,38 @@ BOOL OnCreate(HWND hwnd, LPCREATESTRUCT lpCreateStruct);
 void OnDestroy(HWND hwnd);
 void OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify);
 
+class WorldWindow
+{
+	public:
+		float Left;
+		float Right;
+		float Top;
+		float Bottom;
+
+		inline WorldWindow(float left, float top, float right, float bottom)
+			:Left(left), Top(top), Right(right),Bottom(bottom){}
+		inline float Width() const
+		{
+			return (Right - Left);
+		}
+		inline float Height() const
+		{
+			return (Top - Bottom);
+		}
+};
+class Viewport : public::Rect
+{
+public:
+	inline Viewport(int left, int top, int right, int bottom):Rect(left,top,right-left,bottom-top){}
+	inline Viewport(const RECT &rect):Rect(rect.left,rect.top, rect.right-rect.left, rect.bottom-rect.top){}
+	inline operator RECT() const
+	{
+		RECT rect = { X,Y, X + Width, Y + Height };
+		return rect;
+	}
+};
+
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int  CmdShow)
 {
 	brushes[0] = (HBRUSH)CreateSolidBrush(RGB(0, 0, 100)); //Радикально-синий цвет
@@ -172,6 +204,16 @@ void Display(HDC hdc)
 	g.Clear(Color::LightCyan);
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
+
+	WorldWindow w(0,120,640,400);
+	Viewport vp(0,0,5,5);
+	float A =  (w.Right - w.Left)/vp.Width ;
+	float B =  (w.Bottom - w.Top)/vp.Height;
+	float C = w.Left- A * vp.X ;
+	float D = w.Top - B *vp.Y;
+
+
+
 	int m = 6*PI/0.05f;
 	PointF dots[376];
 	float t = 0.0f;
@@ -181,14 +223,15 @@ void Display(HDC hdc)
 		{
 			float X = -2 * cos(t) + 3 * cos(-2 / 3 * t);
 			float Y = -2 * sin(t) - 3 * sin(-2 / 3 * t);
-			dots[i].X = X;
-			dots[i].Y += Y;
-			t += 0.05f;
+
+			dots[i].X = A*X+C;
+			dots[i].Y += B*Y+D;
+			t += 0.5f;
 		}
 	}
 
 	//Кисти для заполнения цветом
-	Pen curvePen(Color::Blue, 100.f);
+	Pen curvePen(Color::Blue, 0.5f);
 	g.DrawBeziers(&curvePen, dots, m);
 	//delete [] dots;
 	
