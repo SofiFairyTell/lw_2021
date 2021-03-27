@@ -173,7 +173,7 @@ void Display(HDC hdc)
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 	int m = 6*PI/0.05f;
-	PointF *dots = new PointF[m];
+	PointF dots[376];
 	float t = 0.0f;
 	for (int i = 0; i < m; i++)
 	{
@@ -182,15 +182,15 @@ void Display(HDC hdc)
 			float X = -2 * cos(t) + 3 * cos(-2 / 3 * t);
 			float Y = -2 * sin(t) - 3 * sin(-2 / 3 * t);
 			dots[i].X = X;
-			dots[i].Y = Y;
+			dots[i].Y += Y;
 			t += 0.05f;
 		}
 	}
 
 	//Кисти для заполнения цветом
-	Pen curvePen(Color::Blue, 10.f);
-
-	delete [] dots;
+	Pen curvePen(Color::Blue, 100.f);
+	g.DrawBeziers(&curvePen, dots, m);
+	//delete [] dots;
 	
 }
 
