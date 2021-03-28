@@ -1,5 +1,6 @@
 package ru.bstu.it32.kurbatova.lab3;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -41,6 +42,30 @@ public class Main {
         String str = scan.nextLine();
         int amount = Main.getNumbers(str);
         System.out.println("Фигур будет: " + amount);
+        String shape;
+
+        System.out.println("Введите имя фигуры: triangle circle rectangle");
+        shape = scan.next();
+        do {
+            switch (shape)
+                {
+                    case "triangle":
+                        Triangle triangle = new Triangle();
+                        List<Triangle> shapes = null;
+                        for (int i = 0; i<amount;i++)
+                        {
+                            triangle.getSides();
+                            shapes.add(i,triangle);
+                        }
+                        break;
+                    case "circle":
+                        break;
+                    case "rectangle":
+                        break;
+                }
+            System.out.println("Введите имя фигуры: triangle circle rectangle");
+            shape = scan.next();
+        }while(!shape.equals("no"));
     }
 
 }
