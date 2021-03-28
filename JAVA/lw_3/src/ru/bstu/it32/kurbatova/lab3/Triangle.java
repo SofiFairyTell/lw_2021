@@ -21,6 +21,10 @@ public class Triangle extends Figure.GeometricShapes{
         public void init(Scanner scanner) {
 
         }
-
+    @Override public String toString()
+    {
+        return "Cone [a=" + a + "; " + "b=" +
+                b + "c=" + ";" + " ( perimeter=" + this.getPerimeter() + " )]";
+    }
 
 }

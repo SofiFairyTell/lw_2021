@@ -15,11 +15,13 @@ public class Figure {
 
     public  static  abstract  class GeometricShapes
     {
-        public static int sides; // количество сторон
+        private static int sides; // количество сторон
 
         public GeometricShapes(int side)
         {
             sides = side;
+            Scanner number = new Scanner(System.in);
+
         }
 
         public int getSides()
@@ -38,6 +40,6 @@ public class Figure {
     }
 
 
-    }
+}
 
 
