@@ -215,12 +215,13 @@ void Display(HDC hdc)
 
 
 	int m = 6*PI/0.05f;
-	PointF dots[376];
+	int l = m*2+1;
+	PointF dots[943];
 	float t = 0.0f;
-	for (int i = 0; i < m; i++)
+	for (int i = 0; i < l; i++)
 	{
-		if (t < 6 * PI)
-		{
+	/*	if (t < 6 * PI)
+		{*/
 			float X = -2 * cos(t) + 3 * cos(-2 / 3 * t);
 			float Y = -2 * sin(t) - 3 * sin(-2 / 3 * t);
 
@@ -229,14 +230,17 @@ void Display(HDC hdc)
 		
 
 			t += 0.05f;
-		}
+		/*}*/
 	}
 
 	//должна быть КАРДИОИДА, даже две..
 	//Кисти для заполнения цветом
 	Pen curvePen(Color::Blue, 0.5f);
-	//g.DrawBeziers(&curvePen, dots,m);
-	g.DrawClosedCurve(&curvePen, dots, m);
+	Pen curvePen2(Color::Red, 0.8f);
+	g.DrawBeziers(&curvePen, dots,l);
+	//g.DrawCurve(&curvePen, dots,l);
+	//g.DrawCurve(&curvePen2, dots, m);
+
 	//delete [] dots;
 	
 }

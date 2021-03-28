@@ -21,45 +21,44 @@ $(document).ready(function(){
     let $card = $('.product-card');
 	let switching = false;
 	//Показать оборотную сторону карты
-	// $('.view_details').click(function()
-	// {	
-		// clickId = document.querySelector('.product-card').getAttribute('id');
-		// $clickId.addClass('flip-10');
-		// setTimeout(function()
-		// {
-		// 	$clickId.removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, 
-		// 	// function()
-		// 	// {
-		// 	// 	$('.product-front, .product-front div.shadow').hide();			
-		// 	// });
-		// )
-		// }, 50);
+	$('.view_details').click(function()
+	{	
+		var $clickId = $('.product-card').attr('id');
+		$('.product-card#prd_1').addClass('flip-10');
+		setTimeout(function()
+		{
+		$('.product-card#prd_1').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, 
+			function()
+			{
+				$('.product-front, .product-front div.shadow').hide();			
+			});
+		}, 50);
 
-		// $('div.carouselNext, div.carouselPrev').removeClass('visible');
-		// $('.product-card').addClass('flip-10');
-		// setTimeout(function(){
-		// 	$('.product-card').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, function(){
-		// 		$('.product-front, .product-front div.shadow').hide();			
-		// 	});
-		// }, 50);
+		$('div.carouselNext, div.carouselPrev').removeClass('visible');
+		$('.product-card#prd_1').addClass('flip-10');
+		setTimeout(function(){
+			$('.product-card').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, function(){
+				$('.product-front, .product-front div.shadow').hide();			
+			});
+		}, 50);
 		
-		// setTimeout(function()
-		// {
-		// 	$('.product-card').removeClass('flip90').addClass('flip190');
-		// 	$('.product-back').show().find('div.shadow').show().fadeTo( 90 , 0);
-		// 	setTimeout(function(){				
-		// 		$('.product-card').removeClass('flip190').addClass('flip180').find('div.shadow').hide();						
-		// 		setTimeout(function(){
-		// 			$('.product-card').css('transition', '100ms ease-out');			
-		// 			$('.cx, .cy').addClass('s1');
-		// 			setTimeout(function(){$('.cx, .cy').addClass('s2');}, 100);
-		// 			setTimeout(function(){$('.cx, .cy').addClass('s3');}, 200);				
-		// 			$('div.carouselNext, div.carouselPev').addClass('visible');				
-		// 		}, 100);
-		// 	}, 100);			
-		// }, 150);		
+		setTimeout(function()
+		{
+			$('.product-card').removeClass('flip90').addClass('flip190');
+			$('.product-back').show().find('div.shadow').show().fadeTo( 90 , 0);
+			setTimeout(function(){				
+				$('.product-card').removeClass('flip190').addClass('flip180').find('div.shadow').hide();						
+				setTimeout(function(){
+					$('.product-card').css('transition', '100ms ease-out');			
+					$('.cx, .cy').addClass('s1');
+					setTimeout(function(){$('.cx, .cy').addClass('s2');}, 100);
+					setTimeout(function(){$('.cx, .cy').addClass('s3');}, 200);				
+					$('div.carouselNext, div.carouselPrev').addClass('visible');				
+				}, 100);
+			}, 100);			
+		}, 150);		
 				
-	// });			
+	});			
     
 
 	// // Перевернуть карту рубашкой вверх
