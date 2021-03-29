@@ -15,34 +15,28 @@ import java.util.Scanner;
  *
  * */
 public class Main {
-    private static int getNumbers(String s)
-    {
+    private static int getNumbers(String s) {
         String[] n = s.split(""); //array of strings
         StringBuffer f = new StringBuffer(); // buffer to store numbers
-        for (int i = 0; i < n.length; i++)
-        {
-            if((n[i].matches("[0-9]+")))
-            {
+        for (int i = 0; i < n.length; i++) {
+            if ((n[i].matches("[0-9]+"))) {
                 f.append(n[i]); //appending
                 return Integer.parseInt(f.toString());
             }
         }
         return 0;
     }
-    static int GetMax(ArrayList<Figure.GeometricShapes> shapes,int max)
-    {
-        for(int i = 1; i< shapes.size();i++)
-        {
-            if(shapes.get(max).getPerimeter() < shapes.get(i).getPerimeter())
-            {
+
+    static int GetMax(ArrayList<Figure.GeometricShapes> shapes, int max) {
+        for (int i = 1; i < shapes.size(); i++) {
+            if (shapes.get(max).getPerimeter() < shapes.get(i).getPerimeter()) {
                 max = i;
             }
         }
         return max;
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Введите количество фигур:");
         String str = scan.nextLine();
@@ -55,39 +49,35 @@ public class Main {
         String shape_name;
         shape_name = scan.next();
         do {
-            switch (shape_name)
-            {
+            switch (shape_name) {
                 case "triangle":
-                    for (int i = 0; i<amount;i++)
-                    {
+                    for (int i = 0; i < amount; i++) {
                         Triangle triangle = new Triangle();
                         triangle.init(scan);
                         shapes.add(triangle);
                     }
-                    max = Main.GetMax(shapes,max);
+                    max = Main.GetMax(shapes, max);
                     System.out.println(shapes.get(max).toString());
                     shapes.clear();
                     max = 0;
                     break;
                 case "circle":
-                    for (int i = 0; i<amount;i++)
-                    {
+                    for (int i = 0; i < amount; i++) {
                         Circle circle = new Circle();
                         circle.init(scan);
                         shapes.add(circle);
                     }
-                    System.out.println(shapes.get(Main.GetMax(shapes,max)).toString());
+                    System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
                     shapes.clear();
                     max = 0;
                     break;
                 case "rectangle":
-                    for (int i = 0; i<amount;i++)
-                    {
+                    for (int i = 0; i < amount; i++) {
                         Rectangle rectangle = new Rectangle();
                         rectangle.init(scan);
                         shapes.add(rectangle);
                     }
-                    System.out.println(shapes.get(Main.GetMax(shapes,max)).toString());
+                    System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
                     shapes.clear();
                     max = 0;
                     break;
@@ -96,7 +86,7 @@ public class Main {
             }
             System.out.println("Введите имя фигуры: triangle circle rectangle");
             shape_name = scan.next();
-        }while(!shape_name.equals("no"));
+        } while (!shape_name.equals("no"));
     }
 }
 

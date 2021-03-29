@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Rectangle extends Figure.GeometricShapes {
     private double a,b,c,d;
 
-    public Rectangle(int side) {
-        super(side);
+    public Rectangle() {
+        super(4);
     }
 
     @Override

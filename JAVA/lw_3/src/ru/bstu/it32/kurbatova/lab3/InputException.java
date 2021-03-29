@@ -1,4 +1,4 @@
-package ru.bstu.it32.kurbatova.lab1;
+package ru.bstu.it32.kurbatova.lab3;
 
 
 public class InputException extends Exception

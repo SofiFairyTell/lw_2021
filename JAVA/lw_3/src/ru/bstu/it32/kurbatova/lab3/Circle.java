@@ -6,8 +6,8 @@ public class Circle extends Figure.GeometricShapes
 {
     private double radius;
 
-    public Circle(int side) {
-        super(side);
+    public Circle() {
+        super(0);
     }
 
     @Override
