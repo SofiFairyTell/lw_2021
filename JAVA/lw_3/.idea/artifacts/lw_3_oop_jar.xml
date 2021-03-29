@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="lw_3_oop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/lw_3_oop_jar</output-path>
+    <root id="archive" name="lw_3_oop.jar">
+      <element id="module-output" name="lw_3_oop" />
+      <element id="dir-copy" path="C:/Program Files/Java/jdk-15.0.2" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-15.0.2/lib/src.zip" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk-15.0.2/lib/jrt-fs.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
