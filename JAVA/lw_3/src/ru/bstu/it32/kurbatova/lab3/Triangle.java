@@ -37,14 +37,16 @@ public class Triangle extends Figure.GeometricShapes{
         @Override
         public void init(Scanner scanner)
         {
-            String str = scanner.nextLine();
-
-
+            System.out.println("Введите стороны треугольника:");
+            a = scanner.nextDouble();
+            b = scanner.nextDouble();
+            c = scanner.nextDouble();
         }
+
     @Override public String toString()
     {
         return "Cone [a=" + a + "; " + "b=" +
-                b + "c=" + ";" + " ( perimeter=" + this.getPerimeter() + " )]";
+                b + "c=" + c + ";" + " ( perimeter=" + this.getPerimeter() + " )]";
     }
 
 }

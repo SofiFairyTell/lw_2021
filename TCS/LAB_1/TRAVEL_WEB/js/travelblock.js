@@ -221,9 +221,16 @@ $("form").submit(function(event){
 $('.header_logo').mouseover(function()
 {
 	$('.nav').hide();
+
+
 });
 
 $('.header_logo').mouseout(function()
 {
 	$('.nav').show();
 });
+
+$('.contain').dblclick(function()
+{
+	alert('Приз ваш!');
+})

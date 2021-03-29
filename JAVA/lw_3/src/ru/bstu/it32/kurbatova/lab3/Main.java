@@ -1,5 +1,6 @@
 package ru.bstu.it32.kurbatova.lab3;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -51,11 +52,14 @@ public class Main {
                 {
                     case "triangle":
                         Triangle triangle = new Triangle();
-                        List<Triangle> shapes = null;
+                        ArrayList<Figure.GeometricShapes> shapes = new ArrayList<Figure.GeometricShapes>();
                         for (int i = 0; i<amount;i++)
                         {
-                            triangle.getSides();
+                            triangle.init(scan);
+
                             shapes.add(i,triangle);
+                            //triangle.getSides();
+                            //assert shapes != null;
                         }
                         break;
                     case "circle":
