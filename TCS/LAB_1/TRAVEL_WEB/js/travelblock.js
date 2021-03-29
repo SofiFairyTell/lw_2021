@@ -186,8 +186,9 @@ $("form").submit(function(event){
     else
     {
        
-        if(email.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) 
-        {
+        //if(email.match(/^([a-zA-Z0-9_\-\.]+)@(^(\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) 
+        if(email.match(/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/)==null)
+		{
             // showValidate(email);
             check=false;
             alert('Неправильная почта');
@@ -217,3 +218,12 @@ $("form").submit(function(event){
 
 });
 
+$('.header_logo').mouseover(function()
+{
+	$('.nav').hide();
+});
+
+$('.header_logo').mouseout(function()
+{
+	$('.nav').show();
+});
