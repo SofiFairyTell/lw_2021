@@ -51,21 +51,31 @@ public class Main {
             switch (shape)
                 {
                     case "triangle":
-                        Triangle triangle = new Triangle();
-                        ArrayList<Figure.GeometricShapes> shapes = new ArrayList<Figure.GeometricShapes>();
+
+                        ArrayList<Figure.GeometricShapes> shapes = new ArrayList<>();
                         for (int i = 0; i<amount;i++)
                         {
+                            Triangle triangle = new Triangle();
                             triangle.init(scan);
-
-                            shapes.add(i,triangle);
-                            //triangle.getSides();
-                            //assert shapes != null;
+                            shapes.add(triangle);
                         }
+                        int min = 0;
+                        for(int i = 0; i< shapes.size();i++)
+                        {
+                            if(shapes.get(min).getPerimeter() < shapes.get(i).getPerimeter())
+                            {
+                                min = i;
+                            }
+                        }
+
+                        System.out.println(shapes.get(min).toString());
                         break;
                     case "circle":
                         break;
                     case "rectangle":
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + shape);
                 }
             System.out.println("Введите имя фигуры: triangle circle rectangle");
             shape = scan.next();
