@@ -238,7 +238,7 @@ void Display(HDC hdc)
 	Pen curvePen(Color::Blue, 0.5f);
 	Pen curvePen2(Color::Red, 0.8f);
 	g.DrawBeziers(&curvePen, dots,l);
-	//g.DrawCurve(&curvePen, dots,l);
+	g.DrawCurve(&curvePen, dots,);
 	//g.DrawCurve(&curvePen2, dots, m);
 
 	//delete [] dots;
