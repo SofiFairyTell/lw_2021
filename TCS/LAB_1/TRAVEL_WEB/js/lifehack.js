@@ -1,11 +1,3 @@
-var a = document.querySelectorAll('.product_card');
-// window.onload = function () {
-// 	document.body.classList.add('loaded_hiding');
-// 	window.setTimeout(function () {
-// 	  document.body.classList.add('loaded');
-// 	  document.body.classList.remove('loaded_hiding');
-// 	}, 5000);
-//   }
 $(document).ready(function(){
 
 

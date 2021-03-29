@@ -1,15 +1,6 @@
 // lifehack. htmll
-var a = document.querySelectorAll('.product_card');
-// window.onload = function () {
-// 	document.body.classList.add('loaded_hiding');
-// 	window.setTimeout(function () {
-// 	  document.body.classList.add('loaded');
-// 	  document.body.classList.remove('loaded_hiding');
-// 	}, 5000);
-//   }
-$(document).ready(function(){
-
-
+$(document).ready(function()
+{
 	// Дополнительная информация о первой карточке
 	$('.product-card').hover(function(){
 			$(this).addClass('animate');
@@ -26,50 +17,51 @@ $(document).ready(function(){
 	{
 		
 		// var $clickId = $('.product-card').attr('id');
-		// $('.product-card#prd_1').addClass('flip-10');
-		// setTimeout(function()
-		// {
-		// $('.product-card#prd_1').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, 
-		// 	function()
-		// 	{
-		// 		$('.product-front, .product-front div.shadow').hide();			
-		// 	});
-		// }, 50);
+        _this = this;
+		$(_this).closest('.product-card').addClass('flip-10');
+		setTimeout(function()
+		{
+		$(_this).closest('.product-card').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, 
+			function()
+			{
+				$(_this).closest('.product-front, .product-front div.shadow').hide();			
+			});
+		}, 50);
 
-		// $('div.carouselNext, div.carouselPrev').removeClass('visible');
-		// $('.product-card#prd_1').addClass('flip-10');
-		// setTimeout(function(){
-		// 	$('.product-card').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, function(){
-		// 		$('.product-front, .product-front div.shadow').hide();			
-		// 	});
-		// }, 50);
+		$('div.carouselNext, div.carouselPrev').removeClass('visible');
+		$(_this).closest('.product-card').addClass('flip-10');
+		setTimeout(function(){
+			$(_this).closest('.product-card').removeClass('flip-10').addClass('flip90').find('div.shadow').show().fadeTo( 80 , 1, function(){
+				$(_this).closest('.product-front, .product-front div.shadow').hide();			
+			});
+		}, 50);
 		
-		// setTimeout(function()
-		// {
-		// 	$('.product-card').removeClass('flip90').addClass('flip190');
-		// 	$('.product-back').show().find('div.shadow').show().fadeTo( 90 , 0);
-		// 	setTimeout(function(){				
-		// 		$('.product-card').removeClass('flip190').addClass('flip180').find('div.shadow').hide();						
-		// 		setTimeout(function(){
-		// 			$('.product-card').css('transition', '100ms ease-out');			
-		// 			$('.cx, .cy').addClass('s1');
-		// 			setTimeout(function(){$('.cx, .cy').addClass('s2');}, 100);
-		// 			setTimeout(function(){$('.cx, .cy').addClass('s3');}, 200);				
-		// 			$('div.carouselNext, div.carouselPrev').addClass('visible');				
-		// 		}, 100);
-		// 	}, 100);			
-		// }, 150);		
+		setTimeout(function()
+		{
+			$(_this).closest('.product-card').removeClass('flip90').addClass('flip190');
+			$('.product-back').show().find('div.shadow').show().fadeTo( 90 , 0);
+			setTimeout(function(){				
+				$(_this).closest('.product-card').removeClass('flip190').addClass('flip180').find('div.shadow').hide();						
+				setTimeout(function(){
+					$(_this).closest('.product-card').css('transition', '100ms ease-out');			
+					$('.cx, .cy').addClass('s1');
+					setTimeout(function(){$('.cx, .cy').addClass('s2');}, 100);
+					setTimeout(function(){$('.cx, .cy').addClass('s3');}, 200);				
+					$('div.carouselNext, div.carouselPrev').addClass('visible');				
+				}, 100);
+			}, 100);			
+		}, 150);		
 				
 	});			
     
 
 	// Перевернуть карту рубашкой вверх
 	$('.flip-back').click(function(){		
-		
-		$('.product-card').removeClass('flip180').addClass('flip190');
+		_this = this;
+		$(_this).closest('.product-card').removeClass('flip180').addClass('flip190');
 		setTimeout(function()
 		{
-			$('.product-card').removeClass('flip190').addClass('flip90');
+			$(_this).closest('.product-card').removeClass('flip190').addClass('flip90');
 	
 			$('.product-back div.shadow').css('opacity', 0).fadeTo( 100 , 1, function(){
 				$('.product-back, .product-back div.shadow').hide();
@@ -79,11 +71,11 @@ $(document).ready(function(){
 		
 		setTimeout(function()
 		{
-			$('.product-card').removeClass('flip90').addClass('flip-10');
+			$(_this).closest('.product-card').removeClass('flip90').addClass('flip-10');
 			$('.product-front div.shadow').show().fadeTo( 100 , 0);
 			setTimeout(function(){						
 				$('.product-front div.shadow').hide();
-				$('.product-card').removeClass('flip-10').css('transition', '100ms ease-out');		
+				$(_this).closest('.product-card').removeClass('flip-10').css('transition', '100ms ease-out');		
 				$('.cx, .cy').removeClass('s1 s2 s3');			
 			}, 100);			
 		}, 150);			
@@ -180,10 +172,9 @@ function getCount() {
     }
 }
 
-
+ debugger;
 $("form").submit(function(event){
-    event.preventDefault();
-    
+    event.preventDefault();  
     var name = $("#name").val().trim();
     var email = $("#email").val().trim();
     var message = $("#msg").val().trim();
@@ -194,6 +185,7 @@ $("form").submit(function(event){
     }
     else
     {
+       
         if(email.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) 
         {
             // showValidate(email);
