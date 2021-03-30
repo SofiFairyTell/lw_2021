@@ -203,41 +203,37 @@ void Display(HDC hdc)
 	Graphics g(hdc);
 	g.Clear(Color::LightCyan);
 	//сглаживание
-	// g.SetSmoothingMode(SmoothingModeHighQuality);
+	g.SetSmoothingMode(SmoothingModeHighQuality);
 
-	WorldWindow w(0.0f,0.0f,640.0f,480.0f);
-	Viewport vp(-2.0f,3.9f,3.0f,-3.0f);
+	WorldWindow w(0.0f,0.0f,640.0f,640.0f);
+	//Viewport vp(-2.0f, 3.9f, 3.0f, -3.0f);
+	Viewport vp(-2.0f,3.9f,5.0f,-5.0f);
 	float A =  (w.Right - w.Left)/(float)vp.Width ;
 	float B =  (w.Bottom - w.Top)/(float)vp.Height;
 	float C = w.Left - A * vp.X ;
 	float D = w.Top - B * vp.Y;
 
-	int m = 6*PI/0.05f;
-	int l = m*2+1;
+	int m = 6*PI/0.05f;//376,8 = 377 точек
+	int l = m*2+1;//754 точки
 	PointF dots[943];
 	float t = 0.00f;
-	for (int i = 0; i < l; i++)
+ 	for (int i = 0; i < 943; i++)
 	{
 			float X = -2 * cos(t) + 3 * cos(-2 / 3 * t);
 			float Y = -2 * sin(t) - 3 * sin(-2 / 3 * t);
-
 			dots[i].X = A*X+C;
 			dots[i].Y = B*Y+D;			
 			//dots[i].X = X;
 			//dots[i].Y = Y;
-
 			t += 0.05f;
-
 	}
-
-	//должна быть КАРДИОИДА, даже две..
+	//должна быть Улитка Паскаля, даже две..
 	//Кисти для заполнения цветом
 	Pen curvePen(Color::Blue, 0.5f);
-	for (int i = 0; i < 942; ++i)
-	{
-			g.DrawLine(&curvePen, dots[i], dots[i+1]);
-	}
-	
-	//g.DrawCurve(&curvePen, dots,943);
+	GraphicsPath path;
+	path.AddCurve(dots, l);
+	g.DrawPath(&curvePen, &path);
+
+//	g.DrawCurve(&curvePen, dots,943);
 }
 
