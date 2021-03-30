@@ -219,8 +219,8 @@ void Display(HDC hdc)
 	float t = 0.00f;
  	for (int i = 0; i < 943; i++)
 	{
-			float X = -2 * cos(t) + 3 * cos(-2 / 3 * t);
-			float Y = -2 * sin(t) - 3 * sin(-2 / 3 * t);
+			float X = -2.0f * cos(t) + 3.0f* cos(-2.0f / 3.0f * t);
+			float Y = -2.0f * sin(t) - 3.0f * sin(-2.0f / 3.0f * t);
 			dots[i].X = A*X+C;
 			dots[i].Y = B*Y+D;			
 			//dots[i].X = X;
@@ -231,9 +231,9 @@ void Display(HDC hdc)
 	//Кисти для заполнения цветом
 	Pen curvePen(Color::Blue, 0.5f);
 	GraphicsPath path;
-	path.AddCurve(dots, l);
-	g.DrawPath(&curvePen, &path);
+	//path.AddCurve(dots, l);
+	//g.DrawPath(&curvePen, &path);
 
-//	g.DrawCurve(&curvePen, dots,943);
+	g.DrawCurve(&curvePen, dots,943);
 }
 

@@ -25,7 +25,12 @@ public class Circle extends Figure.GeometricShapes
             System.out.println(ex.getMessage());
         }
     }
-
+    @Override
+    public void init(String string)
+    {
+        String[] arr = string.split(",");
+        radius = Double.parseDouble(arr[0]);
+    }
     @Override
     public double getPerimeter()
     {  return radius * 2*Math.PI;  }

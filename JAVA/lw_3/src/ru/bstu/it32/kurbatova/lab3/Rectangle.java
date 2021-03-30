@@ -19,6 +19,16 @@ public class Rectangle extends Figure.GeometricShapes {
         d = scanner.nextDouble();
     }
     @Override
+    public void init(String string)
+    {
+        String[] arr = string.split(",");
+        a = Double.parseDouble(arr[0]);
+        b = Double.parseDouble(arr[1]);
+        c = Double.parseDouble(arr[2]);
+        d = Double.parseDouble(arr[3]);
+    }
+
+    @Override
     public double getPerimeter() {
         return a+b+c+d;
     }

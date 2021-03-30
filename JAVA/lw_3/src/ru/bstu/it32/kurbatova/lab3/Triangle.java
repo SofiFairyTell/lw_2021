@@ -42,7 +42,14 @@ public class Triangle extends Figure.GeometricShapes{
             b = scanner.nextDouble();
             c = scanner.nextDouble();
         }
-
+        @Override
+        public void init(String string)
+        {
+            String[] arr = string.split(",");
+            a = Double.parseDouble(arr[0]);
+            b = Double.parseDouble(arr[1]);
+            c = Double.parseDouble(arr[2]);
+        }
     @Override public String toString()
     {
         return "Cone [a=" + a + "; " + "b=" +

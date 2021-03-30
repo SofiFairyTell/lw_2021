@@ -29,6 +29,7 @@ public class Figure {
             return sides;
         }
         public abstract void init(Scanner scanner);	// считывание параметров с консоли
+        public abstract void init(String string);	// считывание параметров с консоли
         public abstract double getPerimeter();	// возвращает  периметр
     }
     //Общие поля

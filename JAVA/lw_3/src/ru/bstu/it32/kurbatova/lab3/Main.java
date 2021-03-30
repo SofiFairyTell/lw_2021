@@ -58,7 +58,7 @@ public class Main {
                     }
                     max = Main.GetMax(shapes, max);
                     System.out.println(shapes.get(max).toString());
-                    shapes.clear();
+                    //shapes.clear();
                     max = 0;
                     break;
                 case "circle":
@@ -68,7 +68,7 @@ public class Main {
                         shapes.add(circle);
                     }
                     System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
-                    shapes.clear();
+                    //shapes.clear();
                     max = 0;
                     break;
                 case "rectangle":
@@ -78,7 +78,7 @@ public class Main {
                         shapes.add(rectangle);
                     }
                     System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
-                    shapes.clear();
+                    //shapes.clear();
                     max = 0;
                     break;
                 default:
@@ -87,6 +87,8 @@ public class Main {
             System.out.println("Введите имя фигуры: triangle circle rectangle");
             shape_name = scan.next();
         } while (!shape_name.equals("no"));
+
+        System.out.println("Max perimeter in figure"+shapes.get(Main.GetMax(shapes, max)).toString());
     }
 }
 
