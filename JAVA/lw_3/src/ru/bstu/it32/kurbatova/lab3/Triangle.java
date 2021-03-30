@@ -1,5 +1,6 @@
 package ru.bstu.it32.kurbatova.lab3;
 
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Triangle extends Figure.GeometricShapes{
@@ -52,8 +53,22 @@ public class Triangle extends Figure.GeometricShapes{
         }
     @Override public String toString()
     {
-        return "Cone [a=" + a + "; " + "b=" +
-                b + "c=" + c + ";" + " ( perimeter=" + this.getPerimeter() + " )]";
+        return "Parameters TRIANGLE [a=" + a + "; " + "b=" +
+                b + "c=" + c + ";" +super.toString();
     }
 
+    @Override
+    public int compare(Figure.GeometricShapes o1, Figure.GeometricShapes o2) {
+        if (o1.getPerimeter()>o2.getPerimeter())
+        {
+            return 1;
+        }
+        else
+        if (o1.getPerimeter()<o2.getPerimeter())
+        {
+            return  -1;
+        }
+        else
+            return 0;
+    }
 }

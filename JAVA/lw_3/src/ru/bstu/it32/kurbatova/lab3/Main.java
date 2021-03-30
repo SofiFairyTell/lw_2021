@@ -48,47 +48,46 @@ public class Main {
         System.out.println("Введите имя фигуры: triangle circle rectangle");
         String shape_name;
         shape_name = scan.next();
-        do {
-            switch (shape_name) {
-                case "triangle":
-                    for (int i = 0; i < amount; i++) {
+        for (int i = 0; i<amount; i++)
+        {
+                switch (shape_name) {
+                    case "triangle":
                         Triangle triangle = new Triangle();
                         triangle.init(scan);
                         shapes.add(triangle);
-                    }
-                    max = Main.GetMax(shapes, max);
-                    System.out.println(shapes.get(max).toString());
-                    //shapes.clear();
-                    max = 0;
-                    break;
-                case "circle":
-                    for (int i = 0; i < amount; i++) {
-                        Circle circle = new Circle();
-                        circle.init(scan);
-                        shapes.add(circle);
-                    }
-                    System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
-                    //shapes.clear();
-                    max = 0;
-                    break;
-                case "rectangle":
-                    for (int i = 0; i < amount; i++) {
-                        Rectangle rectangle = new Rectangle();
-                        rectangle.init(scan);
-                        shapes.add(rectangle);
-                    }
-                    System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
-                    //shapes.clear();
-                    max = 0;
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + shape_name);
-            }
-            System.out.println("Введите имя фигуры: triangle circle rectangle");
-            shape_name = scan.next();
-        } while (!shape_name.equals("no"));
+//                        max = Main.GetMax(shapes, max);
+//                        System.out.println(shapes.get(max).toString());
+                        //shapes.clear();
+//                        max = 0;
+                        break;
+                    case "circle":
+//                        for (int i = 0; i < amount; i++) {
+                            Circle circle = new Circle();
+                            circle.init(scan);
+                            shapes.add(circle);
+//                        }
+//                        System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
+                        //shapes.clear();
+//                        max = 0;
+                        break;
+                    case "rectangle":
+//                        for (int i = 0; i < amount; i++) {
+                            Rectangle rectangle = new Rectangle();
+                            rectangle.init(scan);
+                            shapes.add(rectangle);
+//                        }
+//                        System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
+                        //shapes.clear();
+//                        max = 0;
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + shape_name);
+                }
+                System.out.println("Введите имя фигуры: triangle circle rectangle");
+                shape_name = scan.next();
+         }
 
-        System.out.println("Max perimeter in figure"+shapes.get(Main.GetMax(shapes, max)).toString());
+        System.out.println("Max perimeter in figure: "+shapes.get(Main.GetMax(shapes, max)).toString());
     }
 }
 

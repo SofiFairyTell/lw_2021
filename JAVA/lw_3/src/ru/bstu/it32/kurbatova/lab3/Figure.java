@@ -1,11 +1,15 @@
 package ru.bstu.it32.kurbatova.lab3;
 
+import java.util.Comparator;
 import java.util.Scanner;
 
-
+/**
+ * to do
+ * perimeters - общий
+ * конкатенировать
+ * super.ToString()
+ * количество фигур это max в листе разных*/
 public class Figure {
-
-
 
     public static interface Shape
     {
@@ -13,7 +17,7 @@ public class Figure {
         public  double init();
     }
 
-    public  static  abstract  class GeometricShapes
+    public  static  abstract  class GeometricShapes implements Comparator<GeometricShapes>
     {
         private static int sides; // количество сторон
 
@@ -31,8 +35,13 @@ public class Figure {
         public abstract void init(Scanner scanner);	// считывание параметров с консоли
         public abstract void init(String string);	// считывание параметров с консоли
         public abstract double getPerimeter();	// возвращает  периметр
-    }
-    //Общие поля
+        @Override
+        public String toString()
+        {
+            return "( Perimeter=" + this.getPerimeter() +")";
+        }
+
+    }    //Общие поля
 
 
     public String toString()        // возвращается состояние объекта в виде строки

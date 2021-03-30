@@ -36,7 +36,23 @@ public class Circle extends Figure.GeometricShapes
     {  return radius * 2*Math.PI;  }
 
     @Override public String toString()
-    {    return "Parameters [radius=" + radius + "; "  + " ( Perimeter=" + this.getPerimeter() + " )]";
+    {    return "Parameters CIRCLE [radius = " + radius + "; "  + super.toString();
+    }
+
+
+    @Override
+    public int compare(Figure.GeometricShapes o1, Figure.GeometricShapes o2) {
+        if (o1.getPerimeter()>o2.getPerimeter())
+        {
+            return 1;
+        }
+        else
+        if (o1.getPerimeter()<o2.getPerimeter())
+        {
+            return  -1;
+        }
+        else
+            return 0;
     }
 }
 
