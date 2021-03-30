@@ -38,7 +38,7 @@ public class Figure {
         @Override
         public String toString()
         {
-            return "( Perimeter=" + this.getPerimeter() +")";
+            return "( Perimeter =" + this.getPerimeter() +")";
         }
 
     }    //Общие поля

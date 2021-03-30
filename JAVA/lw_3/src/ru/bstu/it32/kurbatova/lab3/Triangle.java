@@ -53,8 +53,7 @@ public class Triangle extends Figure.GeometricShapes{
         }
     @Override public String toString()
     {
-        return "Parameters TRIANGLE [a=" + a + "; " + "b=" +
-                b + "c=" + c + ";" +super.toString();
+        return "Parameters TRIANGLE [a =" + a + "; " + "b = " + b + ";" + "c =" + c + ";" + super.toString();
     }
 
     @Override

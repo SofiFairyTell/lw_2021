@@ -45,46 +45,34 @@ public class Main {
         int max = 0; //индекс фигуры с максимальным периметром
 
         ArrayList<Figure.GeometricShapes> shapes = new ArrayList<>();
-        System.out.println("Введите имя фигуры: triangle circle rectangle");
+//        System.out.println("Введите имя фигуры: triangle circle rectangle");
         String shape_name;
-        shape_name = scan.next();
+        //shape_name = scan.next();
         for (int i = 0; i<amount; i++)
         {
-                switch (shape_name) {
+            System.out.println("Введите имя фигуры: triangle circle rectangle");
+            shape_name = scan.next();
+                switch (shape_name)
+                {
                     case "triangle":
                         Triangle triangle = new Triangle();
                         triangle.init(scan);
                         shapes.add(triangle);
-//                        max = Main.GetMax(shapes, max);
-//                        System.out.println(shapes.get(max).toString());
-                        //shapes.clear();
-//                        max = 0;
                         break;
                     case "circle":
-//                        for (int i = 0; i < amount; i++) {
                             Circle circle = new Circle();
                             circle.init(scan);
                             shapes.add(circle);
-//                        }
-//                        System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
-                        //shapes.clear();
-//                        max = 0;
                         break;
                     case "rectangle":
-//                        for (int i = 0; i < amount; i++) {
                             Rectangle rectangle = new Rectangle();
                             rectangle.init(scan);
                             shapes.add(rectangle);
-//                        }
-//                        System.out.println(shapes.get(Main.GetMax(shapes, max)).toString());
-                        //shapes.clear();
-//                        max = 0;
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + shape_name);
                 }
-                System.out.println("Введите имя фигуры: triangle circle rectangle");
-                shape_name = scan.next();
+
          }
 
         System.out.println("Max perimeter in figure: "+shapes.get(Main.GetMax(shapes, max)).toString());

@@ -32,7 +32,7 @@ public class Rectangle extends Figure.GeometricShapes {
     }
     @Override public String toString()
     {
-        return "Parameters RECTANGLE [a =" + a + "; " + "b = " + b+ ";" + super.toString()+"]";}
+        return "Parameters RECTANGLE [a = " + a + "; " + "b = " + b + ";" + super.toString()+"]";}
 
 
     @Override
