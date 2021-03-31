@@ -10,9 +10,7 @@
 #define  PI 3.1416f 
 #include <cmath>
 #pragma comment(lib, "GdiPlus.lib")
-
 using namespace Gdiplus;
-
 #pragma comment(linker,"\"/manifestdependency:type                  = 'win32' \
                                               name                  = 'Microsoft.Windows.Common-Controls' \
                                               version               = '6.0.0.0' \
@@ -205,19 +203,19 @@ void Display(HDC hdc)
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 
-	WorldWindow w(0.0f,0.0f,640.0f,640.0f);
+	WorldWindow w(0.0f,0.0f,680.0f,240.0f);
 	//Viewport vp(-2.0f, 3.9f, 3.0f, -3.0f);
-	Viewport vp(-2.0f,3.9f,5.0f,-5.0f);
+	Viewport vp(-5.0f,5.0f,5.0f,-5.0f);
 	float A =  (w.Right - w.Left)/(float)vp.Width ;
 	float B =  (w.Bottom - w.Top)/(float)vp.Height;
 	float C = w.Left - A * vp.X ;
 	float D = w.Top - B * vp.Y;
 
 	int m = 6*PI/0.05f;//376,8 = 377 точек
-	int l = m*2+1;//754 точки
-	PointF dots[943];
+	
+	PointF dots[377];
 	float t = 0.00f;
- 	for (int i = 0; i < 943; i++)
+ 	for (int i = 0; i < m; i++)
 	{
 			float X = -2.0f * cos(t) + 3.0f* cos(-2.0f / 3.0f * t);
 			float Y = -2.0f * sin(t) - 3.0f * sin(-2.0f / 3.0f * t);
@@ -230,10 +228,6 @@ void Display(HDC hdc)
 	//должна быть Улитка Паскаля, даже две..
 	//Кисти для заполнения цветом
 	Pen curvePen(Color::Blue, 0.5f);
-	GraphicsPath path;
-	//path.AddCurve(dots, l);
-	//g.DrawPath(&curvePen, &path);
-
-	g.DrawCurve(&curvePen, dots,943);
+	g.DrawCurve(&curvePen, dots, m);
 }
 
