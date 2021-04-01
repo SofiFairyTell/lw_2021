@@ -6,7 +6,7 @@
 #include <string>
 #include <gdiplus.h>
 #include <gdiplusgraphics.h>
-
+#include <vector>
 #define  PI 3.1416f 
 #include <cmath>
 #pragma comment(lib, "GdiPlus.lib")
@@ -24,12 +24,13 @@ using namespace Gdiplus;
 HWND hwnd = NULL; //дескриптор окна
 void Display(HDC hdc); //функция для показа катера на экране
 void DrawImg(HDC hdc); //загрузка изображения на экран
+void PlotGrid(HWND hwnd, HDC hdc);
 Image* img;
 /*Для изменения цвета окна, когда было обработано WM_SYSCHAR */
 RECT rc;
 HBRUSH brushes[3]; //кисти для изменения цвета окна
 int brush_index = 0;
-//Переменная для изображения
+
 
 /*Оконные процедуры*/
 LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -156,7 +157,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	{
 		PAINTSTRUCT pstruct;
 		HDC hdc = BeginPaint(hwnd, &pstruct);
-		
+		PlotGrid(hwnd, hdc);
 		Display(hdc);
 
 		EndPaint(hwnd, &ps);
@@ -195,16 +196,32 @@ void OnDestroy(HWND hwnd)
 	PostQuitMessage(0); // отправляем сообщение WM_QUIT
 }
 
+inline float Sin(float angle)
+{
+	__asm
+	{
+		fld angle;
+		fsin;
+	}
+}
+inline float Cos(float angle)
+{
+	_asm
+	{
+		fld angle;
+		fcos;
+	}
+}
 
 void Display(HDC hdc)
 {
 	Graphics g(hdc);
 	g.Clear(Color::LightCyan);
+	PlotGrid(hwnd, hdc);//координатная сетка
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 
 	WorldWindow w(0.0f,0.0f, 980.0f, 840.0f);
-	//Viewport vp(-2.0f, 3.9f, 3.0f, -3.0f);
 	Viewport vp(-15.0f,15.0f,35.0f,-35.0f);
 	float A =  (w.Right - w.Left)/(float)vp.Width ;
 	float B =  (w.Bottom - w.Top)/(float)vp.Height;
@@ -213,21 +230,56 @@ void Display(HDC hdc)
 
 	int m = 6*PI/0.05f;//376,8 = 377 точек
 	
+	
 	PointF dots[377];
 	float t = 0.00f;
  	for (int i = 0; i < m; i++)
 	{
-			float X = -2.0f * cos(t) + 3.0f* cos(-2.0f / 3.0f * t);
-			float Y = -2.0f * sin(t) - 3.0f * sin(-2.0f / 3.0f * t);
+			float X = -2.0f * Cos(t) + 3.0f* Cos(-2.0f / 3.0f * t);
+			float Y = -2.0f * Sin(t) - 3.0f * Sin(-2.0f / 3.0f * t);
 			dots[i].X = A*X+C;
 			dots[i].Y = B*Y+D;			
-			//dots[i].X = X;
-			//dots[i].Y = Y;
 			t += 0.05f;
 	}
 	//должна быть Улитка Паскаля, даже две..
 	//Кисти для заполнения цветом
-	Pen curvePen(Color::Blue, 0.5f);
+	Pen curvePen(Color::OrangeRed, 0.5f);
 	g.DrawCurve(&curvePen, dots, m);
 }
+void PlotGrid(HWND hwnd, HDC hdc) {
+	
+	RECT rect;
+	PAINTSTRUCT ps;
+	GetClientRect(hwnd, &rect);
 
+	HPEN hPen = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
+	HPEN hOldPen = SelectPen(hdc, hPen);
+	int i, x, y;
+	int Nx = 20, Ny = 20; //Количество координатных линий по x и y
+
+	//  Шаги приращений координатных линий по x и y
+	int StepX = (int)(rect.right - rect.left) / Nx;
+	int StepY = (int)(rect.bottom - rect.top) / Ny;
+
+	//Проверяем, чтобы шаги приращений по x и y были ненулевыми
+	if (StepX < 1) StepX = 1;
+	if (StepY < 1) StepY = 1;
+	
+	//Закрашиваем фон
+	FillRect(hdc, &ps.rcPaint, brushes[1]);
+	//Рисуем оси 
+
+
+	//Рисуем координатную сетку
+	for (x = rect.left; x <= rect.right; x += StepX)
+	{
+		MoveToEx(hdc, x, rect.top, NULL);
+		LineTo(hdc, x, rect.bottom);
+	}
+
+	for (y = rect.top; y <= rect.bottom; y += StepY)
+	{
+		MoveToEx(hdc, rect.left, y, NULL);
+		LineTo(hdc, rect.right, y);
+	}
+}

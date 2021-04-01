@@ -163,10 +163,22 @@ public:
 int main()
 {
 	float x, y;
+	int n;
 	vector<PointF> points;
 	cout << "---------------START--------------------\n";
+//Ввод координат
+	cout << "-----Enter how many dots in Figure------\n";
+	cin >> n;
 	cout << "Enter the coordinates for the following dots:\n"; 
 	
+	for (int i = 0; i < n; i++)
+	{
+		cout << "Enter the X and Y:\n";
+		cin >> x >> y;
+		PointF point(x, y);
+		points.push_back(point);
+	}
+
 	/*Инициализаци GDI+*/
 	ULONG_PTR gdToken;
 	GdiplusStartupInput gdInput;
