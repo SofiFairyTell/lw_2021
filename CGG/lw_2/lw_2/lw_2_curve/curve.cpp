@@ -203,9 +203,9 @@ void Display(HDC hdc)
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 
-	WorldWindow w(0.0f,0.0f,680.0f,240.0f);
+	WorldWindow w(0.0f,0.0f, 980.0f, 840.0f);
 	//Viewport vp(-2.0f, 3.9f, 3.0f, -3.0f);
-	Viewport vp(-5.0f,5.0f,5.0f,-5.0f);
+	Viewport vp(-15.0f,15.0f,35.0f,-35.0f);
 	float A =  (w.Right - w.Left)/(float)vp.Width ;
 	float B =  (w.Bottom - w.Top)/(float)vp.Height;
 	float C = w.Left - A * vp.X ;
