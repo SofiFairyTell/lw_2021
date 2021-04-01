@@ -25,6 +25,8 @@ HWND hwnd = NULL; //дескриптор окна
 void Display(HDC hdc); //функция для показа катера на экране
 void DrawImg(HDC hdc); //загрузка изображения на экран
 void PlotGrid(HWND hwnd, HDC hdc);
+int  V_LBclip(float *x0, float *y0, float *x1, float *y1);
+static int  LB_tclip(float p, float q);
 Image* img;
 /*Для изменения цвета окна, когда было обработано WM_SYSCHAR */
 RECT rc;
@@ -71,7 +73,42 @@ public:
 		return rect;
 	}
 };
+class EqualMethod
+{
+public:
 
+	bool EqualDot(PointF& first, PointF& second, float tolerance = 1e-6f)
+	{
+		if (abs(first.X - second.X) < tolerance && abs(first.Y - second.Y) < tolerance)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+	inline bool GreaterOrEqual(float a, float b, float tolerance = -1e-3f)
+	{
+		return !(b - a) > tolerance;
+	}
+	inline bool Less(float a, float b, float tolerance = -1e-3f)
+	{
+		return (b - a) > tolerance;
+	}
+	inline bool Greater(float a, float b, float tolerance = -1e-3f)
+	{
+		return (a - b) > tolerance;
+	}
+	inline bool Equal(float a, float b, float tolerance = -1e-3f)
+	{
+		return (abs(a - b) < tolerance);
+	}
+	inline bool IsZero(float a, float tolerance)
+	{
+		return (abs(a) == tolerance);
+	}
+
+
+};
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int  CmdShow)
 {
@@ -220,7 +257,8 @@ void Display(HDC hdc)
 	PlotGrid(hwnd, hdc);//координатная сетка
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
-
+	Rect rect(307, 168, 387, 224);
+	
 	WorldWindow w(0.0f,0.0f, 980.0f, 840.0f);
 	Viewport vp(-15.0f,15.0f,35.0f,-35.0f);
 	float A =  (w.Right - w.Left)/(float)vp.Width ;
@@ -232,6 +270,7 @@ void Display(HDC hdc)
 	
 	
 	PointF dots[377];
+	PointF points[377];
 	float t = 0.00f;
  	for (int i = 0; i < m; i++)
 	{
@@ -245,6 +284,20 @@ void Display(HDC hdc)
 	//Кисти для заполнения цветом
 	Pen curvePen(Color::OrangeRed, 0.5f);
 	g.DrawCurve(&curvePen, dots, m);
+	int j = 0;
+	for (int i = 0; i < m-1; i++)
+	{
+		
+		if (V_LBclip(&dots[i].X, &dots[i].Y, &dots[i + 1].X, &dots[i + 1].Y) == 1)
+		{
+			points[j].X = dots[i].X;
+			points[j].Y = dots[i].Y;
+		}
+
+	}
+	Pen curvePen2(Color::Black, 1.5f);
+	g.DrawRectangle(&curvePen2, rect);
+	g.DrawLines(&curvePen2, points,m);
 }
 void PlotGrid(HWND hwnd, HDC hdc) {
 	
@@ -283,3 +336,97 @@ void PlotGrid(HWND hwnd, HDC hdc) {
 		LineTo(hdc, rect.right, y);
 	}
 }
+
+/*--------------------------------------------------- 
+ * V_LBclip
+ *  Реализует алгоритм отсечения Лианга-Барски
+ *  с параметрическим заданием линий
+ *
+ * int  V_LBclip (float *x0, float *y0, float *x1, float *y1)
+ *
+ * Отсекает отрезок, заданный значениями координат его
+ * точек (x0,y0), (x1,y1), по окну отсечения, заданному
+ * глобальными скалярами Wxlef, Wybot, Wxrig, Wytop
+ *
+ * Возвращает:
+ *  0 - отрезок не видим
+ *  1 - отрезок видим
+ */
+
+static float LB_t0, LB_t1;
+
+static int  LB_tclip(float p, float q)
+{
+	int   accept;
+	float r;
+	EqualMethod Equal = EqualMethod();
+	accept = 1;                           /* Отрезок принят */
+	if (Equal.Equal(p,0.0f) == 0) 
+	{
+		if (Equal.Less(q,0.0f)) accept = 0;             /* Отбрасывание */
+	}
+	else 
+	{
+		r = q / p;
+		if (Equal.Less(p,0.0f)) 
+		{
+			if (Equal.Greater(r,LB_t1)) 
+				accept = 0;      /* Отбрасывание */
+			else 
+				if (Equal.Greater(r,LB_t0)) 
+					LB_t0 = r;
+		}
+		else 
+		{
+			if (Equal.Less(r,LB_t0)) 
+				accept = 0;      /* Отбрасывание */
+			else 
+				if (Equal.Less(r, LB_t1))
+				{
+					LB_t1 = r;
+				}
+					
+
+		}
+	}
+	return (accept);
+}  /* LB_tclip */
+
+int  V_LBclip(float *x0, float *y0, float *x1, float *y1)
+{ 
+	int   visible;
+	float dx, dy;
+	EqualMethod Equal = EqualMethod();
+	//Wxlef, Wybot, Wxrig, Wytop
+	WorldWindow w(307.0f, 168.0f,387.0f, 224.0f);
+
+	
+	visible = 0;
+	LB_t0 = 0;  LB_t1 = 1;
+	dx = *x1 - *x0;
+	if (LB_tclip(-dx, *x0 - w.Left)) 
+	{
+		if (LB_tclip(dx, w.Right - *x0)) 
+		{
+			dy = *y1 - *y0;
+			if (LB_tclip(-dy, *y0 - w.Bottom)) 
+			{
+				if (LB_tclip(dy, w.Top - *y0)) 
+				{
+					if (Equal.Less(LB_t1,1.0f)) 
+					{
+						*x1 = *x0 + LB_t1 * dx;
+						*y1 = *y0 + LB_t1 * dy;
+					}
+					if (Equal.Greater(LB_t0,0.0f))
+					{
+						*x0 = *x0 + LB_t0 * dx;
+						*y0 = *y0 + LB_t0 * dy;
+					}
+					++visible;
+				}
+			}
+		}
+}
+return (visible);
+}  /* V_LBclip */

@@ -70,7 +70,7 @@ class BelongPolygon
 			float b = (((C.Y - A.Y) * (P.X - C.X)) + ((A.X - C.X) * (P.Y - C.Y))) / denominate;
 			float c = (((A.Y - B.Y) * (P.X - C.X) + ((B.X - A.X) * (P.Y - A.Y)))) / denominate;
 
-			if (Equal.GreaterOrEqual(a,0) && Equal.GreaterOrEqual(b, 0)&& Equal.GreaterOrEqual(c, 0))
+			if (Equal.GreaterOrEqual(a,0.0f) && Equal.GreaterOrEqual(b, 0.0f)&& Equal.GreaterOrEqual(c, 0.0f))
 			{
 				cout <<"The dot is in the triangle";
 				// уточнение, т.е. где именно она в треугольнике
