@@ -215,7 +215,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	void Display(HDC hdc)
 	{
 		Graphics g(hdc);
-		g.Clear(Color::Blue);
+		g.Clear(Color::NavajoWhite);
 		//сглаживание
 		g.SetSmoothingMode(SmoothingModeHighQuality);
 		Rect rect(0,0,600,600); //Многоугольник для градиента
@@ -294,8 +294,8 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		Region rg3(&path);
 		g.SetClip(&rg3);
 		//Рисование катера
-		g.Clear(Color::White);
-
+		g.Clear(Color::CornflowerBlue);
+		g.SetSmoothingMode(SmoothingModeHighQuality);
 		g.FillRectangle(&linBrush, kater_part[0]);		//корпус
 		g.FillRectangle(&hatchBrush, kater_part[1]);	//мотор
 	
