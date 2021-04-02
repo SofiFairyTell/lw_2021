@@ -35,6 +35,7 @@ using namespace Gdiplus;
 HWND hwnd = NULL; //дескриптор окна
 void Display(HDC hdc); //функция для показа катера на экране
 void DrawImg(HDC hdc); //загрузка изображения на экран
+
 Image* img;
 /*Для изменения цвета окна, когда было обработано WM_SYSCHAR */
 RECT rc;
@@ -126,15 +127,8 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 {
 	HDC hdc;             // индекс контекста устройства
 	PAINTSTRUCT ps;      // структура для рисования
-	int check = 0; //для проверки того, что нажатие было вызвано 3 раза и вызвать функцию построения треугольника
-	
-	//Координаты
-	Dot A = Dot();
-	Dot B = Dot();
-	Dot C = Dot();
-	Dot P = Dot(); // Точка которую будем проверять
 
-	std::list<Dot> dots;
+
 
 	switch (msg)
 	{
@@ -161,20 +155,8 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 			yPos = HIWORD(lParam);
 			nSize = wsprintf(szBuf, TEXT("(%d, %d)"), xPos, yPos);	
 
-			if (!dots.size < 4)
-			{
-				A.setX = xPos;
-				A.setY = yPos;
-				dots.push_back(A);
-			}
-			else
-			{
+			
 
-			}
-			//A.setCoordinates(A);
-			/*B.setCoordinates(B);
-			C.setCoordinates(C);
-			P.setCoordinates(P);*/
 			TextOut(hdc, xPos, yPos, szBuf, nSize);
 
 		}break;
@@ -192,9 +174,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		return TRUE;
 	}
 	
-	void OnCommand(HWND hWnd, int id, HWND hwnCTRL, UINT codeNotify)
-	{
-	}
+
 
 	void OnDestroy(HWND hwnd)
 	{
@@ -229,25 +209,13 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	}
 
 
-	void DrawTriangle(const std::list<Dot> dots)
-	{
-		Point vertix_list[4];
-		int size = dots.size();
-		for (Dot dot : dots)
-		{
-			Point vertix(dot.X, dot.Y);
-			vertix_list;
-		}
-		
-		
-		
-	}
+	
 
 
 	void Display(HDC hdc)
 	{
 		Graphics g(hdc);
-		g.Clear(Color::LightCyan);
+		g.Clear(Color::Blue);
 		//сглаживание
 		g.SetSmoothingMode(SmoothingModeHighQuality);
 		Rect rect(0,0,600,600); //Многоугольник для градиента
@@ -293,7 +261,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
 		kater_border.SetCompoundArray(border_part, 6); //составное перо
 		HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine, Color::Bisque);//Штриховая кисть
-		HatchBrush hatchBrushText(HatchStyleDiagonalBrick, Color::Black,Color::Red);//Штриховая кисть
+		
 		LinearGradientBrush linBrush(rect,Color::Indigo,Color::Goldenrod,40.f); //кисть с линейным градиентом
 		
 		Color gradient_color[3] =
@@ -313,12 +281,26 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
 		SolidBrush brushYellow(Color::Yellow);
 
+
+		Region rg2;//бесконечный регион
+			
+		
+
+		GraphicsPath path;
+
+		//Первое отсечение эллипсом
+		g.FillEllipse(&brushYellow, Rect(150, 50, 500, 500));
+		path.AddEllipse(Rect(200,100,400,400));
+		Region rg3(&path);
+		g.SetClip(&rg3);
 		//Рисование катера
+		g.Clear(Color::White);
 
 		g.FillRectangle(&linBrush, kater_part[0]);		//корпус
 		g.FillRectangle(&hatchBrush, kater_part[1]);	//мотор
 	
-		
+
+
 		g.FillRectangle(&brushYellow, kater_part[2]);	//кресла
 		g.DrawPolygon(&kater_border, kater_glass, 4);	//стекло над креслами
 
@@ -327,20 +309,28 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		g.FillPolygon(&linBrush,kater_nose,3);			//нос закршенный
 		g.DrawPolygon(&kater_border, kater_nose, 3);	//нос контур
 		
+		
+
+
 		//Нарисуем ручку
 		g.FillClosedCurve(&brushYellow, kater_handline, 4);
 		g.DrawClosedCurve(&kater_border, kater_handline, 4);
-
+	
+	
+		HatchBrush hatchBrushText(HatchStyleDiagonalBrick, Color::Black, Color::Red);//Штриховая кисть
 		FontFamily fontFamily(L"Times New Roman");
 		Font font(&fontFamily, 40.f, FontStyleBoldItalic);
-		//StringFormat sf(int formatFlags = StringAlignmentCenter, LANGID language = (LANGID)SUBLANG_RUSSIAN_RUSSIA);
+
 		LANGID lang = MAKELANGID(LANG_RUSSIAN, SUBLANG_RUSSIAN_RUSSIA);
 		StringFormat sf = new StringFormat(0, lang);
-		//StringFormat sf;
+
 		sf.SetFormatFlags(StringAlignmentNear);
 		RectF rectF(470.f, 310.f, 250.f, 100.f);
-	
-		//g.DrawString(L"Катер-1", -1, &font, rectF, &sf, &hatchBrushText);
+
 		g.DrawString(L"Kater-1", -1, &font, rectF, &sf, &hatchBrushText);
+		g.SetClip(&rg2);
+		
 	}
+
+
 
