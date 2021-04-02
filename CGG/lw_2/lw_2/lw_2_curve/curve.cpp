@@ -280,57 +280,52 @@ void Display(HDC hdc)
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 
-	
+	//Для основной фигуры
 	Viewport vp(0.0f,0.0f, 980.0f, 840.0f);
 	WorldWindow w(-15.0f,15.0f,35.0f,-35.0f);
 
-	WorldWindow w_rect(0.0f, 0.0f, 4.0f, -4.0f);
-	PointF rectF[4] = 
-	{ 
-		PointF(-2.0f, 0.0f),
-		PointF(0.0f, -2.0f),
-		PointF(0.0f,  2.0f),	
-		PointF(2.0f,  0.0f)
-		
-	};
+	//Кисти
+	Pen curve_сlip(Color::Blue, 4.5f);
+	Pen curve_limacon(Color::OrangeRed, 2.5f);
+	Pen curve_limacon_clip(Color::Black, 5.5f);
 
-	WorldToViewPort(w, vp, rectF, 4);
-	Pen curvePen0(Color::Red, 3.5f);
-	g.DrawRectangle(&curvePen0, 295, 255, 79, 68);
+
 	//Из мирового окна в окно просмотра
 
-	int m = 6*PI/0.05f; //376,8 = 377 точек
+	int m = (6*PI/0.05f)+1; //376,8 = 377 точек
 	
-	
-	PointF dots[377];
-	PointF points[377];
+	std::vector<PointF> dots(m);
 
 	float t = 0.00f;
  	for (int i = 0; i < m; i++)
 	{
 			float X = -2.0f * Cos(t) + 3.0f* Cos(-2.0f / 3.0f * t);
 			float Y = -2.0f * Sin(t) - 3.0f * Sin(-2.0f / 3.0f * t);
-			dots[i].X = X;
-			dots[i].Y = Y;
+			
+			dots[i].X += X;
+			dots[i].Y += Y;
 			t += 0.05f;
 	}
-	WorldToViewPort(w, vp, dots, m);
-	//Кисти для заполнения цветом
-	Pen curvePen(Color::OrangeRed, 0.5f);
-	g.DrawCurve(&curvePen, dots, m);
 
 	for (int i = 0; i < m-1; i++)
 	{
-	Pen curvePen2(Color::Black, 5.5f);
-
-	PointF view[2] = {dots[i],dots[i+1]};
-
-	if (V_LBclip(&view[0].X, &view[0].Y, &view[1].X, &view[1].Y) == 1)
-	{
+		PointF view[2] = { dots[i],dots[i + 1] };
 		WorldToViewPort(w, vp, view, 2);
-		g.DrawLines(&curvePen2, view, 2);
-	}	 
+		g.DrawLines(&curve_limacon, view, 2);
 	}
+
+	//Кисти для заполнения цветом
+	for (int i = 0; i < m-1; i++)
+	{
+		PointF view[2] = {dots[i],dots[i+1]};
+		if (V_LBclip(&view[0].X, &view[0].Y, &view[1].X, &view[1].Y) == 1)
+			{
+				WorldToViewPort(w, vp, view, 2);
+				g.DrawLines(&curve_limacon_clip, view, 2);
+			}	 
+	}
+
+	g.DrawRectangle(&curve_сlip, 295, 255, 79, 68);
 }
 void PlotGrid(HWND hwnd, HDC hdc) {
 	
