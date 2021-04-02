@@ -253,31 +253,35 @@ inline float Cos(float angle)
 void Display(HDC hdc)
 {
 	Graphics g(hdc);
-	g.Clear(Color::LightCyan);
+	g.Clear(Color::FloralWhite);
 	PlotGrid(hwnd, hdc);//координатная сетка
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 	Rect rect(307, 168, 387, 224);
 	
-	WorldWindow w(0.0f,0.0f, 980.0f, 840.0f);
-	Viewport vp(-15.0f,15.0f,35.0f,-35.0f);
-	float A =  (w.Right - w.Left)/(float)vp.Width ;
-	float B =  (w.Bottom - w.Top)/(float)vp.Height;
-	float C = w.Left - A * vp.X ;
-	float D = w.Top - B * vp.Y;
+	Viewport vp(0.0f,0.0f, 980.0f, 840.0f);
+	WorldWindow w(-15.0f,15.0f,35.0f,-35.0f);
+	//Из мирового окна в окно просмотра
+	float A =  (float)vp.Width/(w.Right - w.Left) ;
+	float B =  (float)vp.Height/(w.Bottom - w.Top);
+	float C = vp.X - A * w.Left ;
+	float D = vp.Y - B * w.Top;
 
 	int m = 6*PI/0.05f;//376,8 = 377 точек
 	
 	
 	PointF dots[377];
 	PointF points[377];
+	PointF view[377];
 	float t = 0.00f;
  	for (int i = 0; i < m; i++)
 	{
 			float X = -2.0f * Cos(t) + 3.0f* Cos(-2.0f / 3.0f * t);
 			float Y = -2.0f * Sin(t) - 3.0f * Sin(-2.0f / 3.0f * t);
 			dots[i].X = A*X+C;
-			dots[i].Y = B*Y+D;			
+			dots[i].Y = B*Y+D;	
+			points[i].X = X;
+			points[i].Y = Y;
 			t += 0.05f;
 	}
 	//должна быть Улитка Паскаля, даже две..
@@ -285,19 +289,32 @@ void Display(HDC hdc)
 	Pen curvePen(Color::OrangeRed, 0.5f);
 	g.DrawCurve(&curvePen, dots, m);
 	int j = 0;
+	float x, y, x0, y0;
 	for (int i = 0; i < m-1; i++)
 	{
-		
-		if (V_LBclip(&dots[i].X, &dots[i].Y, &dots[i + 1].X, &dots[i + 1].Y) == 1)
+		x = points[i].X;
+		y = points[i].Y;
+		x0 = points[i + 1].X;
+		y0 = points[i + 1].Y;
+
+		if (V_LBclip(&points[i].X, &points[i].Y, &points[i + 1].X, &points[i + 1].Y) == 1)
 		{
-			points[j].X = dots[i].X;
-			points[j].Y = dots[i].Y;
+				view[i].X = A * points[i].X + C;
+				view[i].Y = B * points[i].Y + D;
+				//view[i+1].X = A * points[i+1].X + C;
+				//view[i+1].Y = B * points[i+1].Y + D;
 		}
+		
 
 	}
+	for (int i = 0; i < m; i++)
+	{
+		
+	}
 	Pen curvePen2(Color::Black, 1.5f);
+	Pen curvePen3(Color::YellowGreen, 1.5f);
 	g.DrawRectangle(&curvePen2, rect);
-	g.DrawLines(&curvePen2, points,m);
+	g.DrawCurve(&curvePen2, view,m);
 }
 void PlotGrid(HWND hwnd, HDC hdc) {
 	
@@ -385,8 +402,7 @@ static int  LB_tclip(float p, float q)
 				{
 					LB_t1 = r;
 				}
-					
-
+				
 		}
 	}
 	return (accept);
@@ -398,7 +414,7 @@ int  V_LBclip(float *x0, float *y0, float *x1, float *y1)
 	float dx, dy;
 	EqualMethod Equal = EqualMethod();
 	//Wxlef, Wybot, Wxrig, Wytop
-	WorldWindow w(307.0f, 168.0f,387.0f, 224.0f);
+	WorldWindow w(-1.0f, 1.0f, 3.0f, -3.0f);
 
 	
 	visible = 0;
