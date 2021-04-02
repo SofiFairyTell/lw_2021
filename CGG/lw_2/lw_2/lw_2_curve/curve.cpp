@@ -272,7 +272,7 @@ void Display(HDC hdc)
 	
 	PointF dots[377];
 	PointF points[377];
-	PointF view[377];
+	PointF view[2];
 	float t = 0.00f;
  	for (int i = 0; i < m; i++)
 	{
@@ -297,24 +297,27 @@ void Display(HDC hdc)
 		x0 = points[i + 1].X;
 		y0 = points[i + 1].Y;
 
+	Pen curvePen2(Color::Black, 5.5f);
+	Pen curvePen3(Color::YellowGreen, 1.5f);
+
 		if (V_LBclip(&points[i].X, &points[i].Y, &points[i + 1].X, &points[i + 1].Y) == 1)
 		{
-				view[i].X = A * points[i].X + C;
-				view[i].Y = B * points[i].Y + D;
+				view[0].X = A * points[i].X + C;
+				view[0].Y = B * points[i].Y + D;
+				view[1].X = A * points[i+1].X + C;
+				view[1].Y = B * points[i+1].Y + D;
+				g.DrawLines(&curvePen2, view, 2);
+
 				//view[i+1].X = A * points[i+1].X + C;
 				//view[i+1].Y = B * points[i+1].Y + D;
 		}
-		
+		 
 
 	}
-	for (int i = 0; i < m; i++)
-	{
-		
-	}
-	Pen curvePen2(Color::Black, 1.5f);
-	Pen curvePen3(Color::YellowGreen, 1.5f);
-	g.DrawRectangle(&curvePen2, rect);
-	g.DrawCurve(&curvePen2, view,m);
+
+
+	//g.DrawRectangle(&curvePen2, rect);
+	//g.DrawLines(&curvePen2, view,j);
 }
 void PlotGrid(HWND hwnd, HDC hdc) {
 	
@@ -414,7 +417,7 @@ int  V_LBclip(float *x0, float *y0, float *x1, float *y1)
 	float dx, dy;
 	EqualMethod Equal = EqualMethod();
 	//Wxlef, Wybot, Wxrig, Wytop
-	WorldWindow w(-1.0f, 1.0f, 3.0f, -3.0f);
+	WorldWindow w(0.0f, 0.0f, 4.0f, -4.0f);
 
 	
 	visible = 0;
