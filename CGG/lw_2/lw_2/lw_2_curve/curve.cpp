@@ -25,8 +25,12 @@ HWND hwnd = NULL; //дескриптор окна
 void Display(HDC hdc); //функция для показа катера на экране
 void DrawImg(HDC hdc); //загрузка изображения на экран
 void PlotGrid(HWND hwnd, HDC hdc);
+
 int  V_LBclip(float *x0, float *y0, float *x1, float *y1);
 static int  LB_tclip(float p, float q);
+
+
+
 Image* img;
 /*Для изменения цвета окна, когда было обработано WM_SYSCHAR */
 RECT rc;
@@ -109,6 +113,8 @@ public:
 
 
 };
+
+inline void WorldToViewPort(const WorldWindow &w, const Viewport &vp, PointF *points, int count);
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int  CmdShow)
 {
@@ -250,6 +256,22 @@ inline float Cos(float angle)
 	}
 }
 
+inline void WorldToViewPort(const WorldWindow &w, const Viewport &vp, PointF *points, int count)
+{
+	//Из мирового окна в окно просмотра
+	float A = (float)vp.Width / (w.Right - w.Left);
+	float B = (float)vp.Height / (w.Bottom - w.Top);
+	float C = vp.X - A * w.Left;
+	float D = vp.Y - B * w.Top;
+	for (unsigned int i = 0; i < count; ++i)
+	{
+		points[i].X = A * points[i].X + C;
+		points[i].Y = B * points[i].Y + D;
+	}
+}
+
+
+
 void Display(HDC hdc)
 {
 	Graphics g(hdc);
@@ -257,67 +279,58 @@ void Display(HDC hdc)
 	PlotGrid(hwnd, hdc);//координатная сетка
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
-	Rect rect(307, 168, 387, 224);
+
 	
 	Viewport vp(0.0f,0.0f, 980.0f, 840.0f);
 	WorldWindow w(-15.0f,15.0f,35.0f,-35.0f);
-	//Из мирового окна в окно просмотра
-	float A =  (float)vp.Width/(w.Right - w.Left) ;
-	float B =  (float)vp.Height/(w.Bottom - w.Top);
-	float C = vp.X - A * w.Left ;
-	float D = vp.Y - B * w.Top;
 
-	int m = 6*PI/0.05f;//376,8 = 377 точек
+	WorldWindow w_rect(0.0f, 0.0f, 4.0f, -4.0f);
+	PointF rectF[4] = 
+	{ 
+		PointF(-2.0f, 0.0f),
+		PointF(0.0f, -2.0f),
+		PointF(0.0f,  2.0f),	
+		PointF(2.0f,  0.0f)
+		
+	};
+
+	WorldToViewPort(w, vp, rectF, 4);
+	Pen curvePen0(Color::Red, 3.5f);
+	g.DrawRectangle(&curvePen0, 295, 255, 79, 68);
+	//Из мирового окна в окно просмотра
+
+	int m = 6*PI/0.05f; //376,8 = 377 точек
 	
 	
 	PointF dots[377];
 	PointF points[377];
-	PointF view[2];
+
 	float t = 0.00f;
  	for (int i = 0; i < m; i++)
 	{
 			float X = -2.0f * Cos(t) + 3.0f* Cos(-2.0f / 3.0f * t);
 			float Y = -2.0f * Sin(t) - 3.0f * Sin(-2.0f / 3.0f * t);
-			dots[i].X = A*X+C;
-			dots[i].Y = B*Y+D;	
-			points[i].X = X;
-			points[i].Y = Y;
+			dots[i].X = X;
+			dots[i].Y = Y;
 			t += 0.05f;
 	}
-	//должна быть Улитка Паскаля, даже две..
+	WorldToViewPort(w, vp, dots, m);
 	//Кисти для заполнения цветом
 	Pen curvePen(Color::OrangeRed, 0.5f);
 	g.DrawCurve(&curvePen, dots, m);
-	int j = 0;
-	float x, y, x0, y0;
+
 	for (int i = 0; i < m-1; i++)
 	{
-		x = points[i].X;
-		y = points[i].Y;
-		x0 = points[i + 1].X;
-		y0 = points[i + 1].Y;
-
 	Pen curvePen2(Color::Black, 5.5f);
-	Pen curvePen3(Color::YellowGreen, 1.5f);
 
-		if (V_LBclip(&points[i].X, &points[i].Y, &points[i + 1].X, &points[i + 1].Y) == 1)
-		{
-				view[0].X = A * points[i].X + C;
-				view[0].Y = B * points[i].Y + D;
-				view[1].X = A * points[i+1].X + C;
-				view[1].Y = B * points[i+1].Y + D;
-				g.DrawLines(&curvePen2, view, 2);
+	PointF view[2] = {dots[i],dots[i+1]};
 
-				//view[i+1].X = A * points[i+1].X + C;
-				//view[i+1].Y = B * points[i+1].Y + D;
-		}
-		 
-
+	if (V_LBclip(&view[0].X, &view[0].Y, &view[1].X, &view[1].Y) == 1)
+	{
+		WorldToViewPort(w, vp, view, 2);
+		g.DrawLines(&curvePen2, view, 2);
+	}	 
 	}
-
-
-	//g.DrawRectangle(&curvePen2, rect);
-	//g.DrawLines(&curvePen2, view,j);
 }
 void PlotGrid(HWND hwnd, HDC hdc) {
 	
@@ -383,7 +396,7 @@ static int  LB_tclip(float p, float q)
 	accept = 1;                           /* Отрезок принят */
 	if (Equal.Equal(p,0.0f) == 0) 
 	{
-		if (Equal.Less(q,0.0f)) accept = 0;             /* Отбрасывание */
+		if (Equal.Less(q,0.0f)) accept = 0;   /* Отбрасывание */
 	}
 	else 
 	{
