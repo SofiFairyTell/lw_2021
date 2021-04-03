@@ -33,11 +33,11 @@ class EqualMethod
 			else
 				return false;
 		}
-		inline bool GreaterOrEqual(float a, float b, float tolerance = -1e-3f)
+		inline bool GreaterOrEqual(float a, float b, float tolerance = 1e-6f)
 		{
-			return !(b - a) > tolerance;
+			return (b - a) < tolerance;
 		}
-		inline bool Equal(float a, float b, float tolerance = -1e-3f)
+		inline bool Equal(float a, float b, float tolerance = 1e-6f)
 		{
 			return (abs(a - b) < tolerance);
 		}
@@ -68,17 +68,17 @@ class BelongPolygon
 			float denominate = ((B.Y - C.Y) * (A.X - C.X)) + ((C.X - B.X) * (A.Y - C.Y));
 			float a = (((B.Y - C.Y) * (P.X - C.X)) + ((C.X - B.X) * (P.Y - C.Y))) / denominate;
 			float b = (((C.Y - A.Y) * (P.X - C.X)) + ((A.X - C.X) * (P.Y - C.Y))) / denominate;
-			float c = (((A.Y - B.Y) * (P.X - C.X) + ((B.X - A.X) * (P.Y - A.Y)))) / denominate;
+			float c = (((A.Y - B.Y) * (P.X - A.X) + ((B.X - A.X) * (P.Y - A.Y)))) / denominate;
 
 			if (Equal.GreaterOrEqual(a,0.0f) && Equal.GreaterOrEqual(b, 0.0f)&& Equal.GreaterOrEqual(c, 0.0f))
 			{
-				cout <<"The dot is in the triangle\n";
+				cout <<"The dot is in the polygone\n";
 				// уточнение, т.е. где именно она в треугольнике
 				if (OnBorder(a,b,c))
 				{
 					cout << "The dot is on the border\n";
 					check_border++; 
-					tuple <const bool, int> t = {true, check_border};
+					tuple < const bool, int> t = {true, check_border};
 					return t; 				
 				}
 				else
@@ -132,11 +132,12 @@ public:
 		dots.erase(dots.begin());
 		for (int i = 0; i < dots.size() - 1; ++i)
 		{
-			cout << "WORK WITH TRIANGLE: " << i + 1;
+			cout << "WORK WITH TRIANGLE: \n" << i + 1 <<"\n";
 			tie(answ, check) = inPolygon.Baricenter_method(startDot, dots[i], dots[i + 1], P, check_border);
+
 			check_border = check;
 		}
-		answer = "Belongs polygon\n";
+		
 			if ( answ == true)
 			{
 				if (check > 1 || check == 0)
@@ -147,11 +148,13 @@ public:
 				{
 					answer = "On border of polygon\n";
 				}
+
+				answer += "\n Belongs polygon\n";
 			}
 			else
 				if (answ == false)
 				{
-					answer = "Not Inside in polygon\n";
+					answer = "Not Inside in last triangle\n";
 				}
 			cout << endl << answer << endl;
 		return answer;
@@ -167,10 +170,10 @@ int main()
 	vector<PointF> points;
 	cout << "---------------START--------------------\n";
 //Ввод координат
-	//cout << "-----Enter how many dots in Figure------\n";
-	//cin >> n;
-	//cout << "Enter the coordinates for the following dots:\n"; 
-	//
+	cout << "-----Enter how many dots in Figure------\n";
+	cin >> n;
+	cout << "Enter the coordinates for the following dots:\n"; 
+	
 	//for (int i = 0; i < n; i++)
 	//{
 	//	cout << "Enter the X and Y:\n";
@@ -178,9 +181,9 @@ int main()
 	//	PointF point(x, y);
 	//	points.push_back(point);
 	//}
-	//cout << "Enter the X and Y of P:\n";
-	//cin >> x >> y;
-	//PointF P(x, y);
+	cout << "Enter the X and Y of P:\n";
+	cin >> x >> y;
+	PointF P(x, y);
 	/*Инициализаци GDI+*/
 	ULONG_PTR gdToken;
 	GdiplusStartupInput gdInput;
@@ -193,22 +196,23 @@ int main()
 	PointF D(4.5f, 2.0f);
 	PointF E(3.0f, 1.0f);
 
+	
 	points.push_back(A);
 	points.push_back(B);
 	points.push_back(C);
 	points.push_back(D);
 	points.push_back(E);
 
-	float XcenterP = (points[1].X + points[0].X) / 2.0f;
-	float YcenterP = (points[1].Y + points[0].Y) / 2.0f;
+	//float XcenterP = (points[3].X + points[0].X) / 2.0f;
+	//float YcenterP = (points[3].Y + points[0].Y) / 2.0f;
 
-	PointF P(XcenterP, YcenterP); //проверяемая точка 
+	//PointF P(XcenterP, YcenterP); //проверяемая точка 
 
 	Method method = Method();
 	cout << "-------------Check by Polygon baricentric method----------------------- \n";
 
 	string result = method.Polygon_method(points, P);
-	cout <<"Result for DOT P = "<< P.X <<P.Y <<" is: "<< result;
+	cout <<"Result for DOT P = "<< P.X << "  " << P.Y <<" is: "<< result;
 	cout << "Coordinates of Polygon:";
 	for (int i = 0; i < points.size(); i++)
 	{

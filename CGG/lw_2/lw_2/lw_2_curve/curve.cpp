@@ -115,6 +115,7 @@ public:
 };
 
 inline void WorldToViewPort(const WorldWindow &w, const Viewport &vp, PointF *points, int count);
+inline void ViewPortToWorld(const WorldWindow &w, const Viewport &vp, PointF *points, int count);
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int  CmdShow)
 {
@@ -270,6 +271,19 @@ inline void WorldToViewPort(const WorldWindow &w, const Viewport &vp, PointF *po
 	}
 }
 
+inline void ViewPortToWorld(const WorldWindow &w, const Viewport &vp, PointF *points, int count)
+{
+	//Из мирового окна в окно просмотра
+	float A =  (w.Right - w.Left)/(float)vp.Width ;
+	float B = (w.Bottom - w.Top)/(float)vp.Height ;
+	float C =w.Left  - A * vp.X;
+	float D =w.Top  - B *vp.Y ;
+	for (unsigned int i = 0; i < count; ++i)
+	{
+		points[i].X = A * points[i].X + C;
+		points[i].Y = B * points[i].Y + D;
+	}
+}
 
 
 void Display(HDC hdc)
@@ -307,12 +321,12 @@ void Display(HDC hdc)
 			t += 0.05f;
 	}
 
-	for (int i = 0; i < m-1; i++)
-	{
-		PointF view[2] = { dots[i],dots[i + 1] };
-		WorldToViewPort(w, vp, view, 2);
-		g.DrawLines(&curve_limacon, view, 2);
-	}
+	//for (int i = 0; i < m-1; i++)
+	//{
+	//	PointF view[2] = { dots[i],dots[i + 1] };
+	//	WorldToViewPort(w, vp, view, 2);
+	//	g.DrawLines(&curve_limacon, view, 2);
+	//}
 
 	//Кисти для заполнения цветом
 	for (int i = 0; i < m-1; i++)
@@ -324,8 +338,14 @@ void Display(HDC hdc)
 				g.DrawLines(&curve_limacon_clip, view, 2);
 			}	 
 	}
+	PointF rectF[2] =
+	{
+		PointF(0.0f,255.0f),
+		PointF(0.0f,295.0f)
+	};
+	ViewPortToWorld(w, vp, rectF, 2);
 
-	g.DrawRectangle(&curve_сlip, 295, 255, 79, 68);
+	//g.DrawRectangle(&curve_сlip, 295, 255, 79, 68);
 }
 void PlotGrid(HWND hwnd, HDC hdc) {
 	
@@ -425,7 +445,8 @@ int  V_LBclip(float *x0, float *y0, float *x1, float *y1)
 	float dx, dy;
 	EqualMethod Equal = EqualMethod();
 	//Wxlef, Wybot, Wxrig, Wytop
-	WorldWindow w(0.0f, 0.0f, 4.0f, -4.0f);
+	//WorldWindow w(0.0f, 0.0f, 4.0f, -4.0f);
+	WorldWindow w(0.0f, 4.0f, 10.0f, -15.0f);
 
 	
 	visible = 0;
