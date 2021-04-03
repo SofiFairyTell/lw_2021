@@ -296,13 +296,13 @@ void Display(HDC hdc)
 
 	//Для основной фигуры
 	Viewport vp(0.0f,0.0f, 980.0f, 840.0f);
-	WorldWindow w(-15.0f,15.0f,35.0f,-35.0f);
-
-	//Кисти
+	WorldWindow w(-10.0f,10.0f,15.0f,-15.0f);
+		//Кисти
 	Pen curve_сlip(Color::Blue, 4.5f);
 	Pen curve_limacon(Color::OrangeRed, 2.5f);
 	Pen curve_limacon_clip(Color::Black, 5.5f);
 
+	
 
 	//Из мирового окна в окно просмотра
 
@@ -321,13 +321,13 @@ void Display(HDC hdc)
 			t += 0.05f;
 	}
 
-	//for (int i = 0; i < m-1; i++)
-	//{
-	//	PointF view[2] = { dots[i],dots[i + 1] };
-	//	WorldToViewPort(w, vp, view, 2);
-	//	g.DrawLines(&curve_limacon, view, 2);
-	//}
-
+	for (int i = 0; i < m-1; i++)
+	{
+		PointF view[2] = { dots[i],dots[i + 1] };
+		WorldToViewPort(w, vp, view, 2);
+		g.DrawLines(&curve_limacon, view, 2);
+	}
+	
 	//Кисти для заполнения цветом
 	for (int i = 0; i < m-1; i++)
 	{
@@ -446,7 +446,7 @@ int  V_LBclip(float *x0, float *y0, float *x1, float *y1)
 	EqualMethod Equal = EqualMethod();
 	//Wxlef, Wybot, Wxrig, Wytop
 	//WorldWindow w(0.0f, 0.0f, 4.0f, -4.0f);
-	WorldWindow w(0.0f, 4.0f, 10.0f, -15.0f);
+	WorldWindow w(0.0f, 0.0f, 10.0f, -15.0f);
 
 	
 	visible = 0;
