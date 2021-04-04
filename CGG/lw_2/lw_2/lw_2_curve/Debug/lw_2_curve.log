@@ -1,8 +1,8 @@
 ﻿  curve.cpp
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(95): warning C4804: >: небезопасное использование типа "bool" в операции
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(268): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(282): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(300): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(330): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(374): warning C4101: i: неиспользованная локальная переменная
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(94): warning C4804: >: небезопасное использование типа "bool" в операции
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(269): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(283): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(301): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(332): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\kurbatova\source\lw2020\lw_2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(376): warning C4101: i: неиспользованная локальная переменная
   lw_2_curve.vcxproj -> C:\Users\Kurbatova\source\LW2020\lw_2021\CGG\lw_2\lw_2\Debug\lw_2_curve.exe

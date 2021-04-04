@@ -26,8 +26,7 @@ void Display(HDC hdc); //функция для показа катера на э
 void DrawImg(HDC hdc); //загрузка изображения на экран
 void PlotGrid(HWND hwnd, HDC hdc);
 
-int  V_LBclip(float *x0, float *y0, float *x1, float *y1);
-static int  LB_tclip(float p, float q);
+
 
 
 
@@ -117,6 +116,8 @@ public:
 inline void WorldToViewPort(const WorldWindow &w, const Viewport &vp, PointF *points, int count);
 inline void ViewPortToWorld(const WorldWindow &w, const Viewport &vp, PointF *points, int count);
 
+int  V_LBclip(const WorldWindow &w, float *x0, float *y0, float *x1, float *y1);
+static int  LB_tclip(float p, float q);
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int  CmdShow)
 {
 	brushes[0] = (HBRUSH)CreateSolidBrush(RGB(0, 0, 100)); //Радикально-синий цвет
@@ -297,8 +298,8 @@ void Display(HDC hdc)
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 
 	//Для основной фигуры
-	Viewport vp(10.0f,10.0f, 580.0f, 440.0f);
-	WorldWindow w(-5.0f,5.0f,5.0f,-5.0f);
+	Viewport vp(5.0f,5.0f, 580.0f, 440.0f);
+	WorldWindow w(-4.75f,4.75f,4.75f,-4.75f);
 
 	
 	PointF border[5] =
@@ -306,7 +307,8 @@ void Display(HDC hdc)
 		PointF(w.Right,w.Top),	
 		PointF(w.Left,w.Top),
 		PointF(w.Left,w.Bottom),	
-		PointF(w.Right,w.Bottom)
+		PointF(w.Right,w.Bottom),
+		PointF(w.Right,w.Top)
 
 	};
 
@@ -317,7 +319,7 @@ void Display(HDC hdc)
 	
 	for (int i = 0; i < 4; i++)
 	{
-		PointF view[2] = { border[i],border[i + 1] };
+		PointF view[2] = {border[i + 1] , border[i]};
 		WorldToViewPort(w, vp, view, 2);
 		
 		g.DrawLines(&curve_limacon_clip, view,2);
@@ -342,18 +344,18 @@ void Display(HDC hdc)
 			t += 0.05f;
 	}
 
-	for (int i = 0; i < m-1; i++)
-	{
-		PointF view[2] = { dots[i],dots[i + 1] };
-		WorldToViewPort(w, vp, view, 2);
-		g.DrawLines(&curve_limacon, view, 2);
-	}
+	//for (int i = 0; i < m-1; i++)
+	//{
+	//	PointF view[2] = { dots[i],dots[i + 1] };
+	//	WorldToViewPort(w, vp, view, 2);
+	//	g.DrawLines(&curve_limacon, view, 2);
+	//}
 	
 	//Кисти для заполнения цветом
 	for (int i = 0; i < m-1; i++)
 	{
 		PointF view[2] = {dots[i],dots[i+1]};
-		if (V_LBclip(&view[0].X, &view[0].Y, &view[1].X, &view[1].Y) == 1)
+		if (V_LBclip(w, &view[0].X, &view[0].Y, &view[1].X, &view[1].Y) == 1)
 			{
 				WorldToViewPort(w, vp, view, 2);
 				g.DrawLines(&curve_limacon_clip, view, 2);
@@ -455,14 +457,14 @@ static int  LB_tclip(float p, float q)
 	return (accept);
 }  /* LB_tclip */
 
-int  V_LBclip(float *x0, float *y0, float *x1, float *y1)
+int  V_LBclip(const WorldWindow &w, float *x0, float *y0, float *x1, float *y1)
 { 
 	int   visible;
 	float dx, dy;
 	EqualMethod Equal = EqualMethod();
 	//Wxlef, Wybot, Wxrig, Wytop
 	//WorldWindow w(0.0f, 0.0f, 4.0f, -4.0f);
-	WorldWindow w(0.0f, 0.0f, 10.0f, -15.0f);
+	//WorldWindow w(0.0f, 0.0f, 10.0f, -15.0f);
 
 	
 	visible = 0;
