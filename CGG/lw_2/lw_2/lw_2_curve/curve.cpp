@@ -297,20 +297,31 @@ void Display(HDC hdc)
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 
 	//Для основной фигуры
-	Viewport vp(0.0f,0.0f, 980.0f, 840.0f);
-	WorldWindow w(-10.0f,10.0f,15.0f,-15.0f);
-
-	float A = (w.Right - w.Left) / (float)vp.Width;
-	float B = (w.Bottom - w.Top) / (float)vp.Height;
-	float C = w.Left - A * vp.X;
-	float D = w.Top - B * vp.Y;
+	Viewport vp(10.0f,10.0f, 580.0f, 440.0f);
+	WorldWindow w(-5.0f,5.0f,5.0f,-5.0f);
 
 	
+	PointF border[5] =
+	{
+		PointF(w.Right,w.Top),	
+		PointF(w.Left,w.Top),
+		PointF(w.Left,w.Bottom),	
+		PointF(w.Right,w.Bottom)
+
+	};
+
 		//Кисти
 	Pen curve_сlip(Color::Blue, 4.5f);
 	Pen curve_limacon(Color::OrangeRed, 2.5f);
 	Pen curve_limacon_clip(Color::Black, 5.5f);
-
+	
+	for (int i = 0; i < 4; i++)
+	{
+		PointF view[2] = { border[i],border[i + 1] };
+		WorldToViewPort(w, vp, view, 2);
+		
+		g.DrawLines(&curve_limacon_clip, view,2);
+	}
 
 	
 
@@ -348,12 +359,7 @@ void Display(HDC hdc)
 				g.DrawLines(&curve_limacon_clip, view, 2);
 			}	 
 	}
-	PointF rectF[2] =
-	{
-		PointF(0.0f,255.0f),
-		PointF(0.0f,295.0f)
-	};
-	ViewPortToWorld(w, vp, rectF, 2);
+
 
 	//g.DrawRectangle(&curve_сlip, 295, 255, 79, 68);
 }
