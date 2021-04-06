@@ -4,7 +4,7 @@ from warnings import warn
 
 class Simplex(object):
     def __init__(self, num_vars, constraints, objective_function):
-        """
+        """   
         num_vars: Number of variables
         equations: A list of strings representing constraints
         each variable should be start with x followed by a underscore
@@ -198,11 +198,17 @@ class Simplex(object):
 
             key_column = max_index(self.coeff_matrix[0])
             condition = self.coeff_matrix[0][key_column] > 0
+        sol = ""
+        for i in range(len(self.coeff_matrix)):
+            for j in range(len(self.coeff_matrix)+2):
+                sol += str(self.coeff_matrix[i][j].numerator / self.coeff_matrix[i][j].denominator) + " "
+            sol += "\n"
 
+        print("Solution table: \n{0} \n".format(sol))
         solution = {}
         for i, var in enumerate(self.basic_vars[1:]):
             if var < self.num_vars:
-                solution['x_'+str(var+1)] = self.coeff_matrix[i+1][-1]
+                solution['x_'+str(var+1)] = self.coeff_matrix[i+1][-1].numerator / self.coeff_matrix[i+1][-1].denominator
 
         for i in range(0, self.num_vars):
             if i not in self.basic_vars[1:]:
@@ -229,15 +235,18 @@ class Simplex(object):
             self.make_key_column_zero(key_column, key_row)
             key_column = min_index(self.coeff_matrix[0])
             condition = self.coeff_matrix[0][key_column] < 0
+        sol = ""
+        for i in range(len(self.coeff_matrix)):
+            for j in range(len(self.coeff_matrix)+2):
+                sol += str(self.coeff_matrix[i][j].numerator / self.coeff_matrix[i][j].denominator) + " "
+            sol += "\n"
 
-        # print(self.coeff_matrix)
+        print("Solution table: \n{0} \n".format(sol))
+
         solution = {}
         for i, var in enumerate(self.basic_vars[1:]):
             if var < self.num_vars:
-                numerator = self.coeff_matrix[i + 1][-1].numerator
-                denominator = self.coeff_matrix[i + 1][-1].denominator
-                # solution['x_'+str(var+1)+str(" = ") + str(numerator/denominator)] = self.coeff_matrix[i+1][-1]
-                solution['x_'+str(var+1)+str(" = ")] = self.coeff_matrix[i+1][-1].numerator / self.coeff_matrix[i+1][-1].denominator
+                solution['x_'+str(var+1)] = self.coeff_matrix[i+1][-1].numerator / self.coeff_matrix[i+1][-1].denominator
 
 
 
