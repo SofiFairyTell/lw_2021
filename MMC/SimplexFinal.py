@@ -115,7 +115,12 @@ class Simplex(object):
         condition = self.coeff_matrix[0][key_column] > 0
 
         while condition is True:
-
+            sol = ""
+            for i in range(len(self.coeff_matrix)):
+                for j in range(len(self.coeff_matrix) + 2):
+                    sol += str(self.coeff_matrix[i][j].numerator / self.coeff_matrix[i][j].denominator) + " "
+                sol += "\n"
+            print("Coefficient table: \n{0} \n".format(sol))
             key_row = self.find_key_row(key_column = key_column)
             self.basic_vars[key_row] = key_column
             pivot = self.coeff_matrix[key_row][key_column]
@@ -124,8 +129,17 @@ class Simplex(object):
 
             key_column = max_index(self.coeff_matrix[0])
             condition = self.coeff_matrix[0][key_column] > 0
-            # print("\nSIMPLEX")
-            # print(self.coeff_matrix)
+
+        sol = ""
+        for i in range(len(self.coeff_matrix)):
+            for j in range(len(self.coeff_matrix) + 2):
+                sol += str(self.coeff_matrix[i][j].numerator / self.coeff_matrix[i][j].denominator) + " "
+            sol += "\n"
+        print("Coefficient table: \n{0} \n".format(sol))
+
+
+
+
 
     def find_key_row(self, key_column):
         min_val = float("inf")
@@ -285,3 +299,4 @@ def min_index(row):
             min_i = i
 
     return min_i
+
