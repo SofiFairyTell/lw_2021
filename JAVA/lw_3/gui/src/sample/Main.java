@@ -4,16 +4,19 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("lw3oop.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("lw3.fxml"));
         primaryStage.setTitle("Lw_3");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+
     }
 
 

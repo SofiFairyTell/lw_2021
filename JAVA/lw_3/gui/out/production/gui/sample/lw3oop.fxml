@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<GridPane alignment="center" hgap="10" rowConstraints="$null" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <children>
+      <AnchorPane prefHeight="480.0" prefWidth="600.0">
+         <children>
+            <TabPane prefHeight="480.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="100.0" tabMaxWidth="100.0">
+              <tabs>
+                <Tab text="Треугольник">
+                     <content>
+                        <Polygon fill="DODGERBLUE" points="-50.0, 40.0, 129.79998779296875, 39.99998474121094, 0.0, -60.0" stroke="BLACK" strokeType="INSIDE" />
+                     </content>
+                  </Tab>
+                <Tab text="Круг" />
+                  <Tab text="Прямоугольник">
+                     <content>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="152.0" stroke="BLACK" strokeType="INSIDE" width="205.0" />
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
