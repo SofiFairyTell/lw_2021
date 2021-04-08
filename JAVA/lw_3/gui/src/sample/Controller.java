@@ -25,7 +25,6 @@ public class Controller {
         TreeItem<String> circle = new TreeItem("Круг");
         TreeItem<String> triangle = new TreeItem("Треугольник");
         TreeItem<String> rectangle = new TreeItem("Прямоугольник");
-//        temChild.setExpanded(true);
 
         rootFigure.getChildren().add(circle);
         rootFigure.getChildren().add(triangle);
@@ -37,5 +36,5 @@ public class Controller {
     public void handleButtonAction(javafx.event.ActionEvent actionEvent) {
         createTree();
     }
-    
+
 }
