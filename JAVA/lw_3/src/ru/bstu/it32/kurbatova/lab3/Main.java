@@ -27,7 +27,7 @@ public class Main {
         return 0;
     }
 
-    static int GetMax(ArrayList<Figure.GeometricShapes> shapes, int max) {
+    public static int GetMax(ArrayList<Figure.GeometricShapes> shapes, int max) {
         for (int i = 1; i < shapes.size(); i++) {
             if (shapes.get(max).getPerimeter() < shapes.get(i).getPerimeter()) {
                 max = i;

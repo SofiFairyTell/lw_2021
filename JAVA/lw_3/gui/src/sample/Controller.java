@@ -3,6 +3,9 @@ package sample;
 import ru.bstu.it32.kurbatova.lab3.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import ru.bstu.it32.kurbatova.lab3.Main;
+
+import java.util.ArrayList;
 
 public class Controller {
     @FXML
@@ -29,7 +32,7 @@ public class Controller {
     private Button btn;
     @FXML
     TreeView selectionTreeView;
-
+    ArrayList<Figure.GeometricShapes> shapes = new ArrayList<>();
 
     public void createTree(String... rootItems) {
         //create root
@@ -99,10 +102,16 @@ public class Controller {
 
         }
     }
-
+    public void handleResult(javafx.event.ActionEvent actionEvent)
+    {
+        int max = 0;
+        result.setText(shapes.get(Main.GetMax(shapes,max)).toString());
+    }
     public void handleButtonAdd(javafx.event.ActionEvent actionEvent)
     {
+
         String value = FigureName.getSelectionModel().getSelectedItem().toString();
+        String result;
         if (value == null || value.trim().equals(""))
         {
             this.writeMessage("Item cannot be empty.");
@@ -110,14 +119,23 @@ public class Controller {
         }
         else {
             switch (value) {
-                case "Tреугольник":
-                    
+                case "Треугольник":
+                    result = parametr1.getText()+ ","+parametr2.getText()+ ","+parametr3.getText()+ ","+ value;
+                    Triangle triangle = new Triangle();
+                    triangle.init(result);
+                    shapes.add(triangle);
                     break;
                 case "Круг":
-
+                    result = parametr1.getText()+ ","+ value;
+                    Circle circle = new Circle();
+                    circle.init(result);
+                    shapes.add(circle);
                     break;
                 case "Прямоугольник":
-
+                    result = parametr1.getText()+ ","+parametr2.getText()+","+ value;
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.init(result);
+                    shapes.add(rectangle);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + value);
@@ -163,6 +181,7 @@ public class Controller {
             parent.setExpanded(true);
         }
     }
+
 
     private void writeMessage(String s) {
     }

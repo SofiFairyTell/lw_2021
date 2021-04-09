@@ -32,7 +32,7 @@
                                         <Font name="Times New Roman" size="14.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="btn" layoutX="717.0" layoutY="127.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="178.0" text="Найти" />
+                                <Button fx:id="btn" onAction="#handleResult" layoutX="717.0" layoutY="127.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="178.0" text="Найти" />
                                 <SplitPane dividerPositions="0.4344366645448759" prefHeight="400.0" prefWidth="501.0">
                                     <items>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="299.0">
