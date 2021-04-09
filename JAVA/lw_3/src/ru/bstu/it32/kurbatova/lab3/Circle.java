@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Circle extends Figure.GeometricShapes
 {
     private double radius;
-
+    private String name;
     public Circle() {
         super(0);
     }
@@ -30,6 +30,7 @@ public class Circle extends Figure.GeometricShapes
     {
         String[] arr = string.split(",");
         radius = Double.parseDouble(arr[0]);
+        name = arr[1];
     }
     @Override
     public double getPerimeter()

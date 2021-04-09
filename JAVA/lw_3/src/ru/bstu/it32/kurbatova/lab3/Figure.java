@@ -17,31 +17,34 @@ public class Figure {
         public  double init();
     }
 
-    public  static  abstract  class GeometricShapes implements Comparator<GeometricShapes>
-    {
+    public  static  abstract  class GeometricShapes implements Comparator<GeometricShapes> {
         private static int sides; // количество сторон
+        private static String name;
 
-        public GeometricShapes(int side)
-        {
+        public GeometricShapes(int side) {
             sides = side;
-            Scanner number = new Scanner(System.in);
-
         }
 
-        public int getSides()
-        {
+        public GeometricShapes(String name) {
+            this.name = name;
+        }
+
+        public int getSides() {
             return sides;
         }
-        public abstract void init(Scanner scanner);	// считывание параметров с консоли
-        public abstract void init(String string);	// считывание параметров с консоли
-        public abstract double getPerimeter();	// возвращает  периметр
+
+        public abstract void init(Scanner scanner);    // считывание параметров с консоли
+
+        public abstract void init(String string);    // считывание параметров с консоли
+
+        public abstract double getPerimeter();    // возвращает  периметр
+
         @Override
-        public String toString()
-        {
-            return "( Perimeter =" + this.getPerimeter() +")";
+        public String toString() {
+            return "( Perimeter =" + this.getPerimeter() + ")";
         }
 
-    }    //Общие поля
+    }
 
 
     public String toString()        // возвращается состояние объекта в виде строки

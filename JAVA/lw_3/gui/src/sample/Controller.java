@@ -1,12 +1,8 @@
 package sample;
 
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
+import ru.bstu.it32.kurbatova.lab3.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Controller {
     @FXML
@@ -40,9 +36,9 @@ public class Controller {
         TreeItem rootFigure = new TreeItem("Фигуры");
         rootFigure.setExpanded(true);
         //create child
-        TreeItem<String> circle = new TreeItem("Круг");
-        TreeItem<String> triangle = new TreeItem("Треугольник");
-        TreeItem<String> rectangle = new TreeItem("Прямоугольник");
+        TreeItem circle = new TreeItem("Круг");
+        TreeItem triangle = new TreeItem("Треугольник");
+        TreeItem rectangle = new TreeItem("Прямоугольник");
 
         rootFigure.getChildren().add(circle);
         rootFigure.getChildren().add(triangle);
@@ -57,7 +53,7 @@ public class Controller {
     public void handleComboBox(javafx.event.ActionEvent actionEvent)
     {
         String value = FigureName.getSelectionModel().getSelectedItem().toString();
-        selectionTreeView.getSelectionModel().setSelectionMode();
+
         if (value == null || value.trim().equals(""))
         {
             this.writeMessage("Item cannot be empty.");
@@ -103,8 +99,30 @@ public class Controller {
 
         }
     }
+
     public void handleButtonAdd(javafx.event.ActionEvent actionEvent)
     {
+        String value = FigureName.getSelectionModel().getSelectedItem().toString();
+        if (value == null || value.trim().equals(""))
+        {
+            this.writeMessage("Item cannot be empty.");
+            return;
+        }
+        else {
+            switch (value) {
+                case "Tреугольник":
+                    
+                    break;
+                case "Круг":
+
+                    break;
+                case "Прямоугольник":
+
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + value);
+            }
+        }
         addItem(figureName.getText());
     }
 

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Rectangle extends Figure.GeometricShapes {
     private double a,b;
-
+    private String name;
     public Rectangle() {
         super(4);
     }
@@ -23,7 +23,7 @@ public class Rectangle extends Figure.GeometricShapes {
         String[] arr = string.split(",");
         a = Double.parseDouble(arr[0]);
         b = Double.parseDouble(arr[1]);
-
+        name = arr[2];
     }
 
     @Override

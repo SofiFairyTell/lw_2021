@@ -23,10 +23,12 @@ public class Triangle extends Figure.GeometricShapes{
 
 
         private double a,b,c;
-
+        private String name;
         public Triangle()
         {
             super(3);
+
+
         }
         @Override
         public double getPerimeter()
@@ -50,7 +52,9 @@ public class Triangle extends Figure.GeometricShapes{
             a = Double.parseDouble(arr[0]);
             b = Double.parseDouble(arr[1]);
             c = Double.parseDouble(arr[2]);
+            name = arr[3];
         }
+
     @Override public String toString()
     {
         return "Parameters TRIANGLE [a =" + a + "; " + "b = " + b + ";" + "c =" + c + ";" + super.toString();
