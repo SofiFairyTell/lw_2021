@@ -16,7 +16,7 @@ public class Controller {
     private Button btn;
     @FXML
     TreeView selectionTreeView;
-    @FXML
+
 
 
     public void createTree(String... rootItems) {
@@ -35,11 +35,11 @@ public class Controller {
         selectionTreeView.setRoot(rootFigure);
     }
 
-    public void handleButtonAction(javafx.event.ActionEvent actionEvent) {
+    public void handleButtonExpand(javafx.event.ActionEvent actionEvent) {
         createTree();
     }
 
-    public void handleButtonAdd(ActionEvent event)
+    public void handleButtonAdd(javafx.event.ActionEvent actionEvent)
     {
         addItem(FigureName.getSelectionModel().getSelectedItem().toString());
     }
@@ -52,32 +52,32 @@ public class Controller {
             return;
         }
 
+        TreeItem<String> parent = (TreeItem<String>) selectionTreeView.getSelectionModel().getSelectedItem();
 
-//        TreeItem parent = selectionTreeView.getSelectionModel().getSelectedItem();
-//
-//        if (parent == null)
-//        {
-//            this.writeMessage("Select a node to add this item to.");
-//            return;
-//        }
-//
-//        // Check for duplicate
-//        for(Object child : parent.getChildren())
-//        {
-//            if (child.getValue().equals(value))
-//            {
-//                this.writeMessage(value + " already exists under " + parent.getValue());
-//                return;
-//            }
-//        }
-//
-//        TreeItem newItem = new TreeItem(value);
-//        parent.getChildren().add(newItem);
-//
-//        if (!parent.isExpanded())
-//        {
-//            parent.setExpanded(true);
-//        }
+        if (parent == null)
+        {
+            this.writeMessage("Select a node to add this item to.");
+            return;
+        }
+
+        // Check for duplicate
+        for(TreeItem child : parent.getChildren())
+        {
+
+            if (child.getValue().equals(value))
+            {
+                this.writeMessage(value + " already exists under " + parent.getValue());
+                return;
+            }
+        }
+
+        TreeItem newItem = new TreeItem(value);
+        parent.getChildren().add(newItem);
+
+        if (!parent.isExpanded())
+        {
+            parent.setExpanded(true);
+        }
     }
 
     private void writeMessage(String s) {
