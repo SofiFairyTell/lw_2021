@@ -1,11 +1,28 @@
 package sample;
 
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Controller {
+    @FXML
+    private TextField figureName;
+    @FXML
+    private Label label1;
+    @FXML
+    private Label label2;
+    @FXML
+    private Label label3;
+    @FXML
+    private TextField parametr1;
+    @FXML
+    private TextField parametr2;
+    @FXML
+    private TextField parametr3;
     @FXML
     private TextArea result;
     @FXML
@@ -16,7 +33,6 @@ public class Controller {
     private Button btn;
     @FXML
     TreeView selectionTreeView;
-
 
 
     public void createTree(String... rootItems) {
@@ -38,10 +54,58 @@ public class Controller {
     public void handleButtonExpand(javafx.event.ActionEvent actionEvent) {
         createTree();
     }
+    public void handleComboBox(javafx.event.ActionEvent actionEvent)
+    {
+        String value = FigureName.getSelectionModel().getSelectedItem().toString();
+        selectionTreeView.getSelectionModel().setSelectionMode();
+        if (value == null || value.trim().equals(""))
+        {
+            this.writeMessage("Item cannot be empty.");
+            return;
+        }
+        if(value.equals("Круг"))
+        {
+            parametr2.setVisible(false);
+            label2.setVisible(false);
+            parametr3.setVisible(false);
+            label3.setVisible(false);
+            label1.setText("Радиус");
+            parametr1.setPromptText("Введите радиус");
+        }
+        else
+        {
+            if(value.equals("Прямоугольник"))
+            {
+                parametr3.setVisible(false);
+                label3.setVisible(false);
+                parametr2.setPromptText("Введите сторону b");
+                parametr1.setPromptText("Введите сторону a");
+                label1.setText("Сторона a");
+                label2.setText("Сторона b");
+            }
+            else
+            {
+                if(value.equals("Треугольник"))
+                {
+                    parametr2.setVisible(true);
+                    label2.setVisible(true);
+                    parametr3.setVisible(true);
+                    label3.setVisible(true);
 
+                    parametr3.setPromptText("Введите сторону c");
+                    parametr2.setPromptText("Введите сторону b");
+                    parametr1.setPromptText("Введите сторону a");
+                    label1.setText("Сторона a");
+                    label2.setText("Сторона b");
+                    label3.setText("Сторона c");
+                }
+            }
+
+        }
+    }
     public void handleButtonAdd(javafx.event.ActionEvent actionEvent)
     {
-        addItem(FigureName.getSelectionModel().getSelectedItem().toString());
+        addItem(figureName.getText());
     }
 
     private void addItem(String value)
@@ -51,8 +115,10 @@ public class Controller {
             this.writeMessage("Item cannot be empty.");
             return;
         }
+        String root = FigureName.getSelectionModel().getSelectedItem().toString();
+//        TreeItem<String> parent = new TreeItem(root);
 
-        TreeItem<String> parent = (TreeItem<String>) selectionTreeView.getSelectionModel().getSelectedItem();
+       TreeItem<String> parent = (TreeItem<String>) selectionTreeView.getSelectionModel().getSelectedItem();
 
         if (parent == null)
         {
