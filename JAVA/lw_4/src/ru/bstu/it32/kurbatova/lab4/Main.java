@@ -19,7 +19,7 @@ public class Main {
     }
     private void FileParser(String line)
     {
-        
+
     }
     public static void main(String[] args) {
 
