@@ -1,4 +1,7 @@
 package ru.bstu.it32.kurbatova.lab4;
+
+import java.io.FileNotFoundException;
+
 /**
  * На вход программе подается произвольный html-файл. Необходимо всем тегам <img> добавить недостающие атрибуты
  * height и width со значениями заданными пользователем.
@@ -21,7 +24,9 @@ public class Main {
     {
 
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner scanner = new Scanner(System.in);
+        String path = "C:\\Users\\Kurbatova\\source\\LW2020\\lw_2021\\TCS\\LAB_1\\TRAVEL_WEB"
 
     }
 }
