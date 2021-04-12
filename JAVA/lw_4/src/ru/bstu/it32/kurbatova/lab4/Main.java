@@ -19,42 +19,38 @@ import java.util.regex.Pattern;
  *
  * 100, 200 и 300 это значения введенные пользователем*/
 public class Main {
-    private void FileReader(String filename) throws IOException {
+
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите путь к HTML файлу: ");
         String filePath = scanner.nextLine();
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
-        BufferedReader bufferedReader2 = new BufferedReader(new FileReader(filePath));
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("result.html"));
-        FileParser(bufferedReader);
-    }
 
-    private void FileParser(BufferedReader bufferedReader) throws IOException {
-/*		String Str = new String("<img src='kartinka.jpg' />");
-		int index = Str.indexOf("' ");
-		int index2 = Str.indexOf("/");
-		System.out.print(index);
-		System.out.print(index2);
-		System.out.print("\nВозвращаемое значение: ");
-		Str = Str.replace(Str.substring(index+1,index2), " width = '300' height = '100'");
-		System.out.println(Str);*/
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("result.html"));
+
         String patt = "<img.*?src?= ?['\\\"]([^'\\\"]*)['\\\"](.*?)\\/";
         Pattern pattern = Pattern.compile(patt);
         Matcher matcher;
 
         String input = "";
+        StringBuilder result = new StringBuilder();
         while ((input = bufferedReader.readLine()) != null) {
             matcher = pattern.matcher(input);
-            if (matcher.find()) {
-                input.replaceAll(matcher.group(2),"width = '300' height = '100'");
+            if (matcher.find())
+            {
+                String group = matcher.group(2);
+                input = input.replaceAll(matcher.group(2)," width = '300' height = '100'");
+                System.out.println(input);
+                result.append(input).append("\n");
+            }
+            else
+            {
+                result.append(input).append("\n");
             }
 
         }
-    }
-	
-    public static void main(String[] args) throws FileNotFoundException {
-        Scanner scanner = new Scanner(System.in);
-        String path = "C:\\Users\\Kurbatova\\source\\LW2020\\lw_2021\\TCS\\LAB_1\\TRAVEL_WEB";
+        System.out.println(result);
+        bufferedWriter.write(result.toString());
 
     }
 }
