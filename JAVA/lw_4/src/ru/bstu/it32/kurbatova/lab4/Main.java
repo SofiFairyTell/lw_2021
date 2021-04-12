@@ -1,6 +1,7 @@
 package ru.bstu.it32.kurbatova.lab4;
 
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * На вход программе подается произвольный html-файл. Необходимо всем тегам <img> добавить недостающие атрибуты
@@ -21,12 +22,20 @@ public class Main {
 
     }
     private void FileParser(String line)
-    {
-
-    }
+	{
+		String Str = new String("<img src='kartinka.jpg' />");
+		int index = Str.indexOf("' ");
+		int index2 = Str.indexOf("/");
+		System.out.print(index);
+		System.out.print(index2);
+		System.out.print("\nВозвращаемое значение: ");
+		Str = Str.replace(Str.substring(index+1,index2), " width = '300' height = '100'");
+		System.out.println(Str);
+	}
+	
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
-        String path = "C:\\Users\\Kurbatova\\source\\LW2020\\lw_2021\\TCS\\LAB_1\\TRAVEL_WEB"
-
+        String path = "C:\\Users\\Kurbatova\\source\\LW2020\\lw_2021\\TCS\\LAB_1\\TRAVEL_WEB";
+        String pattern = "<img.*?src?= ?['\\\"]([^'\\\"]*)['\\\"](.*?)\\/";
     }
 }
