@@ -51,6 +51,6 @@ public class Main {
         }
         System.out.println(result);
         bufferedWriter.write(result.toString());
-
+        bufferedWriter.close();
     }
 }
