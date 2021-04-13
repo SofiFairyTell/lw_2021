@@ -29,6 +29,7 @@ public class Main {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("result.html"));
 
         String patt = "<img.*?src?= ?['\\\"]([^'\\\"]*)['\\\"](.*?)\\/";
+        //Разбить паттерна три группы! Тогда  первой группе д.б. img + src, потом вставка наших значений и соединение со второй группой
         Pattern pattern = Pattern.compile(patt);
         Matcher matcher;
 
