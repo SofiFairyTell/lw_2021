@@ -245,7 +245,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		Pen kater_border(Color::Blue, 10.f);//Кисти для заполнения цветом
 		SolidBrush brushYellow(Color::Yellow);//Твердая кисть
 		HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine, Color::Bisque);//Штриховая кисть
-		HatchBrush hatchBrush_vibes(HatchStyleShingle, Color::Aquamarine, Color::Bisque);//Штриховая кисть
+		HatchBrush hatchBrush_vibes(HatchStyleShingle, Color::Yellow, Color::Red);//Штриховая кисть
 		LinearGradientBrush linBrush(rect,Color::Indigo,Color::Goldenrod,40.f); //кисть с линейным градиентом
 		
 	#pragma region Part of kater
@@ -313,16 +313,17 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		g.SetSmoothingMode(SmoothingModeHighQuality);
 
 
-		//g.FillEllipse(&hatchBrush, Rect(150, 50, 500, 500));
 		path.AddEllipse(Rect(270, 240, 100, 100));
 
 		Region rg_window(&path);
 		g.SetClip(&rg_window, CombineModeUnion);
 
+		
 		path.AddEllipse(Rect(440, 240, 100, 100));
 
 		Region rg_window2(&path);
 		g.SetClip(&rg_window2, CombineModeUnion);
+
 
 
 		g.FillRectangle(&linBrush, kater_part[0]);		//корпус
@@ -385,6 +386,10 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		g.DrawString(L"Kater-1", -1, &font, rectF, &sf, &hatchBrushText);
 		
 		g.SetClip(&rg_infinity);
+
+		g.DrawEllipse(&kater_border, Rect(270, 240, 100, 100));
+		g.DrawEllipse(&kater_border, Rect(440, 240, 100, 100));
+
 		
 	}
 

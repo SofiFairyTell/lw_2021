@@ -116,8 +116,9 @@ public:
 inline void WorldToViewPort(const WorldWindow &w, const Viewport &vp, PointF *points, int count);
 inline void ViewPortToWorld(const WorldWindow &w, const Viewport &vp, PointF *points, int count);
 
-int  V_LBclip(const WorldWindow &w, float *x0, float *y0, float *x1, float *y1);
-static int  LB_tclip(float p, float q);
+bool  V_LBclip(const WorldWindow &w, float *x0, float *y0, float *x1, float *y1);//отсечение по алгоритму Лианга-Барски
+static bool LB_tclip(float p, float q);//определение оставить отрезок или нет
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int  CmdShow)
 {
 	brushes[0] = (HBRUSH)CreateSolidBrush(RGB(0, 0, 100)); //Радикально-синий цвет
@@ -241,6 +242,7 @@ void OnDestroy(HWND hwnd)
 	PostQuitMessage(0); // отправляем сообщение WM_QUIT
 }
 //То что ниже надо собирать с x86
+//Вычисление Sin и COS
 inline float Sin(float angle)
 {
 	__asm
@@ -311,60 +313,19 @@ void Display(HDC hdc)
 	//сглаживание
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 
-	//Для основной фигуры
-	Viewport vp(5.0f,5.0f, 580.0f, 440.0f);
-	WorldWindow w(-4.75f,4.75f,4.75f,-4.75f);
+	//Координаты окон для основной фигуры
+	Viewport vp(50.0f,50.0f, 580.0f, 440.0f);
+	WorldWindow w(-5.75f,5.75f, 5.75f,-5.75f);
 
-	
-	PointF border[5] =
-	{
-		PointF(w.Right,w.Top),	
-		PointF(w.Left,w.Top),
-		PointF(w.Left,w.Bottom),	
-		PointF(w.Right,w.Bottom),
-		PointF(w.Right,w.Top)
-
-	};
-
-		//Кисти
+			//Кисти
 	Pen curve_сlip(Color::Blue, 4.5f);
-	Pen curve_limacon(Color::OrangeRed, 2.5f);
-	Pen curve_limacon_clip(Color::Black, 5.5f);
+	Pen curve_border(Color::OrangeRed, 6.5f);
+	Pen curve_limacon_clip(Color::Black, 2.5f);
 	
-	for (int i = 0; i < 4; i++)
-	{
-		PointF view[2] = {border[i + 1] , border[i]};
-		WorldToViewPort(w, vp, view, 2);
-		
-		g.DrawLines(&curve_limacon_clip, view,2);
-	}
-
-	
-
-	//Из мирового окна в окно просмотра
-
 	int m = (6*PI/0.05f)+1; //376,8 = 377 точек
 	
 	std::vector<PointF> dots(m);
 	CalculateDots(dots, m);
-
-	/*float t = 0.00f;
- 	for (int i = 0; i < m; i++)
-	{
-			float X = -2.0f * Cos(t) + 3.0f* Cos(-2.0f / 3.0f * t);
-			float Y = -2.0f * Sin(t) - 3.0f * Sin(-2.0f / 3.0f * t);
-			
-			dots[i].X += X;
-			dots[i].Y += Y;
-			t += 0.05f;
-	}*/
-
-	//for (int i = 0; i < m-1; i++)
-	//{
-	//	PointF view[2] = { dots[i],dots[i + 1] };
-	//	WorldToViewPort(w, vp, view, 2);
-	//	g.DrawLines(&curve_limacon, view, 2);
-	//}
 	
 	//Кисти для заполнения цветом
 	for (int i = 0; i < m-1; i++)
@@ -373,10 +334,27 @@ void Display(HDC hdc)
 		if (V_LBclip(w, &view[0].X, &view[0].Y, &view[1].X, &view[1].Y) == 1)
 			{
 				WorldToViewPort(w, vp, view, 2);
-				g.DrawLines(&curve_limacon_clip, view, 2);
+				g.DrawCurve(&curve_limacon_clip, view, 2);
 			}	 
 	}
 
+
+	PointF border[5] =
+	{
+		PointF(w.Right, w.Top),
+		PointF(w.Left, w.Top),
+		PointF(w.Left, w.Bottom),
+		PointF(w.Right, w.Bottom),
+		PointF(w.Right, w.Top)
+	};
+
+	//Рисование границы
+	for (int i = 0; i < 4; i++)
+	{
+		PointF view[2] = { border[i + 1] , border[i] };
+		WorldToViewPort(w, vp, view, 2);
+		g.DrawLines(&curve_border, view, 2);
+	}
 
 	//g.DrawRectangle(&curve_сlip, 295, 255, 79, 68);
 }
@@ -419,32 +397,28 @@ void PlotGrid(HWND hwnd, HDC hdc) {
 }
 
 /*--------------------------------------------------- 
- * V_LBclip
- *  Реализует алгоритм отсечения Лианга-Барски
- *  с параметрическим заданием линий
- *
- * int  V_LBclip (float *x0, float *y0, float *x1, float *y1)
- *
+ *  int  V_LBclip (float *x0, float *y0, float *x1, float *y1) - алгоритм отсечения Лианга-Барски с параметрическим заданием линий
+ *  *
  * Отсекает отрезок, заданный значениями координат его
  * точек (x0,y0), (x1,y1), по окну отсечения, заданному
  * глобальными скалярами Wxlef, Wybot, Wxrig, Wytop
  *
  * Возвращает:
- *  0 - отрезок не видим
- *  1 - отрезок видим
+ *  false - отрезок не видим
+ *  true - отрезок видим
  */
 
 static float LB_t0, LB_t1;
 
-static int  LB_tclip(float p, float q)
+static bool  LB_tclip(float p, float q)
 {
-	int   accept;
+	bool accept;
 	float r;
 	EqualMethod Equal = EqualMethod();
-	accept = 1;                           /* Отрезок принят */
+	accept = true;                           /* Отрезок принят */
 	if (Equal.Equal(p,0.0f) == 0) 
 	{
-		if (Equal.Less(q,0.0f)) accept = 0;   /* Отбрасывание */
+		if (Equal.Less(q,0.0f)) accept = false;   /* Отбрасывание */
 	}
 	else 
 	{
@@ -452,7 +426,7 @@ static int  LB_tclip(float p, float q)
 		if (Equal.Less(p,0.0f)) 
 		{
 			if (Equal.Greater(r,LB_t1)) 
-				accept = 0;      /* Отбрасывание */
+				accept = false;      /* Отбрасывание */
 			else 
 				if (Equal.Greater(r,LB_t0)) 
 					LB_t0 = r;
@@ -460,7 +434,7 @@ static int  LB_tclip(float p, float q)
 		else 
 		{
 			if (Equal.Less(r,LB_t0)) 
-				accept = 0;      /* Отбрасывание */
+				accept = false;      /* Отбрасывание */
 			else 
 				if (Equal.Less(r, LB_t1))
 				{
@@ -472,17 +446,15 @@ static int  LB_tclip(float p, float q)
 	return (accept);
 }  /* LB_tclip */
 
-int  V_LBclip(const WorldWindow &w, float *x0, float *y0, float *x1, float *y1)
+bool V_LBclip(const WorldWindow &w, float *x0, float *y0, float *x1, float *y1)
 { 
-	int   visible;
+	//int   visible;
+	bool visible;
 	float dx, dy;
 	EqualMethod Equal = EqualMethod();
 	//Wxlef, Wybot, Wxrig, Wytop
-	//WorldWindow w(0.0f, 0.0f, 4.0f, -4.0f);
-	//WorldWindow w(0.0f, 0.0f, 10.0f, -15.0f);
-
 	
-	visible = 0;
+	visible = false;
 	LB_t0 = 0;  LB_t1 = 1;
 	dx = *x1 - *x0;
 	if (LB_tclip(-dx, *x0 - w.Left)) 
@@ -504,7 +476,7 @@ int  V_LBclip(const WorldWindow &w, float *x0, float *y0, float *x1, float *y1)
 						*x0 = *x0 + LB_t0 * dx;
 						*y0 = *y0 + LB_t0 * dy;
 					}
-					++visible;
+					visible = true;
 				}
 			}
 		}
