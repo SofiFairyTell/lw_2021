@@ -7,6 +7,8 @@
 #include <gdiplus.h>
 #include <gdiplusgraphics.h>
 #include <list>
+#include <vector>
+#define  PI 3.1416f 
 #include "Dot.h"
 /*
 * Рисунок - КАТЕР
@@ -35,6 +37,7 @@ using namespace Gdiplus;
 HWND hwnd = NULL; //дескриптор окна
 void Display(HDC hdc); //функция для показа катера на экране
 void DrawImg(HDC hdc); //загрузка изображения на экран
+void CalculateDots(std::vector<PointF> &dots, int m);
 
 Image* img;
 /*Для изменения цвета окна, когда было обработано WM_SYSCHAR */
@@ -128,13 +131,10 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	HDC hdc;             // индекс контекста устройства
 	PAINTSTRUCT ps;      // структура для рисования
 
-
-
 	switch (msg)
 	{
 		HANDLE_MSG(hwnd, WM_CREATE, OnCreate);
 		HANDLE_MSG(hwnd, WM_DESTROY, OnDestroy);
-		//HANDLE_MSG(hwnd, WM_COMMAND, OnCommand)
 		case WM_PAINT:
 			{
 				PAINTSTRUCT pstruct;
@@ -160,10 +160,7 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 			TextOut(hdc, xPos, yPos, szBuf, nSize);
 
 		}break;
-		//case WM_RBUTTONDOWN:
-		//{
-		//	HDC hdc = GetDC(hwnd);
-		//}break;
+
 	}
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
@@ -173,15 +170,31 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		DWORD dwStyle = WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_HSCROLL | ES_MULTILINE | ES_AUTOHSCROLL | ES_AUTOVSCROLL;
 		return TRUE;
 	}
-	
-
 
 	void OnDestroy(HWND hwnd)
 	{
 		PostQuitMessage(0); // отправляем сообщение WM_QUIT
 	}
 	
-//void DrawImg(HDC hdc)
+	//То что ниже надо собирать с x86
+	inline float Sin(float angle)
+	{
+		__asm
+		{
+			fld angle;
+			fsin;
+		}
+	}
+
+	inline float Cos(float angle)
+	{
+		__asm
+		{
+			fld angle;
+			fcos;
+		}
+	}
+	
 	void DrawImg(HDC hdc)
 	{
 		Graphics g(hdc);
@@ -208,10 +221,19 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		g.DrawImage(img, rectImg);
 	}
 
+	void CalculateDots(std::vector<PointF> &dots, int m)
+	{
+		float t = 0.00f;
+		for (int i = 0; i < m; i++)
+		{
+			float X = -2.0f * Cos(t) + 3.0f* Cos(-2.0f / 3.0f * t);
+			float Y = -2.0f * Sin(t) - 3.0f * Sin(-2.0f / 3.0f * t);
 
-	
-
-
+			dots[i].X += X;
+			dots[i].Y += Y;
+			t += 0.05f;
+		}
+	}
 	void Display(HDC hdc)
 	{
 		Graphics g(hdc);
@@ -219,7 +241,14 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		//сглаживание
 		g.SetSmoothingMode(SmoothingModeHighQuality);
 		Rect rect(0,0,600,600); //Многоугольник для градиента
+		//Кисти
+		Pen kater_border(Color::Blue, 10.f);//Кисти для заполнения цветом
+		SolidBrush brushYellow(Color::Yellow);//Твердая кисть
+		HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine, Color::Bisque);//Штриховая кисть
+		HatchBrush hatchBrush_vibes(HatchStyleShingle, Color::Aquamarine, Color::Bisque);//Штриховая кисть
+		LinearGradientBrush linBrush(rect,Color::Indigo,Color::Goldenrod,40.f); //кисть с линейным градиентом
 		
+	#pragma region Part of kater
 		//Части катера
 		Rect kater_part[3] = 
 		{
@@ -231,17 +260,12 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		//Точки для многоугольника
 		Point kater_nose[3] =
 		{
-			Point(40,200),
-			Point(250,200),
-			Point(250,400),
+			Point(40,200), Point(250,200), Point(250,400),
 		};
 
 		Point kater_glass[4] =
 		{
-			Point(170,200),
-			Point(330,77),
-			Point(480,77),
-			Point(520,200)
+			Point(170,200), Point(330,77),	Point(480,77), Point(520,200)
 		};
 		Point kater_handline[4] =
 		{
@@ -250,19 +274,17 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 			Point(661,160),
 			Point(709,192),
 		};
-		//Кисти для заполнения цветом
-		Pen kater_border(Color::Blue, 10.f);
+
 		float border_part[6] =
 		{
 			0.0f,0.2f, //от 0 до 20% толщина линии
 			0.3f, 0.7f,
 			0.8f, 1.0f 
 		};
-
+	
+	#pragma endregion
 		kater_border.SetCompoundArray(border_part, 6); //составное перо
-		HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine, Color::Bisque);//Штриховая кисть
-		
-		LinearGradientBrush linBrush(rect,Color::Indigo,Color::Goldenrod,40.f); //кисть с линейным градиентом
+
 		
 		Color gradient_color[3] =
 		{
@@ -279,44 +301,77 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		linBrush.SetBlend(factors,pos,4);
 		linBrush.SetGammaCorrection(TRUE);
 
-		SolidBrush brushYellow(Color::Yellow);
-
-
-		Region rg2;//бесконечный регион
-			
-		
+		Region rg_infinity;//бесконечный регион	
 
 		GraphicsPath path;
+		g.SetClip(&rg_infinity);
 
-		//Первое отсечение эллипсом
-		g.FillEllipse(&brushYellow, Rect(150, 50, 500, 500));
-		path.AddEllipse(Rect(200,100,400,400));
-		Region rg3(&path);
-		g.SetClip(&rg3);
+
+		
 		//Рисование катера
 		g.Clear(Color::CornflowerBlue);
 		g.SetSmoothingMode(SmoothingModeHighQuality);
+
+
+		//g.FillEllipse(&hatchBrush, Rect(150, 50, 500, 500));
+		path.AddEllipse(Rect(270, 240, 100, 100));
+
+		Region rg_window(&path);
+		g.SetClip(&rg_window, CombineModeUnion);
+
+		path.AddEllipse(Rect(440, 240, 100, 100));
+
+		Region rg_window2(&path);
+		g.SetClip(&rg_window2, CombineModeUnion);
+
+
 		g.FillRectangle(&linBrush, kater_part[0]);		//корпус
 		g.FillRectangle(&hatchBrush, kater_part[1]);	//мотор
-	
-
-
-		g.FillRectangle(&brushYellow, kater_part[2]);	//кресла
-		g.DrawPolygon(&kater_border, kater_glass, 4);	//стекло над креслами
-
+		
 		g.DrawRectangles(&kater_border, kater_part,3);	//нарисованные контуры элементов катера
-
 		g.FillPolygon(&linBrush,kater_nose,3);			//нос закршенный
 		g.DrawPolygon(&kater_border, kater_nose, 3);	//нос контур
 		
+		g.SetClip(&rg_infinity);
+			//////Первое отсечение эллипсом
 		
+		//g.FillRectangle(&brushYellow, Rect(160, 50, 500, 150));
+		
+
+		
+
+		//g.FillRectangle(&hatchBrush, Rect(160, 50, 500, 150));
+		path.AddRectangle(Rect(160, 50, 500, 150));
+		Region rg_rect(&path);
+		g.SetClip(&rg_rect);
+
+		g.FillEllipse(&hatchBrush_vibes, Rect(150, 50, 500, 500));
+		path.AddEllipse(Rect(150,50,500,500));
+		Region rg_ellips(&path);
+
+		g.SetClip(&rg_ellips,CombineModeIntersect);
+
+
+
+		g.SetClip(&rg_infinity);
+
+		g.FillRectangle(&brushYellow, kater_part[2]);	//кресла
+		g.DrawPolygon(&kater_border, kater_glass, 4);	//стекло над креслами
+		
+
+
+		
+	
 
 
 		//Нарисуем ручку
 		g.FillClosedCurve(&brushYellow, kater_handline, 4);
 		g.DrawClosedCurve(&kater_border, kater_handline, 4);
 	
-	
+		path.AddRectangle(Rect(475, 315,250 , 100));
+		Region rg_text(&path);
+		g.SetClip(&rg_text, CombineModeXor);
+
 		HatchBrush hatchBrushText(HatchStyleDiagonalBrick, Color::Black, Color::Red);//Штриховая кисть
 		FontFamily fontFamily(L"Times New Roman");
 		Font font(&fontFamily, 40.f, FontStyleBoldItalic);
@@ -328,7 +383,8 @@ LRESULT CALLBACK MainWindowProcess(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		RectF rectF(470.f, 310.f, 250.f, 100.f);
 
 		g.DrawString(L"Kater-1", -1, &font, rectF, &sf, &hatchBrushText);
-		g.SetClip(&rg2);
+		
+		g.SetClip(&rg_infinity);
 		
 	}
 

@@ -1,0 +1,14 @@
+﻿  curve.cpp
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(94): warning C4804: >: небезопасное использование типа "bool" в операции
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(246): error C4235: использовано нестандартное расширение: ключевое слово "__asm" данной архитектурой не поддерживается
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(248): error C2065: fld: необъявленный идентификатор
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(248): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "angle"
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(249): error C2065: fsin: необъявленный идентификатор
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(255): error C4235: использовано нестандартное расширение: ключевое слово "__asm" данной архитектурой не поддерживается
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(257): error C2065: fld: необъявленный идентификатор
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(257): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "angle"
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(258): error C2065: fcos: необъявленный идентификатор
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(270): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(284): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(302): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+c:\users\kurbatova\source\lw2021\cgg\lw_2\lw_2\lw_2_curve\curve.cpp(333): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных

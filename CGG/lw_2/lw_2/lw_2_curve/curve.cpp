@@ -25,7 +25,7 @@ HWND hwnd = NULL; //дескриптор окна
 void Display(HDC hdc); //функция для показа катера на экране
 void DrawImg(HDC hdc); //загрузка изображения на экран
 void PlotGrid(HWND hwnd, HDC hdc);
-
+void CalculateDots(std::vector<PointF> &dots, int m);//вычисление точек
 
 
 
@@ -240,7 +240,7 @@ void OnDestroy(HWND hwnd)
 {
 	PostQuitMessage(0); // отправляем сообщение WM_QUIT
 }
-
+//То что ниже надо собирать с x86
 inline float Sin(float angle)
 {
 	__asm
@@ -249,9 +249,10 @@ inline float Sin(float angle)
 		fsin;
 	}
 }
+
 inline float Cos(float angle)
 {
-	_asm
+	__asm
 	{
 		fld angle;
 		fcos;
@@ -288,6 +289,19 @@ inline void ViewPortToWorld(const WorldWindow &w, const Viewport &vp, PointF *po
 
 }
 
+void CalculateDots(std::vector<PointF> &dots,int m)
+{
+	float t = 0.00f;
+	for (int i = 0; i < m; i++)
+	{
+		float X = -2.0f * Cos(t) + 3.0f* Cos(-2.0f / 3.0f * t);
+		float Y = -2.0f * Sin(t) - 3.0f * Sin(-2.0f / 3.0f * t);
+
+		dots[i].X += X;
+		dots[i].Y += Y;
+		t += 0.05f;
+	}
+}
 
 void Display(HDC hdc)
 {
@@ -332,8 +346,9 @@ void Display(HDC hdc)
 	int m = (6*PI/0.05f)+1; //376,8 = 377 точек
 	
 	std::vector<PointF> dots(m);
+	CalculateDots(dots, m);
 
-	float t = 0.00f;
+	/*float t = 0.00f;
  	for (int i = 0; i < m; i++)
 	{
 			float X = -2.0f * Cos(t) + 3.0f* Cos(-2.0f / 3.0f * t);
@@ -342,7 +357,7 @@ void Display(HDC hdc)
 			dots[i].X += X;
 			dots[i].Y += Y;
 			t += 0.05f;
-	}
+	}*/
 
 	//for (int i = 0; i < m-1; i++)
 	//{
