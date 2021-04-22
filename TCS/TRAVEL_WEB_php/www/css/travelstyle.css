@@ -1507,3 +1507,9 @@ div.shadow{
   .loaded .preloader {
 	display: none;
   }
+
+  .form-success {
+    color: #CAC97A;
+    font-size: 20px;
+    text-align: center;
+}

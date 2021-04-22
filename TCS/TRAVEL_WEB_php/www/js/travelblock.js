@@ -173,50 +173,42 @@ function getCount() {
 }
 
  debugger;
-$("form").submit(function(event){
-    event.preventDefault();  
-    var name = $("#name").val().trim();
-    var email = $("#email").val().trim();
-    var message = $("#msg").val().trim();
+// $("form").submit(function(event){
+//     event.preventDefault();  
+//     var name = $("#name").val().trim();
+//     var email = $("#email").val().trim();
+//     var message = $("#msg").val().trim();
 
-    if(name == '' && email == '' && message == ''){
-        // showValidate(name);
-        check=false;     
-    }
-    else
-    {
-       
-        //if(email.match(/^([a-zA-Z0-9_\-\.]+)@(^(\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) 
-        if(email.match(/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/)==null)
-		{
-            // showValidate(email);
-            check=false;
-            alert('Неправильная почта');
-        }
-        else
-        {
-            if(name.match(/^([a-zA-Z-]{1,50})$/)==null)
-            {
-                alert('Ошибка в имени. Не должно быть цифр.');
-                check=false;
-            }
-            else
-            {
-                check = true;
-                console.log('Проверка пройдена!')  
-            }
-
-        }
-
-    }
-
-    if(check == true) {
-        $("form").unbind('submit').submit();
-    }
-
-
-
-});
+//     if(name == '' && email == '' && message == ''){
+//         check=false;     
+//     }
+//     else
+//     {     
+//         //if(email.match(/^([a-zA-Z0-9_\-\.]+)@(^(\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) 
+//         if(email.match(/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/)==null)
+// 		{
+//             // showValidate(email);
+//             check=false;
+//             alert('Неправильная почта');
+//         }
+//         else
+//         {
+//             if(name.match(/^([a-zA-Z-]{1,50})$/)==null)
+//             {
+//                 alert('Ошибка в имени. Не должно быть цифр.');
+//                 check=false;
+//             }
+//             else
+//             {
+//                 check = true;
+//                 console.log('Проверка пройдена!')  
+//             }
+//         }
+//     }
+//     if(check == true) {
+//         $("form").unbind('submit').submit();
+//     }
+// });
 
 $('.header_logo').mouseover(function()
 {

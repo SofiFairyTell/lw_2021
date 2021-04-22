@@ -81,16 +81,16 @@
 
 	<button class="open-button" onclick="openForm()">Отправить сообщение</button>
 
-	<div class="form-popup" id="myForm">
+	<!-- <div class="form-popup" id="myForm">
 	  <form action="../action_page.php" class="form-container">
 		<h1>Связаться</h1>
 	
 		<label for="email"><b>Ваше имя</b></label>
-		<!-- <input type="text" placeholder="Ваша имя" name="name" required> -->
+
 		<input type="text" placeholder="Ваша имя" id="name" >
 
 		<label for="email"><b>Почта</b></label>
-		<!-- <input type="text" placeholder="Ваша почта" name="email" required> -->
+
 		<input type="text" placeholder="Ваша почта" id="email" >
 	
 		<label for="psw"><b>Сообщение</b></label>
@@ -103,9 +103,12 @@
 		<button type="submit" class="btn" onclick="">Отправить</button>
 		<button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
 	  </form>
-	</div>
+	</div> -->
+
+
 
 <?php
+ require('form.php');
  require('script.php');
 ?>
 
