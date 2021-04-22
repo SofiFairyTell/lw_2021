@@ -86,15 +86,15 @@ Matrix SumOfMatrices(const Matrix& a, const Matrix& b)
 Matrix CheckMatrix(const Matrix& generator_matrix)
 {
 	//Проверка матрицы
-	Matrix res = vector<vector<int>>(4, vector<int>(6));
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 6; ++j) {
-			res[i][j] = generator_matrix[i][j + 4];
+	Matrix res = vector<vector<int>>(3, vector<int>(7));
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 7; ++j) {
+			res[i][j] = generator_matrix[i][j + 3];
 		}
 	}
 
-	for (int i = 0; i < 6; ++i) {
-		vector<int> new_row(6, 0);
+	for (int i = 0; i < 7; ++i) {
+		vector<int> new_row(7, 0);
 		new_row[i] = 1;
 		res.push_back(new_row);
 	}
@@ -122,17 +122,17 @@ int main()
 	//};
 	//Порождающая матрица д.б. построена по 4-м правилам...поэтому переделать до 10, 4
 	Matrix generator_matrix = {
-		{1, 0, 0, 0,    1, 1, 1, 1, 0, 0},
-		{0, 1, 0, 0,    0, 0, 0, 0, 1, 1},
-		{0, 0, 1, 0,    0, 0, 1, 1, 1, 1},
-		{0, 0, 0, 1,    0, 0, 1, 1, 1, 1}
+		{1, 0, 0, 0,    1, 1, 0},
+		{0, 1, 0, 0,    1, 0, 0},
+		{0, 0, 1, 0,    0, 1, 1},
+		{0, 0, 0, 1,    1, 1, 1}
 	};
 	//PrintMatrix(generator_matrix);
 	//Формирование новой кодовой последовательности
 	Matrix output = MultiplicationMatrices(input, generator_matrix);
-	Matrix transposed_output = vector<vector<int>>(10, vector<int>(1));
+	Matrix transposed_output = vector<vector<int>>(7, vector<int>(1));
 	
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < 7; ++i) {
 		transposed_output[i][0] = output[0][i];
 	}
 
