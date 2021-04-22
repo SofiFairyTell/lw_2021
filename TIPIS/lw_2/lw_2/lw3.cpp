@@ -85,7 +85,7 @@ Matrix SumOfMatrices(const Matrix& a, const Matrix& b)
 
 Matrix CheckMatrix(const Matrix& generator_matrix)
 {
-	//Проверка матрицы
+	//Проверочная матрицы
 	Matrix res = vector<vector<int>>(3, vector<int>(4));
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 4; ++j) {
@@ -98,14 +98,14 @@ Matrix CheckMatrix(const Matrix& generator_matrix)
 		new_row[i] = 1;
 		res.push_back(new_row);
 	}
-
+	//Транспонирование матрицы чтобы потом  написать проверочную
 	return TransposedMatrix(res);
 }
 
 int main()
 {
 	Matrix input = {
-			{0, 1, 1, 1}
+			{0, 0, 1, 1}
 			//0 1 0 1 0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1
 	};
 
@@ -136,6 +136,7 @@ int main()
 	};
 	//PrintMatrix(generator_matrix);
 	//Формирование новой кодовой последовательности
+
 	Matrix output = MultiplicationMatrices(input, generator_matrix);
 	Matrix transposed_output = vector<vector<int>>(7, vector<int>(1));
 
@@ -150,7 +151,7 @@ int main()
 	Matrix check_matrix = CheckMatrix(generator_matrix);
 	int m = check_matrix.size();
 	int n = check_matrix[0].size();
-
+	PrintMatrix(check_matrix); //вывод на экран
 	//Матрицы для ошибок
 	//vector<Matrix> errors = {
 	//	// one-time errors
@@ -182,6 +183,12 @@ int main()
 		{{1, 0, 1, 0,   0, 0, 0}},
 		{{0, 1, 0, 1,   0, 0, 0}}
 	};
+	
+	Matrix input_2 = {
+			{1, 1, 0, 0,0,0,0}
+			//0 1 0 1 0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1
+	};
+	
 	cout << "Error                                   : Syndrome" << endl;
 	for (const auto& error : errors) {
 
@@ -194,6 +201,7 @@ int main()
 		PrintMatrix(syndrome);
 		cout << endl;
 	}
+
 	cout << endl;
 
 	string source_alphabet = {
