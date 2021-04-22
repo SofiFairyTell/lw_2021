@@ -10,7 +10,6 @@
  require('header.php');
 ?>
 
-
 <div class="intro_main">
 			<div class="intro_inner">
 				<h1 class="intro_title">
@@ -23,11 +22,9 @@
 				
 			</a>
 	  		</div><!--intro_inner-->
-			
+</div> <!--intro_main-->
 
-	</div> <!--intro_main-->
-
-	<section class="section">
+<section class="section">
 		<a name="block"></a>
 		<div class="contain">
 			<div class="section_header">
@@ -59,31 +56,32 @@
 				</div><!--photo-->	
 			</div> <!--section_header-->
 		</div><!--contain-->
-	</section><!--section-->
+</section><!--section-->
 
-	<div class="staistics">
-		<div class="contain">
-			<div class="stat_all">
-						<div class="stat_item">
-							<div class="stat_number">42</div>
-							<div class="stat_txt">Уникальных маршрута</div>
-						</div>
-						<div class="stat_item">
-							<div class="stat_number">15k</div>
-							<div class="stat_txt">Чашек кофе</div>
-						</div>
-						<div class="stat_item">
-							<div class="stat_number">30k+</div>
-							<div class="stat_txt">Прослушаной музыки</div>
-						</div>
-						<div class="stat_item">
-							<div class="stat_number">100k+</div>
-							<div class="stat_txt">Фотографий и видео</div>
-						</div>
-			</div> <!--stat_all--->
-		</div><!--contain-->
-	</div><!--staistics-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<div class="staistics">
+	<div class="contain">
+		<div class="stat_all">
+			<div class="stat_item">
+					<div class="stat_number">42</div>
+					<div class="stat_txt">Уникальных маршрута</div>
+			</div> <!--stat_item--->
+			<div class="stat_item">
+					<div class="stat_number">15k</div>
+					<div class="stat_txt">Чашек кофе</div>
+			</div> <!--stat_item--->
+			<div class="stat_item">
+					<div class="stat_number">30k+</div>
+					<div class="stat_txt">Прослушаной музыки</div>
+			</div> <!--stat_item--->
+			<div class="stat_item">
+					<div class="stat_number">100k+</div>
+					<div class="stat_txt">Фотографий и видео</div>
+			</div> <!--stat_item--->
+		</div> <!--stat_all--->
+	</div><!--contain-->
+</div><!--staistics-->
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="./js/travelblock.js"></script>
 	<script>
 	document.addEventListener('DOMContentLoaded', function () {
@@ -123,5 +121,6 @@
 	  }
 	}, 1000);
 	</script>
+	
 </body>
 </html>

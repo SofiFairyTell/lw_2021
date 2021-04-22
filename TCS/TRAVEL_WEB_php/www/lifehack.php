@@ -3,12 +3,13 @@
 <head>
 	<title>Лайфхаки</title>
 	<link rel="stylesheet" type="text/css" href="css/travelstyle.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 </head>
 
 <?php
  require('header.php');
 ?>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+	
 <section class="section_hack">
 <div class="contain">
 	<div class="photo">
@@ -138,9 +139,11 @@
 </div> <!--contain-->
 </section> <!--section-hack-->
 
+<?php
+ require('script.php');
+?>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="./js/travelblock.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
@@ -150,7 +153,7 @@
 		document.body.classList.remove('loaded_hiding');
 	}, 2000);
 	});
-</script>
+</script> -->
 
 </body>
 </html>
