@@ -151,7 +151,11 @@ int main()
 	Matrix check_matrix = CheckMatrix(generator_matrix);
 	int m = check_matrix.size();
 	int n = check_matrix[0].size();
+	cout << "CHECK MATRIX" << endl;
 	PrintMatrix(check_matrix); //вывод на экран
+	cout << endl;
+
+	
 	//Матрицы для ошибок
 	//vector<Matrix> errors = {
 	//	// one-time errors
@@ -189,13 +193,15 @@ int main()
 			//0 1 0 1 0 0 0 0 1 1 1 1 0 0 0 0 1 1 1 1
 	};
 	
-	cout << "Error                                   : Syndrome" << endl;
+	cout << endl<<"INPUT WITh ERROR" << "Error                                   : Syndrome" << endl;
 	for (const auto& error : errors) {
 
 		auto spoiled_output = SumOfMatrices(output, error);
 		auto transposed_spoiled_output = TransposedMatrix(spoiled_output);
 		auto syndrome = MultiplicationMatrices(check_matrix, transposed_spoiled_output);
 
+		PrintMatrix(spoiled_output);
+		cout << ":";
 		PrintMatrix(error);
 		cout << ": ";
 		PrintMatrix(syndrome);
