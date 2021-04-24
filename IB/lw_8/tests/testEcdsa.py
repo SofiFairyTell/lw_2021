@@ -26,7 +26,7 @@ class EcdsaTest(TestCase):
 
         self.assertFalse(Ecdsa.verify(message2, signature, publicKey))
 
-if __name__ == "__main__":
+
 
     # message = input("Enter message")
     # print(generate_hash(message).hex())
