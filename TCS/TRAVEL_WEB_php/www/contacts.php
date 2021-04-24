@@ -109,7 +109,8 @@
 
 <?php
  require('form.php');
- require('script.php');
+ require('script.php'); 
+ 
 ?>
 
 </body>

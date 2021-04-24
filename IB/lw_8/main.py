@@ -22,6 +22,6 @@ if __name__ == "__main__":
     signature = Ecdsa.sign(message1, privateKey)
     print("Сообщение: "+message1);
     print("Сообщение: "+message2);
-    
+
     print(Ecdsa.verify(message1, signature, publicKey))
     print(Ecdsa.verify(message2, signature, publicKey))

@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<title>Лайфхаки</title>
-	<link rel="stylesheet" type="text/css" href="css/travelstyle.css">
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-</head>
 
 <?php
  require('header.php');

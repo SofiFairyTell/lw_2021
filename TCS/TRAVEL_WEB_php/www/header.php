@@ -1,3 +1,20 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/validation.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
+// include_once $_SERVER['DOCUMENT_ROOT'] . './components/logic/fileSize.php';
+// include_once $_SERVER['DOCUMENT_ROOT'] . './components/logic/email.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/titleChange.php';
+?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>
+   <?=
+        titleChange()
+        ?>
+    </title>
+	    <link rel="stylesheet" type="text/css" href="css/travelstyle.css">
+</head>
 <body >
 <div class="preloader">
 	<div class="preloader__row">

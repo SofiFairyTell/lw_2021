@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Conten-Type" content="text/html;charset=utf-8"/>
-	    <title>TRAVEL BLOG</title>
-	    <link rel="stylesheet" type="text/css" href="./css/travelstyle.css">
-	</head>
-
 <?php
  require('header.php');
 ?>
@@ -121,6 +113,7 @@
 	  }
 	}, 1000);
 	</script>
-	
+
+
 </body>
 </html>

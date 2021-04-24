@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<title>О нас</title>
-	    <link rel="stylesheet" type="text/css" href="css/travelstyle.css">
-</head>
+
 <!-- Обращение к файлу с шапкой -->
 <?php
  require('header.php');
@@ -42,8 +37,7 @@
 
 <?php
  require('script.php');
-?>
-
+ ?>
 
 </body>
 </html>
