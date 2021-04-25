@@ -22,6 +22,11 @@ function titleChange(): string
                 return 'О нас';
                 } 
                 else 
+                if(stripos($_SERVER['REQUEST_URI'], 'filesizeform'))
+                {
+                    return 'FileSize';
+                }
+                else
                 {
                     return 'TravelBlog';
                 }
