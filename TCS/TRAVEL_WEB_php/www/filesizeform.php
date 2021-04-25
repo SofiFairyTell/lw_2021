@@ -1,5 +1,8 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/parser.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/phpQuery/phpQuery.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -18,7 +21,12 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
             <span>Результат: </span>
             <?= !empty($_GET) ? getRes($_GET['path'])  : '' ?>
         </div>
-
+</div>
+</section>
+<section class = "section">
+<div>
+    <span> Текст с сайта</span>
+   <? parser() ?>
 </div>
 </section>
 </body>

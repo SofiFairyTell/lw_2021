@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<title>Контакты</title>
-	  <link rel="stylesheet" type="text/css" href="css/travelstyle.css">
-</head>
 <?php
  require('header.php');
 ?>

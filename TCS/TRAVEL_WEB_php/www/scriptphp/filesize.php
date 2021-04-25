@@ -48,6 +48,6 @@ function getFormat($size)
         ++$format_;
         $size /=1024;
     }
-    $ret = round($size,1)."".(isset($format[$format_])&$format[$format_]::'??');
+    $ret = round($size,1)."".(isset($format[$format_])?$format[$format_]:'??');
     return $ret;
 }

@@ -1,13 +1,15 @@
 <?php 
 $name = checkRegularName();
 $email = checkRegularEmail();
+$message = checkTextBox();
 ?> 
 
 
 <?php
 if (!empty($_GET)) {
-    if($_GET['ok']==="ok") {?>
-    <!-- <div class="form-success">Форма успешно отправлена!</div>  -->
+    if($_GET['ok']==="ok") 
+    {?>
+    <div class = "form-success"> Форма успешно отправлена!</div>
     alert('Форма успешно отправлена!');
     <?php
 }}
@@ -20,8 +22,8 @@ if (!empty($_GET)) {
 
         <label class="<?= $name ? 'error' : '' ?>" for="name"> <?= $name ? "Только символы кириллицы!" : 'Имя' ?></label>
 
-		<input type="text" placeholder ="Ваша имя" id="name"  
-            value="<?= !empty($_POST['name']) ? $_POST['name'] : '' ?>">
+		<input type="text"id="name"  
+            value="<?= !empty($_POST['name']) ? $_POST['name'] : '' ?>" placeholder ="Ваша имя" >
 
         <label class="<?= $email ? 'error' : '' ?>" for="email"><?= $email ? 'Формат email: jjjjj.dfdf2011@yandex.ru' : 'email' ?></label>
 		
