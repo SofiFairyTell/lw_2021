@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.HTMLEditor?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HTMLEditor fx:id="htmlEdit" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="14.0" layoutY="14.0" prefHeight="296.0" prefWidth="574.0" />
+      <TextField fx:id="textParam" layoutX="14.0" layoutY="327.0" prefHeight="26.0" prefWidth="362.0" promptText="Введите ширину и высоту для изображений через запятую " />
+      <Button fx:id = "btn" onAction = "#EditHtml" layoutX="394.0" layoutY="327.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="191.0" text="Исправить" />
+   </children>
+</AnchorPane>

@@ -28,37 +28,11 @@ public class Main {
         System.out.println("Введите путь к HTML файлу: ");
         String filePath = scanner.nextLine();
         System.out.println("Введите высоту и ширину изображений");
-        double width = scanner.nextDouble();
-        double height = scanner.nextDouble();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+        Parametres param = new Parametres();
+        param.Parametres(scanner);
+        String replacement = " width = '"+param.Width()+"' height = '"+param.Height()+"'";
+        Parser parse = new Parser();
+        parse.HtmlParser(filePath, replacement);
 
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("result.html"));
-
-        String patt = "<img.*?src?= ?['\\\"]([^'\\\"]*)['\\\"](.*?)\\/";
-        //Разбить паттерна три группы! Тогда  первой группе д.б. img + src, потом вставка наших значений и соединение со второй группой
-        Pattern pattern = Pattern.compile(patt);
-        Matcher matcher;
-
-        String input = "";
-        StringBuilder result = new StringBuilder();
-        while ((input = bufferedReader.readLine()) != null) {
-            matcher = pattern.matcher(input);
-            if (matcher.find())
-            {
-                String group = matcher.group(2);
-                String replacement = " width = '"+width+"' height = '"+height+"'";
-                input = input.replaceAll(matcher.group(2),replacement);
-                System.out.println(input);
-                result.append(input).append("\n");
-            }
-            else
-            {
-                result.append(input).append("\n");
-            }
-
-        }
-        System.out.println(result);
-        bufferedWriter.write(result.toString());
-        bufferedWriter.close();
     }
 }
