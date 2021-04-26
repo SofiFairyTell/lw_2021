@@ -3,7 +3,7 @@
 function checkRegularName(): bool
 {
     if (!empty($_POST)) {
-        if (!preg_match('/^[а-я]{2,}+$/iu', trim($_POST['name']))) {
+        if (preg_match('/^[а-я]{2,}+$/iu', trim($_POST['name']))) {
             return true;
         }
     }

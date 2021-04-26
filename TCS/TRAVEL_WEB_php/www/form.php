@@ -6,15 +6,14 @@ $message = checkTextBox();
 
 
 <?php
-if (!empty($_GET)) {
+if (!empty($_GET)) 
+{
     if($_GET['ok']==="ok") 
-    {?>
-    <div class = "form-success"> Форма успешно отправлена!</div>
-    alert('Форма успешно отправлена!');
-    <?php
+    {
+    echo '<div class = "form-success"> Форма успешно отправлена!</div>'
+    echo '<script>alert("Форма успешно отправлена!")</script>';
 }}
 ?>
-
 
 <div class="form-popup" id="myForm">
 	  <form action="./contacts.php" class="form-container" method = "post">
@@ -28,7 +27,8 @@ if (!empty($_GET)) {
         <label class="<?= $email ? 'error' : '' ?>" for="email"><?= $email ? 'Формат email: jjjjj.dfdf2011@yandex.ru' : 'email' ?></label>
 		
 
-	    <input type="text" id="email" name="email" value="<?= !empty($_POST['email']) ? $_POST['email'] : '' ?>" placeholder="Ваша почта" maxlength="40" type="text">
+	    <input type="text" id="email" name="email" value="<?= !empty($_POST['email']) ? $_POST['email'] : '' ?>" 
+        placeholder="Ваша почта" maxlength="40" type="text">
 
         <label class="<?= $message ? 'error' : '' ?>"> <?= $message ? 'Минимальная длина сообщения 30 символов!' : 'Введите сообщение' ?></label>
 

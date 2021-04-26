@@ -17,13 +17,19 @@ import java.util.regex.Pattern;
  * <img src='kartinka.jpg' height='300' width='100'/>
  * <img src='kartinka.jpg' height='200' width='300'/>
  *
- * 100, 200 и 300 это значения введенные пользователем*/
+ *<img.*?src?= ?['\"]([^'\"]*)['\"](.*?)\/ - будет две группы
+ * (?|(width.*)|(class.*)|(alt.*)|(height.*))\/ - найдет полностью последнуюю группу
+ * 100, 200 и 300 это значения введенные пользователем
+ * */
 public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите путь к HTML файлу: ");
         String filePath = scanner.nextLine();
+        System.out.println("Введите высоту и ширину изображений");
+        double width = scanner.nextDouble();
+        double height = scanner.nextDouble();
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("result.html"));
@@ -40,7 +46,8 @@ public class Main {
             if (matcher.find())
             {
                 String group = matcher.group(2);
-                input = input.replaceAll(matcher.group(2)," width = '300' height = '100'");
+                String replacement = " width = '"+width+"' height = '"+height+"'";
+                input = input.replaceAll(matcher.group(2),replacement);
                 System.out.println(input);
                 result.append(input).append("\n");
             }

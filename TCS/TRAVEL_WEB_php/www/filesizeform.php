@@ -2,6 +2,8 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/parser.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/phpQuery/phpQuery.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
+
 
 ?>
 <!DOCTYPE html>
@@ -27,8 +29,27 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/phpQuery/phpQuery.php';
 <div>
     <span> Текст с сайта</span>
    <? $obj = new Parser();
-    $obj->parsHtml() ?>
+    // $obj->parsHtml();
+    // $obj->statParser();
+    $watermark = new Watermark();
+    $img = imagecreatefromjpeg('./img/photo3.jpg');
+    $image = $watermark->add_watermark($img2,'travelblog.ru','erasbd.ttf');
+ 
+    //выводим изображение
+    imageJPEG($image);
+    //освобождаем память
+    imagedestroy($image);
+    imagedestroy($img2);
+    ?>
 </div>
 </section>
+
+<section class = "section">
+<form enctype="multipart/form-data" action="05_upload.php" method="post">
+			Выберите файл: <input name="userfile" type="file" />
+			<input type="submit" value="Загрузить" />
+		</form>
+</section>
+
 </body>
 </html>
