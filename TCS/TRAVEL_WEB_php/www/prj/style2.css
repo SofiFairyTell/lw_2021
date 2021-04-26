@@ -1,0 +1,41 @@
+p.vocab
+{
+	position: relative;
+	text-align: justify;
+	top:200%;
+	left:0.5%;
+	font-size: 200%;
+	background-color: #efefef;
+} 
+div.column, .column2, .column3, 
+.column4, .column5, .column6
+{
+	width: 30%;
+	float: left;
+	margin: 5px;
+}
+div.column0
+{
+
+	width: 2%;
+	float: left;
+	margin: 5px;
+}
+body.zad3
+{
+	background-color: rgb(200,200,200);
+}
+blockquote
+{
+	position: relative;
+	float: right;
+	z-index: 2;
+	width:275px;
+	font-size: 130%;
+	font-family: Times New Roman,serif;
+	margin: 0px 0px 10px 10px;
+	padding: 10px;
+	border-top: 5px solid #665544;
+	border-bottom: 5px solid #665544;
+	border-color: blue;
+}

@@ -26,7 +26,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/phpQuery/phpQuery.php';
 <section class = "section">
 <div>
     <span> Текст с сайта</span>
-   <? parser() ?>
+   <? $obj = new Parser();
+    $obj->parsHtml() ?>
 </div>
 </section>
 </body>
