@@ -1,14 +1,17 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="file://$PATH_TO_FX$" />
-      <root url="jar://$PROJECT_DIR$/../out/artifacts/lw_4_jar/lw_4.jar!/" />
+      <root url="jar://$PATH_TO_FX$/javafx-swt.jar!/" />
+      <root url="jar://$PATH_TO_FX$/javafx.base.jar!/" />
+      <root url="jar://$PATH_TO_FX$/javafx.controls.jar!/" />
+      <root url="jar://$PATH_TO_FX$/javafx.fxml.jar!/" />
+      <root url="jar://$PATH_TO_FX$/javafx.graphics.jar!/" />
+      <root url="jar://$PATH_TO_FX$/javafx.media.jar!/" />
+      <root url="jar://$PATH_TO_FX$/javafx.swing.jar!/" />
+      <root url="jar://$PATH_TO_FX$/javafx.web.jar!/" />
+      <root url="file://$PROJECT_DIR$/../out/artifacts/lw_4_jar" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PATH_TO_FX$" />
-    </SOURCES>
-    <jarDirectory url="file://$PATH_TO_FX$" recursive="false" />
-    <jarDirectory url="file://$PATH_TO_FX$" recursive="false" type="SOURCES" />
+    <SOURCES />
   </library>
 </component>

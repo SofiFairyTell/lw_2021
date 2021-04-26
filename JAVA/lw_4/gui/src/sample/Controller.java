@@ -1,6 +1,6 @@
 package sample;
 
-import ru.bstu.it32.kurbatova.lab4.*;
+import  ;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -18,7 +18,7 @@ public class Controller
     private HTMLEditor htmlEdit;
     @FXML
     private Button btn;
-
+@FXML
     public void EditHtml(javafx.event.ActionEvent actionEvent) throws IOException {
         String value = textParam.getText();
         Parametres param = new Parametres();
