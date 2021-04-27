@@ -2,19 +2,19 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.web.HTMLEditor;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Controller
 {
     @FXML
     private TextField textParam;
     @FXML
-    private HTMLEditor htmlEdit;
+    private TextArea htmlEdit;
+    @FXML
+    private TextArea htmlEdit1;
     @FXML
     private Button btn;
 @FXML
@@ -23,10 +23,26 @@ public class Controller
         Parametres param = new Parametres();
         param.Parametres(value);
         String replacemenet = " width = '" + param.Width() + "' height = '" + param.Height() + "'";
-        //Соберем из созданного файла новый файл
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("result.html"));
-        bufferedWriter.write(htmlEdit.getHtmlText());
-        bufferedWriter.close();
+        String filePath = "C:\\Users\\Kurbatova\\source\\LW2021\\JAVA\\lw_4\\src\\prj\\zad2.html";
+    //Соберем из созданного файла новый файл
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+        String str = "";
 
+
+        while ((str = bufferedReader.readLine()) != null)
+         {
+             htmlEdit.appendText(str+'\n');
+         }
+        Parser parser = new Parser();
+        parser.HtmlParser(filePath,replacemenet);
+
+        BufferedReader bufferReader = new BufferedReader(new FileReader("result.html"));
+        String after = "";
+        while ((after = bufferReader.readLine()) != null)
+        {
+            htmlEdit1.appendText(after+'\n');
+        }
     }
+
 }
+
