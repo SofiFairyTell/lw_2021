@@ -9,7 +9,6 @@
       <root url="jar://$PATH_TO_FX$/javafx.media.jar!/" />
       <root url="jar://$PATH_TO_FX$/javafx.swing.jar!/" />
       <root url="jar://$PATH_TO_FX$/javafx.web.jar!/" />
-      <root url="file://$PROJECT_DIR$/../out/artifacts/lw_4_jar" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
