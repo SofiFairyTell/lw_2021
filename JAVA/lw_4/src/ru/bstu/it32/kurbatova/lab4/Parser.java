@@ -9,7 +9,7 @@ public class Parser
     public void HtmlParser(String filePath, String replacement) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("result.html"));
-        //String patt = "<img.*?src?= ?['\\\"]([^'\\\"]*)['\\\"](.*?)\\/";
+
         String patt = "<img.*?src?= ?['\\\"]([^'\\\"]*)['\\\"](.*?)(width.*?|height.*?|\\S)\\/";
 
         //String patt2 ="(?|(width.*?['\\\"]([^'\\\"]*)['\\\"])|(height.*?['\\\"]([^'\\\"]*)['\\\"]))";
@@ -29,6 +29,7 @@ public class Parser
 
                        if(matcher.group(2)=="")
                        {
+                           //то есть ни ширины ни высоты нет
                            String pat = "<img.*?src?= ?['\\\"]([^'\\\"]*)['\\\"](.*?)\\/";
                            Pattern patte = Pattern.compile(pat);
                            matcher = patte.matcher(input);
