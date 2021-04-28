@@ -9,9 +9,7 @@ public class Parser
     public void HtmlParser(String filePath, String replacement) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("result.html"));
-
         String patt = "<img.*?src?= ?['\\\"]([^'\\\"]*)['\\\"](.*?)(width.*?|height.*?|\\S)\\/";
-
         //String patt2 ="(?|(width.*?['\\\"]([^'\\\"]*)['\\\"])|(height.*?['\\\"]([^'\\\"]*)['\\\"]))";
         //Разбить паттерна три группы! Тогда  первой группе д.б. img + src, потом вставка наших значений и соединение со второй группой
         Pattern pattern = Pattern.compile(patt);
@@ -23,7 +21,6 @@ public class Parser
         while ((input = bufferedReader.readLine()) != null) {
             matcher = pattern.matcher(input);
             int lenght = matcher.groupCount();
-
             if (matcher.find())
             {
 
@@ -48,7 +45,6 @@ public class Parser
                            System.out.println(input);
                            result.append(input).append("\n");
                        }
-                //String replacement = " width = '"+width+"' height = '"+height+"'";
             }
             else
             {
@@ -58,10 +54,5 @@ public class Parser
         System.out.println(result);
         bufferedWriter.write(result.toString());
         bufferedWriter.close();
-
-
-
-
-
     }
 }
