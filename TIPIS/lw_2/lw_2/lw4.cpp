@@ -30,10 +30,13 @@ unordered_map<char, double> probability_to_receive;
 
 ofstream fout("C:\\Users\\Kurbatova\\source\\LW2021\\TIPIS\\lw_2\\information-theory-lab-4-channel-matrix.txt");
 int size_of_cell = 15;
-
+    // вывод в файл
+	string source_alphabet_fout = { 'g', 'k', 'o', 'p', 'r','s','t','u', 'v', 'z','w' }; //алфавит источника
+	string receiver_alph_fout = source_alphabet_fout + '?';
 
 double ConditionalProbability(char received_letter, char sent_letter)
 {
+	//Условные вероятности
 	double sum = 0;
 	for (const auto& elem : sphere[received_letter]) {
 		double part = 1;
@@ -78,19 +81,21 @@ void PrintChannelMatrix()
 {
 	fout << setprecision(8) << fixed;
 
-	fout << "CHANNEL MATRIX:" << endl;
-	fout << setw(1 * size_of_cell) << "";
-	for (char received_letter : receiver_alphabet) {
-		fout << setw(size_of_cell) << received_letter;
-	}
+	fout << "КАНАЛЬНАЯ МАТРИЦА" << endl;
+	fout << setw(2 * size_of_cell) << "";
+	for (char received_letter : receiver_alph_fout)
+	{ 
+		fout << setw(size_of_cell) << received_letter; 
+	} 
 	fout << endl;
-
+	int i = 0;
 	for (char sent_letter : source_alphabet) {
-		fout << setw(size_of_cell) << sent_letter;
+		fout << setw(size_of_cell) << receiver_alph_fout[i] << setw(size_of_cell);
 		for (char received_letter : receiver_alphabet) {
 			fout << setw(size_of_cell) << channel_matrix[sent_letter][received_letter];
 		}
-		fout << endl;
+		fout << endl; 
+		i++;
 	}
 	fout << endl;
 }
@@ -99,20 +104,21 @@ void FindAndPrintReceiversAlphabetDistribution()
 {
 	for (char received_letter : receiver_alphabet) {
 		// formula of total probability
-		double sum = 0;
+		double sum = 0; 
 		for (char sent_letter : source_alphabet) {
 			sum += channel_matrix[sent_letter][received_letter] * probability_to_send[sent_letter];
 		}
 		probability_to_receive[received_letter] = sum;
 	}
 
-	fout << "PROBABILITY TO RECEIVE LETTER:" << endl;
+	int j = 0;
+	fout << "ВЕРОЯТНОСТЬ ПОЛУЧЕНИЯ СИМВОЛА:" << endl;
 	for (char letter : receiver_alphabet) {
-		fout << setw(size_of_cell) << letter
-			<< setw(size_of_cell) << probability_to_receive[letter]
-			<< endl;
+		fout << setw(size_of_cell) << receiver_alph_fout[j] << setw(size_of_cell) << probability_to_receive[letter] << endl;
+		j++;
 	}
 	fout << endl;
+
 }
 
 
@@ -153,7 +159,7 @@ int main()
 			{'k', {1, 0, 1, 1}},
 	};
 
-	second_code = {
+	/*second_code = {
 			{'a', {1, 1, 0, 1, 0, 0, 1}},
 			{'b', {0, 1, 0, 1, 0, 1, 0}},
 			{'c', {1, 0, 0, 0, 0, 1, 1}},
@@ -165,8 +171,20 @@ int main()
 			{'i', {0, 0, 1, 1, 0, 0, 1}},
 			{'j', {1, 0, 1, 1, 0, 1, 0}},
 			{'k', {0, 1, 1, 0, 0, 1, 1}},
+	};*/
+	second_code = {
+		{'a', {0, 0, 0, 1, 1, 1, 1}},//o
+		{'b', {0, 0, 1, 0, 0, 1, 0}},//s
+		{'c', {0, 0, 1, 1, 1, 0, 1}},//g
+		{'d', {0, 1, 0, 0, 1, 0, 0}},//z
+		{'e', {0, 1, 0, 1, 0, 1, 1}},//p
+		{'f', {0, 1, 1, 0, 1, 1, 0}},//v
+		{'g', {0, 1, 1, 1, 0, 0, 1}},//u
+		{'h', {1, 0, 0, 0, 1, 1, 0}},//w
+		{'i', {1, 0, 0, 1, 0, 0, 1}},//r
+		{'j', {1, 0, 1, 0, 1, 0, 0}},//t
+		{'k', {1, 0, 1, 1, 0, 1, 1}},//k
 	};
-
 
 	for (int bit0 = 0; bit0 < 2; ++bit0) {
 		for (int bit1 = 0; bit1 < 2; ++bit1) {
@@ -209,7 +227,7 @@ int main()
 	p[1][1] = 0.90; 
 	p[0][1] = 0.10; 
 
-	double transmission_time_of_one_bit = 0.0007;
+	double transmission_time_of_one_bit = 0.0002;
 
 	FillInChannelMatrix();
 	PrintChannelMatrix();
