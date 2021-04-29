@@ -1,5 +1,6 @@
+
 <?php
- require('header.php');
+require("header.php");
 ?>
 	<section class="section" >
 		<div class="contain">
@@ -64,7 +65,7 @@
 												</div> <!--table-wrapper-->
 							          		</div><!--inner-content-->
 							        	</div><!--content-->
-							      	</div>collapse
+							      	</div><!--collapse-->
 							    </div> <!--collapse-content-->
 						</div><!--accordion_item-->
 					</div><!--accordion-->
@@ -98,13 +99,26 @@
 		<button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
 	  </form>
 	</div> -->
+	<?php
+if (isset($_POST['btn']))
+{
+    $err = array();
+    if(strlen($_POST['name'])<=1)
+    {
+        $err['name'] = 'Длина имени должна быть более 1 символа';
+    }
+    else
+    {
+        //редирект
+        header('Location: '.$_SERVER['PHP_SELF'].'?message=ok'); 
+    }
+}
+?>
 
 
-
-<?php
- require('form.php');
- require('script.php'); 
- 
+<?php 
+require('form.php');
+require('script.php');  
 ?>
 
 </body>
