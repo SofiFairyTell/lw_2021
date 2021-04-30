@@ -47,7 +47,7 @@ double ConditionalProbability(char received_letter, char sent_letter)
 	}
 	return sum;
 }
-
+//Расстояние
 int Distance(const vector<int>& a, const vector<int>& b)
 {
 	int res = 0;
@@ -67,12 +67,11 @@ void FillInChannelMatrix()
 			if (received_letter == '?') {
 				continue;
 			}
-
 			// edit
 			channel_matrix[sent_letter][received_letter] = ConditionalProbability(received_letter, sent_letter);
 			sum += channel_matrix[sent_letter][received_letter];
 		}
-		// probability of '????'
+		// вероятность of '????'
 		channel_matrix[sent_letter]['?'] = 1 - sum;
 	}
 }
@@ -117,8 +116,7 @@ void FindAndPrintReceiversAlphabetDistribution()
 		fout << setw(size_of_cell) << receiver_alph_fout[j] << setw(size_of_cell) << probability_to_receive[letter] << endl;
 		j++;
 	}
-	fout << endl;
-
+	fout << endl; 
 }
 
 
@@ -186,6 +184,7 @@ int main()
 		{'k', {1, 0, 1, 1, 0, 1, 1}},//k
 	};
 
+	//Объединение кодов в одну кодовую последовательность
 	for (int bit0 = 0; bit0 < 2; ++bit0) {
 		for (int bit1 = 0; bit1 < 2; ++bit1) {
 			for (int bit2 = 0; bit2 < 2; ++bit2) {
