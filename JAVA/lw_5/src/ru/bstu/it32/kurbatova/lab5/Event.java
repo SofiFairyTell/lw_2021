@@ -27,7 +27,7 @@ public class Event
     @Override
     public  String toString()
     {
-        SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+        SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss");
 
         return  "ID:" + this.id + "\n"
                 + "Название: " + this.name + "\n"
@@ -39,4 +39,32 @@ public class Event
 
     }
 
+    public int getId()
+    {
+        return this.id;
+    }
+    public String getName()
+    {
+        return  this.name;
+    }
+    public  String getType()
+    {
+        return  this.type;
+    }
+    public Date getDate_start()
+    {
+        return this.date_start;
+    }
+    public Date getDate_end()
+    {
+        return this.date_end;
+    }
+    public  String getManager()
+    {
+        return this.manager;
+    }
+    public String getPlace()
+    {
+        return this.place;
+    }
 }
