@@ -41,14 +41,14 @@ public class Menu
         String filePath = catalog + "\\file.xml";
         int type = choiceMenu();
         if (type == 3) {
-            var sax = new SAXParse();
+            var sax = new ParseSAX();
             var parsing = new Parsing(sax.readerSaxDocument(filePath));
             parsing.parseXMLtoDB();
             start();
         }
         if (type == 4) {
-            var sax = new SAXParse();
-            var dom = new DomParse(filePath);
+            var sax = new ParseSAX();
+            var dom = new ParseDOM(filePath);
             var parsing = new Parsing(sax.readerSaxDocument(filePath), dom);
             parsing.parseDBtoXML();
             start();
@@ -67,10 +67,10 @@ public class Menu
             switch (choice) {
                 case 1: {
                     if (type == 1) {
-                        var sax = new SAXParse();
+                        var sax = new ParseSAX();
                         var events = sax.readerSaxDocument(filePath);
                         if (events.size() > 0) {
-                            for (Event student : events) {
+                            for (Event event : events) {
                                 System.out.println(events.toString());
                             }
                         }
@@ -79,16 +79,17 @@ public class Menu
                         var result = mySqlObj.workDataBase(choice);
                         try {
                             while (result.next()) {
-                                Event student = new Event(
+                                Event event = new Event(
                                         result.getInt("id"),
                                         result.getString("name"),
                                         result.getString("type"),
-                                        result.getString("date_start"),
-                                        result.getString("date_end"),
+                                        Common.DateParser(result.getString("date_start")),
+                                        Common.DateParser(result.getString("date_end")),
                                         result.getString("manager"),
                                         result.getString("place")
                                 );
-                                System.out.println(events.toString());
+
+                                System.out.println(event.toString());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -98,7 +99,7 @@ public class Menu
                 break;
                 case 2: {
                     if (type == 1) {
-                        var sax = new SAXParse();
+                        var sax = new ParseSAX();
                         String content = "";
                         System.out.print("Выберите содержимое поиска (id):\n");
                         Scanner scanner = new Scanner(System.in);
@@ -110,12 +111,12 @@ public class Menu
                         var result = mySqlObj.workDataBase(choice);
                         try {
                             while (result.next()) {
-                                Event student = new Event(
+                                Event event = new Event(
                                         result.getInt("id"),
                                         result.getString("name"),
                                         result.getString("type"),
-                                        result.getString("date_start"),
-                                        result.getString("date_end"),
+                                        Common.DateParser(result.getString("date_start")),
+                                        Common.DateParser(result.getString("date_end")),
                                         result.getString("manager"),
                                         result.getString("place")
                                 );
@@ -129,12 +130,12 @@ public class Menu
                 break;
                 case 3: {
                     if (type == 1) {
-                        var sax = new SAXParse();
+                        var sax = new ParseSAX();
                         var events = sax.readerSaxDocument(filePath);
 
-                        var newEvent = set.setData(students.size());
+                        var newEvent = set.setNewEvent(events.size());
                         events.add(newEvent);
-                        var dom = new DomParse(filePath);
+                        var dom = new ParseDOM(filePath);
                         dom.setDomNodes(events);
                     } else if (type == 2) {
                         var mySqlObj = new MySqlParse();
@@ -170,5 +171,4 @@ public class Menu
             }
         }
     }
-
 }

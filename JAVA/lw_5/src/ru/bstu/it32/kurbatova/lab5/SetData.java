@@ -56,7 +56,7 @@ public class SetData {
 
 
 
-    private Event setNewEvent(int size)
+    public Event setNewEvent(int size)
     {
         var strings = this.setData();
         Date date_start = null, date_end = null;
@@ -68,7 +68,7 @@ public class SetData {
 
     public void changeEvent(String filePath)
     {
-        var sax = new SAXParse();
+        var sax = new ParseSAX();
         var events = sax.readerSaxDocument(filePath);
         System.out.println("Введите id события:");
         var searchId = Common.getIDevent();
@@ -84,7 +84,7 @@ public class SetData {
             }
         }
         if (flag) {
-            var dom = new DomParse(filePath);
+            var dom = new ParseDOM(filePath);
             dom.setDomNodes(events);
         } else {
             System.out.println("Такого события нет!");
@@ -93,7 +93,7 @@ public class SetData {
 
     public void deleteEvent(String filePath)
     {
-        var sax = new SAXParse();
+        var sax = new ParseSAX();
         var events = sax.readerSaxDocument(filePath);
         System.out.println("Введите ID события:");
         var searchId = Common.getIDevent();
@@ -106,7 +106,7 @@ public class SetData {
             }
         }
         if (flag) {
-            var dom = new DomParse(filePath);
+            var dom = new ParseDOM(filePath);
             dom.setDomNodes(events);
         } else {
             System.out.println("Такого события нет!");

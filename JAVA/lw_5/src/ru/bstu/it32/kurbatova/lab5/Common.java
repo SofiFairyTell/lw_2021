@@ -27,4 +27,12 @@ public class Common {
         }
         return date_parsed;
     }
+
+    public static  String DateToString(Date date)
+    {
+        String date_parsed = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+        date_parsed = dateFormat.format(date);
+        return date_parsed;
+    }
 }
