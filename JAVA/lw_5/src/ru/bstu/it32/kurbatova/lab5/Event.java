@@ -27,7 +27,7 @@ public class Event
     @Override
     public  String toString()
     {
-        SimpleDateFormat ft = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss");
+        SimpleDateFormat ft = new SimpleDateFormat("E dd.MM.yyyy hh:mm:ss");
 
         return  "ID:" + this.id + "\n"
                 + "Название: " + this.name + "\n"
