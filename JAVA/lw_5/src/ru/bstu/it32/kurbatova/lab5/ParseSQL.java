@@ -9,6 +9,7 @@ public class ParseSQL
 
     ParseSQL()
     {
+
         try {
             ParseProperties propertiesParse = new ParseProperties();
             var settings = propertiesParse.bdSettings();
@@ -56,6 +57,7 @@ public class ParseSQL
 
     public ResultSet workDataBase(int action) {
         try {
+            //регистрация драйвера
             Class.forName("com.mysql.cj.jdbc.Driver");
             try {
                 switch (action) {

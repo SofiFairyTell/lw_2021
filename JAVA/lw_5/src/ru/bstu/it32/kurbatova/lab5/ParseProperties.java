@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class ParseProperties
 {
-    private String propPath = "E:\\Java\\5\\java5\\settings.properties";
+    private String propPath = "C:\\Users\\Kurbatova\\source\\LW2021\\JAVA\\lw_5\\settings.properties";
 
     public String readCatalogRoot () {
         Properties prop = new Properties();

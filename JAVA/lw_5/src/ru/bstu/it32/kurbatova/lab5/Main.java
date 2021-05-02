@@ -2,8 +2,7 @@ package ru.bstu.it32.kurbatova.lab5;
 
 import java.io.*;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 /**
  *  1.  Разработать формат представления данных в xml и БД. В xml предусмотреть все рассмотренные виды узлов.
