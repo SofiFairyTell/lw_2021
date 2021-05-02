@@ -36,20 +36,20 @@ public class Menu
 
     public static void start() {
         SetData set = new SetData();
-        var prop = new PropertiesParse();
+        var prop = new ParseProperties();
         var catalog = prop.readCatalogRoot();
         String filePath = catalog + "\\file.xml";
         int type = choiceMenu();
         if (type == 3) {
             var sax = new ParseSAX();
-            var parsing = new Parsing(sax.readerSaxDocument(filePath));
+            var parsing = new Parse(sax.readerSaxDocument(filePath));
             parsing.parseXMLtoDB();
             start();
         }
         if (type == 4) {
             var sax = new ParseSAX();
             var dom = new ParseDOM(filePath);
-            var parsing = new Parsing(sax.readerSaxDocument(filePath), dom);
+            var parsing = new Parse(sax.readerSaxDocument(filePath), dom);
             parsing.parseDBtoXML();
             start();
         }
@@ -75,7 +75,7 @@ public class Menu
                             }
                         }
                     } else if (type == 2) {
-                        var mySqlObj = new MySqlParse();
+                        var mySqlObj = new ParseSQL();
                         var result = mySqlObj.workDataBase(choice);
                         try {
                             while (result.next()) {
@@ -107,7 +107,7 @@ public class Menu
                         var event = sax.searchSaxDocument(filePath, content);
                         System.out.println(event != null ? event.toString() : "Такого события нет!");
                     } else if (type == 2) {
-                        var mySqlObj = new MySqlParse();
+                        var mySqlObj = new ParseSQL();
                         var result = mySqlObj.workDataBase(choice);
                         try {
                             while (result.next()) {
@@ -138,7 +138,7 @@ public class Menu
                         var dom = new ParseDOM(filePath);
                         dom.setDomNodes(events);
                     } else if (type == 2) {
-                        var mySqlObj = new MySqlParse();
+                        var mySqlObj = new ParseSQL();
                         mySqlObj.workDataBase(choice);
                     }
                 }
@@ -147,7 +147,7 @@ public class Menu
                     if (type == 1) {
                         set.changeEvent(filePath);
                     } else if (type == 2) {
-                        var mySqlObj = new MySqlParse();
+                        var mySqlObj = new ParseSQL();
                         mySqlObj.workDataBase(choice);
                     }
                 }
@@ -156,7 +156,7 @@ public class Menu
                     if (type == 1) {
                         set.deleteEvent(filePath);
                     } else if (type == 2) {
-                        var mySqlObj = new MySqlParse();
+                        var mySqlObj = new ParseSQL();
                         mySqlObj.workDataBase(choice);
                     }
                 }

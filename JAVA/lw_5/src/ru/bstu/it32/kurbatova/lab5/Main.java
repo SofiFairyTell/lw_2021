@@ -27,7 +27,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Добро пожаловать! ");
-
-
+        Menu.start();
     }
 }
