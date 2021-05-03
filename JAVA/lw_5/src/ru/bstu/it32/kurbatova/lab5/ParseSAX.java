@@ -1,5 +1,4 @@
 package ru.bstu.it32.kurbatova.lab5;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLEventWriter;
@@ -23,9 +22,9 @@ public class ParseSAX
 {
     protected String content;
     protected boolean flag = false;
-    protected ArrayList<Event> events = new ArrayList<Event>();
+    protected ArrayList<Eventlist> eventslist = new ArrayList<Eventlist>();
     protected String[] strMas = new String[6];
-    protected Event event;
+    protected Eventlist eventlist;
     protected int step = 0;
 
     private final DefaultHandler handler = new DefaultHandler()
@@ -37,7 +36,7 @@ public class ParseSAX
         public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
         {
             tag = qName;
-            if (tag.equalsIgnoreCase("Event"))
+            if (tag.equalsIgnoreCase("Eventlist"))
                 id = attributes.getValue("id");
         }
         @Override
@@ -56,11 +55,16 @@ public class ParseSAX
                 strMas[5] = new String(ch, start, length);
             }
 
-            if (strMas[0] != null && strMas[1] != null && strMas[2] != null &&
-                    strMas[3] != null && strMas[4] != null && strMas[5] != null && !id.equals("")) {
-                Event event = new Event(Integer.parseInt(id), strMas[0], strMas[1],Common.DateParser(strMas[2]), Common.DateParser(strMas[3]), strMas[4], strMas[5]);
+//            if (strMas[0] != null && strMas[1] != null && strMas[2] != null &&
+//                    strMas[3] != null && strMas[4] != null && strMas[5] != null && !id.equals(""))
+                if (strMas[0] != null && strMas[1] != null && strMas[4] != null && strMas[5] != null && !id.equals(""))
+            {
+//                Eventlist eventlist = new Eventlist(Integer.parseInt(id), strMas[0], strMas[1],
+//                        Common.DateParser(strMas[2]), Common.DateParser(strMas[3]), strMas[4], strMas[5]);
+                Eventlist eventlist = new Eventlist(Integer.parseInt(id), strMas[0], strMas[1],
+                       strMas[4], strMas[5]);
                 Arrays.fill(strMas, null);
-                events.add(event);
+                eventslist.add(eventlist);
             }
         }
 
@@ -77,7 +81,7 @@ public class ParseSAX
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
             tag = qName;
-            if (tag.equalsIgnoreCase("Event"))
+            if (tag.equalsIgnoreCase("Eventlist"))
                 id = attributes.getValue("id");
         }
 
@@ -97,9 +101,8 @@ public class ParseSAX
                 } else if (tag.equalsIgnoreCase("place") && strMas[5] == null) {
                     strMas[5] = new String(ch, start, length);
                 }
-                if (strMas[0] != null && strMas[1] != null && strMas[2] != null &&
-                        strMas[3] != null && strMas[4] != null && strMas[5] != null && !id.equals("")) {
-                    Event event = new Event(Integer.parseInt(id), strMas[0], strMas[1], Common.DateParser(strMas[2]), Common.DateParser(strMas[3]), strMas[4], strMas[5]);
+                if (strMas[0] != null && strMas[1] != null  && strMas[4] != null && strMas[5] != null && !id.equals("")) {
+                   eventlist = new Eventlist(Integer.parseInt(id), strMas[0], strMas[1], strMas[4], strMas[5]);
                 }
             }
         }
@@ -118,7 +121,7 @@ public class ParseSAX
         }
     };
 
-    public Event searchSaxDocument(String filePath, String content) {
+    public Eventlist searchSaxDocument(String filePath, String content) {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -127,10 +130,10 @@ public class ParseSAX
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return event;
+        return eventlist;
     }
 
-    public ArrayList<Event> readerSaxDocument(String filePath) {
+    public ArrayList<Eventlist> readerSaxDocument(String filePath) {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -138,7 +141,7 @@ public class ParseSAX
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return this.events;
+        return this.eventslist;
     }
 
     //В качестве аргумента принимает путь файла, в который нужно записать

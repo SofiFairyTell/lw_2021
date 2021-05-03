@@ -3,23 +3,23 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 public class Parse
 {
-    protected ArrayList<Event> events = new ArrayList<Event>();
+    protected ArrayList<Eventlist> eventslist = new ArrayList<Eventlist>();
     protected ParseDOM parseDOM;
 
-    public Parse(ArrayList<Event> eventsXML) {
-        this.events = eventsXML;
+    public Parse(ArrayList<Eventlist> eventsXML) {
+        this.eventslist = eventsXML;
     }
 
-    public Parse(ArrayList<Event> eventsXML, ParseDOM parseDOM) {
-        this.events = eventsXML;
+    public Parse(ArrayList<Eventlist> eventsXML, ParseDOM parseDOM) {
+        this.eventslist = eventsXML;
         this.parseDOM = parseDOM;
     }
 
     public void parseXMLtoDB() {
         var sqlOBJ = new ParseSQL();
-        for (Event event : this.events) {
+        for (Eventlist eventlist : this.eventslist) {
             try {
-                sqlOBJ.addNewRecord(event);
+                sqlOBJ.addNewRecord(eventlist);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -31,7 +31,7 @@ public class Parse
         try {
             var result = sqlOBJ.getAll();
             while (result.next()) {
-                this.events.add(new Event(
+                this.eventslist.add(new Eventlist(
                         result.getInt("id"),
                         result.getString("name"),
                         result.getString("type"),
@@ -41,7 +41,7 @@ public class Parse
                         result.getString("place")
                 ));
             }
-            this.parseDOM.setDomNodes(this.events);
+            this.parseDOM.setDomNodes(this.eventslist);
         } catch (Exception e) {
             e.printStackTrace();
         }

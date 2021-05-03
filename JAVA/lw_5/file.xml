@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Events>
-    <Event id="1">
+<Eventlists>
+    <Eventlist id="1">
         <name>Форум "Умный город"</name>
         <type>Встреча</type>
         <data_start>15.04.2021 08:00:00</data_start>
         <data_end>16.04.2021 09:00:00</data_end>
         <manager>Задохин Д</manager>
         <place>Белгород</place>
-    </Event>
-    <Event id="2">
+    </Eventlist>
+    <Eventlist id="2">
         <name>Мероприятие</name>
         <type>Командировка</type>
         <data_start>18.05.2021 02:00:00</data_start>
         <data_end>21.05.2021 03:00:00</data_end>
         <manager>Иванова ВС</manager>
         <place>Белгород</place>
-    </Event>
-    <Event id="3">
+    </Eventlist>
+    <Eventlist id="3">
         <name>Meetup</name>
         <type>Встреча</type>
         <data_start>12.06.2021 04:00:00</data_start>
         <data_end>12.06.2021 05:00:00</data_end>
         <manager>Иванова ВС</manager>
         <place>Белгород</place>
-    </Event>
-    <Event id="4">
+    </Eventlist>
+    <Eventlist id="4">
         <name>Собеседование</name>
         <type>Встреча</type>
         <data_start>12.08.2021 02:00:00</data_start>
         <data_end>12.08.2021 03:00:00</data_end>
         <manager>Иванова ВС</manager>
         <place>Белгород</place>
-    </Event>
-    <Event id="5">
+    </Eventlist>
+    <Eventlist id="5">
         <name>Мероприятие</name>
         <type>Командировка</type>
         <data_start>19.05.2021 02:00:00</data_start>
         <data_end>22.05.2021 03:00:00</data_end>
         <manager>Сергеенко ВС</manager>
         <place>Москва</place>
-    </Event>
-    <Event id="6">
+    </Eventlist>
+    <Eventlist id="6">
         <name>Мероприятие</name>
         <type>Встреча</type>
         <data_start>12.05.2021 02:00:00</data_start>
         <data_end>12.05.2021 03:00:00</data_end>
         <manager>Иванова ВС</manager>
         <place>Белгород</place>
-    </Event>
-    <Event id="7">
+    </Eventlist>
+    <Eventlist id="7">
         <name>Мероприятие_4</name>
         <type>Встреча</type>
         <data_start>12.05.2021 02:00:00</data_start>
         <data_end>12.05.2021 03:00:00</data_end>
         <manager>Иванова ВС</manager>
         <place>Ижевск</place>
-    </Event>
-    <Event id="8">
+    </Eventlist>
+    <Eventlist id="8">
         <name>Мероприятие_3</name>
         <type>Встреча</type>
         <data_start>12.05.2021 02:00:00</data_start>
         <data_end>12.05.2021 03:00:00</data_end>
         <manager>Иванова ВС</manager>
         <place>Ижевск</place>
-    </Event>
-    <Event id="9">
+    </Eventlist>
+    <Eventlist id="9">
         <name>Мероприятие</name>
         <type>Встреча</type>
         <data_start>12.05.2021 02:00:00</data_start>
         <data_end>12.05.2021 03:00:00</data_end>
         <manager>Сергеенко ВС</manager>
         <place>Омск</place>
-    </Event>
-</Events>
+    </Eventlist>
+</Eventlists>

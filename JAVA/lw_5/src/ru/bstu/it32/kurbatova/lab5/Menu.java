@@ -1,8 +1,6 @@
 package ru.bstu.it32.kurbatova.lab5;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.Scanner;
 
 import javax.xml.parsers.*;
@@ -68,10 +66,10 @@ public class Menu
                 case 1: {
                     if (type == 1) {
                         var sax = new ParseSAX();
-                        var events = sax.readerSaxDocument(filePath);
-                        if (events.size() > 0) {
-                            for (Event event : events) {
-                                System.out.println(events.toString());
+                        var eventslist = sax.readerSaxDocument(filePath);
+                        if (eventslist.size() > 0) {
+                            for (Eventlist eventlist : eventslist) {
+                                System.out.println(eventlist.toString());
                             }
                         }
                     } else if (type == 2) {
@@ -79,7 +77,7 @@ public class Menu
                         var result = mySqlObj.workDataBase(choice);
                         try {
                             while (result.next()) {
-                                Event event = new Event(
+                                Eventlist eventlist = new Eventlist(
                                         result.getInt("id"),
                                         result.getString("name"),
                                         result.getString("type"),
@@ -89,7 +87,7 @@ public class Menu
                                         result.getString("place")
                                 );
 
-                                System.out.println(event.toString());
+                                System.out.println(eventlist.toString());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -111,7 +109,7 @@ public class Menu
                         var result = mySqlObj.workDataBase(choice);
                         try {
                             while (result.next()) {
-                                Event event = new Event(
+                                Eventlist eventlist = new Eventlist(
                                         result.getInt("id"),
                                         result.getString("name"),
                                         result.getString("type"),
@@ -120,7 +118,7 @@ public class Menu
                                         result.getString("manager"),
                                         result.getString("place")
                                 );
-                                System.out.println(event.toString());
+                                System.out.println(eventlist.toString());
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -131,12 +129,12 @@ public class Menu
                 case 3: {
                     if (type == 1) {
                         var sax = new ParseSAX();
-                        var events = sax.readerSaxDocument(filePath);
+                        var eventslist = sax.readerSaxDocument(filePath);
 
-                        var newEvent = set.setNewEvent(events.size());
-                        events.add(newEvent);
+                        var newEvent = set.setNewEvent(eventslist.size());
+                        eventslist.add(newEvent);
                         var dom = new ParseDOM(filePath);
-                        dom.setDomNodes(events);
+                        dom.setDomNodes(eventslist);
                     } else if (type == 2) {
                         var mySqlObj = new ParseSQL();
                         mySqlObj.workDataBase(choice);

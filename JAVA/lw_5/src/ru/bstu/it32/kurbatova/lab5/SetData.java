@@ -56,14 +56,14 @@ public class SetData {
 
 
 
-    public Event setNewEvent(int size)
+    public Eventlist setNewEvent(int size)
     {
         var strings = this.setData();
         Date date_start = null, date_end = null;
         date_start = Common.DateParser(strings[2]);
         date_end = Common.DateParser(strings[3]);
 
-        return new Event(size + 1, strings[0], strings[1],date_start, date_end , strings[4], strings[5]);
+        return new Eventlist(size + 1, strings[0], strings[1],date_start, date_end , strings[4], strings[5]);
     }
 
     public void changeEvent(String filePath)
@@ -76,7 +76,7 @@ public class SetData {
         boolean flag = false;
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId() == searchId) {
-                events.set(i, new Event(searchId,
+                events.set(i, new Eventlist(searchId,
                         strings[0], strings[1], Common.DateParser(strings[2]),
                         Common.DateParser(strings[3]), strings[4], strings[5]));
                 flag = true;

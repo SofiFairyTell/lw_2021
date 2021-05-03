@@ -59,7 +59,7 @@ public class ParseDOM
         }
     }
 
-    public void setDomNodes(ArrayList<Event> events) {
+    public void setDomNodes(ArrayList<Eventlist> eventslist) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try {
@@ -69,10 +69,10 @@ public class ParseDOM
             Element rootElement = doc.createElement("Events");
             doc.appendChild(rootElement);
             // добавляем корневой элемент в объект Document
-            for(int i = 0; i < events.size(); i++){
-                rootElement.appendChild(getEvent(doc, i + 1, events.get(i).getName(), events.get(i).getType(),
-                        Common.DateToString(events.get(i).getDate_start()), Common.DateToString(events.get(i).getDate_end()),
-                        events.get(i).getManager(), events.get(i).getPlace()));
+            for(int i = 0; i < eventslist.size(); i++){
+                rootElement.appendChild(getEvent(doc, i + 1, eventslist.get(i).getName(), eventslist.get(i).getType(),
+                        Common.DateToString(eventslist.get(i).getDate_start()), Common.DateToString(eventslist.get(i).getDate_end()),
+                        eventslist.get(i).getManager(), eventslist.get(i).getPlace()));
             }
             doc.getDocumentElement().normalize();
             //создаем объект TransformerFactory для преобразования документа в файл
