@@ -19,28 +19,41 @@ UINT frameIndex = 0; // индекс активного кадра 4 UINT frameC
 
 void SetTransform(Graphics& g, float t)
 {
+	float Timing_0 = -1.f,
+		Timing_1 = 1.f,
+		Timing_2 = 2.f;
+		//Timing_3 = 76.f,
+		//Timing_4 = 130.f,
+		//Timing_5 = 134.f,
+		//Timing_6 = 137.f,
+		//Timing_7 = 143.f,
+		//Timing_8 = 156.f,
+		//Timing_9 = 200.f; 
+
+	//int Timing_1_1 = 350;
+
 	float m[6];
 	Matrix T[3];
 
 	//умножение текущей матрицы на матрицу переноса
 	T[0].Translate(400.f, 220.f);
-	T[1].Translate(400.f, -50.f);
+	T[1].Translate(200.f, -50.f);
 	T[2].Translate(0.f, -50.f);
+
 	//умножение текущей матрицы на матрицу поворота вокруг заданной точки
-	T[2].RotateAt(-10.f, PointF{ 470.f, 450.f });
+	T[1].RotateAt(-50.f, PointF{ 470.f, 450.f });
 
 	float a[6], b[6];
-	if (t < 1.f) // первый этап анимации
+	if (t < Timing_1) // первый этап анимации
 	{
 		//получение элементов матрицы
-		T[0].GetElements(a);
-		T[1].GetElements(b);
+		T[0].GetElements(a);//элементы из матрицы T будут записаны в a
+		T[1].GetElements(b);//элементы из матрицы T будут записаны в b
 	}
-	else if (t < 2.f) // первый этап анимации
+	else if (t < Timing_2) // первый этап анимации
 	{
 		T[1].GetElements(a);
 		T[2].GetElements(b);
-
 		t -= 1.f;
 	}
 	else
