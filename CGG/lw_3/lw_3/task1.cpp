@@ -9,20 +9,32 @@
 using namespace Gdiplus;
 LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 void Display(Graphics& g, float t);
-Image* textura;
+
+//Для анимации
+void ShiftLeft(PointF points, int n);
+Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t);
+
+
 MSG  msg;
 HWND hWnd = NULL;
-UINT frameCount = 0;
+//Gif-изображение
 Image* gif;
+UINT frameCount = 0;
 UINT frameIndex = 0; // индекс активного кадра 4 UINT frameCount; // количество кадров
 
+void ShiftLeft(PointF points,int n)
+{
+	Gdiplus::Matrix mtrx;
+	mtrx.Translate(100, 0);
+	mtrx.TransformPoints(&points, n);
+}
 
-void SetTransform(Graphics& g, float t)
+void SetTransform(Graphics& g, float time)
 {
 	float Timing_0 = -1.f,
 		Timing_1 = 1.f,
-		Timing_2 = 2.f;
-		//Timing_3 = 76.f,
+		Timing_2 = 2.f,
+		Timing_3 = 4.f;
 		//Timing_4 = 130.f,
 		//Timing_5 = 134.f,
 		//Timing_6 = 137.f,
@@ -33,29 +45,46 @@ void SetTransform(Graphics& g, float t)
 	//int Timing_1_1 = 350;
 
 	float m[6];
-	Matrix T[3];
+	Gdiplus::Matrix T[3];
+
 
 	//умножение текущей матрицы на матрицу переноса
 	T[0].Translate(400.f, 220.f);
-	T[1].Translate(200.f, -50.f);
-	T[2].Translate(0.f, -50.f);
+	T[1].Translate(350.f, 220.f);
+	
+	//T[2].Translate(300.f, 220.f);
+	//T[3].Translate(200.f, -50.f);
+	//T[4].Translate(0.f, -50.f);
 
 	//умножение текущей матрицы на матрицу поворота вокруг заданной точки
-	T[1].RotateAt(-50.f, PointF{ 470.f, 450.f });
+	//T[1].RotateAt(-10.f, PointF{ 470.f, 450.f });
+	//T[2].RotateAt(10.f, PointF{ 400.f, 200.f });
+
 
 	float a[6], b[6];
-	if (t < Timing_1) // первый этап анимации
+	if (Timing_1 < time < Timing_2) // первый этап анимации
 	{
+		T[0].Translate(200.f, 50.f); 
+
+		T[1].RotateAt(-40.f, PointF{ 200.f, 50.f });
+	
+
 		//получение элементов матрицы
 		T[0].GetElements(a);//элементы из матрицы T будут записаны в a
 		T[1].GetElements(b);//элементы из матрицы T будут записаны в b
 	}
-	else if (t < Timing_2) // первый этап анимации
+	
+	if (Timing_2 < time < Timing_3) // первый этап анимации
 	{
+
+		T[0].Translate(200.f, 0.f);
+		T[1].RotateAt(50.f, PointF{ 200.f, 0.f });
+
 		T[1].GetElements(a);
 		T[2].GetElements(b);
-		t -= 1.f;
+		//time -= 1.f;
 	}
+	
 	else
 	{
 		return;
@@ -63,7 +92,7 @@ void SetTransform(Graphics& g, float t)
 
 	for (int i = 0; i < _countof(m); ++i)
 	{
-		m[i] = a[i] * (1.f - t) + b[i] * t;//формула твиннига
+		m[i] = a[i] * (1.f - time) + b[i] * time;//формула твиннига
 	}
 
 	Matrix matrix;
@@ -222,16 +251,22 @@ LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
+Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t) 
+{
+	return Gdiplus::PointF(A.X * (1.f - t) + B.X * t, A.Y * (1.f - t) + B.Y * t);
+}
 
-
-void Display(Graphics &g, float t)
+void Display(Graphics &g, float time)
 {
 
 	g.SetSmoothingMode(SmoothingModeHighQuality);
 	// выполняем очистку перед рисованием
 	g.Clear(Color::CornflowerBlue);
 
-	g.DrawImage(gif, 0, 10); // отображение gif-анимации и активного кадра
+	g.DrawImage(gif, 0, 5); // отображение gif-анимации и активного кадра
+	g.DrawImage(gif, 500, 5); // отображение gif-анимации и активного кадра
+	g.DrawImage(gif, 1000, 5); // отображение gif-анимации и активного кадра
+
 
 	SolidBrush blackBrush(Color::Black);
 
@@ -240,7 +275,7 @@ void Display(Graphics &g, float t)
 	g.DrawString(L"Лаб №3. Вариант №10 - Катер", -1, &font1, PointF(10.f, 550.f), &blackBrush);
 
 
-	SetTransform(g, t); //анимация??
+	SetTransform(g, time); //анимация??
 
 	Rect rect(0, 0, 600, 600); //Многоугольник для градиента
 //Кисти
@@ -264,6 +299,9 @@ void Display(Graphics &g, float t)
 		Point(40,200), Point(250,200), Point(250,400),
 	};
 
+	//Gdiplus::Matrix mtrx;
+	//mtrx.Translate(0, -5);
+	//mtrx.TransformPoints(kater_nose, 3);
 	Point kater_glass[4] =
 	{
 		Point(170,200), Point(330,77),	Point(480,77), Point(520,200)
@@ -282,6 +320,8 @@ void Display(Graphics &g, float t)
 		0.3f, 0.7f,
 		0.8f, 1.0f
 	};
+
+	
 
 #pragma endregion
 	kater_border.SetCompoundArray(border_part, 6); //составное перо

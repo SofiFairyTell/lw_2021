@@ -11,8 +11,8 @@
 #pragma comment(lib, "gdiplus.lib")
 
 int Time = 0;
-UINT frameIndex; // индекс активного кадра
-UINT frameCount; // количество кадров
+UINT frameIndex; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+UINT frameCount; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 int x_image = -290;
 
 HWND hWnd = NULL;
@@ -46,7 +46,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR lpszCmdLine, int nCm
 	LoadLibrary(TEXT("ComCtl32.dll"));
 	setlocale(LC_ALL, "Russian");
 
-	HWND hWnd = CreateWindowEx(0, TEXT("NewWindowClass"), TEXT("Компьютерная графика и геометрия. Лабораторная работа №3"),
+	HWND hWnd = CreateWindowEx(0, TEXT("NewWindowClass"), TEXT("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ3"),
 		WS_OVERLAPPEDWINDOW & (~WS_MAXIMIZEBOX) ^ WS_THICKFRAME, CW_USEDEFAULT, 0, 1300, 600, NULL, NULL, hInstance, NULL);
 
 	if (hWnd == NULL)
@@ -69,7 +69,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR lpszCmdLine, int nCm
 			DispatchMessage(&msg);
 		}
 	}
-	Gdiplus::GdiplusShutdown(gdiplusToken); // Завершение работы с библиотекой
+	Gdiplus::GdiplusShutdown(gdiplusToken); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	return (int)msg.wParam;
 }
 
@@ -82,11 +82,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		image = Gdiplus::Image::FromFile(L"lab3.gif");
 		image1 = Gdiplus::Image::FromFile(L"lab3_1.gif");
 		if (image == NULL || image1 == NULL)
-			return -1; // загрузка не удалась
+			return -1; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		frameIndex = 0;
-		// определение количества кадров в изображении
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		frameCount = image->GetFrameCount(&Gdiplus::FrameDimensionTime);
-		SetTimer(hWnd, 1, 40, NULL); // устанавливает таймер ~ 25 FPS
+		SetTimer(hWnd, 1, 40, NULL); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ~ 25 FPS
 		return 0;
 	}
 	break;
@@ -94,11 +94,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_TIMER:
 	{
 		Time++;
-		// увеличиваем индекс кадра (циклически)
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 		frameIndex = (frameIndex + 1) % frameCount;
-		// Делаем кадр активным
+		// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		image->SelectActiveFrame(&Gdiplus::FrameDimensionTime, frameIndex);
-		// требуем обновления клиентской области окна (перерисовки)
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 		InvalidateRect(hWnd, NULL, FALSE);
 		return 0;
 	}
@@ -107,10 +107,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 	{
 		if (image != NULL || image1 != NULL)
-			delete image; // удаляем объект
+			delete image; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 			delete image1;
 
-		Gdiplus::GdiplusShutdown(gdiplusToken); // завершение работы GDI+
+		Gdiplus::GdiplusShutdown(gdiplusToken); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ GDI+
 		PostQuitMessage(0);
 	}
 	break;
@@ -135,22 +135,22 @@ BOOL PreTranslateMessage(LPMSG lpMsg)
 	return IsDialogMessage(hWnd, lpMsg);
 }
 
-int x = -210, y = 50; // главные координаты
+int x = -210, y = 50; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-Gdiplus::PointF left_rama[3] = { // левая рама
+Gdiplus::PointF left_rama[3] = { // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 250, y + 320),
 	Gdiplus::PointF(x + 350, y + 330),
 	Gdiplus::PointF(x + 330, y + 280)
 };
 
-Gdiplus::PointF right_rama[3] = { // правая рама
+Gdiplus::PointF right_rama[3] = { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 330, y + 280),
 	Gdiplus::PointF(x + 350, y + 330),
 	Gdiplus::PointF(x + 445, y + 235)
 };
 
 int sx = x + 430, sy = y + 270;
-Gdiplus::PointF right_wheel[8] = { // правое колесо
+Gdiplus::PointF right_wheel[8] = { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(sx + 30, sy),
 	Gdiplus::PointF(sx + 70, sy),
 	Gdiplus::PointF(sx + 100, sy + 30),
@@ -162,7 +162,7 @@ Gdiplus::PointF right_wheel[8] = { // правое колесо
 };
 
 int sx2 = x + 200, sy2 = y + 270;
-Gdiplus::PointF left_wheel[8] = { // левое колесо
+Gdiplus::PointF left_wheel[8] = { // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(sx2 + 30, sy2),
 	Gdiplus::PointF(sx2 + 70, sy2),
 	Gdiplus::PointF(sx2 + 100, sy2 + 30),
@@ -173,28 +173,28 @@ Gdiplus::PointF left_wheel[8] = { // левое колесо
 	Gdiplus::PointF(sx2, sy2 + 30)
 };
 
-Gdiplus::PointF back_pedal[2] = { // педаль заднего плана
+Gdiplus::PointF back_pedal[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 350, y + 329),
 	Gdiplus::PointF(x + 335, y + 303)
 };
 
-Gdiplus::PointF back_pedal1[2] = { // педаль заднего плана
+Gdiplus::PointF back_pedal1[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 330, y + 303),
 	Gdiplus::PointF(x + 340, y + 303)
 };
 
-Gdiplus::PointF front_pedal[2] = { // педаль переднего плана
+Gdiplus::PointF front_pedal[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 350, y + 329),
 	Gdiplus::PointF(x + 365, y + 355)
 };
-Gdiplus::PointF front_pedal1[2] = { // педаль переднего плана
+Gdiplus::PointF front_pedal1[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 360, y + 355),
 	Gdiplus::PointF(x + 370, y + 355)
 };
 
 
 int sx3 = x + 242, sy3 = y + 312;
-Gdiplus::PointF small_star[8] = { // маленькая звезда
+Gdiplus::PointF small_star[8] = { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(sx3 + 5, sy3),
 	Gdiplus::PointF(sx3 + 11, sy3),
 	Gdiplus::PointF(sx3 + 16, sy3 + 5),
@@ -205,43 +205,43 @@ Gdiplus::PointF small_star[8] = { // маленькая звезда
 	Gdiplus::PointF(sx3, sy3 + 5)
 };
 
-Gdiplus::PointF small_star1[2] = { // маленькая звезда
+Gdiplus::PointF small_star1[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 242, y + 320),
 	Gdiplus::PointF(x + 258, y + 320)
 };
 
-Gdiplus::PointF small_star2[2] = { // маленькая звезда
+Gdiplus::PointF small_star2[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 250, y + 312),
 	Gdiplus::PointF(x + 250, y + 328)
 };
 
-Gdiplus::PointF cep1[2] = { // цепь(верх)
+Gdiplus::PointF cep1[2] = { // пїЅпїЅпїЅпїЅ(пїЅпїЅпїЅпїЅ)
 	Gdiplus::PointF(x + 250, y + 312),
 	Gdiplus::PointF(x + 350, y + 314)
 };
 
-Gdiplus::PointF cep2[2] = { // цепь(низ)
+Gdiplus::PointF cep2[2] = { // пїЅпїЅпїЅпїЅ(пїЅпїЅпїЅ)
 	Gdiplus::PointF(x + 250, y + 328),
 	Gdiplus::PointF(x + 350, y + 344)
 };
 
-Gdiplus::PointF sit1[2] = { // зеленая пипка под седеньем
+Gdiplus::PointF sit1[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 350, y + 330),
 	Gdiplus::PointF(x + 326, y + 270)
 };
 
-Gdiplus::PointF sit2[2] = { // черная пипка под сиденьем
+Gdiplus::PointF sit2[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 326, y + 270),
 	Gdiplus::PointF(x + 318, y + 250)
 };
 
-Gdiplus::PointF sit3[2] = { // черная линия в сиденьем
+Gdiplus::PointF sit3[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 303, y + 250),
 	Gdiplus::PointF(x + 333, y + 250)
 };
 
 int sx4 = x + 300, sy4 = y + 246;
-Gdiplus::PointF sit4[8] = { // черный кружок в сиденье
+Gdiplus::PointF sit4[8] = { // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(sx4 + 4, sy4),
 	Gdiplus::PointF(sx4 + 8, sy4),
 	Gdiplus::PointF(sx4 + 12, sy4 + 4),
@@ -253,18 +253,18 @@ Gdiplus::PointF sit4[8] = { // черный кружок в сиденье
 };
 
 
-Gdiplus::PointF big_star1[2] = { // большая звезда
+Gdiplus::PointF big_star1[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 335, y + 329),
 	Gdiplus::PointF(x + 365, y + 329)
 };
 
-Gdiplus::PointF big_star2[2] = { // большая звезда
+Gdiplus::PointF big_star2[2] = { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 350, y + 344),
 	Gdiplus::PointF(x + 350, y + 314)
 };
 
 int sx5 = x + 335, sy5 = y + 314;
-Gdiplus::PointF big_star3[8] = { // большая звезда
+Gdiplus::PointF big_star3[8] = { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(sx5 + 9, sy5),
 	Gdiplus::PointF(sx5 + 21, sy5),
 	Gdiplus::PointF(sx5 + 30, sy5 + 9),
@@ -275,13 +275,13 @@ Gdiplus::PointF big_star3[8] = { // большая звезда
 	Gdiplus::PointF(sx5, sy5 + 9)
 };
 
-Gdiplus::PointF vilka1[2] = { // вилка
+Gdiplus::PointF vilka1[2] = { // пїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 480, y + 320),
 	Gdiplus::PointF(x + 445, y + 230)
 };
 
 int sx6 = x + 477, sy6 = y + 317;
-Gdiplus::PointF vilka2[8] = { // вилка
+Gdiplus::PointF vilka2[8] = { // пїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(sx6 + 2, sy6),
 	Gdiplus::PointF(sx6 + 4, sy6),
 	Gdiplus::PointF(sx6 + 6, sy6 + 2),
@@ -292,7 +292,7 @@ Gdiplus::PointF vilka2[8] = { // вилка
 	Gdiplus::PointF(sx6, sy6 + 2)
 };
 
-Gdiplus::PointF rul[8] = { // руль
+Gdiplus::PointF rul[8] = { // пїЅпїЅпїЅпїЅ
 	Gdiplus::PointF(x + 445, y + 230),
 	Gdiplus::PointF(x + 438, y + 212),
 	Gdiplus::PointF(x + 440, y + 217),
@@ -303,48 +303,48 @@ Gdiplus::PointF rul[8] = { // руль
 	Gdiplus::PointF(x + 425, y + 200)
 };
 
-Gdiplus::PointF brick1[4] = { // кирпич 1
+Gdiplus::PointF brick1[4] = { // пїЅпїЅпїЅпїЅпїЅпїЅ 1
 	Gdiplus::PointF(x + 1120, y + 170),
 	Gdiplus::PointF(x + 1160, y + 170),
 	Gdiplus::PointF(x + 1160, y + 200),
 	Gdiplus::PointF(x + 1120, y + 200)
 };
 
-Gdiplus::PointF brick2[4] = { // кирпич 2
+Gdiplus::PointF brick2[4] = { // пїЅпїЅпїЅпїЅпїЅпїЅ 2
 	Gdiplus::PointF(x + 1120, y + 200),
 	Gdiplus::PointF(x + 1160, y + 200),
 	Gdiplus::PointF(x + 1160, y + 230),
 	Gdiplus::PointF(x + 1120, y + 230)
 };
-Gdiplus::PointF brick3[4] = { // кирпич 3
+Gdiplus::PointF brick3[4] = { // пїЅпїЅпїЅпїЅпїЅпїЅ 3
 	Gdiplus::PointF(x + 1120, y + 230),
 	Gdiplus::PointF(x + 1160, y + 230),
 	Gdiplus::PointF(x + 1160, y + 260),
 	Gdiplus::PointF(x + 1120, y + 260)
 };
 
-Gdiplus::PointF brick4[4] = { // кирпич 4
+Gdiplus::PointF brick4[4] = { // пїЅпїЅпїЅпїЅпїЅпїЅ 4
 	Gdiplus::PointF(x + 1120, y + 260),
 	Gdiplus::PointF(x + 1160, y + 260),
 	Gdiplus::PointF(x + 1160, y + 290),
 	Gdiplus::PointF(x + 1120, y + 290)
 };
 
-Gdiplus::PointF brick5[4] = { // кирпич 5
+Gdiplus::PointF brick5[4] = { // пїЅпїЅпїЅпїЅпїЅпїЅ 5
 	Gdiplus::PointF(x + 1120, y + 290),
 	Gdiplus::PointF(x + 1160, y + 290),
 	Gdiplus::PointF(x + 1160, y + 320),
 	Gdiplus::PointF(x + 1120, y + 320)
 };
 
-Gdiplus::PointF brick6[4] = { // кирпич 6
+Gdiplus::PointF brick6[4] = { // пїЅпїЅпїЅпїЅпїЅпїЅ 6
 	Gdiplus::PointF(x + 1120, y + 320),
 	Gdiplus::PointF(x + 1160, y + 320),
 	Gdiplus::PointF(x + 1160, y + 350),
 	Gdiplus::PointF(x + 1120, y + 350)
 };
 
-Gdiplus::PointF brick7[4] = { // кирпич 7
+Gdiplus::PointF brick7[4] = { // пїЅпїЅпїЅпїЅпїЅпїЅ 7
 	Gdiplus::PointF(x + 1120, y + 350),
 	Gdiplus::PointF(x + 1160, y + 350),
 	Gdiplus::PointF(x + 1160, y + 380),
@@ -358,21 +358,21 @@ Gdiplus::PointF pnt1[1] = {
 
 void  Display(HDC  hdc)
 {
-	// создаем объект класса Graphics для рисования
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Graphics пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::Graphics graph(hdc);
 
-	// определяем размер области рисования
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::Rect rect(0, 0, 1300, 600);
 	graph.GetVisibleClipBounds(&rect);
 
 	Gdiplus::Bitmap backbuffer(rect.Width, rect.Height, &graph);
-	//создаем объект класса Grapchics для рисования в буфер
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Grapchics пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::Graphics g(&backbuffer);
 
-	g.Clear(Gdiplus::Color::White); // выполняем очистку перед рисованием
+	g.Clear(Gdiplus::Color::White); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	g.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
 
-	// создаем сплошную кисть
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	Gdiplus::SolidBrush  solidBrush(Gdiplus::Color::Yellow);
 	Gdiplus::SolidBrush  grayBrush(Gdiplus::Color::Gray);
 	Gdiplus::SolidBrush  blackBrush(Gdiplus::Color::Black);
@@ -387,11 +387,11 @@ void  Display(HDC  hdc)
 	Gdiplus::SolidBrush background1(Gdiplus::Color::Brown);
 	Gdiplus::Pen  sostav_pen(Gdiplus::Color::Black, 10.f);
 	Gdiplus::HatchBrush  hatch_brush(Gdiplus::HatchStyleForwardDiagonal, Gdiplus::Color::Yellow, Gdiplus::Color::LightBlue);
-	//  массив,  определяющий  составное  перо
+	//  пїЅпїЅпїЅпїЅпїЅпїЅ,  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅ
 	float  comp[6] = {
-	0.0f,  0.2f,    //  1-я  линия:  от  0%  до  20%  от  толщины  пера
-	0.3f,  0.7f,    //  2-я  линия:  от  30%  до  70%  от  толщины  пера
-	0.8f,  1.0f };  //  3-я  линия:  от  80%  до  100%  от  толщины  пера
+	0.0f,  0.2f,    //  1-пїЅ  пїЅпїЅпїЅпїЅпїЅ:  пїЅпїЅ  0%  пїЅпїЅ  20%  пїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅ
+	0.3f,  0.7f,    //  2-пїЅ  пїЅпїЅпїЅпїЅпїЅ:  пїЅпїЅ  30%  пїЅпїЅ  70%  пїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅ
+	0.8f,  1.0f };  //  3-пїЅ  пїЅпїЅпїЅпїЅпїЅ:  пїЅпїЅ  80%  пїЅпїЅ  100%  пїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅ
 
 	sostav_pen.SetCompoundArray(comp, 6);
 	Gdiplus::HatchBrush hBrush(Gdiplus::HatchStyleDiagonalCross, Gdiplus::Color::Black, Gdiplus::Color::WhiteSmoke);
@@ -402,7 +402,7 @@ void  Display(HDC  hdc)
 	pen.SetLineJoin(Gdiplus::LineJoinBevel);
 	
 
-	// создаем перо
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	Gdiplus::Pen blackPen(Gdiplus::Color::Black, 4.f);
 	Gdiplus::Pen silverPen(Gdiplus::Color::Silver, 3.f);
 	Gdiplus::Pen blackPen1(Gdiplus::Color::Black, 6.f);
@@ -425,14 +425,14 @@ void  Display(HDC  hdc)
 			Timing_6 = 137,
 			Timing_7 = 143,
 			Timing_8 = 156,
-			Timing_9 = 200; // прдолжительность анимации
+			Timing_9 = 200; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		int Timing_1_2 = 18;
 		int Timing_1_1 = 350;
 
 		
 
-		if ((Time > Timing_1_2) && Time < Timing_2) // двигаемся влево
+		if ((Time > Timing_1_2) && Time < Timing_2) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		{
 			mtrx.Translate(20, 0);
 			
@@ -466,7 +466,6 @@ void  Display(HDC  hdc)
 			
 		}
 
-	
 
 		g.FillRectangle(&background, 0, 0, 1300, 600);
 		g.FillRectangle(&background1, 0, 375, 1300, 375);
@@ -616,13 +615,13 @@ void  Display(HDC  hdc)
 		}
 	}
 
-	graph.DrawImage(&backbuffer, rect); // выводим на экран готовое изображение из буфера								
+	graph.DrawImage(&backbuffer, rect); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ								
 }  //  Display
 
 
-//вставка изображения в программе 
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 
-Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t) // Функция нахождения промежуточных точек
+Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 {
 	return Gdiplus::PointF(A.X * (1.f - t) + B.X * t, A.Y * (1.f - t) + B.Y * t);
 }
