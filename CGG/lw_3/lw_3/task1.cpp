@@ -21,6 +21,7 @@ void SetTransform(Graphics& g, float t)
 {
 	float m[6];
 	Matrix T[3];
+
 	//умножение текущей матрицы на матрицу переноса
 	T[0].Translate(400.f, 220.f);
 	T[1].Translate(400.f, -50.f);
@@ -131,7 +132,8 @@ LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 
 		if (NULL == gif) return -1; // загрузка не удалась
 
-		SetTimer(hWnd, 0, 100, nullptr);
+		SetTimer(hWnd, 0, 100, nullptr); //Установка таймера для анимации
+
 		return 0;
 	case WM_DESTROY:
 		if (bitmap != nullptr)
@@ -208,34 +210,14 @@ void Display(Graphics &g, float t)
 	// выполняем очистку перед рисованием
 	g.Clear(Color::CornflowerBlue);
 
-	g.DrawImage(gif, 0, 100); // отображаем активный кадр
-	Rect rectel(10, 10, 100, 100);
-
-	// создаем эллиптический контур
-	GraphicsPath path;
-	path.AddEllipse(rectel);
-
-	// создаем сплошную кисть
-	SolidBrush solidBrush(Color::WhiteSmoke); // 
-	PathGradientBrush pthGrBrush(&path);
-	pthGrBrush.SetCenterColor(Color::DarkRed);
-	Color color = Color::Yellow;
-
-	int n = 1;
-	pthGrBrush.SetSurroundColors(&color, &n);
-
+	g.DrawImage(gif, 0, 10); // отображение gif-анимации и активного кадра
 
 	SolidBrush blackBrush(Color::Black);
-	SolidBrush LGBrush(Color::LightGray);
-
-	SolidBrush WBrush(Color::White);
-
-
 
 	Font font1(L"Times New Roman", 14.f, FontStyleBold);
 	Font font2(L"Arial", 80.f, FontStyleBold);
 	g.DrawString(L"Лаб №3. Вариант №10 - Катер", -1, &font1, PointF(10.f, 550.f), &blackBrush);
-	g.FillPath(&pthGrBrush, &path); //солнце
+
 
 	SetTransform(g, t); //анимация??
 
