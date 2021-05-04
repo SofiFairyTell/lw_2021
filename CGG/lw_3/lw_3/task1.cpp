@@ -15,7 +15,7 @@ HWND hWnd = NULL;
 UINT frameCount = 0;
 Image* gif;
 UINT frameIndex = 0; // индекс активного кадра 4 UINT frameCount; // количество кадров
-Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t); // Функция твинига
+
 
 void SetTransform(Graphics& g, float t)
 {
@@ -121,88 +121,96 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR lpszCmdLine, int nCm
 
 LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	static Bitmap* bitmap = nullptr;
+	
+	static Bitmap* bitmap = NULL; //для катера
 	static float t = 0.f;
 
 	switch (uMsg)
 	{
+
 	case WM_CREATE:
-		// определение количества кадров в изображении
-		frameCount = gif->GetFrameCount(&FrameDimensionTime);
-
-		if (NULL == gif) return -1; // загрузка не удалась
-
-		SetTimer(hWnd, 0, 100, nullptr); //Установка таймера для анимации
-
-		return 0;
+					{
+						// определение количества кадров в изображении
+						frameCount = gif->GetFrameCount(&FrameDimensionTime);
+						if (NULL == gif) 
+						return -1; // загрузка не удалась
+						SetTimer(hWnd, 0, 100, NULL); //Установка таймера для анимации
+						return 0;
+					}
 	case WM_DESTROY:
-		if (bitmap != nullptr)
-		{
-			delete bitmap;
-		}
-		if (NULL != gif) delete gif; // удаляем объект
-		return 0;
-		PostQuitMessage(0);
-		return 0;
+					{
+						if (bitmap != NULL)
+						{
+							delete bitmap;
+						}
+						if (NULL != gif) 
+							delete gif; // удаляем объект
+						PostQuitMessage(0);
+						return 0;
+					}
 	case WM_ERASEBKGND:
-		return 1;
+					//подавление события чтобы не было мерцания
+					return 1;
 	case WM_TIMER:
+					{
+						// увеличиваем индекс кадра (циклически)
+						frameIndex = (frameIndex + 1) % frameCount;
+						// делаем кадр активным
+						gif->SelectActiveFrame(&FrameDimensionTime, frameIndex);
 
-	{
-		// увеличиваем индекс кадра (циклически)
-		frameIndex = (frameIndex + 1) % frameCount;
-		// делаем кадр активным
-		gif->SelectActiveFrame(&FrameDimensionTime, frameIndex);
+						// требуем обновления клиентской области окна (перерисовки)
+						InvalidateRect(hWnd, NULL, FALSE);
+						t += 0.01f;
+						if (2.f < t) t = 0.f;
 
-		// требуем обновления клиентской области окна (перерисовки)
-		InvalidateRect(hWnd, NULL, FALSE);
-		t += 0.01f;
-		if (2.f < t) t = 0.f;
-
-		if (bitmap != nullptr)
-		{
-			{
-				Graphics g(bitmap);
-				Display(g, t);
-			}
-
-			Graphics g(hWnd);
-			g.DrawImage(bitmap, 0, 0);
-		}
-	}
-	return 0;
+						if (bitmap != NULL)
+						{
+							{
+								Graphics g(bitmap);
+								Display(g, t);
+							}
+							Graphics g(hWnd);
+							g.DrawImage(bitmap, 0, 0);
+						}
+					return 0;
+					}
 	case WM_SIZE:
-		if (wParam != SIZE_MINIMIZED)
-		{
-			if (bitmap != nullptr)
-			{
-				delete bitmap;
-			}
-			bitmap = new Bitmap{ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
-		}
-		return 0;
+				{
+				if (wParam != SIZE_MINIMIZED)
+						{
+							if (bitmap != NULL)
+							{
+								delete bitmap;
+							}
+							bitmap = new Bitmap{ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
+						}
+						return 0;
+				}	
 	case WM_PAINT:
-	{
-		PAINTSTRUCT ps;
-		// начинаем процесс рисования
-		HDC hdc = BeginPaint(hWnd, &ps);
-		if (bitmap != nullptr)
-		{
-			{
-				Graphics g(bitmap);
-				Display(g, t);
-			}
+				{
+					PAINTSTRUCT ps;
+					// начинаем процесс рисования
+					HDC hdc = BeginPaint(hWnd, &ps);
+					if (bitmap != NULL)
+					{
+						{
+							Graphics g(bitmap);
+							Display(g, t);
+						}
 
-			Graphics g(hdc);
-			g.DrawImage(bitmap, 0, 0);
-		}
-		// завершаем процесс рисования
-		EndPaint(hWnd, &ps);
-	}
-	return 0;
+						Graphics g(hdc);
+						g.DrawImage(bitmap, 0, 0);
+					}
+					// завершаем процесс рисования
+					EndPaint(hWnd, &ps);
+				}
+				return 0;
 	}
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
+
+
+
 void Display(Graphics &g, float t)
 {
 
@@ -298,6 +306,3 @@ void Display(Graphics &g, float t)
 
 } // Display
 
-Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t){
-	return Gdiplus::PointF(A.X * (1.f - t)+B.X*t,A.Y*(1.f-t)+B.Y*t);
-}
