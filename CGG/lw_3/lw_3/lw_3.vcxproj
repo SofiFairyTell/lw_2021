@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="boat.cpp" />
     <ClCompile Include="task1.cpp" />
   </ItemGroup>
   <ItemGroup>
