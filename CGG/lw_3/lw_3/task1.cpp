@@ -5,16 +5,20 @@
 #include  <Shlobj.h>
 #include <map>
 #include <gdiplus.h>
+#include <vector>
+
 #pragma comment(lib, "gdiplus.lib")
 using namespace Gdiplus;
 LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-void Display(Graphics& g, float t);
+void Display(Graphics& g, int t);
 
 //Для анимации
-void ShiftLeft(PointF points, int n);
+void ShiftLeft(std::vector<PointF> points, int offsetX);
+void ShiftRight(PointF points, int n);
+
 Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t);
 
-
+int t; //время
 MSG  msg;
 HWND hWnd = NULL;
 //Gif-изображение
@@ -22,10 +26,16 @@ Image* gif;
 UINT frameCount = 0;
 UINT frameIndex = 0; // индекс активного кадра 4 UINT frameCount; // количество кадров
 
-void ShiftLeft(PointF points,int n)
+void ShiftLeft(PointF points, int offsetX)
 {
-	Gdiplus::Matrix mtrx;
-	mtrx.Translate(100, 0);
+	Matrix mtrx;
+	mtrx.Translate(offsetX, 0);
+	mtrx.TransformPoints(&points,);
+}
+void ShiftRight(PointF points, int n)
+{
+	Matrix mtrx;
+	mtrx.Translate(-100, 0);
 	mtrx.TransformPoints(&points, n);
 }
 
@@ -68,11 +78,6 @@ void SetTransform(Graphics& g, float time)
 
 	if (Timing_1 < time < Timing_2) // первый этап анимации
 	{
-		/*T[0].Translate(200.f, 50.f); 
-
-		T[1].RotateAt(-40.f, PointF{ 200.f, 50.f });
-	*/
-
 		//получение элементов матрицы
 		T[0].GetElements(a);//элементы из матрицы T будут записаны в a
 		T[1].GetElements(b);//элементы из матрицы T будут записаны в b
@@ -81,13 +86,8 @@ void SetTransform(Graphics& g, float time)
 	
 	if (Timing_2 < time < Timing_3) // первый этап анимации
 	{
-
-		//T[0].Translate(200.f, 0.f);
-		//T[1].RotateAt(50.f, PointF{ 200.f, 0.f });
-
 		T[1].GetElements(a);
 		T[2].GetElements(b);
-		//time -= 1.f;
 	}
 	
 	else
@@ -170,7 +170,7 @@ LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 {
 	
 	static Bitmap* bitmap = NULL; //для катера
-	static float t = 0.f;
+	//static float t = 0.f;
 
 	switch (uMsg)
 	{
@@ -181,7 +181,7 @@ LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 						frameCount = gif->GetFrameCount(&FrameDimensionTime);
 						if (NULL == gif) 
 						return -1; // загрузка не удалась
-						SetTimer(hWnd, 0, 100, NULL); //Установка таймера для анимации
+						SetTimer(hWnd, 0, 40, NULL); //Установка таймера для анимации
 						return 0;
 					}
 	case WM_DESTROY:
@@ -207,8 +207,8 @@ LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 
 						// требуем обновления клиентской области окна (перерисовки)
 						InvalidateRect(hWnd, NULL, FALSE);
-						t += 0.01f;
-						if (2.f < t) t = 0.f;
+						t++;
+						//if (2.f < t) t = 0.f;
 
 						if (bitmap != NULL)
 						{
@@ -223,6 +223,7 @@ LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 					}
 	case WM_SIZE:
 				{
+				
 				if (wParam != SIZE_MINIMIZED)
 						{
 							if (bitmap != NULL)
@@ -261,7 +262,7 @@ Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float 
 	return Gdiplus::PointF(A.X * (1.f - t) + B.X * t, A.Y * (1.f - t) + B.Y * t);
 }
 
-void Display(Graphics &g, float time)
+void Display(Graphics &g, int time)
 {
 
 	g.SetSmoothingMode(SmoothingModeHighQuality);
@@ -279,7 +280,7 @@ void Display(Graphics &g, float time)
 	Font font2(L"Arial", 80.f, FontStyleBold);
 	g.DrawString(L"Лаб №3. Вариант №10 - Катер", -1, &font1, PointF(10.f, 550.f), &blackBrush);
 
-	SetTransform(g, time); //анимация??
+	//SetTransform(g, time); //анимация??
 
 	Rect rect(0, 0, 600, 600); //Многоугольник для градиента
 //Кисти
@@ -287,6 +288,20 @@ void Display(Graphics &g, float time)
 	SolidBrush brushYellow(Color::Yellow);//Твердая кисть
 	HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine, Color::Bisque);//Штриховая кисть
 	LinearGradientBrush linBrush(rect, Color::Indigo, Color::Goldenrod, 40.f); //кисть с линейным градиентом
+
+
+	//Время ключевых кадров
+	int Timing_0 = -1,
+		Timing_1 = 2,
+		Timing_2 = 5,
+		Timing_3 = 10,
+		Timing_4 = 20,
+		Timing_5 = 40,
+		Timing_6 = 137,
+		Timing_7 = 143,
+		Timing_8 = 156,
+		Timing_9 = 200;
+	int Timing_1_1 = 350;
 
 #pragma region Part of kater
 	//Части катера
@@ -342,10 +357,107 @@ void Display(Graphics &g, float time)
 		0.3f, 0.7f,
 		0.8f, 1.0f
 	};
-
-	
-
 #pragma endregion
+	Gdiplus::PointF pnt[1] = {
+	Gdiplus::PointF(545.f, 407.f),
+	};
+
+	Gdiplus::PointF pnt1[1] = {
+		Gdiplus::PointF(393.f, 492.f),
+	};
+
+	Gdiplus::PointF pnt2[1] = {
+		Gdiplus::PointF(287.f, 492.f),
+	};
+
+	Gdiplus::PointF pnt3[1] = {
+		Gdiplus::PointF(439.f, 407.f),
+	};
+
+
+	Gdiplus::Matrix mtrx;
+	if (time > Timing_0 && time < Timing_1)
+	{	
+		mtrx.Translate(-20, 0);
+		//ShiftLeft(*kater_body, 4);
+		//ShiftLeft(*kater_motor, 4);
+		//ShiftLeft(*kater_top, 4);
+		//ShiftLeft(*kater_nose, 3);
+		//ShiftLeft(*kater_glass, 4);
+		//ShiftLeft(*kater_handline, 4);
+		mtrx.TransformPoints(kater_body, 4);
+		mtrx.TransformPoints(kater_motor, 4);
+		mtrx.TransformPoints(kater_top, 4);
+		mtrx.TransformPoints(kater_nose, 3);
+		mtrx.TransformPoints(kater_glass, 4);
+		mtrx.TransformPoints(kater_handline, 4);
+	}
+	if (time > Timing_1 && time < Timing_2) // �������� ����
+	{
+		mtrx.RotateAt(-3, pnt[0]);
+		mtrx.TransformPoints(kater_body, 4);
+		mtrx.TransformPoints(kater_motor, 4);
+		mtrx.TransformPoints(kater_top, 4);
+		mtrx.TransformPoints(kater_nose, 3);
+		mtrx.TransformPoints(kater_glass, 4);
+		mtrx.TransformPoints(kater_handline, 4);
+	}
+	if (time > Timing_2 &&time < Timing_4)
+	{
+		mtrx.Translate(20, 0);
+		/*	
+		ShiftRight(*kater_body, 4);
+		ShiftRight(*kater_motor, 4);
+		ShiftRight(*kater_top, 4);
+		ShiftRight(*kater_nose, 3);
+		ShiftRight(*kater_glass, 4);
+		ShiftRight(*kater_handline, 4);	*/	
+		mtrx.TransformPoints(kater_body, 4);
+		mtrx.TransformPoints(kater_motor, 4);
+		mtrx.TransformPoints(kater_top, 4);
+		mtrx.TransformPoints(kater_nose, 3);
+		mtrx.TransformPoints(kater_glass, 4);
+		mtrx.TransformPoints(kater_handline, 4);
+	}
+	if (time > Timing_3 && time < Timing_4) // �������� ����
+	{
+		mtrx.RotateAt(3, pnt1[0]);
+		mtrx.TransformPoints(kater_body, 4);
+		mtrx.TransformPoints(kater_motor, 4);
+		mtrx.TransformPoints(kater_top, 4);
+		mtrx.TransformPoints(kater_nose, 3);
+		mtrx.TransformPoints(kater_glass, 4);
+		mtrx.TransformPoints(kater_handline, 4);
+	}
+	if (time > Timing_4 && time < Timing_5 )
+	{
+		mtrx.Translate(-20, 0);
+		mtrx.TransformPoints(kater_body, 4);
+		mtrx.TransformPoints(kater_motor, 4);
+		mtrx.TransformPoints(kater_top, 4);
+		mtrx.TransformPoints(kater_nose, 3);
+		mtrx.TransformPoints(kater_glass, 4);
+		mtrx.TransformPoints(kater_handline, 4);
+	}
+
+
+	if (time < Timing_1_1)
+	{
+		kater_body[0] = Tween(kater_body[0], kater_body[1], 0.01f);
+		kater_body[1] = Tween(kater_body[1], kater_body[2], 0.01f);
+		kater_body[2] = Tween(kater_body[2], kater_body[3], 0.01f);
+		kater_body[3] = Tween(kater_body[3], kater_body[0], 0.01f);
+
+		kater_nose[0] = Tween(kater_nose[0], kater_nose[1], 0.01f);
+		kater_nose[1] = Tween(kater_nose[1], kater_nose[2], 0.01f);
+		kater_nose[2] = Tween(kater_nose[2], kater_nose[0], 0.01f);
+
+		kater_top[0] = Tween(kater_top[0], kater_top[1], 0.01f);
+		kater_top[1] = Tween(kater_top[1], kater_top[2], 0.01f);
+		kater_top[2] = Tween(kater_top[2], kater_top[3], 0.01f);
+		kater_top[3] = Tween(kater_top[3], kater_top[0], 0.01f);
+	}
+	
 	kater_border.SetCompoundArray(border_part, 6); //составное перо
 
 	Color gradient_color[3] =
