@@ -66,12 +66,12 @@ public class ParseDOM
             builder = factory.newDocumentBuilder();
             Document doc = builder.newDocument();// создаем пустой объект Document
             // создаем корневой элемент
-            Element rootElement = doc.createElement("Events");
+            Element rootElement = doc.createElement("Eventlists");
             doc.appendChild(rootElement);
             // добавляем корневой элемент в объект Document
             for(int i = 0; i < eventslist.size(); i++){
                 rootElement.appendChild(getEvent(doc, i + 1, eventslist.get(i).getName(), eventslist.get(i).getType(),
-                        Common.DateToString(eventslist.get(i).getDate_start()), Common.DateToString(eventslist.get(i).getDate_end()),
+                        eventslist.get(i).getDate_start(), eventslist.get(i).getDate_end(),
                         eventslist.get(i).getManager(), eventslist.get(i).getPlace()));
             }
             doc.getDocumentElement().normalize();
@@ -93,16 +93,16 @@ public class ParseDOM
     }
 
     // метод для создания нового узла XML-файла
-    private static Node getEvent(Document doc, int id, String name, String type, String date_start, String date_end,
+    private static Node getEvent(Document doc, int id, String event_name, String event_type, String date_start, String date_end,
                                  String manager, String place)
     {
-        Element language = doc.createElement("Event");
+        Element language = doc.createElement("Eventlist");
         language.setAttribute("id", id+""); // устанавливаем атрибут id
         // создаем элементы name и age
-        language.appendChild(getLanguageElements(doc, "name", name));
-        language.appendChild(getLanguageElements(doc, "type", type));
-        language.appendChild(getLanguageElements(doc, "data_start", date_start));
-        language.appendChild(getLanguageElements(doc, "data_end", date_end));
+        language.appendChild(getLanguageElements(doc, "event_name", event_name));
+        language.appendChild(getLanguageElements(doc, "event_type", event_type));
+        language.appendChild(getLanguageElements(doc, "date_start", date_start));
+        language.appendChild(getLanguageElements(doc, "date_end", date_end));
         language.appendChild(getLanguageElements(doc, "manager", manager));
         language.appendChild(getLanguageElements(doc, "place", place));
         return language;

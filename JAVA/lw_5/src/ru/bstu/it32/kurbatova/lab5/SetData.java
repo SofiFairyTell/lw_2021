@@ -23,7 +23,7 @@ public class SetData {
         while (true)
         {
             Scanner input = new Scanner(System.in);
-            String str = input.next();
+            String str = input.nextLine();
             if(str.length()>0)
             {
                 return str;
@@ -63,7 +63,7 @@ public class SetData {
         date_start = Common.DateParser(strings[2]);
         date_end = Common.DateParser(strings[3]);
 
-        return new Eventlist(size + 1, strings[0], strings[1],date_start, date_end , strings[4], strings[5]);
+        return new Eventlist(size + 1, strings[0], strings[1],strings[2],strings[3], strings[4], strings[5]);
     }
 
     public void changeEvent(String filePath)
@@ -77,8 +77,8 @@ public class SetData {
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId() == searchId) {
                 events.set(i, new Eventlist(searchId,
-                        strings[0], strings[1], Common.DateParser(strings[2]),
-                        Common.DateParser(strings[3]), strings[4], strings[5]));
+                        strings[0], strings[1], strings[2],
+                        strings[3], strings[4], strings[5]));
                 flag = true;
                 break;
             }

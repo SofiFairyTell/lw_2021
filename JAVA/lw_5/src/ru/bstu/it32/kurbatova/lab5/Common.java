@@ -19,7 +19,8 @@ public class Common {
     public static Date DateParser(String date_str)
     {
         Date date_parsed = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         try {
             date_parsed = dateFormat.parse(date_str);
         } catch (ParseException e) {

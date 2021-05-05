@@ -41,7 +41,7 @@ public class ParseSQL
 
     public void addNewRecord(Eventlist eventlist) throws SQLException {
         statement.executeUpdate("INSERT INTO eventslist.eventslist (event_name, event_type, date_start, date_end, manager , place)" +
-                " VALUES ('" + eventlist.name + "','" + eventlist.type + "', '" + eventlist.date_start + "', '" + eventlist.date_end + "', " +
+                " VALUES ('" + eventlist.event_name + "','" + eventlist.event_type + "', '" + eventlist.date_start + "', '" + eventlist.date_end + "', " +
                 "'" + eventlist.manager + "','" + eventlist.place + "')");
     }
 

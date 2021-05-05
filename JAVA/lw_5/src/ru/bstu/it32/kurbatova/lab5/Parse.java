@@ -33,10 +33,10 @@ public class Parse
             while (result.next()) {
                 this.eventslist.add(new Eventlist(
                         result.getInt("id"),
-                        result.getString("name"),
-                        result.getString("type"),
-                        Common.DateParser(result.getString("date_start")),
-                        Common.DateParser(result.getString("date_end")),
+                        result.getString("event_name"),
+                        result.getString("event_type"),
+                        result.getString("date_start"),
+                        result.getString("date_end"),
                         result.getString("manager"),
                         result.getString("place")
                 ));
