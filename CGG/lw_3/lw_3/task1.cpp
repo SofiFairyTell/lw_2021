@@ -49,9 +49,12 @@ void SetTransform(Graphics& g, float time)
 
 
 	//умножение текущей матрицы на матрицу переноса
-	T[0].Translate(400.f, 220.f);
-	T[1].Translate(350.f, 220.f);
-	
+	//T[0].Translate(400.f, 220.f);
+	//T[1].Translate(350.f, 220.f);
+
+	T[0].Translate(200.f, 50.f);
+	T[0].Translate(200.f, 50.f);
+	T[1].RotateAt(-10.f, PointF{ 200.f, 50.f });
 	//T[2].Translate(300.f, 220.f);
 	//T[3].Translate(200.f, -50.f);
 	//T[4].Translate(0.f, -50.f);
@@ -62,23 +65,25 @@ void SetTransform(Graphics& g, float time)
 
 
 	float a[6], b[6];
+
 	if (Timing_1 < time < Timing_2) // первый этап анимации
 	{
-		T[0].Translate(200.f, 50.f); 
+		/*T[0].Translate(200.f, 50.f); 
 
 		T[1].RotateAt(-40.f, PointF{ 200.f, 50.f });
-	
+	*/
 
 		//получение элементов матрицы
 		T[0].GetElements(a);//элементы из матрицы T будут записаны в a
 		T[1].GetElements(b);//элементы из матрицы T будут записаны в b
+
 	}
 	
 	if (Timing_2 < time < Timing_3) // первый этап анимации
 	{
 
-		T[0].Translate(200.f, 0.f);
-		T[1].RotateAt(50.f, PointF{ 200.f, 0.f });
+		//T[0].Translate(200.f, 0.f);
+		//T[1].RotateAt(50.f, PointF{ 200.f, 0.f });
 
 		T[1].GetElements(a);
 		T[2].GetElements(b);
@@ -129,7 +134,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR lpszCmdLine, int nCm
 
 	if (Ok == stRet)
 	{
-		textura = Image(L"texture2.jpg").GetThumbnailImage(320, 240);
+		
 		gif = Image::FromFile(L"gif.gif");
 		hWnd = CreateWindowEx(0, TEXT("Lab1"), TEXT("Lab3"), WS_OVERLAPPEDWINDOW,
 			CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
@@ -155,7 +160,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR lpszCmdLine, int nCm
 			}
 		}
 		//-------------------------------------------цикл сообщений-------------------------------------------	
-		delete textura;
+		
 		GdiplusShutdown(gdiplusToken); // завершение работы GDI+
 	} // if
 	return (int)msg.wParam;
@@ -274,7 +279,6 @@ void Display(Graphics &g, float time)
 	Font font2(L"Arial", 80.f, FontStyleBold);
 	g.DrawString(L"Лаб №3. Вариант №10 - Катер", -1, &font1, PointF(10.f, 550.f), &blackBrush);
 
-
 	SetTransform(g, time); //анимация??
 
 	Rect rect(0, 0, 600, 600); //Многоугольник для градиента
@@ -286,32 +290,50 @@ void Display(Graphics &g, float time)
 
 #pragma region Part of kater
 	//Части катера
-	Rect kater_part[3] =
+	PointF kater_body[4] =
 	{
-		Rect(250,200,460,200),//тело катера
-		Rect(710,290,80,90),//мотор катера
-		Rect(318,130,160,70),//стул или крыша??
+		PointF(250.f,400.f),
+		PointF(250.f,200.f),	
+		PointF(710.f,200.f),
+		PointF(710.f,400.f),
 	};
 
+	PointF kater_motor[4] = 
+	{
+		PointF(710.f,380.f),
+		PointF(710.f,290.f),
+		PointF(790.f,290.f),
+		PointF(790.f,380.f),
+	};
+	
+	PointF kater_top[4] =
+	{
+		PointF(318.f,200.f),
+		PointF(318.f,130.f),
+		PointF(478.f,130.f),
+		PointF(478.f,200.f),
+	};
 	//Точки для многоугольника
-	Point kater_nose[3] =
+	PointF kater_nose[3] =
 	{
-		Point(40,200), Point(250,200), Point(250,400),
+		PointF(40.f,200.f), 
+		PointF(250.f,200.f), 
+		PointF(250.f,400.f)
 	};
 
-	//Gdiplus::Matrix mtrx;
-	//mtrx.Translate(0, -5);
-	//mtrx.TransformPoints(kater_nose, 3);
-	Point kater_glass[4] =
+	PointF kater_glass[4] =
 	{
-		Point(170,200), Point(330,77),	Point(480,77), Point(520,200)
+		PointF(170.f,200.f), 
+		PointF(330.f,77.f),
+		PointF(480.f,77.f), 
+		PointF(520.f,200.f)
 	};
-	Point kater_handline[4] =
+	PointF  kater_handline[4] =
 	{
-		Point(507,140),
-		Point(585,150),
-		Point(661,160),
-		Point(709,192),
+		PointF(507.f,140.f),
+		PointF(585.f,150.f),
+		PointF(661.f,160.f),
+		PointF(709.f,192.f),
 	};
 
 	float border_part[6] =
@@ -343,19 +365,26 @@ void Display(Graphics &g, float time)
 
 	//Рисование катера
 	g.SetSmoothingMode(SmoothingModeHighQuality);
-	g.FillRectangle(&linBrush, kater_part[0]);		//корпус
-	g.FillRectangle(&hatchBrush, kater_part[1]);	//мотор
+	
 
-	g.DrawRectangles(&kater_border, kater_part, 3);	//нарисованные контуры элементов катера
-	g.FillPolygon(&linBrush, kater_nose, 3);			//нос закршенный
-	g.DrawPolygon(&kater_border, kater_nose, 3);	//нос контур
+	//нарисованные контуры элементов катера
 
-	g.FillRectangle(&brushYellow, kater_part[2]);	//кресла
+	g.FillPolygon(&linBrush, kater_body,4);		//корпус
+	g.FillPolygon(&hatchBrush, kater_motor,4);	//мотор
+	g.FillPolygon(&brushYellow, kater_top,4);	//кресла
+	g.FillPolygon(&linBrush, kater_nose, 3);	//нос
+
+	g.DrawPolygon(&kater_border,kater_body,4);	//корпус
+	g.DrawPolygon(&kater_border,kater_motor,4);	//мотор
+	g.DrawPolygon(&kater_border,kater_top,4);	//кресла
+	g.DrawPolygon(&kater_border, kater_nose, 3);//нос 
+	
 	g.DrawPolygon(&kater_border, kater_glass, 4);	//стекло над креслами
 
 	//Нарисуем ручку
 	g.FillClosedCurve(&brushYellow, kater_handline, 4);
 	g.DrawClosedCurve(&kater_border, kater_handline, 4);
+
 
 } // Display
 
