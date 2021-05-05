@@ -6,15 +6,15 @@
 #include <map>
 #include <gdiplus.h>
 #include <vector>
+#define  PI 3.1416f 
+#include <cmath>
 
 #pragma comment(lib, "gdiplus.lib")
 using namespace Gdiplus;
 LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 void Display(Graphics& g, int t);
-
+void DrawWave(Graphics& g);
 //Для анимации
-void ShiftLeft(std::vector<PointF> points, int offsetX);
-void ShiftRight(PointF points, int n);
 
 Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t);
 
@@ -26,84 +26,143 @@ Image* gif;
 UINT frameCount = 0;
 UINT frameIndex = 0; // индекс активного кадра 4 UINT frameCount; // количество кадров
 
-void ShiftLeft(PointF points, int offsetX)
+//Для того чтобы нарисовать волну
+class WorldWindow
 {
-	Matrix mtrx;
-	mtrx.Translate(offsetX, 0);
-	mtrx.TransformPoints(&points,);
+public:
+	float Left;
+	float Right;
+	float Top;
+	float Bottom;
+
+	inline WorldWindow(float left, float top, float right, float bottom)
+		:Left(left), Top(top), Right(right), Bottom(bottom) {}
+	inline float Width() const
+	{
+		return (Right - Left);
+	}
+	inline float Height() const
+	{
+		return (Top - Bottom);
+	}
+};
+class Viewport : public::Rect
+{
+public:
+	inline Viewport(int left, int top, int right, int bottom) :Rect(left, top, right - left, bottom - top) {}
+	inline Viewport(const RECT &rect) : Rect(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top) {}
+	inline operator RECT() const
+	{
+		RECT rect = { X,Y, X + Width, Y + Height };
+		return rect;
+	}
+};
+class EqualMethod
+{
+public:
+
+	bool EqualDot(PointF& first, PointF& second, float tolerance = 1e-6f)
+	{
+		if (abs(first.X - second.X) < tolerance && abs(first.Y - second.Y) < tolerance)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+	inline bool GreaterOrEqual(float a, float b, float tolerance = -1e-3f)
+	{
+		return !(b - a) > tolerance;
+	}
+	inline bool Less(float a, float b, float tolerance = -1e-3f)
+	{
+		return (b - a) > tolerance;
+	}
+	inline bool Greater(float a, float b, float tolerance = -1e-3f)
+	{
+		return (a - b) > tolerance;
+	}
+	inline bool Equal(float a, float b, float tolerance = -1e-3f)
+	{
+		return (abs(a - b) < tolerance);
+	}
+	inline bool IsZero(float a, float tolerance)
+	{
+		return (abs(a) == tolerance);
+	}
+
+
+};
+
+
+
+inline void WorldToViewPort(const WorldWindow &w, const Viewport &vp, PointF *points, int count);
+inline void ViewPortToWorld(const WorldWindow &w, const Viewport &vp, PointF *points, int count);
+bool  V_LBclip(const WorldWindow &w, float *x0, float *y0, float *x1, float *y1);//отсечение по алгоритму Лианга-Барски
+static bool LB_tclip(float p, float q);//определение оставить отрезок или нет
+
+// То что ниже надо собирать с x86
+//Вычисление Sin и COS
+inline float Sin(float angle)
+{
+	__asm
+	{
+		fld angle;
+		fsin;
+	}
 }
-void ShiftRight(PointF points, int n)
+
+inline float Cos(float angle)
 {
-	Matrix mtrx;
-	mtrx.Translate(-100, 0);
-	mtrx.TransformPoints(&points, n);
+	__asm
+	{
+		fld angle;
+		fcos;
+	}
 }
 
-void SetTransform(Graphics& g, float time)
+inline void WorldToViewPort(const WorldWindow &w, const Viewport &vp, PointF *points, int count)
 {
-	float Timing_0 = -1.f,
-		Timing_1 = 1.f,
-		Timing_2 = 2.f,
-		Timing_3 = 4.f;
-		//Timing_4 = 130.f,
-		//Timing_5 = 134.f,
-		//Timing_6 = 137.f,
-		//Timing_7 = 143.f,
-		//Timing_8 = 156.f,
-		//Timing_9 = 200.f; 
+	//Из мирового окна в окно просмотра
+	float A = (float)vp.Width / (w.Right - w.Left);
+	float B = (float)vp.Height / (w.Bottom - w.Top);
+	float C = vp.X - A * w.Left;
+	float D = vp.Y - B * w.Top;
 
-	//int Timing_1_1 = 350;
-
-	float m[6];
-	Gdiplus::Matrix T[3];
-
-
-	//умножение текущей матрицы на матрицу переноса
-	//T[0].Translate(400.f, 220.f);
-	//T[1].Translate(350.f, 220.f);
-
-	T[0].Translate(200.f, 50.f);
-	T[0].Translate(200.f, 50.f);
-	T[1].RotateAt(-10.f, PointF{ 200.f, 50.f });
-	//T[2].Translate(300.f, 220.f);
-	//T[3].Translate(200.f, -50.f);
-	//T[4].Translate(0.f, -50.f);
-
-	//умножение текущей матрицы на матрицу поворота вокруг заданной точки
-	//T[1].RotateAt(-10.f, PointF{ 470.f, 450.f });
-	//T[2].RotateAt(10.f, PointF{ 400.f, 200.f });
-
-
-	float a[6], b[6];
-
-	if (Timing_1 < time < Timing_2) // первый этап анимации
+	for (unsigned int i = 0; i < count; ++i)
 	{
-		//получение элементов матрицы
-		T[0].GetElements(a);//элементы из матрицы T будут записаны в a
-		T[1].GetElements(b);//элементы из матрицы T будут записаны в b
-
+		points[i].X = A * points[i].X + C;
+		points[i].Y = B * points[i].Y + D;
 	}
-	
-	if (Timing_2 < time < Timing_3) // первый этап анимации
+}
+
+inline void ViewPortToWorld(const WorldWindow &w, const Viewport &vp, PointF *points, int count)
+{
+	//Из мирового окна в окно просмотра
+	float A = (w.Right - w.Left) / (float)vp.Width;
+	float B = (w.Bottom - w.Top) / (float)vp.Height;
+	float C = w.Left - A * vp.X;
+	float D = w.Top - B * vp.Y;
+	for (unsigned int i = 0; i < count; ++i)
 	{
-		T[1].GetElements(a);
-		T[2].GetElements(b);
-	}
-	
-	else
-	{
-		return;
+		points[i].X = A * points[i].X + C;
+		points[i].Y = B * points[i].Y + D;
 	}
 
-	for (int i = 0; i < _countof(m); ++i)
+}
+
+void CalculateDots(std::vector<PointF> &dots, int m)
+{
+	float t = 0.00f;
+	for (int i = 0; i < m; i++)
 	{
-		m[i] = a[i] * (1.f - time) + b[i] * time;//формула твиннига
+		float X = t;
+		float Y = -2.0f * Cos(t) + 3.0f* Cos(-2.0f / 3.0f * t);;
+
+		dots[i].X += X;
+		dots[i].Y += Y;
+		t += 0.05f;
 	}
-
-	Matrix matrix;
-	matrix.SetElements(m[0], m[1], m[2], m[3], m[4], m[5]);
-	g.SetTransform(&matrix);
-
 }
 
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR lpszCmdLine, int nCmdShow)
@@ -257,6 +316,42 @@ LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
+void DrawWave(Graphics& g)
+{
+	//Координаты окон для основной фигуры
+	Viewport vp(-1200.0f, 350.0f, 1200.0f, 440.0f);
+	WorldWindow w(-20.75f, 20.75f, 20.75f, -20.75f);
+
+	//Кисти
+	Pen curve_limacon_clip(Color::Blue, 30.f);
+
+	int m = (500 * PI / 0.05f) + 1; //376,8 = 377 точек
+
+	std::vector<PointF> dots(m);
+	CalculateDots(dots, m);
+	Matrix mtrx;
+	//Кисти для заполнения цветом
+	for (int i = 0; i < m - 1; i++)
+	{
+		PointF view[2] = { dots[i],dots[i + 1] };
+		if (V_LBclip(w, &view[0].X, &view[0].Y, &view[1].X, &view[1].Y) == 1)
+		{
+			WorldToViewPort(w, vp, view, 2);
+			g.DrawCurve(&curve_limacon_clip, view, 2);
+			SolidBrush gr(Color::Blue);
+			g.FillClosedCurve(&gr,view,2);
+			//if (t > 25 && t < 38)
+			//{
+			//	mtrx.Translate(0.f, 20.f);
+			//	mtrx.TransformPoints(view, 2);
+			//}
+
+		}
+
+	}
+
+
+}
 Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t) 
 {
 	return Gdiplus::PointF(A.X * (1.f - t) + B.X * t, A.Y * (1.f - t) + B.Y * t);
@@ -280,8 +375,6 @@ void Display(Graphics &g, int time)
 	Font font2(L"Arial", 80.f, FontStyleBold);
 	g.DrawString(L"Лаб №3. Вариант №10 - Катер", -1, &font1, PointF(10.f, 550.f), &blackBrush);
 
-	//SetTransform(g, time); //анимация??
-
 	Rect rect(0, 0, 600, 600); //Многоугольник для градиента
 //Кисти
 	Pen kater_border(Color::Blue, 10.f);//Кисти для заполнения цветом
@@ -292,14 +385,14 @@ void Display(Graphics &g, int time)
 
 	//Время ключевых кадров
 	int Timing_0 = -1,
-		Timing_1 = 2,
-		Timing_2 = 5,
-		Timing_3 = 10,
-		Timing_4 = 20,
-		Timing_5 = 40,
-		Timing_6 = 137,
-		Timing_7 = 143,
-		Timing_8 = 156,
+		Timing_1 = 12,
+		Timing_2 = 25,
+		Timing_3 = 38,
+		Timing_4 = 50,
+		Timing_5 = 63,
+		Timing_6 = 75,
+		Timing_7 = 88,
+		Timing_8 = 100,
 		Timing_9 = 200;
 	int Timing_1_1 = 350;
 
@@ -378,13 +471,8 @@ void Display(Graphics &g, int time)
 	Gdiplus::Matrix mtrx;
 	if (time > Timing_0 && time < Timing_1)
 	{	
-		mtrx.Translate(-20, 0);
-		//ShiftLeft(*kater_body, 4);
-		//ShiftLeft(*kater_motor, 4);
-		//ShiftLeft(*kater_top, 4);
-		//ShiftLeft(*kater_nose, 3);
-		//ShiftLeft(*kater_glass, 4);
-		//ShiftLeft(*kater_handline, 4);
+		mtrx.Translate(220, 20);
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
@@ -394,7 +482,9 @@ void Display(Graphics &g, int time)
 	}
 	if (time > Timing_1 && time < Timing_2) // �������� ����
 	{
-		mtrx.RotateAt(-3, pnt[0]);
+		mtrx.Translate(-20, -20);
+		mtrx.RotateAt(-4, pnt[0]);
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
@@ -404,24 +494,24 @@ void Display(Graphics &g, int time)
 	}
 	if (time > Timing_2 &&time < Timing_4)
 	{
-		mtrx.Translate(20, 0);
-		/*	
-		ShiftRight(*kater_body, 4);
-		ShiftRight(*kater_motor, 4);
-		ShiftRight(*kater_top, 4);
-		ShiftRight(*kater_nose, 3);
-		ShiftRight(*kater_glass, 4);
-		ShiftRight(*kater_handline, 4);	*/	
+		DrawWave(g);
+
+		mtrx.RotateAt(4, pnt1[0]);
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
 		mtrx.TransformPoints(kater_nose, 3);
 		mtrx.TransformPoints(kater_glass, 4);
 		mtrx.TransformPoints(kater_handline, 4);
+
+		
 	}
-	if (time > Timing_3 && time < Timing_4) // �������� ����
+	if (time > Timing_3 && time < Timing_4) 
 	{
-		mtrx.RotateAt(3, pnt1[0]);
+		//mtrx.RotateAt(3, pnt1[0]);
+		mtrx.Translate(20, -20);
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
@@ -431,7 +521,37 @@ void Display(Graphics &g, int time)
 	}
 	if (time > Timing_4 && time < Timing_5 )
 	{
-		mtrx.Translate(-20, 0);
+		DrawWave(g);
+		mtrx.RotateAt(-4, pnt1[0]);
+
+		mtrx.TransformPoints(kater_body, 4);
+		mtrx.TransformPoints(kater_motor, 4);
+		mtrx.TransformPoints(kater_top, 4);
+		mtrx.TransformPoints(kater_nose, 3);
+		mtrx.TransformPoints(kater_glass, 4);
+		mtrx.TransformPoints(kater_handline, 4);
+	}
+	if (time > Timing_5 && time < Timing_6)
+	{		
+		DrawWave(g);
+
+		mtrx.RotateAt(4, pnt1[0]);
+
+		mtrx.TransformPoints(kater_body, 4);
+		mtrx.TransformPoints(kater_motor, 4);
+		mtrx.TransformPoints(kater_top, 4);
+		mtrx.TransformPoints(kater_nose, 3);
+		mtrx.TransformPoints(kater_glass, 4);
+		mtrx.TransformPoints(kater_handline, 4);
+
+
+
+	}
+
+	if (time > Timing_6 && time < Timing_7)
+	{
+		mtrx.Translate(-250, 0);
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
@@ -497,6 +617,86 @@ void Display(Graphics &g, int time)
 	g.FillClosedCurve(&brushYellow, kater_handline, 4);
 	g.DrawClosedCurve(&kater_border, kater_handline, 4);
 
+	DrawWave(g);
+	
+
+
+
 
 } // Display
 
+static float LB_t0, LB_t1;
+
+static bool  LB_tclip(float p, float q)
+{
+	bool accept;
+	float r;
+	EqualMethod Equal = EqualMethod();
+	accept = true;                           /* Отрезок принят */
+	if (Equal.Equal(p, 0.0f) == 0)
+	{
+		if (Equal.Less(q, 0.0f)) accept = false;   /* Отбрасывание */
+	}
+	else
+	{
+		r = q / p;
+		if (Equal.Less(p, 0.0f))
+		{
+			if (Equal.Greater(r, LB_t1))
+				accept = false;      /* Отбрасывание */
+			else
+				if (Equal.Greater(r, LB_t0))
+					LB_t0 = r;
+		}
+		else
+		{
+			if (Equal.Less(r, LB_t0))
+				accept = false;      /* Отбрасывание */
+			else
+				if (Equal.Less(r, LB_t1))
+				{
+					LB_t1 = r;
+				}
+
+		}
+	}
+	return (accept);
+}  /* LB_tclip */
+
+bool V_LBclip(const WorldWindow &w, float *x0, float *y0, float *x1, float *y1)
+{
+	//int   visible;
+	bool visible;
+	float dx, dy;
+	EqualMethod Equal = EqualMethod();
+	//Wxlef, Wybot, Wxrig, Wytop
+
+	visible = false;
+	LB_t0 = 0;  LB_t1 = 1;
+	dx = *x1 - *x0;
+	if (LB_tclip(-dx, *x0 - w.Left))
+	{
+		if (LB_tclip(dx, w.Right - *x0))
+		{
+			dy = *y1 - *y0;
+			if (LB_tclip(-dy, *y0 - w.Bottom))
+			{
+				if (LB_tclip(dy, w.Top - *y0))
+				{
+					if (Equal.Less(LB_t1, 1.0f))
+					{
+						*x1 = *x0 + LB_t1 * dx;
+						*y1 = *y0 + LB_t1 * dy;
+					}
+					if (Equal.Greater(LB_t0, 0.0f))
+					{
+						*x0 = *x0 + LB_t0 * dx;
+						*y0 = *y0 + LB_t0 * dy;
+					}
+					visible = true;
+				}
+			}
+		}
+	}
+	return (visible);
+}  /* V_LBclip */
