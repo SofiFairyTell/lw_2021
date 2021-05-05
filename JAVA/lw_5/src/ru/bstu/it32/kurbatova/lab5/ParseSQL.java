@@ -26,21 +26,21 @@ public class ParseSQL
     }
 
     public ResultSet getAll() throws SQLException {
-        return this.statement.executeQuery("select * from eventslist");
+        return this.statement.executeQuery("select * from eventslist.eventslist");
     }
 
     public ResultSet searchRecord(int id) throws SQLException {
-        return statement.executeQuery("select * from eventslist where id in(" + id + ");");
+        return statement.executeQuery("select * from eventslist.eventslist where id in(" + id + ");");
     }
 
     public void addNewRecord(String[] strings) throws SQLException {
-        this.statement.executeUpdate("INSERT INTO eventslist (name, type, date_start, date_end, manager , place)" +
+        this.statement.executeUpdate("INSERT INTO eventslist.eventslist (event_name, event_type, date_start, date_end, manager , place)" +
                 " VALUES ('" + strings[0] + "','" + strings[1] + "', '" + strings[2] + "', '" + strings[3] + "', " +
                 "'" + strings[4] + "','" + strings[5] + "')");
     }
 
     public void addNewRecord(Eventlist eventlist) throws SQLException {
-        statement.executeUpdate("INSERT INTO eventslist (name, type, date_start, date_end, manager , place)" +
+        statement.executeUpdate("INSERT INTO eventslist.eventslist (event_name, event_type, date_start, date_end, manager , place)" +
                 " VALUES ('" + eventlist.name + "','" + eventlist.type + "', '" + eventlist.date_start + "', '" + eventlist.date_end + "', " +
                 "'" + eventlist.manager + "','" + eventlist.place + "')");
     }
@@ -48,12 +48,12 @@ public class ParseSQL
     public void updateRecord(int id) throws SQLException {
         SetData setData = new SetData();
         var strings = setData.setData();
-        statement.executeUpdate("update eventslist set name = '" + strings[0] + "', type = '" + strings[1] + "', date_start = '" + strings[2]
+        statement.executeUpdate("update eventslist.eventslist set event_name = '" + strings[0] + "', event_type = '" + strings[1] + "', date_start = '" + strings[2]
                 + "', date_end = '" + strings[3] + "', manager = '" + strings[4] + "', place = '" + strings[5] + "' where id = " + id + ";");
     }
 
     public void deleteRecord(int id) throws SQLException {
-        statement.executeUpdate("delete from eventslist where id in(" + id + ");");
+        statement.executeUpdate("delete from eventslist.eventslist where id in(" + id + ");");
     }
 
     public ResultSet workDataBase(int action) {

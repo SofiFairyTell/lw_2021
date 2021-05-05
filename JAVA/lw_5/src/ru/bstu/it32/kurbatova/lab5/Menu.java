@@ -79,8 +79,8 @@ public class Menu
                             while (result.next()) {
                                 Eventlist eventlist = new Eventlist(
                                         result.getInt("id"),
-                                        result.getString("name"),
-                                        result.getString("type"),
+                                        result.getString("event_name"),
+                                        result.getString("event_type"),
                                         Common.DateParser(result.getString("date_start")),
                                         Common.DateParser(result.getString("date_end")),
                                         result.getString("manager"),
