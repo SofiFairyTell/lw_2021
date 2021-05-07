@@ -1,3 +1,4 @@
+<?php
 class Watermark
 {
     function add_watermark($img, $text, $font, $r = 128, $g = 128, $b = 128, $alpha = 100)

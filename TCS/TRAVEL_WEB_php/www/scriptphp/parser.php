@@ -51,7 +51,7 @@ class Parser
         $value = preg_quote($value);
        
         $tag_regex = "/<(".$tag.")[^>]*$attr\s*=\s*".
-                      "(['\"])$value\\2[^>]*>(.*?)<\/\\1>/"
+                      "(['\"])$value\\2[^>]*>(.*?)<\/\\1>/";
        
         preg_match_all($tag_regex,
                        $xml,
@@ -59,18 +59,22 @@ class Parser
                        PREG_PATTERN_ORDER);
        
         return $matches[3];
-}
+    }
 ///<p.*?class?= ?['\\\"]([^'\\\"]*)(.*?)<\/p>/
-function get_tag( $tag, $xml ) {
-    $tag = 'p';
-    $tag = preg_quote($tag);
-    preg_match_all('{<'.$tag.'[^>]*>(.*?)</'.$tag.'>.'}',
-                     $xml,
-                     $matches,
-                     PREG_PATTERN_ORDER);
+// function get_tag( $tag, $xml ) {
+//     $tag = 'p';
+//     $tag = preg_quote($tag);
+//     preg_match_all('{<'.$tag.'[^>]*>(.*?)</'.$tag.'>.'},
+//                      $xml,
+//                      $matches,
+//                      PREG_PATTERN_ORDER);
    
-    return $matches[1];
-  }
+//     return $matches[1];
+//   }
+
+
+}
+
 
 ?>
 

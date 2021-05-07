@@ -28,18 +28,22 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
 <section class = "section">
 <div>
     <span> Текст с сайта</span>
-   <? $obj = new Parser();
-    // $obj->parsHtml();
-    // $obj->statParser();
+   <?php 
+
     $watermark = new Watermark();
-    $img = imagecreatefromjpeg('./img/photo3.jpg');
-    $image = $watermark->add_watermark($img2,'travelblog.ru','erasbd.ttf');
+    $img = imagecreatefromjpeg('img/photo3.jpg');
+
+    $font = dirname(__FILE__) . '/fonts/verdana.ttf';;
+    $image = $watermark->add_watermark($img,'travelblog.ru',$font);
  
     //выводим изображение
-    imageJPEG($image);
+    // Устанавливаем тип содержимого в заголовок, в данном случае image/jpeg
+    
+    imageJPEG($img,'img/simpletext.jpg');
+    imagejpeg($image, NULL, 75);
     //освобождаем память
     imagedestroy($image);
-    imagedestroy($img2);
+    imagedestroy($img);
     ?>
 </div>
 </section>
