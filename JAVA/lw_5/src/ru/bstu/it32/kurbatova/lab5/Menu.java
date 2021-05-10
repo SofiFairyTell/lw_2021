@@ -3,16 +3,6 @@ package ru.bstu.it32.kurbatova.lab5;
 
 import java.util.Scanner;
 
-import javax.xml.parsers.*;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
 public class Menu
 {
     public static int choiceMenu() {
