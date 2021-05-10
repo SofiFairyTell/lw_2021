@@ -99,22 +99,6 @@ require("header.php");
 		<button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
 	  </form>
 	</div> -->
-	<?php
-// if (isset($_POST['btn']))
-// {
-//     $err = array();
-//     if(strlen($_POST['name'])<=1)
-//     {
-//         $err['name'] = 'Длина имени должна быть более 1 символа';
-//     }
-//     else
-//     {
-//         //редирект
-//         header('Location: '.$_SERVER['PHP_SELF'].'?message=ok'); 
-//     }
-// }
-?>
-
 
 <?php 
 require('form.php');

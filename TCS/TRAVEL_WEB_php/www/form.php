@@ -1,6 +1,5 @@
 
 <?php
-//$message = checkTextBox();
 $validName = false;
 $validEmail = false;
 $formvalid = true;
@@ -9,19 +8,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
 	if (isset($_POST['btn_ok'])) 
 	{
-		echo "<script type='text/javascript'>alert('КНОПКА СРАББОТАЛА ЗДЕСЬ');</script>";
 		if (isset($_POST['login']))
 		{
              $validName = preg_match('|^[А-Я][а-я]{2,}$|u', $_POST['login'], $matches,PREG_OFFSET_CAPTURE);
-			// $formvalid = false;
-			 echo "<script type='text/javascript'>alert('КНОПКА  ЗДЕСЬ');</script>";
         }		
 		if (isset($_POST['email'])) 
 		{
 			$re = '|^[A-Z0-9][A-Z0-9._%+-]+@[A-Z0-9-]+\.[A-Z]{2,4}$|i';
             $validEmail = preg_match($re , $_POST['email'], $matches,PREG_OFFSET_CAPTURE);
-			//$formvalid = false;
-			echo "<script type='text/javascript'>alert('КНОПКА тут');</script>";
         }
 	}
 
@@ -35,17 +29,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		$message = " Ваше сообщение не отправлено!";
 		echo "<script type='text/javascript'>alert('$message');</script>";
 	}
-	// if(!$formvalid)
-	// {
-	// 	//header('Location: '.$_SERVER['PHP_SELF'].'?message=ok');
-	// 	$message = " Ваше сообщение отправлено!";
-	// 	echo "<script type='text/javascript'>alert('$message');</script>";
-	// }
-	// else{
-	// 	$message = " Ваше сообщение не отправлено!";
-	// 	echo "<script type='text/javascript'>alert('$message');</script>";
-	// }
-
 }
 ?>
 

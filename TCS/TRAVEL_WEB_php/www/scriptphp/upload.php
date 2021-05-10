@@ -55,7 +55,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Загрузить')
   }
 }
 
-echo "<p> Скачать изображение по ссылке:</p> <a href= dowland.php?path=$dowland_path> Скачать изображение </a></p>";
+echo "<p> Скачать изображение по ссылке:</p> <a href= ./scriptphp/dowland.php?path=$dowland_path> Скачать изображение </a></p>";
 
 ?> 
  

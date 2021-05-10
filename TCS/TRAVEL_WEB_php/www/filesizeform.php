@@ -26,14 +26,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
 </section>
 <section class = "section">
 
-    <span> Фотография с Watermark</span>
+    <span> <h1> Фотография с Watermark </h1></span>
     <form enctype="multipart/form-data" action="filesizeform.php" method="post">
 			Выберите файл: <input name="uploadedFile" type="file" />
 			<input type="submit" name = "uploadBtn" value="Загрузить" />
             <input type="submit" name = "dowlandBtn" value="Скачать" />
 		</form>
 <?php
- require('upload.php');
+ require('./scriptphp/upload.php');
 
  ?>      
   

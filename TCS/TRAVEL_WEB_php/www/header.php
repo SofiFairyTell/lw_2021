@@ -1,8 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/validation.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
-// include_once $_SERVER['DOCUMENT_ROOT'] . './components/logic/fileSize.php';
-// include_once $_SERVER['DOCUMENT_ROOT'] . './components/logic/email.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/titleChange.php';
 ?>
 <!DOCTYPE html>
