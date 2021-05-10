@@ -54,15 +54,8 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Загрузить')
     $message .= 'Error:' . $_FILES['uploadedFile']['error'];
   }
 }
-else
-{
 
-}
 echo "<p> Скачать изображение по ссылке:</p> <a href= dowland.php?path=$dowland_path> Скачать изображение </a></p>";
-
-// $contents = file_get_contents($dowland_path);
-// $path = './dowland_files/file.jpg';
-// file_put_contents($path, file_get_contents($dowland_path));
 
 ?> 
  
