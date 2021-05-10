@@ -104,7 +104,8 @@ public class Menu
                         content = scanner.nextLine();
                         var event = sax.searchSaxDocument(filePath, content);
                         System.out.println(event != null ? event.toString() : "Такого события нет!");
-                    } else if (type == 2) {
+                    } else
+                        if (type == 2) {
                         var mySqlObj = new ParseSQL();
                         var result = mySqlObj.workDataBase(choice);
                         try {
