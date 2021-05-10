@@ -34,6 +34,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
 <?php
  require('upload.php');
  ?>      
+  
 </section>
 
 </body>

@@ -26,13 +26,14 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Загрузить')
 
     // check if file has one of the following extensions
     $allowedfileExtensions = array('jpg', 'gif', 'png');
-
+   
     if (in_array($fileExtension, $allowedfileExtensions))
     {
       // directory in which the uploaded file will be moved
       $uploadFileDir = './uploaded_files/';
+      $dowlandFileDir = '/uploaded_files/';
       $dest_path = $uploadFileDir . $newFileName;
-
+      $dowland_path = $_SERVER['DOCUMENT_ROOT'].$dowlandFileDir. $newFileName;
       if(move_uploaded_file($fileTmpPath, $dest_path)) 
       {
         $message ='File is successfully uploaded.';
@@ -53,4 +54,8 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Загрузить')
     $message .= 'Error:' . $_FILES['uploadedFile']['error'];
   }
 }
-?>       
+
+echo "<p> Скачать изображение по ссылке:</p> <a href= $dowland_path> Скачать изображение </a></p>"
+?> 
+ 
+     
