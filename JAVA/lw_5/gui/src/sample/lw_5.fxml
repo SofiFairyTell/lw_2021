@@ -25,16 +25,16 @@
                                     <items>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="426.0">
                                  <children>
-                                    <TextArea id="calendarArea" layoutX="7.0" layoutY="7.0" prefHeight="402.0" prefWidth="474.0" promptText="Календарь событий" wrapText="true" />
+                                    <TextArea fx:id="calendarArea" layoutX="7.0" layoutY="7.0" prefHeight="402.0" prefWidth="474.0" promptText="Календарь событий" wrapText="true" />
                                  </children>
                                         </AnchorPane>
 
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="398.0">
                                             <children>
-                                    <Button id="watchALL" fx:id="btn11" layoutX="74.0" layoutY="33.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Просмотр календаря" />
-                                    <Button id="deleteID" fx:id="btn111" layoutX="74.0" layoutY="146.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Удалить событие" />
-                                    <Button id="changeALL" fx:id="btn1111" layoutX="74.0" layoutY="202.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Изменить событие" />
-                                    <Button id="findID" fx:id="btn1112" layoutX="74.0" layoutY="89.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Найти" />
+                                    <Button id="watchALL" fx:id="btn11" onAction="#WatchAll" layoutX="74.0" layoutY="33.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Просмотр календаря" />
+                                    <Button id="deleteID" fx:id="btn111" onAction="#DeleteId" layoutX="74.0" layoutY="146.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Удалить событие" />
+                                    <Button id="changeALL" fx:id="btn1111" onAction="#ChangeAll" layoutX="74.0" layoutY="202.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Изменить событие" />
+                                    <Button id="findID" fx:id="btn1112" onAction="#FindID" layoutX="74.0" layoutY="89.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Найти" />
                                             </children>
                                         </AnchorPane>
                                     </items>
@@ -47,7 +47,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                                    <Button id="addID" fx:id="btn1" layoutX="166.0" layoutY="276.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="160.0" text="Добавить событие" />
+                                    <Button id="addID" fx:id="btn1" onAction="#AddId" layoutX="166.0" layoutY="276.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="160.0" text="Добавить событие" />
                                     <Label fx:id="label1" layoutX="14.0" layoutY="26.0" prefHeight="16.0" prefWidth="57.0" text="Тип">
                                         <font>
                                             <Font name="Times New Roman" size="14.0" />
@@ -77,9 +77,10 @@
                                     <ComboBox id="event_type_CB" fx:id="FigureName" layoutX="141.0" layoutY="21.0" prefHeight="26.0" prefWidth="187.0" promptText="Тип мероприятия">
                                         <items>
                                             <FXCollections fx:factory="observableArrayList">
-                                                <String fx:value="Круг" />
-                                                <String fx:value="Треугольник" />
-                                                <String fx:value="Прямоугольник" />
+                                                <String fx:value="Встреча" />
+                                                <String fx:value="Собеседование" />
+                                                <String fx:value="Конференция" />
+                                                <String fx:value="Переговоры" />
                                             </FXCollections>
                                         </items>
                                     </ComboBox>
@@ -94,13 +95,19 @@
                               <Font name="Times New Roman" size="14.0" />
                            </font>
                         </Label>
-                        <Button id="changeID" fx:id="btn12" layoutX="541.0" layoutY="69.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="160.0" text="Изменить событие" />
+                        <Button id="changeID" fx:id="btn12" layoutX="541.0" layoutY="95.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="160.0" text="Изменить событие" />
                         <Label fx:id="label312" layoutX="380.0" layoutY="26.0" text="Номер изменяемого события">
                            <font>
                               <Font name="Times New Roman" size="14.0" />
                            </font>
                         </Label>
                         <TextField id="id_TA" fx:id="parametr311" layoutX="567.0" layoutY="21.0" prefHeight="26.0" prefWidth="134.0" promptText="Введите номер" />
+                        <TextField id="eventname_TA" fx:id="parametr3111" layoutX="567.0" layoutY="62.0" prefHeight="26.0" prefWidth="134.0" promptText="Введите название (для БД)" />
+                        <Label fx:id="label3121" layoutX="380.0" layoutY="67.0" text="Название изменяемого события">
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
               </content>

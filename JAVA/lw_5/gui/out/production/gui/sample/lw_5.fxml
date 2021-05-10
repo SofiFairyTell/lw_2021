@@ -10,7 +10,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -18,68 +17,24 @@
     <children>
         <TabPane id="workspace" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #B3D05C;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
             <tabs>
-                <Tab id="task1" text="Сравнение периметров геометрических фигур">
+                <Tab id="task1" text="Календарь событий">
                     <content>
                         <AnchorPane id="task1_space" prefHeight="540.0" prefWidth="814.0" style="-fx-background-color: #DF92A5;">
                             <children>
-                                <TextArea fx:id="result" layoutX="522.0" layoutY="65.0" prefHeight="50.0" prefWidth="374.0" promptText="Фигура с наибольшим периметром">
-                                    <font>
-                                        <Font name="Times New Roman" size="14.0" />
-                                    </font>
-                                </TextArea>
-                                <Label layoutX="521.0" layoutY="14.0" prefHeight="51.0" prefWidth="373.0" text="Поиск фигуры с наибольшим периметром">
-                                    <font>
-                                        <Font name="Times New Roman" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Button fx:id="btn" layoutX="717.0" layoutY="127.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="178.0" text="Найти" />
-                                <SplitPane dividerPositions="0.4344366645448759" prefHeight="400.0" prefWidth="501.0">
+                                <SplitPane dividerPositions="0.544543429844098" prefHeight="418.0" prefWidth="900.0">
                                     <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="299.0">
-                                            <children>
-                                                <TreeView fx:id="selectionTreeView" prefHeight="400.0" prefWidth="346.0" />
-                                            </children>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="426.0">
+                                 <children>
+                                    <TextArea fx:id="calendarArea" layoutX="7.0" layoutY="7.0" prefHeight="402.0" prefWidth="474.0" promptText="Календарь событий" wrapText="true" />
+                                 </children>
                                         </AnchorPane>
 
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="288.0">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="398.0">
                                             <children>
-                                                <Button fx:id="btn1" layoutX="140.0" layoutY="339.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="120.0" text="Добавить фигуру" />
-                                                <Button fx:id="btn2" layoutX="18.0" layoutY="339.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="96.0" text="Развернуть" />
-                                                <Label fx:id="label1" layoutX="21.0" layoutY="138.0" text="Параметр 1 ">
-                                                    <font>
-                                                        <Font name="Times New Roman" size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <TextField fx:id="parametr1" layoutX="94.0" layoutY="133.0" prefHeight="26.0" prefWidth="126.0" promptText="Введите параметр 1" />
-                                                <Label fx:id="label2" layoutX="21.0" layoutY="173.0" text="Параметр 2 ">
-                                                    <font>
-                                                        <Font name="Times New Roman" size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <TextField  layoutX="94.0" layoutY="176.0" prefHeight="26.0" prefWidth="126.0" promptText="Введите параметр 2" />
-                                                <Label fx:id="label3" layoutX="21.0" layoutY="221.0" text="Параметр 3 ">
-                                                    <font>
-                                                        <Font name="Times New Roman" size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <TextField fx:id="parametr3" layoutX="94.0" layoutY="224.0" prefHeight="26.0" prefWidth="126.0" promptText="Введите параметр 3" />
-                                                <TextField fx:id="figureName" layoutX="94.0" layoutY="93.0" prefHeight="26.0" prefWidth="126.0" promptText="Введите фигуру" />
-
-                                                <Label layoutX="21.0" layoutY="98.0" text="Фигура">
-                                                    <font>
-                                                        <Font name="Times New Roman" size="14.0" />
-                                                    </font>
-                                                </Label>
-
-                                                <ComboBox fx:id="FigureName"  layoutX="22.0" layoutY="53.0" prefHeight="26.0" prefWidth="199.0" promptText="Название фигуры">
-                                                    <items>
-                                                        <FXCollections fx:factory="observableArrayList">
-                                                            <String fx:value="Круг" />
-                                                            <String fx:value="Треугольник" />
-                                                            <String fx:value="Прямоугольник" />
-                                                        </FXCollections>
-                                                    </items>
-                                                </ComboBox>
+                                    <Button id="watchALL" fx:id="btn11" onAction="#WatchAll" layoutX="74.0" layoutY="33.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Просмотр календаря" />
+                                    <Button id="deleteID" fx:id="btn111" onAction="#DeleteId" layoutX="74.0" layoutY="146.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Удалить событие" />
+                                    <Button id="changeALL" fx:id="btn1111" onAction="#ChangeAll" layoutX="74.0" layoutY="202.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Изменить событие" />
+                                    <Button id="findID" fx:id="btn1112" onAction="#FindID" layoutX="74.0" layoutY="89.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="166.0" text="Найти" />
                                             </children>
                                         </AnchorPane>
                                     </items>
@@ -88,6 +43,75 @@
                         </AnchorPane>
                     </content>
                 </Tab>
+            <Tab text="Редактирование">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                                    <Button id="addID" fx:id="btn1" onAction="#AddId" layoutX="166.0" layoutY="276.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="160.0" text="Добавить событие" />
+                                    <Label fx:id="label1" layoutX="14.0" layoutY="26.0" prefHeight="16.0" prefWidth="57.0" text="Тип">
+                                        <font>
+                                            <Font name="Times New Roman" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <TextField id="date_end_TA" fx:id="parametr1" layoutX="142.0" layoutY="141.0" prefHeight="26.0" prefWidth="185.0" promptText="Введите дату" />
+                                    <Label fx:id="label2" layoutX="6.0" layoutY="106.0" prefHeight="16.0" prefWidth="130.0" text="Дата и время начала">
+                                        <font>
+                                            <Font name="Times New Roman" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <TextField id="date_start_TA" layoutX="142.0" layoutY="101.0" prefHeight="26.0" prefWidth="185.0" promptText="Введите дату" />
+                                    <Label fx:id="label3" layoutX="13.0" layoutY="146.0" text="Дата и время конца">
+                                        <font>
+                                            <Font name="Times New Roman" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <TextField id="manager_TA" fx:id="parametr3" layoutX="143.0" layoutY="228.0" prefHeight="26.0" prefWidth="183.0" promptText="Введите ФИО организатора" />
+                                    <TextField id="event_name_TA" fx:id="figureName" layoutX="141.0" layoutY="62.0" prefHeight="26.0" prefWidth="187.0" promptText="Введите название" />
+
+                                    <Label layoutX="14.0" layoutY="67.0" prefHeight="16.0" prefWidth="67.0" text="Название">
+                                        <font>
+                                            <Font name="Times New Roman" size="14.0" />
+                                        </font>
+                                    </Label>
+
+                                    <ComboBox id="event_type_CB" fx:id="FigureName" layoutX="141.0" layoutY="21.0" prefHeight="26.0" prefWidth="187.0" promptText="Тип мероприятия">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="Встреча" />
+                                                <String fx:value="Собеседование" />
+                                                <String fx:value="Конференция" />
+                                                <String fx:value="Переговоры" />
+                                            </FXCollections>
+                                        </items>
+                                    </ComboBox>
+                        <Label fx:id="label31" layoutX="11.0" layoutY="233.0" text="Организатор">
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField id="place_TA" fx:id="parametr31" layoutX="143.0" layoutY="185.0" prefHeight="26.0" prefWidth="184.0" promptText="Введите место" />
+                        <Label fx:id="label311" layoutX="11.0" layoutY="182.0" text="Место">
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button id="changeID" fx:id="btn12" layoutX="541.0" layoutY="95.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="160.0" text="Изменить событие" />
+                        <Label fx:id="label312" layoutX="380.0" layoutY="26.0" text="Номер изменяемого события">
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField id="id_TA" fx:id="parametr311" layoutX="567.0" layoutY="21.0" prefHeight="26.0" prefWidth="134.0" promptText="Введите номер" />
+                        <TextField id="eventname_TA" fx:id="parametr3111" layoutX="567.0" layoutY="62.0" prefHeight="26.0" prefWidth="134.0" promptText="Введите название (для БД)" />
+                        <Label fx:id="label3121" layoutX="380.0" layoutY="67.0" text="Название изменяемого события">
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
             </tabs>
         </TabPane>
     </children>
