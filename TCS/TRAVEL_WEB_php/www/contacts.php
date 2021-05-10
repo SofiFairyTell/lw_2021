@@ -100,19 +100,19 @@ require("header.php");
 	  </form>
 	</div> -->
 	<?php
-if (isset($_POST['btn']))
-{
-    $err = array();
-    if(strlen($_POST['name'])<=1)
-    {
-        $err['name'] = 'Длина имени должна быть более 1 символа';
-    }
-    else
-    {
-        //редирект
-        header('Location: '.$_SERVER['PHP_SELF'].'?message=ok'); 
-    }
-}
+// if (isset($_POST['btn']))
+// {
+//     $err = array();
+//     if(strlen($_POST['name'])<=1)
+//     {
+//         $err['name'] = 'Длина имени должна быть более 1 символа';
+//     }
+//     else
+//     {
+//         //редирект
+//         header('Location: '.$_SERVER['PHP_SELF'].'?message=ok'); 
+//     }
+// }
 ?>
 
 

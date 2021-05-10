@@ -3,7 +3,7 @@
 //$message = checkTextBox();
 $validName = false;
 $validEmail = false;
-$formvalid = false;
+$formvalid = true;
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -13,26 +13,38 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		if (isset($_POST['login']))
 		{
              $validName = preg_match('|^[А-Я][а-я]{2,}$|u', $_POST['login'], $matches,PREG_OFFSET_CAPTURE);
-			 $formvalid = true;
+			// $formvalid = false;
 			 echo "<script type='text/javascript'>alert('КНОПКА  ЗДЕСЬ');</script>";
-        }
-		
-		
+        }		
 		if (isset($_POST['email'])) 
 		{
 			$re = '|^[A-Z0-9][A-Z0-9._%+-]+@[A-Z0-9-]+\.[A-Z]{2,4}$|i';
             $validEmail = preg_match($re , $_POST['email'], $matches,PREG_OFFSET_CAPTURE);
-			$formvalid = true;
+			//$formvalid = false;
 			echo "<script type='text/javascript'>alert('КНОПКА тут');</script>";
         }
 	}
-	
-	if($formvalid)
+
+	if($validName && $validEmail)
 	{
-		//header('Location: '.$_SERVER['PHP_SELF'].'?message=ok');
 		$message = " Ваше сообщение отправлено!";
 		echo "<script type='text/javascript'>alert('$message');</script>";
 	}
+	else
+	{
+		$message = " Ваше сообщение не отправлено!";
+		echo "<script type='text/javascript'>alert('$message');</script>";
+	}
+	// if(!$formvalid)
+	// {
+	// 	//header('Location: '.$_SERVER['PHP_SELF'].'?message=ok');
+	// 	$message = " Ваше сообщение отправлено!";
+	// 	echo "<script type='text/javascript'>alert('$message');</script>";
+	// }
+	// else{
+	// 	$message = " Ваше сообщение не отправлено!";
+	// 	echo "<script type='text/javascript'>alert('$message');</script>";
+	// }
 
 }
 ?>
@@ -43,7 +55,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         <label for="login"><b>Ваше имя</b></label>
         <input type="text" name="login" value="<?= isset($_POST['login']) ? $_POST['login']: ""; ?>">
                 <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') { ?>
-                <?php if (!validName): ?>
+                <?php if (!$validName): ?>
                     <p >
                         Имя должно состоять минимум из 3 букв,
                         содержать буквы русского алфавита и не содержать пробелов.<br>
@@ -59,7 +71,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 		<input type="text" placeholder="Ваша почта" name="email" value="<?= isset($_POST['email']) ? $_POST['email']: ""; ?>">
 				<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') 
                 { ?>
-                <?php if (!validEmail): ?>
+                <?php if (!$validEmail): ?>
                         <label for="email" >"Err"</label>
                     <?php else: ?>
                         <label for="email"> </label> 
