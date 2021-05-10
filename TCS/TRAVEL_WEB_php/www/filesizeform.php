@@ -30,9 +30,11 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
     <form enctype="multipart/form-data" action="filesizeform.php" method="post">
 			Выберите файл: <input name="uploadedFile" type="file" />
 			<input type="submit" name = "uploadBtn" value="Загрузить" />
+            <input type="submit" name = "dowlandBtn" value="Скачать" />
 		</form>
 <?php
  require('upload.php');
+
  ?>      
   
 </section>

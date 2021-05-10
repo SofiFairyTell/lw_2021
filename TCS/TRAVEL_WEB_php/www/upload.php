@@ -54,25 +54,16 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Загрузить')
     $message .= 'Error:' . $_FILES['uploadedFile']['error'];
   }
 }
+else
+{
 
-echo "<p> Скачать изображение по ссылке:</p> <a href= $dowland_path> Скачать изображение </a></p>";
+}
+echo "<p> Скачать изображение по ссылке:</p> <a href= dowland.php?path=$dowland_path> Скачать изображение </a></p>";
 
-// $mm_type="application/octet-stream";
-// $myFile = "/dowland_files/file.jpg";
+// $contents = file_get_contents($dowland_path);
+// $path = './dowland_files/file.jpg';
+// file_put_contents($path, file_get_contents($dowland_path));
 
-// header("Cache-Control: public, must-revalidate");
-// header("Pragma: hack");
-// header("Content-Type: " . $mm_type);
-// header("Content-Length: " .(string)(filesize($myFile)) );
-// header('Content-Disposition: attachment; filename="'.$newFileName.'"');
-// header("Content-Transfer-Encoding: binary\n");
-
-//readfile($myFile);
-
-$contents = file_get_contents($dowland_path);
-
- $path = './dowland_files/file.jpg';
- file_put_contents($path, file_get_contents($dowland_path));
 ?> 
  
      
