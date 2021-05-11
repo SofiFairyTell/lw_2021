@@ -40,11 +40,16 @@ public class ParseSQL
     }
 
     public void addNewRecord(Eventlist eventlist) throws SQLException {
-        statement.executeUpdate("INSERT INTO eventslist.eventslist (event_name, event_type, date_start, date_end, manager , place)" +
+        statement.executeUpdate("INSERT INTO eventslist.eventslist (event_name, event_type, date_start, date_end, manager , place, id)" +
                 " VALUES ('" + eventlist.event_name + "','" + eventlist.event_type + "', '" + eventlist.date_start + "', '" + eventlist.date_end + "', " +
-                "'" + eventlist.manager + "','" + eventlist.place + "')");
+                "'" + eventlist.manager + "','" + eventlist.place + "','" + eventlist.id +"')");
     }
 
+//    public void addNewRecord(lace + "') where id <>("+eventlist.id+")");
+////    }Eventlist eventlist) throws SQLException {
+//        statement.executeUpdate("INSERT INTO eventslist.eventslist (event_name, event_type, date_start, date_end, manager , place)" +
+//                " VALUES ('" + eventlist.event_name + "','" + eventlist.event_type + "', '" + eventlist.date_start + "', '" + eventlist.date_end + "', " +
+//                "'" + eventlist.manager + "','" + eventlist.p
     public void updateRecord(int id) throws SQLException {
         SetData setData = new SetData();
         var strings = setData.setData();

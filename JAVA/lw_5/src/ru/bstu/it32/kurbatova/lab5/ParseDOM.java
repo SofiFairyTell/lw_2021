@@ -73,7 +73,7 @@ public class ParseDOM
             doc.appendChild(rootElement);
             // добавляем корневой элемент в объект Document
             for(int i = 0; i < eventslist.size(); i++){
-                rootElement.appendChild(getEvent(doc, i + 1, eventslist.get(i).getName(), eventslist.get(i).getType(),
+                rootElement.appendChild(getEvent(doc, eventslist.get(i).getId(), eventslist.get(i).getName(), eventslist.get(i).getType(),
                         eventslist.get(i).getDate_start(), eventslist.get(i).getDate_end(),
                         eventslist.get(i).getManager(), eventslist.get(i).getPlace()));
             }
