@@ -7,11 +7,11 @@ public class Menu
 {
     public static int choiceMenu() {
         System.out.println("Выберите с чем работать: \n" +
-                "1: XML\n" +
-                "2: БД\n" +
-                "3: Конвертировать данные из XML в БД\n" +
-                "4: Конвертировать данные из БД в XML\n" +
-                "5: Завершить работу.");
+                "1. XML\n" +
+                "2. БД\n" +
+                "3. Конвертировать данные из XML в БД\n" +
+                "4. Конвертировать данные из БД в XML\n" +
+                "5. Завершить работу.");
         int type = 0;
         while (true) {
             type = Common.getIDevent();
@@ -37,19 +37,19 @@ public class Menu
         if (type == 4) {
             var sax = new ParseSAX();
             var dom = new ParseDOM(filePath);
-            var parsing = new Parse(sax.readerSaxDocument(filePath), dom);
+            var parsing = new Parse(sax.eventslist,dom);
             parsing.parseDBtoXML();
             start();
         }
         if (type == 5) return;
         while (true) {
             System.out.println("Выберите действие: \n" +
-                    "1: Вывести всё содержимое\n" +
-                    "2: Найти содержимое по параметру\n" +
-                    "3: Добавить новую запись\n" +
+                    "1. Вывести всё содержимое\n" +
+                    "2. Найти содержимое по параметру\n" +
+                    "3. Добавить новую запись\n" +
                     "4: Изменить запись\n" +
                     "5: Удалить запись\n" +
-                    "9: Выбрать заново с чем работать\n" +
+                    "6: Возврат в верхнее меню\n" +
                     "0: Завершить работу\n");
             var choice = Common.getIDevent();
             switch (choice) {
@@ -150,7 +150,7 @@ public class Menu
                     }
                 }
                 break;
-                case 9: {
+                case 6: {
                     start();
                 }
                 break;

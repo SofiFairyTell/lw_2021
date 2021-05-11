@@ -8,11 +8,14 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class ParseDOM
@@ -75,7 +78,7 @@ public class ParseDOM
                         eventslist.get(i).getManager(), eventslist.get(i).getPlace()));
             }
             doc.getDocumentElement().normalize();
-            //создаем объект TransformerFactory для преобразования документа в файл
+//            //создаем объект TransformerFactory для преобразования документа в файл
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             // установка параметров форматирования для красивого вывода
@@ -84,9 +87,12 @@ public class ParseDOM
             //получение исходного кода готового документа
             DOMSource source = new DOMSource(doc);
             //создание объекта для записи - файл
-            StreamResult file = new StreamResult(new File(this.filePath));
+            var prop = new ParseProperties();
+            var catalog = prop.readCatalogRoot();
+            StreamResult file = new StreamResult(new File(catalog + "\\file.xml"));
+
             //запись данных
-            transformer.transform(source, file);
+           transformer.transform(source, file);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Eventlists>
+    <Eventlist id="1">
+        <event_name>Форум "Умный город"</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>15.04.2021 08:00:00 </date_start>
+        <date_end>16.04.2021 09:00:00</date_end>
+        <manager>Задохин Д</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="2">
+        <event_name>Мероприятие_2</event_name>
+        <event_type>Командировка</event_type>
+        <date_start>12.10.2021 18:00:00</date_start>
+        <date_end>12.10.2021 18:00:00</date_end>
+        <manager>Иванов В.С.</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="3">
+        <event_name>Встреча</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>15.02.2021 15:00:00</date_start>
+        <date_end>15.02.2021 15:00:00</date_end>
+        <manager>Романов ВВ</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="4">
+        <event_name>Собеседование</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>12.08.2021 02:00:00</date_start>
+        <date_end>12.08.2021 03:00:00</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="5">
+        <event_name>Мероприятие</event_name>
+        <event_type>Командировка</event_type>
+        <date_start>19.05.2021 02:00:00</date_start>
+        <date_end>22.05.2021 03:00:00</date_end>
+        <manager>Сергеенко ВС</manager>
+        <place>Москва</place>
+    </Eventlist>
+    <Eventlist id="6">
+        <event_name>Мероприятие_4</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>12.05.2021 02:00:00</date_start>
+        <date_end>12.05.2021 03:00:00</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="7">
+        <event_name>Мероприятие_3</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>12.05.2021 02:00:00</date_start>
+        <date_end>12.05.2021 03:00:00</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="8">
+        <event_name>Мероприятие</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>12.05.2021 02:00:00</date_start>
+        <date_end>12.05.2021 03:00:00</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="9">
+        <event_name>День</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>12.12.2021</date_start>
+        <date_end>12.12.2021</date_end>
+        <manager>Миронов</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="10">
+        <event_name>Форум "Умный город"</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-05</date_start>
+        <date_end>2021-05-05</date_end>
+        <manager>Задохин Д</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="11">
+        <event_name>Мероприятие</event_name>
+        <event_type>Командировка</event_type>
+        <date_start>2021-05-05</date_start>
+        <date_end>2021-05-05</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="12">
+        <event_name>Meetup</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-05</date_start>
+        <date_end>2021-05-05</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="13">
+        <event_name>Собеседование</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-05</date_start>
+        <date_end>2021-05-05</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="14">
+        <event_name>Мероприятие</event_name>
+        <event_type>Командировка</event_type>
+        <date_start>2021-05-05</date_start>
+        <date_end>2021-05-05</date_end>
+        <manager>Сергеенко ВС</manager>
+        <place>Москва</place>
+    </Eventlist>
+    <Eventlist id="15">
+        <event_name>Мероприятие</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-05</date_start>
+        <date_end>2021-05-05</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="16">
+        <event_name>Мероприятие_4</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-05</date_start>
+        <date_end>2021-05-05</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="17">
+        <event_name>Мероприятие_3</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-05</date_start>
+        <date_end>2021-05-05</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="18">
+        <event_name>Мероприятие</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-05</date_start>
+        <date_end>2021-05-05</date_end>
+        <manager>Сергеенко ВС</manager>
+        <place>Омск</place>
+    </Eventlist>
+    <Eventlist id="19">
+        <event_name>Мероприятие_2</event_name>
+        <event_type>Командировка</event_type>
+        <date_start>2021-10-12</date_start>
+        <date_end>2021-10-12</date_end>
+        <manager>Иванов В.С.</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="20">
+        <event_name>Meetup</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-06-12</date_start>
+        <date_end>2021-06-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="21">
+        <event_name>Собеседование</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-08-12</date_start>
+        <date_end>2021-08-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="22">
+        <event_name>Мероприятие</event_name>
+        <event_type>Командировка</event_type>
+        <date_start>2021-05-19</date_start>
+        <date_end>2021-05-22</date_end>
+        <manager>Сергеенко ВС</manager>
+        <place>Москва</place>
+    </Eventlist>
+    <Eventlist id="23">
+        <event_name>Мероприятие_4</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-12</date_start>
+        <date_end>2021-05-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="24">
+        <event_name>Мероприятие_3</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-12</date_start>
+        <date_end>2021-05-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="25">
+        <event_name>Мероприятие</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-12</date_start>
+        <date_end>2021-05-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="26">
+        <event_name>День</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-12-12</date_start>
+        <date_end>2021-12-12</date_end>
+        <manager>Миронов</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="27">
+        <event_name>Форум "Умный город"</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-04-15</date_start>
+        <date_end>2021-04-16</date_end>
+        <manager>Задохин Д</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="28">
+        <event_name>Мероприятие_2</event_name>
+        <event_type>Командировка</event_type>
+        <date_start>2021-10-12</date_start>
+        <date_end>2021-10-12</date_end>
+        <manager>Иванов В.С.</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="29">
+        <event_name>Meetup</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-06-12</date_start>
+        <date_end>2021-06-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="30">
+        <event_name>Собеседование</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-08-12</date_start>
+        <date_end>2021-08-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="31">
+        <event_name>Мероприятие</event_name>
+        <event_type>Командировка</event_type>
+        <date_start>2021-05-19</date_start>
+        <date_end>2021-05-22</date_end>
+        <manager>Сергеенко ВС</manager>
+        <place>Москва</place>
+    </Eventlist>
+    <Eventlist id="32">
+        <event_name>Мероприятие_4</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-12</date_start>
+        <date_end>2021-05-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="33">
+        <event_name>Мероприятие_3</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-12</date_start>
+        <date_end>2021-05-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="34">
+        <event_name>Мероприятие</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-05-12</date_start>
+        <date_end>2021-05-12</date_end>
+        <manager>Иванова ВС</manager>
+        <place>Ижевск</place>
+    </Eventlist>
+    <Eventlist id="35">
+        <event_name>День</event_name>
+        <event_type>Встреча</event_type>
+        <date_start>2021-12-12</date_start>
+        <date_end>2021-12-12</date_end>
+        <manager>Миронов</manager>
+        <place>Белгород</place>
+    </Eventlist>
+</Eventlists>
