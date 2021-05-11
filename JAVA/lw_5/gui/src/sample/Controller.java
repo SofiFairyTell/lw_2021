@@ -1,11 +1,10 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import ru.bstu.it32.kurbatova.lab5.Eventlist;
-import ru.bstu.it32.kurbatova.lab5.ParseProperties;
-import ru.bstu.it32.kurbatova.lab5.ParseSAX;
+import ru.bstu.it32.kurbatova.lab5.*;
 
 import java.io.IOException;
 
@@ -28,6 +27,8 @@ public class Controller
     private TextArea calendarArea;
     @FXML
     private  TextField id_TA;
+    @FXML
+    private ComboBox event_type_CB;
 @FXML
     public void WatchAll(javafx.event.ActionEvent actionEvent) throws IOException {
         if(calendarArea != null)
@@ -54,6 +55,36 @@ public class Controller
     }
 @FXML
     public void  ChangeAll(javafx.event.ActionEvent actionEvent) throws IOException {
+        SetData set = new SetData();
+        var prop = new ParseProperties();
+        var catalog = prop.readCatalogRoot();
+        String filePath = catalog + "\\file.xml";
+        var sax = new ParseSAX();
+        var events = sax.readerSaxDocument(filePath);
+       // set.changeEvent(filePath);
+    event_name_TA.setText("Встреча");
+        var event_name = event_name_TA.getText();
+        var event_type = event_type_CB.getSelectionModel().getSelectedItem().toString();
+        var date_start =  date_start_TA.getText();
+        var date_end = date_end_TA.getText();
+        var manager =  manager_TA.getText();
+        var place = place_TA.getText().trim();
+        var searchId = Integer.parseInt(id_TA.getText().trim());
+        boolean flag = false;
+        for (int i = 0; i < events.size(); i++) {
+            if (events.get(i).getId() == searchId) {
+                events.set(i, new Eventlist(searchId, event_name,event_type,date_start, date_end,
+                       manager,place));
+                flag = true;
+                break;
+            }
+    }
+    if (flag) {
+        var dom = new ParseDOM(filePath);
+        dom.setDomNodes(events);
+    } else {
+        System.out.println("Такого события нет!");
+    }
 }
 @FXML
     public  void FindID(javafx.event.ActionEvent actionEvent) throws IOException

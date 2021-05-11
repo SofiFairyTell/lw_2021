@@ -48,26 +48,26 @@
                         <Button id="deleteID_DB" fx:id="btn111" layoutX="595.0" layoutY="163.0" mnemonicParsing="false" onAction="#DeleteId" prefHeight="38.0" prefWidth="180.0" text="Удалить событие в файле" />
                         <Button id="findID_XML" fx:id="btn1112" layoutX="596.0" layoutY="214.0" mnemonicParsing="false" onAction="#FindID" prefHeight="38.0" prefWidth="178.0" text=" Найти в файле" />
                         <Button id="findID_DB" fx:id="btn11121" layoutX="387.0" layoutY="214.0" mnemonicParsing="false" onAction="#FindID" prefHeight="38.0" prefWidth="182.0" text=" Найти в БД" />
-                             <Button id="addID" fx:id="btn1" layoutX="166.0" layoutY="276.0" mnemonicParsing="false" onAction="#AddId" prefHeight="38.0" prefWidth="160.0" text="Добавить событие" />
+                             <Button fx:id="addID" layoutX="166.0" layoutY="276.0" mnemonicParsing="false" onAction="#AddId" prefHeight="38.0" prefWidth="160.0" text="Добавить событие" />
                                     <Label fx:id="label1" layoutX="14.0" layoutY="26.0" prefHeight="16.0" prefWidth="57.0" text="Тип">
                                         <font>
                                             <Font name="Times New Roman" size="14.0" />
                                         </font>
                                     </Label>
-                                    <TextField id="date_end_TA" fx:id="parametr1" layoutX="142.0" layoutY="141.0" prefHeight="26.0" prefWidth="185.0" promptText="Введите дату" />
+                                    <TextField fx:id="date_end_TA" layoutX="142.0" layoutY="141.0" prefHeight="26.0" prefWidth="185.0" promptText="Введите дату" />
                                     <Label fx:id="label2" layoutX="6.0" layoutY="106.0" prefHeight="16.0" prefWidth="130.0" text="Дата и время начала">
                                         <font>
                                             <Font name="Times New Roman" size="14.0" />
                                         </font>
                                     </Label>
-                                    <TextField id="date_start_TA" layoutX="142.0" layoutY="101.0" prefHeight="26.0" prefWidth="185.0" promptText="Введите дату" />
+                                    <TextField fx:id="date_start_TA" layoutX="142.0" layoutY="101.0" prefHeight="26.0" prefWidth="185.0" promptText="Введите дату" />
                                     <Label fx:id="label3" layoutX="13.0" layoutY="146.0" text="Дата и время конца">
                                         <font>
                                             <Font name="Times New Roman" size="14.0" />
                                         </font>
                                     </Label>
-                                    <TextField id="manager_TA" fx:id="parametr3" layoutX="143.0" layoutY="228.0" prefHeight="26.0" prefWidth="183.0" promptText="Введите ФИО организатора" />
-                                    <TextField id="event_name_TA" fx:id="figureName" layoutX="141.0" layoutY="62.0" prefHeight="26.0" prefWidth="187.0" promptText="Введите название" />
+                                    <TextField  fx:id ="manager_TA" layoutX="143.0" layoutY="228.0" prefHeight="26.0" prefWidth="183.0" promptText="Введите ФИО организатора" />
+                                    <TextField fx:id="event_name_TA" layoutX="141.0" layoutY="62.0" prefHeight="26.0" prefWidth="187.0" promptText="Введите название" />
 
                                     <Label layoutX="14.0" layoutY="67.0" prefHeight="16.0" prefWidth="67.0" text="Название">
                                         <font>
@@ -75,7 +75,7 @@
                                         </font>
                                     </Label>
 
-                                    <ComboBox id="event_type_CB" fx:id="FigureName" layoutX="141.0" layoutY="21.0" prefHeight="26.0" prefWidth="187.0" promptText="Тип мероприятия">
+                                    <ComboBox fx:id="event_type_CB" layoutX="141.0" layoutY="21.0" prefHeight="26.0" prefWidth="187.0" promptText="Тип мероприятия">
                                         <items>
                                             <FXCollections fx:factory="observableArrayList">
                                                 <String fx:value="Встреча" />
@@ -96,14 +96,14 @@
                               <Font name="Times New Roman" size="14.0" />
                            </font>
                         </Label>
-                        <Button id="changeID_XML" fx:id="btn12" layoutX="595.0" layoutY="108.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="180.0" text="Изменить событие в файле" />
+                        <Button id="changeID_XML" onAction= "#ChangeAll" fx:id="btn12" layoutX="595.0" layoutY="108.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="180.0" text="Изменить событие в файле" />
                         <Label fx:id="label312" layoutX="380.0" layoutY="26.0" text="Номер изменяемого события">
                            <font>
                               <Font name="Times New Roman" size="14.0" />
                            </font>
                         </Label>
                         <TextField fx:id="id_TA"  layoutX="621.0" layoutY="21.0" prefHeight="26.0" prefWidth="164.0" promptText="Введите номер" />
-                        <TextField fx:id = "eventname_TA"  layoutX="621.0" layoutY="54.0" prefHeight="26.0" prefWidth="165.0" promptText="Введите название (для БД)" />
+                        <TextField fx:id = "event_name_BD"  layoutX="621.0" layoutY="54.0" prefHeight="26.0" prefWidth="165.0" promptText="Введите название (для БД)" />
                         <Label fx:id="label3121" layoutX="380.0" layoutY="67.0" text="Название изменяемого события">
                            <font>
                               <Font name="Times New Roman" size="14.0" />

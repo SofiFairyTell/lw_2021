@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ParseDOM
 {
     private final String filePath;
-    ParseDOM(String filepath)
+    public ParseDOM(String filepath)
     {
         this.filePath = filepath;
     }

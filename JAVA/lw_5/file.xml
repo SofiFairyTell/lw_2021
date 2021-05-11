@@ -17,11 +17,11 @@
         <place>Ижевск</place>
     </Eventlist>
     <Eventlist id="3">
-        <event_name>Meetup</event_name>
+        <event_name>Встреча</event_name>
         <event_type>Встреча</event_type>
-        <date_start>12.06.2021 04:00:00</date_start>
-        <date_end>12.06.2021 05:00:00</date_end>
-        <manager>Иванова ВС</manager>
+        <date_start>15.02.2021 15:00:00</date_start>
+        <date_end>15.02.2021 15:00:00</date_end>
+        <manager>Романов ВВ</manager>
         <place>Белгород</place>
     </Eventlist>
     <Eventlist id="4">
