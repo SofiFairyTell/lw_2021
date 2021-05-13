@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Eventlists>
-    <Eventlist id="200">
+    <Eventlist id="1">
         <event_name>Форум "Умный город"</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-04-15</date_start>
@@ -8,7 +8,7 @@
         <manager>Задохин Д</manager>
         <place>Белгород</place>
     </Eventlist>
-    <Eventlist id="201">
+    <Eventlist id="2">
         <event_name>Мероприятие_2</event_name>
         <event_type>Командировка</event_type>
         <date_start>2021-10-12</date_start>
@@ -16,23 +16,23 @@
         <manager>Иванов В.С.</manager>
         <place>Ижевск</place>
     </Eventlist>
-    <Eventlist id="202">
+    <Eventlist id="3">
+        <event_name>Встреча</event_name>
+        <event_type>Собеседование</event_type>
+        <date_start>12.09.2021 15:00</date_start>
+        <date_end>12.09.2021 16:00</date_end>
+        <manager>Сергеев</manager>
+        <place>Белгород</place>
+    </Eventlist>
+    <Eventlist id="4">
         <event_name>Встреча</event_name>
         <event_type>Встреча</event_type>
-        <date_start>2021-02-15</date_start>
-        <date_end>2021-02-15</date_end>
-        <manager>Романов ВВ</manager>
-        <place>Белгород</place>
+        <date_start>12 май 2021</date_start>
+        <date_end>09 май 2021</date_end>
+        <manager>Орлов ВВ</manager>
+        <place>Омск</place>
     </Eventlist>
-    <Eventlist id="203">
-        <event_name>Собеседование</event_name>
-        <event_type>Встреча</event_type>
-        <date_start>2021-08-12</date_start>
-        <date_end>2021-08-12</date_end>
-        <manager>Иванова ВС</manager>
-        <place>Белгород</place>
-    </Eventlist>
-    <Eventlist id="204">
+    <Eventlist id="5">
         <event_name>Мероприятие</event_name>
         <event_type>Командировка</event_type>
         <date_start>2021-05-19</date_start>
@@ -40,7 +40,7 @@
         <manager>Сергеенко ВС</manager>
         <place>Москва</place>
     </Eventlist>
-    <Eventlist id="205">
+    <Eventlist id="6">
         <event_name>Мероприятие_4</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-05-12</date_start>
@@ -48,7 +48,7 @@
         <manager>Иванова ВС</manager>
         <place>Белгород</place>
     </Eventlist>
-    <Eventlist id="206">
+    <Eventlist id="7">
         <event_name>Мероприятие_3</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-05-12</date_start>
@@ -56,7 +56,7 @@
         <manager>Иванова ВС</manager>
         <place>Ижевск</place>
     </Eventlist>
-    <Eventlist id="207">
+    <Eventlist id="8">
         <event_name>Мероприятие</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-05-12</date_start>
@@ -64,7 +64,7 @@
         <manager>Иванова ВС</manager>
         <place>Ижевск</place>
     </Eventlist>
-    <Eventlist id="208">
+    <Eventlist id="9">
         <event_name>День</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-12-12</date_start>
@@ -72,7 +72,7 @@
         <manager>Миронов</manager>
         <place>Белгород</place>
     </Eventlist>
-    <Eventlist id="209">
+    <Eventlist id="10">
         <event_name>Cj,snbt=</event_name>
         <event_type>typr</event_type>
         <date_start>2021-12-12</date_start>
@@ -80,7 +80,7 @@
         <manager>Truerr</manager>
         <place>Belgorod</place>
     </Eventlist>
-    <Eventlist id="210">
+    <Eventlist id="11">
         <event_name>New</event_name>
         <event_type>New</event_type>
         <date_start>2021-12-12</date_start>
@@ -88,7 +88,7 @@
         <manager>Ivanov</manager>
         <place>Belgorod</place>
     </Eventlist>
-    <Eventlist id="211">
+    <Eventlist id="12">
         <event_name>Новое событие</event_name>
         <event_type>Тип</event_type>
         <date_start>2021-12-12</date_start>
@@ -96,7 +96,7 @@
         <manager>Романенко РР</manager>
         <place>Белгород</place>
     </Eventlist>
-    <Eventlist id="300">
+    <Eventlist id="13">
         <event_name>Форум "Умный город"</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-04-15</date_start>
@@ -104,7 +104,7 @@
         <manager>Задохин Д</manager>
         <place>Белгород</place>
     </Eventlist>
-    <Eventlist id="301">
+    <Eventlist id="14">
         <event_name>Мероприятие_2</event_name>
         <event_type>Командировка</event_type>
         <date_start>2021-10-12</date_start>
@@ -112,7 +112,7 @@
         <manager>Иванов В.С.</manager>
         <place>Ижевск</place>
     </Eventlist>
-    <Eventlist id="302">
+    <Eventlist id="15">
         <event_name>Встреча</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-02-15</date_start>
@@ -120,7 +120,7 @@
         <manager>Романов ВВ</manager>
         <place>Белгород</place>
     </Eventlist>
-    <Eventlist id="303">
+    <Eventlist id="16">
         <event_name>Собеседование</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-08-12</date_start>
@@ -128,7 +128,7 @@
         <manager>Иванова ВС</manager>
         <place>Белгород</place>
     </Eventlist>
-    <Eventlist id="304">
+    <Eventlist id="17">
         <event_name>Мероприятие</event_name>
         <event_type>Командировка</event_type>
         <date_start>2021-05-19</date_start>
@@ -136,7 +136,7 @@
         <manager>Сергеенко ВС</manager>
         <place>Москва</place>
     </Eventlist>
-    <Eventlist id="305">
+    <Eventlist id="18">
         <event_name>Мероприятие_4</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-05-12</date_start>
@@ -144,7 +144,7 @@
         <manager>Иванова ВС</manager>
         <place>Белгород</place>
     </Eventlist>
-    <Eventlist id="306">
+    <Eventlist id="19">
         <event_name>Мероприятие_3</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-05-12</date_start>
@@ -152,7 +152,7 @@
         <manager>Иванова ВС</manager>
         <place>Ижевск</place>
     </Eventlist>
-    <Eventlist id="307">
+    <Eventlist id="20">
         <event_name>Мероприятие</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-05-12</date_start>
@@ -160,7 +160,7 @@
         <manager>Иванова ВС</manager>
         <place>Ижевск</place>
     </Eventlist>
-    <Eventlist id="308">
+    <Eventlist id="21">
         <event_name>День</event_name>
         <event_type>Встреча</event_type>
         <date_start>2021-12-12</date_start>
@@ -168,7 +168,7 @@
         <manager>Миронов</manager>
         <place>Белгород</place>
     </Eventlist>
-    <Eventlist id="309">
+    <Eventlist id="22">
         <event_name>Cj,snbt=</event_name>
         <event_type>typr</event_type>
         <date_start>2021-12-12</date_start>
@@ -176,7 +176,7 @@
         <manager>Truerr</manager>
         <place>Belgorod</place>
     </Eventlist>
-    <Eventlist id="310">
+    <Eventlist id="23">
         <event_name>New</event_name>
         <event_type>New</event_type>
         <date_start>2021-12-12</date_start>
@@ -184,7 +184,7 @@
         <manager>Ivanov</manager>
         <place>Belgorod</place>
     </Eventlist>
-    <Eventlist id="311">
+    <Eventlist id="24">
         <event_name>Новое событие</event_name>
         <event_type>Тип</event_type>
         <date_start>2021-12-12</date_start>
