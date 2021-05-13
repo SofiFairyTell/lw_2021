@@ -10,6 +10,7 @@ import ru.bstu.it32.kurbatova.lab5.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Controller
 {
@@ -76,7 +77,7 @@ public class Controller
         var event_name = event_name_TA.getText();
         var event_type = event_type_CB.getSelectionModel().getSelectedItem().toString();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date_start_ta_pickValue = date_start_TA_pick.getValue();
         LocalDate date_end_ta_pickValue = date_end_TA_pick.getValue();
 
@@ -131,7 +132,7 @@ public class Controller
         var event_name = event_name_TA.getText();
         var event_type = event_type_CB.getSelectionModel().getSelectedItem().toString();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date_start_ta_pickValue = date_start_TA_pick.getValue();
         LocalDate date_end_ta_pickValue = date_end_TA_pick.getValue();
 
@@ -148,14 +149,26 @@ public class Controller
         dom.setDomNodes(eventslist);
     }
  @FXML
-    public void ConvertXMLtoBD()(javafx.event.ActionEvent actionEvent) throws IOException
+    public void ConvertXMLtoDB(javafx.event.ActionEvent actionEvent) throws IOException
     {
-
+        var prop = new ParseProperties();
+        var catalog = prop.readCatalogRoot();
+        String filePath = catalog + "\\file.xml";
+        var sax = new ParseSAX();
+        var parsing = new Parse(sax.readerSaxDocument(filePath));
+        parsing.parseXMLtoDB();
     }
     @FXML
-    public void ConvertBDtoXML()(javafx.event.ActionEvent actionEvent) throws IOException
+    public void ConvertDBtoXML(javafx.event.ActionEvent actionEvent) throws IOException
     {
-
+        ArrayList<Eventlist> eventslist = new ArrayList<Eventlist>();
+        var prop = new ParseProperties();
+        var catalog = prop.readCatalogRoot();
+        String filePath = catalog + "\\file.xml";
+        //var sax = new ParseSAX();
+        var dom = new ParseDOM(filePath);
+        var parsing = new Parse(eventslist,dom);
+        parsing.parseDBtoXML();
     }
 }
 
