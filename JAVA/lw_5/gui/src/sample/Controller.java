@@ -63,7 +63,7 @@ public class Controller
         set.deleteEvent(filePath,searchId);
     }
 @FXML
-    public void  ChangeAll(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void ChangeAll(javafx.event.ActionEvent actionEvent) throws IOException {
         SetData set = new SetData();
         var prop = new ParseProperties();
         var catalog = prop.readCatalogRoot();
@@ -105,7 +105,7 @@ public class Controller
     }
 }
 @FXML
-    public  void FindID(javafx.event.ActionEvent actionEvent) throws IOException
+    public void FindID(javafx.event.ActionEvent actionEvent) throws IOException
     {
         var sax = new ParseSAX();
         var prop = new ParseProperties();
@@ -146,6 +146,16 @@ public class Controller
 
         var dom = new ParseDOM(filePath);
         dom.setDomNodes(eventslist);
+    }
+ @FXML
+    public void ConvertXMLtoBD()(javafx.event.ActionEvent actionEvent) throws IOException
+    {
+
+    }
+    @FXML
+    public void ConvertBDtoXML()(javafx.event.ActionEvent actionEvent) throws IOException
+    {
+
     }
 }
 

@@ -35,6 +35,8 @@
                                             <children>
                                     <Button id="bd_butt" layoutX="14.0" layoutY="349.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="146.0" text="Просмотр Из  БД" />
                                     <Button id="watchALL" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#WatchAll" prefHeight="38.0" prefWidth="146.0" text="Просмотр Из XМL" />
+                                    <Button layoutX="16.0" layoutY="196.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="146.0" text="Конвертировать из XML в БД" />
+                                    <Button layoutX="16.0" layoutY="244.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="146.0" text="Конвертироавть из БД в XML" />
                                             </children>
                                         </AnchorPane>
                                     </items>
