@@ -66,6 +66,11 @@ public class SetData {
         return new Eventlist(size + 1, strings[0], strings[1],strings[2],strings[3], strings[4], strings[5]);
     }
 
+    public Eventlist setNewEvent(int size, String event_name,String event_type,String date_start, String date_end, String manager,String place)
+    {
+        return new Eventlist(size + 1, event_name,event_type,date_start, date_end, manager,place);
+    }
+
     public void changeEvent(String filePath)
     {
         var sax = new ParseSAX();
@@ -97,6 +102,26 @@ public class SetData {
         var events = sax.readerSaxDocument(filePath);
         System.out.println("Введите ID события:");
         var searchId = Common.getIDevent();
+        boolean flag = false;
+        for (int i = 0; i < events.size(); i++) {
+            if (events.get(i).getId() == searchId) {
+                events.remove(i);
+                flag = true;
+                break;
+            }
+        }
+        if (flag) {
+            var dom = new ParseDOM(filePath);
+            dom.setDomNodes(events);
+        } else {
+            System.out.println("Такого события нет!");
+        }
+    }
+    public void deleteEvent(String filePath, int searchId)
+    {
+        var sax = new ParseSAX();
+        var events = sax.readerSaxDocument(filePath);
+
         boolean flag = false;
         for (int i = 0; i < events.size(); i++) {
             if (events.get(i).getId() == searchId) {

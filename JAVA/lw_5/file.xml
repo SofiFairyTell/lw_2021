@@ -184,12 +184,20 @@
         <manager>Ivanov</manager>
         <place>Belgorod</place>
     </Eventlist>
-    <Eventlist id="24">
-        <event_name>Новое событие</event_name>
-        <event_type>Тип</event_type>
-        <date_start>2021-12-12</date_start>
-        <date_end>2021-12-12</date_end>
-        <manager>Романенко РР</manager>
-        <place>Белгород</place>
+    <Eventlist id="25">
+        <event_name>Pattern("dd LLLL yyyy")(formatter);</event_name>
+        <event_type>Собеседование</event_type>
+        <date_start>16 май 2021</date_start>
+        <date_end>21 май 2021</date_end>
+        <manager>06.05.2021</manager>
+        <place>06.05.2021</place>
+    </Eventlist>
+    <Eventlist id="27">
+        <event_name>Pattern("dd LLLL yyyy")(formatter);</event_name>
+        <event_type>Собеседование</event_type>
+        <date_start>16 май 2021</date_start>
+        <date_end>21 май 2021</date_end>
+        <manager>06.05.2021</manager>
+        <place>06.05.2021</place>
     </Eventlist>
 </Eventlists>

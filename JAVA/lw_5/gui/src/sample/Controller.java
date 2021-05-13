@@ -23,10 +23,6 @@ public class Controller
     @FXML
     private DatePicker date_end_TA_pick;
     @FXML
-    private TextField date_start_TA;
-    @FXML
-    private TextField date_end_TA;
-    @FXML
     private TextField manager_TA;
     @FXML
     private TextField place_TA;
@@ -58,7 +54,13 @@ public class Controller
 @FXML
     public void DeleteId(javafx.event.ActionEvent actionEvent) throws IOException
     {
-
+        var prop = new ParseProperties();
+        var catalog = prop.readCatalogRoot();
+        var sax = new ParseSAX();
+        String filePath = catalog + "\\file.xml";
+        SetData set = new SetData();
+        var searchId = Integer.parseInt(id_TA.getText().trim());
+        set.deleteEvent(filePath,searchId);
     }
 @FXML
     public void  ChangeAll(javafx.event.ActionEvent actionEvent) throws IOException {
@@ -68,15 +70,16 @@ public class Controller
         String filePath = catalog + "\\file.xml";
         var sax = new ParseSAX();
         var events = sax.readerSaxDocument(filePath);
-       // set.changeEvent(filePath);
-    event_name_TA.setText("Встреча");
+
+        //event_name_TA.setText("Встреча");
+
         var event_name = event_name_TA.getText();
         var event_type = event_type_CB.getSelectionModel().getSelectedItem().toString();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         LocalDate date_start_ta_pickValue = date_start_TA_pick.getValue();
         LocalDate date_end_ta_pickValue = date_end_TA_pick.getValue();
-                
+
         var date_start =  date_start_ta_pickValue.format(formatter);
         var date_end = date_end_ta_pickValue.format(formatter);
 
@@ -97,15 +100,16 @@ public class Controller
         var dom = new ParseDOM(filePath);
         dom.setDomNodes(events);
     } else {
+
         System.out.println("Такого события нет!");
     }
 }
 @FXML
     public  void FindID(javafx.event.ActionEvent actionEvent) throws IOException
     {
+        var sax = new ParseSAX();
         var prop = new ParseProperties();
         var catalog = prop.readCatalogRoot();
-        var sax = new ParseSAX();
         String filePath = catalog + "\\file.xml";
         String content = id_TA.getText();
         var event = sax.searchSaxDocument(filePath, content);
@@ -114,8 +118,34 @@ public class Controller
     }
 @FXML
     public void AddId(javafx.event.ActionEvent actionEvent) throws IOException
-{
+    {
+        SetData set = new SetData();
+        var sax = new ParseSAX();
 
-}
+        var prop = new ParseProperties();
+        var catalog = prop.readCatalogRoot();
+        String filePath = catalog + "\\file.xml";
+
+        var eventslist = sax.readerSaxDocument(filePath);
+
+        var event_name = event_name_TA.getText();
+        var event_type = event_type_CB.getSelectionModel().getSelectedItem().toString();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        LocalDate date_start_ta_pickValue = date_start_TA_pick.getValue();
+        LocalDate date_end_ta_pickValue = date_end_TA_pick.getValue();
+
+        var date_start =  date_start_ta_pickValue.format(formatter);
+        var date_end = date_end_ta_pickValue.format(formatter);
+
+        var manager =  manager_TA.getText();
+        var place = place_TA.getText().trim();
+
+        var newEvent = set.setNewEvent(eventslist.size(), event_name,event_type,date_start, date_end, manager,place);
+        eventslist.add(newEvent);
+
+        var dom = new ParseDOM(filePath);
+        dom.setDomNodes(eventslist);
+    }
 }
 
