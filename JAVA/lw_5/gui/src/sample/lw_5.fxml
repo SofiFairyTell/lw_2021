@@ -33,10 +33,10 @@
 
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="398.0">
                                             <children>
-                                    <Button id="bd_butt" layoutX="14.0" layoutY="349.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="146.0" text="Просмотр Из  БД" />
-                                    <Button id="watchALL" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#WatchAll" prefHeight="38.0" prefWidth="146.0" text="Просмотр Из XМL" />
-                                    <Button layoutX="16.0" layoutY="196.0" mnemonicParsing="false" onAction = "#ConvertXMLtoDB" prefHeight="38.0" prefWidth="146.0" text="Конвертировать из XML в БД" />
-                                    <Button layoutX="16.0" layoutY="244.0" mnemonicParsing="false" onAction="#ConvertDBtoXML" prefHeight="38.0" prefWidth="146.0" text="Конвертироавть из БД в XML" />
+<!--                                    <Button id="bd_butt" layoutX="14.0" layoutY="349.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="146.0" text="Просмотр Из  БД" />-->
+                                    <Button id="watchALL" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#WatchAll" prefHeight="38.0" prefWidth="250.0" text="Просмотр" />
+                                    <Button layoutX="16.0" layoutY="196.0" mnemonicParsing="false" onAction = "#ConvertXMLtoDB" prefHeight="38.0" prefWidth="250.0" text="Конвертировать из XML в БД" />
+                                    <Button layoutX="16.0" layoutY="244.0" mnemonicParsing="false" onAction="#ConvertDBtoXML" prefHeight="38.0" prefWidth="250.0" text="Конвертироавть из БД в XML" />
                                             </children>
                                         </AnchorPane>
                                     </items>
@@ -45,7 +45,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-            <Tab text="Редактирование">
+                <Tab text="Редактирование">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -59,7 +59,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="id_TA" layoutX="124.0" layoutY="55.0" prefHeight="26.0" prefWidth="186.0" promptText="Введите номер" />
-                        <AnchorPane layoutX="355.0" layoutY="72.0" prefHeight="273.0" prefWidth="374.0">
+                        <AnchorPane layoutX="355.0" layoutY="72.0" prefHeight="273.0" prefWidth="374.0" style="-fx-background-color: ##91FF00;">
                            <children>
                                           <Label fx:id="label1" layoutX="16.0" layoutY="28.0" prefHeight="16.0" prefWidth="57.0" text="Тип">
                                               <font>
@@ -110,7 +110,7 @@
                               <DatePicker fx:id="date_end_TA_pick" layoutX="178.0" layoutY="141.0" prefHeight="26.0" prefWidth="186.0" />
                            </children>
                         </AnchorPane>
-                        <CheckBox layoutX="14.0" layoutY="23.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="158.0" text="Работа с базой данных" />
+                        <CheckBox fx:id = "choose_BD" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="158.0" text="Работа с базой данных" />
                      </children>
                   </AnchorPane>
               </content>

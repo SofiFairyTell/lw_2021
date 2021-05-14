@@ -8,7 +8,7 @@ public class ParseSQL
     private  String password ;
     private  Statement statement;
 
-    ParseSQL()
+    public ParseSQL()
     {
 
         try {
@@ -56,7 +56,11 @@ public class ParseSQL
         statement.executeUpdate("update eventslist.eventslist set event_name = '" + strings[0] + "', event_type = '" + strings[1] + "', date_start = '" + strings[2]
                 + "', date_end = '" + strings[3] + "', manager = '" + strings[4] + "', place = '" + strings[5] + "' where id = " + id + ";");
     }
-
+    public void updateRecord(int id, Eventlist eventlist) throws SQLException {
+        statement.executeUpdate("update eventslist.eventslist set event_name = '" + eventlist.event_name + "', event_type = '" + eventlist.event_type
+                + "', date_start = '" +eventlist.date_start   + "', date_end = '" + eventlist.date_end + "', manager = '" + eventlist.manager +
+                "', place = '" + eventlist.place  + "' where id = " + id + ";");
+    }
     public void deleteRecord(int id) throws SQLException {
         statement.executeUpdate("delete from eventslist.eventslist where id in(" + id + ");");
     }
