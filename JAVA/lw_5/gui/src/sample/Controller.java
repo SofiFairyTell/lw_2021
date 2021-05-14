@@ -192,56 +192,48 @@ public class Controller
             calendarArea.appendText(event != null ? event.toString() : "Такого события нет!"+ "\n");
         }
 
-
     }
 @FXML
-    public void AddId(javafx.event.ActionEvent actionEvent) throws IOException
-    {
-        var event_name = event_name_TA.getText();
-        var event_type = event_type_CB.getSelectionModel().getSelectedItem().toString();
+    public void AddId(javafx.event.ActionEvent actionEvent) throws IOException {
+    var event_name = event_name_TA.getText();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date_start_ta_pickValue = date_start_TA_pick.getValue();
-        LocalDate date_end_ta_pickValue = date_end_TA_pick.getValue();
+    var event_type = event_type_CB.getSelectionModel().getSelectedItem().toString();
 
-        var date_start =  date_start_ta_pickValue.format(formatter);
-        var date_end = date_end_ta_pickValue.format(formatter);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate date_start_ta_pickValue = date_start_TA_pick.getValue();
+    LocalDate date_end_ta_pickValue = date_end_TA_pick.getValue();
 
-        var manager =  manager_TA.getText();
-        var place = place_TA.getText().trim();
+    var date_start = date_start_ta_pickValue.format(formatter);
+    var date_end = date_end_ta_pickValue.format(formatter);
 
-        var searchId = Integer.parseInt(id_TA.getText().trim());
-        if (choose_BD.isSelected())
-        {
-            var mySqlObj = new ParseSQL();
-            try {
-                mySqlObj.addNewRecord(new Eventlist(searchId+1,event_name,event_type,date_start, date_end, manager,place));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+    var manager = manager_TA.getText();
+    var place = place_TA.getText().trim();
+
+    var searchId = Integer.parseInt(id_TA.getText().trim());
+    if (choose_BD.isSelected()) {
+        var mySqlObj = new ParseSQL();
+        try {
+            mySqlObj.addNewRecord(new Eventlist(searchId + 1, event_name, event_type, date_start, date_end, manager, place));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        else
-        {
-            SetData set = new SetData();
-            var sax = new ParseSAX();
+    } else {
+        SetData set = new SetData();
+        var sax = new ParseSAX();
 
-            var prop = new ParseProperties();
-            var catalog = prop.readCatalogRoot();
-            String filePath = catalog + "\\file.xml";
+        var prop = new ParseProperties();
+        var catalog = prop.readCatalogRoot();
+        String filePath = catalog + "\\file.xml";
 
-            var eventslist = sax.readerSaxDocument(filePath);
-            var newEvent = set.setNewEvent(eventslist.size(), event_name,event_type,date_start, date_end, manager,place);
-            eventslist.add(newEvent);
+        var eventslist = sax.readerSaxDocument(filePath);
+        var newEvent = set.setNewEvent(eventslist.size(), event_name, event_type, date_start, date_end, manager, place);
+        eventslist.add(newEvent);
 
-            var dom = new ParseDOM(filePath);
-            dom.setDomNodes(eventslist);
-        }
-
-
-
-
-
+        var dom = new ParseDOM(filePath);
+        dom.setDomNodes(eventslist);
     }
+}
+
  @FXML
     public void ConvertXMLtoDB(javafx.event.ActionEvent actionEvent) throws IOException
     {
