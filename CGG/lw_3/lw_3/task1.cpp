@@ -141,7 +141,7 @@ LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 		// требуем обновления клиентской области окна (перерисовки)
 		InvalidateRect(hWnd, NULL, FALSE);
 
-		if (t >= 10.f)
+		if (t >= 45.f)
 		{
 			t = 0.0f;
 		}
@@ -257,39 +257,24 @@ void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF 
 		Gdiplus::PointF(439.f, 407.f),
 	};
 	//Время ключевых кадров
-	//int Timing_0 = -1,
-	//	Timing_1 = 4,
-	//	Timing_2 = 5,
-	//	Timing_1_ = 7,
-	//	Timing_2_ = 9,
-	//	Timing_3 = 11,
-	//	Timing_4 = 13,
-	//	Timing_5 = 15,
-	//	Timing_6 = 17,
-	//	Timing_7 = 19,
-	//	Timing_8 = 21;
-
-	int Timing_0 = -1.f,
+	float Timing_0 = -1.f,
 		Timing_1 = 5.f,
 		Timing_2 = 10.f,
-		Timing_3 = 11.f,
-		Timing_4 = 40.f,
-		Timing_5 = 50.f,
-		Timing_6 = 60.f,
-		Timing_7 = 70.f,
-		Timing_8 = 80.f,
-		Timing_9 = 90.f; // прдолжительность анимации
+		Timing_3 = 15.f,
+		Timing_4 = 20.f,
+		Timing_5 = 25.f,
+		Timing_6 = 30.f,
+		Timing_7 = 35.f,
+		Timing_8 = 40.f,
+		Timing_9 = 45.f; // прдолжительность анимации
 
-
-
-	int Timing_1_1 = 350.f;
-	
-	float dist = 10 * (time + 2);
+	float Timing_1_1 = 46.f;
+	float dist = 0.f;
+	dist = 1.f * (time + 0.1f);
 	Gdiplus::Matrix mtrx;
 	if (time > Timing_0 && time < Timing_1)
 	{
-		
-		mtrx.Translate(dist, 20);
+		mtrx.Translate(dist, 0.f);
 	
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
@@ -297,12 +282,22 @@ void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF 
 		mtrx.TransformPoints(kater_nose, 3);
 		mtrx.TransformPoints(kater_glass, 4);
 		mtrx.TransformPoints(kater_handline, 4);
+
+		kater_motor[0] = Tween(kater_motor[0], kater_motor[1], 0.02f);
+		kater_motor[1] = Tween(kater_motor[1], kater_motor[2], 0.02f);
+		kater_motor[2] = Tween(kater_motor[2], kater_motor[3], 0.02f);
+		kater_motor[3] = Tween(kater_motor[3], kater_motor[0], 0.02f);
+
 	}
 
 	if (time > Timing_1 && time < Timing_2) 
 	{
-		mtrx.Translate(dist, 0);
+		mtrx.Translate(dist, 0.f);
+
+		   
+
 		//mtrx.RotateAt(-5, pnt[0]);
+		mtrx.RotateAt(-0.2f, pnt2[0]);
 
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
@@ -314,8 +309,9 @@ void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF 
 
 	if (time > Timing_2 &&time < Timing_3)
 	{
-		//mtrx.RotateAt(4, pnt1[0]);
-		mtrx.Translate(dist, 0);
+		
+		mtrx.Translate(dist, 0.f);
+		mtrx.RotateAt(0.2f, pnt2[0]);
 
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
@@ -323,13 +319,20 @@ void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF 
 		mtrx.TransformPoints(kater_nose, 3);
 		mtrx.TransformPoints(kater_glass, 4);
 		mtrx.TransformPoints(kater_handline, 4);
+
+		kater_motor[0] = Tween(kater_motor[0], kater_motor[1], 0.01f);
+		kater_motor[1] = Tween(kater_motor[1], kater_motor[2], 0.01f);
+		kater_motor[2] = Tween(kater_motor[2], kater_motor[3], 0.01f);
+		kater_motor[3] = Tween(kater_motor[3], kater_motor[0], 0.01f);
+
+
 	}
 
 	if (time > Timing_3 && time < Timing_4)
 	{
-		mtrx.Translate(dist, 0);
+		mtrx.Translate(dist, 0.f);
 		//mtrx.RotateAt(4, pnt2[0]);
-		
+		mtrx.RotateAt(0.5f, pnt1[0]);
 
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
@@ -341,8 +344,9 @@ void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF 
 
 	if (time > Timing_4 && time < Timing_5)
 	{
-		//mtrx.RotateAt(-4, pnt2[0]);
-		mtrx.Translate(dist, 0);
+		mtrx.Translate(dist, 0.f);
+		
+		mtrx.RotateAt(-0.5f, pnt1[0]);
 
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
@@ -356,7 +360,8 @@ void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF 
 	{
 		
 		//mtrx.RotateAt(4, pnt3[0]);
-		mtrx.Translate(dist, 0);
+		mtrx.Translate(-dist, 0.f);
+		mtrx.RotateAt(-0.4f, pnt1[0]);
 
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
@@ -368,7 +373,8 @@ void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF 
 
 	if (time > Timing_6 && time < Timing_7)
 	{
-		mtrx.Translate(dist, 0);
+		mtrx.Translate(-dist, 0.f);
+		
 
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
@@ -380,34 +386,97 @@ void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF 
 
 	if (time > Timing_7 && time < Timing_8)
 	{
-		mtrx.Translate(dist, 0);
-
+		mtrx.Translate(-dist, 0.f);
+		mtrx.RotateAt(0.4f, pnt1[0]);
+		
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
 		mtrx.TransformPoints(kater_nose, 3);
 		mtrx.TransformPoints(kater_glass, 4);
 		mtrx.TransformPoints(kater_handline, 4);
+
 		
 	}
 
-	if (time < Timing_1_1)
-	{
-		kater_body[0] = Tween(kater_body[0], kater_body[1], 0.01f);
-		kater_body[1] = Tween(kater_body[1], kater_body[2], 0.01f);
-		kater_body[2] = Tween(kater_body[2], kater_body[3], 0.01f);
-		kater_body[3] = Tween(kater_body[3], kater_body[0], 0.01f);
+	//if (time < Timing_1_1)
+	//{
+	//	kater_motor[0] = Tween(kater_motor[0], kater_motor[1], 0.01f);
+	//	kater_motor[1] = Tween(kater_motor[1], kater_motor[2], 0.01f);
+	//	kater_motor[2] = Tween(kater_motor[2], kater_motor[3], 0.01f);
+	//	kater_motor[3] = Tween(kater_motor[3], kater_motor[0], 0.01f);
+	//	
+	//	//	kater_body[0] = Tween(kater_body[0], kater_body[1], 0.01f);
+	////	kater_body[1] = Tween(kater_body[1], kater_body[2], 0.01f);
+	//	//kater_body[2] = Tween(kater_body[2], kater_body[3], 0.01f);
+	//	//kater_body[3] = Tween(kater_body[3], kater_body[0], 0.01f);
 
-		kater_nose[0] = Tween(kater_nose[0], kater_nose[1], 0.01f);
-		kater_nose[1] = Tween(kater_nose[1], kater_nose[2], 0.01f);
-		kater_nose[2] = Tween(kater_nose[2], kater_nose[0], 0.01f);
+	////	kater_nose[0] = Tween(kater_nose[0], kater_nose[1], 0.01f);
+	////	kater_nose[1] = Tween(kater_nose[1], kater_nose[2], 0.01f);
+	////	kater_nose[2] = Tween(kater_nose[2], kater_nose[0], 0.01f);
 
-		kater_top[0] = Tween(kater_top[0], kater_top[1], 0.01f);
-		kater_top[1] = Tween(kater_top[1], kater_top[2], 0.01f);
-		kater_top[2] = Tween(kater_top[2], kater_top[3], 0.01f);
-		kater_top[3] = Tween(kater_top[3], kater_top[0], 0.01f);
-	}
+	////	kater_top[0] = Tween(kater_top[0], kater_top[1], 0.01f);
+	////	kater_top[1] = Tween(kater_top[1], kater_top[2], 0.01f);
+	////	kater_top[2] = Tween(kater_top[2], kater_top[3], 0.01f);
+	////	kater_top[3] = Tween(kater_top[3], kater_top[0], 0.01f);
+	//}
+	//else
+	//{
+	//	kater_motor[0] = Tween(kater_motor[3], kater_motor[0], 0.01f);
+	//	kater_motor[1] = Tween(kater_motor[2], kater_motor[1], 0.01f);
+	//	kater_motor[2] = Tween(kater_motor[3], kater_motor[2], 0.01f);
+	//	kater_motor[3] = Tween(kater_motor[0], kater_motor[3], 0.01f);
+	//}
 }
+
+#pragma region Part of kater
+//Части катера
+PointF kater_body[4] =
+{
+	PointF(250.f,400.f),
+	PointF(250.f,200.f),
+	PointF(710.f,200.f),
+	PointF(710.f,400.f),
+};
+
+PointF kater_motor[4] =
+{
+	PointF(710.f,380.f),
+	PointF(710.f,290.f),
+	PointF(790.f,290.f),
+	PointF(790.f,380.f),
+};
+
+PointF kater_top[4] =
+{
+	PointF(318.f,200.f),
+	PointF(318.f,130.f),
+	PointF(478.f,130.f),
+	PointF(478.f,200.f),
+};
+//Точки для многоугольника
+PointF kater_nose[3] =
+{
+	PointF(40.f,200.f),
+	PointF(250.f,200.f),
+	PointF(250.f,400.f)
+};
+
+PointF kater_glass[4] =
+{
+	PointF(170.f,200.f),
+	PointF(330.f,77.f),
+	PointF(480.f,77.f),
+	PointF(520.f,200.f)
+};
+PointF  kater_handline[4] =
+{
+	PointF(507.f,140.f),
+	PointF(585.f,150.f),
+	PointF(661.f,160.f),
+	PointF(709.f,192.f),
+};
+
 
 void SetIMGTransform(Graphics& g, int t)
 {
@@ -473,53 +542,7 @@ void Display(Graphics &g, int time)
 	LinearGradientBrush linBrush(rect, Color::Indigo, Color::Goldenrod, 40.f); //кисть с линейным градиентом
 	
 	//SetIMGTransform(g, time);
-#pragma region Part of kater
-	//Части катера
-	PointF kater_body[4] =
-	{
-		PointF(250.f,400.f),
-		PointF(250.f,200.f),	
-		PointF(710.f,200.f),
-		PointF(710.f,400.f),
-	};
 
-	PointF kater_motor[4] = 
-	{
-		PointF(710.f,380.f),
-		PointF(710.f,290.f),
-		PointF(790.f,290.f),
-		PointF(790.f,380.f),
-	};
-	
-	PointF kater_top[4] =
-	{
-		PointF(318.f,200.f),
-		PointF(318.f,130.f),
-		PointF(478.f,130.f),
-		PointF(478.f,200.f),
-	};
-	//Точки для многоугольника
-	PointF kater_nose[3] =
-	{
-		PointF(40.f,200.f), 
-		PointF(250.f,200.f), 
-		PointF(250.f,400.f)
-	};
-
-	PointF kater_glass[4] =
-	{
-		PointF(170.f,200.f), 
-		PointF(330.f,77.f),
-		PointF(480.f,77.f), 
-		PointF(520.f,200.f)
-	};
-	PointF  kater_handline[4] =
-	{
-		PointF(507.f,140.f),
-		PointF(585.f,150.f),
-		PointF(661.f,160.f),
-		PointF(709.f,192.f),
-	};
 
 	float border_part[6] =
 	{
