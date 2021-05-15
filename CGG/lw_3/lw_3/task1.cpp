@@ -7,9 +7,10 @@ void DrawWave(Graphics& g);
 //Для анимации
 
 Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float t);
-void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF kater_top[], PointF kater_nose[], PointF kater_glass[], PointF kater_handline[]);
+void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF kater_top[], PointF kater_nose[], PointF kater_glass[], PointF kater_handline[]);
+void SetIMGTransform(Graphics& g, int t);
 
-int t; //время
+float t = 0.f; //время
 MSG  msg;
 HWND hWnd = NULL;
 //Gif-изображение
@@ -94,94 +95,105 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR lpszCmdLine, int nCm
 
 LRESULT CALLBACK MyWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	
-static Bitmap* bitmap = NULL; //для катера
-//static float t = 0.f;
 
-switch (uMsg)
-{
+	static Bitmap* bitmap = NULL; //для катера
+	//static float t = 0.f;
 
-case WM_CREATE:
-{
-	// определение количества кадров в изображении
-	frameCount = gif->GetFrameCount(&FrameDimensionTime);
-	if (NULL == gif) 
-	return -1; // загрузка не удалась
-	SetTimer(hWnd, 1, 40, NULL); //Установка таймера для анимации
-	return 0;
-}
-case WM_DESTROY:
-{
-	if (bitmap != NULL)
+	switch (uMsg)
 	{
-		delete bitmap;
-	}
-	if (NULL != gif) 
-		delete gif; // удаляем объект
-	PostQuitMessage(0);
-	return 0;
-}
-case WM_ERASEBKGND:
-//подавление события чтобы не было мерцания
-return 1;
-case WM_TIMER:
-{
-	// увеличиваем индекс кадра (циклически)
-	frameIndex = (frameIndex + 1) % frameCount;
-	// делаем кадр активным
-	gif->SelectActiveFrame(&FrameDimensionTime, frameIndex);
 
-	// требуем обновления клиентской области окна (перерисовки)
-	InvalidateRect(hWnd, NULL, FALSE);
-	t++;
-	//if (2.f < t) t = 0.f;
-	if (t == 55) t = 0;
-	if (bitmap != NULL)
+	case WM_CREATE:
 	{
-		{
-			Graphics g(bitmap);
-			Display(g, t);
-		}
-		Graphics g(hWnd);
-		g.DrawImage(bitmap, 0, 0);
-	}
-return 0;
-}
-case WM_SIZE:
-{
-				
-if (wParam != SIZE_MINIMIZED)
+		// определение количества кадров в изображении
+		frameCount = gif->GetFrameCount(&FrameDimensionTime);
+		if (NULL == gif)
+			return -1; // загрузка не удалась
+
+		SetTimer(hWnd, 1, 22, NULL); //Установка таймера для анимации
+		return 0;
+	}break;
+	case WM_DESTROY:
 	{
 		if (bitmap != NULL)
 		{
 			delete bitmap;
 		}
-		bitmap = new Bitmap{ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
+		if (NULL != gif)
+			delete gif; // удаляем объект
+		PostQuitMessage(0);
+		return 0;
+	}break;
+	case WM_ERASEBKGND:
+	{
+		//подавление события чтобы не было мерцания
+		return 1;
+	}break;
+
+	case WM_TIMER:
+	{
+
+		t += 1.0f;
+		// увеличиваем индекс кадра (циклически)
+		frameIndex = (frameIndex + 1) % frameCount;
+		// делаем кадр активным
+		gif->SelectActiveFrame(&FrameDimensionTime, frameIndex);
+
+		// требуем обновления клиентской области окна (перерисовки)
+		InvalidateRect(hWnd, NULL, FALSE);
+
+		if (t >= 10.f)
+		{
+			t = 0.0f;
+		}
+		//if (2.f < t) t = 0.f;
+
+		if (bitmap != NULL)
+		{
+			{
+				Graphics g(bitmap);
+				Display(g, t);
+			}
+			Graphics g(hWnd);
+			g.DrawImage(bitmap, 0, 0);
+		}
+		return 0;
+	}break;
+	case WM_SIZE:
+	{
+
+		if (wParam != SIZE_MINIMIZED)
+		{
+			if (bitmap != NULL)
+			{
+				delete bitmap;
+			}
+			bitmap = new Bitmap{ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
+		}
+		return 0;
+	}	break;
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;
+		// начинаем процесс рисования
+		HDC hdc = BeginPaint(hWnd, &ps);
+		if (bitmap != NULL)
+		{
+			{
+				Graphics g(bitmap);
+				Display(g, t);
+			}
+
+			Graphics g(hdc);
+			g.DrawImage(bitmap, 0, 0);
+		}
+		// завершаем процесс рисования
+		EndPaint(hWnd, &ps);
 	}
 	return 0;
-}	
-case WM_PAINT:
-{
-PAINTSTRUCT ps;
-// начинаем процесс рисования
-HDC hdc = BeginPaint(hWnd, &ps);
-if (bitmap != NULL)
-{
-	{
-		Graphics g(bitmap);
-		Display(g, t);
 	}
-
-	Graphics g(hdc);
-	g.DrawImage(bitmap, 0, 0);
-}
-// завершаем процесс рисования
-EndPaint(hWnd, &ps);
-}
-return 0;
-}
 return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
+
 
 void DrawWave(Graphics& g)
 {
@@ -224,7 +236,10 @@ Gdiplus::PointF Tween(const Gdiplus::PointF& A, const Gdiplus::PointF& B, float 
 {
 	return Gdiplus::PointF(A.X * (1.f - t) + B.X * t, A.Y * (1.f - t) + B.Y * t);
 }
-void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF kater_top[], PointF kater_nose[], PointF kater_glass[], PointF kater_handline[])
+
+
+
+void SetTransform(float time, PointF kater_body[], PointF kater_motor[], PointF kater_top[], PointF kater_nose[], PointF kater_glass[], PointF kater_handline[])
 {
 	Gdiplus::PointF pnt[1] = {
 	Gdiplus::PointF(545.f, 407.f),
@@ -242,21 +257,34 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 		Gdiplus::PointF(439.f, 407.f),
 	};
 	//Время ключевых кадров
-	int Timing_0 = -1,
-		Timing_1 = 10,
-		Timing_2 = 15,
-		Timing_1_ = 20,
-		Timing_2_ = 25,
-		Timing_3 = 30,
-		Timing_4 = 35,
-		Timing_5 = 40,
-		Timing_6 = 45,
-		Timing_7 = 50,
-		Timing_8 = 55;
+	//int Timing_0 = -1,
+	//	Timing_1 = 4,
+	//	Timing_2 = 5,
+	//	Timing_1_ = 7,
+	//	Timing_2_ = 9,
+	//	Timing_3 = 11,
+	//	Timing_4 = 13,
+	//	Timing_5 = 15,
+	//	Timing_6 = 17,
+	//	Timing_7 = 19,
+	//	Timing_8 = 21;
 
-	int Timing_1_1 = 24;
+	int Timing_0 = -1.f,
+		Timing_1 = 5.f,
+		Timing_2 = 10.f,
+		Timing_3 = 11.f,
+		Timing_4 = 40.f,
+		Timing_5 = 50.f,
+		Timing_6 = 60.f,
+		Timing_7 = 70.f,
+		Timing_8 = 80.f,
+		Timing_9 = 90.f; // прдолжительность анимации
+
+
+
+	int Timing_1_1 = 350.f;
 	
-	int dist = 10 * (time + 2);
+	float dist = 10 * (time + 2);
 	Gdiplus::Matrix mtrx;
 	if (time > Timing_0 && time < Timing_1)
 	{
@@ -275,19 +303,6 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 	{
 		mtrx.Translate(dist, 0);
 		//mtrx.RotateAt(-5, pnt[0]);
-
-		mtrx.TransformPoints(kater_body, 4);
-		mtrx.TransformPoints(kater_motor, 4);
-		mtrx.TransformPoints(kater_top, 4);
-		mtrx.TransformPoints(kater_nose, 3);
-		mtrx.TransformPoints(kater_glass, 4);
-		mtrx.TransformPoints(kater_handline, 4);
-	}
-
-	if (time > Timing_1_ && time < Timing_2_)
-	{
-		mtrx.Translate(dist, 0);
-		//mtrx.RotateAt(-4, pnt[0]);
 
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
@@ -376,22 +391,61 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 		
 	}
 
-	//if (time < Timing_1_1)
-	//{
-	//	kater_body[0] = Tween(kater_body[0], kater_body[1], 0.01f);
-	//	kater_body[1] = Tween(kater_body[1], kater_body[2], 0.01f);
-	//	kater_body[2] = Tween(kater_body[2], kater_body[3], 0.01f);
-	//	kater_body[3] = Tween(kater_body[3], kater_body[0], 0.01f);
+	if (time < Timing_1_1)
+	{
+		kater_body[0] = Tween(kater_body[0], kater_body[1], 0.01f);
+		kater_body[1] = Tween(kater_body[1], kater_body[2], 0.01f);
+		kater_body[2] = Tween(kater_body[2], kater_body[3], 0.01f);
+		kater_body[3] = Tween(kater_body[3], kater_body[0], 0.01f);
 
-	//	kater_nose[0] = Tween(kater_nose[0], kater_nose[1], 0.01f);
-	//	kater_nose[1] = Tween(kater_nose[1], kater_nose[2], 0.01f);
-	//	kater_nose[2] = Tween(kater_nose[2], kater_nose[0], 0.01f);
+		kater_nose[0] = Tween(kater_nose[0], kater_nose[1], 0.01f);
+		kater_nose[1] = Tween(kater_nose[1], kater_nose[2], 0.01f);
+		kater_nose[2] = Tween(kater_nose[2], kater_nose[0], 0.01f);
 
-	//	kater_top[0] = Tween(kater_top[0], kater_top[1], 0.01f);
-	//	kater_top[1] = Tween(kater_top[1], kater_top[2], 0.01f);
-	//	kater_top[2] = Tween(kater_top[2], kater_top[3], 0.01f);
-	//	kater_top[3] = Tween(kater_top[3], kater_top[0], 0.01f);
-	//}
+		kater_top[0] = Tween(kater_top[0], kater_top[1], 0.01f);
+		kater_top[1] = Tween(kater_top[1], kater_top[2], 0.01f);
+		kater_top[2] = Tween(kater_top[2], kater_top[3], 0.01f);
+		kater_top[3] = Tween(kater_top[3], kater_top[0], 0.01f);
+	}
+}
+
+void SetIMGTransform(Graphics& g, int t)
+{
+	float m[6];
+	Matrix T[3];
+	float dist = 400 * (t + 2);
+	T[0].Translate(dist, 0);
+	T[1].Translate(dist, 0);
+	T[2].Translate(dist,0);
+	T[2].RotateAt(-10.f, PointF{ 470.f, 450.f });
+	float a[6], b[6];
+
+	if (t < 1) // первый этап анимации
+	{
+		T[0].GetElements(a);
+		T[1].GetElements(b);
+	}
+	else if (t < 2) // первый этап анимации
+	{
+		T[1].GetElements(a);
+		T[2].GetElements(b);
+
+		t -= 1;
+	}
+	else
+	{
+		return;
+	}
+
+	for (int i = 0; i < _countof(m); ++i)
+	{
+		m[i] = a[i] * (1 - t) + b[i] * t;
+	}
+
+	Matrix matrix;
+	matrix.SetElements(m[0], m[1], m[2], m[3], m[4], m[5]);
+
+	g.SetTransform(&matrix);
 }
 void Display(Graphics &g, int time)
 {
@@ -418,7 +472,7 @@ void Display(Graphics &g, int time)
 	HatchBrush hatchBrush(HatchStyleForwardDiagonal, Color::Aquamarine, Color::Bisque);//Штриховая кисть
 	LinearGradientBrush linBrush(rect, Color::Indigo, Color::Goldenrod, 40.f); //кисть с линейным градиентом
 	
-
+	//SetIMGTransform(g, time);
 #pragma region Part of kater
 	//Части катера
 	PointF kater_body[4] =
@@ -476,6 +530,8 @@ void Display(Graphics &g, int time)
 #pragma endregion
 
 	SetTransform(time, kater_body, kater_motor, kater_top, kater_nose, kater_glass, kater_handline);
+
+
 
 	kater_border.SetCompoundArray(border_part, 6); //составное перо
 
