@@ -107,7 +107,7 @@ case WM_CREATE:
 	frameCount = gif->GetFrameCount(&FrameDimensionTime);
 	if (NULL == gif) 
 	return -1; // загрузка не удалась
-	SetTimer(hWnd, 1, 50, NULL); //Установка таймера для анимации
+	SetTimer(hWnd, 1, 40, NULL); //Установка таймера для анимации
 	return 0;
 }
 case WM_DESTROY:
@@ -135,7 +135,7 @@ case WM_TIMER:
 	InvalidateRect(hWnd, NULL, FALSE);
 	t++;
 	//if (2.f < t) t = 0.f;
-
+	if (t == 55) t = 0;
 	if (bitmap != NULL)
 	{
 		{
@@ -243,21 +243,26 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 	};
 	//Время ключевых кадров
 	int Timing_0 = -1,
-		Timing_1 = 5,
-		Timing_2 = 10,
-		Timing_3 = 25,
-		Timing_4 = 30,
-		Timing_5 = 35,
-		Timing_6 = 40,
-		Timing_7 = 45,
-		Timing_8 = 50;
-	int Timing_1_1 = 55;
+		Timing_1 = 10,
+		Timing_2 = 15,
+		Timing_1_ = 20,
+		Timing_2_ = 25,
+		Timing_3 = 30,
+		Timing_4 = 35,
+		Timing_5 = 40,
+		Timing_6 = 45,
+		Timing_7 = 50,
+		Timing_8 = 55;
 
+	int Timing_1_1 = 24;
+	
+	int dist = 10 * (time + 2);
 	Gdiplus::Matrix mtrx;
 	if (time > Timing_0 && time < Timing_1)
 	{
-		mtrx.Translate(220, 20);
-
+		
+		mtrx.Translate(dist, 20);
+	
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
@@ -265,10 +270,11 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 		mtrx.TransformPoints(kater_glass, 4);
 		mtrx.TransformPoints(kater_handline, 4);
 	}
+
 	if (time > Timing_1 && time < Timing_2) 
 	{
-		mtrx.Translate(-20, -20);
-		mtrx.RotateAt(-4, pnt[0]);
+		mtrx.Translate(dist, 0);
+		//mtrx.RotateAt(-5, pnt[0]);
 
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
@@ -277,22 +283,39 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 		mtrx.TransformPoints(kater_glass, 4);
 		mtrx.TransformPoints(kater_handline, 4);
 	}
+
+	if (time > Timing_1_ && time < Timing_2_)
+	{
+		mtrx.Translate(dist, 0);
+		//mtrx.RotateAt(-4, pnt[0]);
+
+		mtrx.TransformPoints(kater_body, 4);
+		mtrx.TransformPoints(kater_motor, 4);
+		mtrx.TransformPoints(kater_top, 4);
+		mtrx.TransformPoints(kater_nose, 3);
+		mtrx.TransformPoints(kater_glass, 4);
+		mtrx.TransformPoints(kater_handline, 4);
+	}
+
 	if (time > Timing_2 &&time < Timing_3)
 	{
-		mtrx.RotateAt(4, pnt1[0]);
+		//mtrx.RotateAt(4, pnt1[0]);
+		mtrx.Translate(dist, 0);
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
 		mtrx.TransformPoints(kater_nose, 3);
 		mtrx.TransformPoints(kater_glass, 4);
 		mtrx.TransformPoints(kater_handline, 4);
-
-
 	}
+
 	if (time > Timing_3 && time < Timing_4)
 	{
-		mtrx.RotateAt(3, pnt2[0]);
-		mtrx.Translate(20, -20);
+		mtrx.Translate(dist, 0);
+		//mtrx.RotateAt(4, pnt2[0]);
+		
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
@@ -300,9 +323,12 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 		mtrx.TransformPoints(kater_glass, 4);
 		mtrx.TransformPoints(kater_handline, 4);
 	}
+
 	if (time > Timing_4 && time < Timing_5)
 	{
-		mtrx.RotateAt(-4, pnt1[0]);
+		//mtrx.RotateAt(-4, pnt2[0]);
+		mtrx.Translate(dist, 0);
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
@@ -310,9 +336,13 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 		mtrx.TransformPoints(kater_glass, 4);
 		mtrx.TransformPoints(kater_handline, 4);
 	}
+
 	if (time > Timing_5 && time < Timing_6)
 	{
-		mtrx.RotateAt(4, pnt3[0]);
+		
+		//mtrx.RotateAt(4, pnt3[0]);
+		mtrx.Translate(dist, 0);
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
@@ -323,7 +353,8 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 
 	if (time > Timing_6 && time < Timing_7)
 	{
-		mtrx.Translate(-250, 0);
+		mtrx.Translate(dist, 0);
+
 		mtrx.TransformPoints(kater_body, 4);
 		mtrx.TransformPoints(kater_motor, 4);
 		mtrx.TransformPoints(kater_top, 4);
@@ -332,22 +363,35 @@ void SetTransform(int time, PointF kater_body[], PointF kater_motor[], PointF ka
 		mtrx.TransformPoints(kater_handline, 4);
 	}
 
-	if (time < Timing_1_1)
+	if (time > Timing_7 && time < Timing_8)
 	{
-		kater_body[0] = Tween(kater_body[0], kater_body[1], 0.01f);
-		kater_body[1] = Tween(kater_body[1], kater_body[2], 0.01f);
-		kater_body[2] = Tween(kater_body[2], kater_body[3], 0.01f);
-		kater_body[3] = Tween(kater_body[3], kater_body[0], 0.01f);
+		mtrx.Translate(dist, 0);
 
-		kater_nose[0] = Tween(kater_nose[0], kater_nose[1], 0.01f);
-		kater_nose[1] = Tween(kater_nose[1], kater_nose[2], 0.01f);
-		kater_nose[2] = Tween(kater_nose[2], kater_nose[0], 0.01f);
-
-		kater_top[0] = Tween(kater_top[0], kater_top[1], 0.01f);
-		kater_top[1] = Tween(kater_top[1], kater_top[2], 0.01f);
-		kater_top[2] = Tween(kater_top[2], kater_top[3], 0.01f);
-		kater_top[3] = Tween(kater_top[3], kater_top[0], 0.01f);
+		mtrx.TransformPoints(kater_body, 4);
+		mtrx.TransformPoints(kater_motor, 4);
+		mtrx.TransformPoints(kater_top, 4);
+		mtrx.TransformPoints(kater_nose, 3);
+		mtrx.TransformPoints(kater_glass, 4);
+		mtrx.TransformPoints(kater_handline, 4);
+		
 	}
+
+	//if (time < Timing_1_1)
+	//{
+	//	kater_body[0] = Tween(kater_body[0], kater_body[1], 0.01f);
+	//	kater_body[1] = Tween(kater_body[1], kater_body[2], 0.01f);
+	//	kater_body[2] = Tween(kater_body[2], kater_body[3], 0.01f);
+	//	kater_body[3] = Tween(kater_body[3], kater_body[0], 0.01f);
+
+	//	kater_nose[0] = Tween(kater_nose[0], kater_nose[1], 0.01f);
+	//	kater_nose[1] = Tween(kater_nose[1], kater_nose[2], 0.01f);
+	//	kater_nose[2] = Tween(kater_nose[2], kater_nose[0], 0.01f);
+
+	//	kater_top[0] = Tween(kater_top[0], kater_top[1], 0.01f);
+	//	kater_top[1] = Tween(kater_top[1], kater_top[2], 0.01f);
+	//	kater_top[2] = Tween(kater_top[2], kater_top[3], 0.01f);
+	//	kater_top[3] = Tween(kater_top[3], kater_top[0], 0.01f);
+	//}
 }
 void Display(Graphics &g, int time)
 {
@@ -430,6 +474,7 @@ void Display(Graphics &g, int time)
 		0.8f, 1.0f
 	};
 #pragma endregion
+
 	SetTransform(time, kater_body, kater_motor, kater_top, kater_nose, kater_glass, kater_handline);
 
 	kater_border.SetCompoundArray(border_part, 6); //составное перо
