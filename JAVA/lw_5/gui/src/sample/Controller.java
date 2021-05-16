@@ -104,6 +104,10 @@ public class Controller
     @FXML
     public void ChangeAll(javafx.event.ActionEvent actionEvent) throws IOException
     {
+        if(calendarArea != null)
+        {
+            calendarArea.clear();
+        }
         var event_name = event_name_TA.getText();
         var event_type = event_type_CB.getSelectionModel().getSelectedItem().toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -124,6 +128,7 @@ public class Controller
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+            calendarArea.appendText("Запись № "+ searchId+" была успешно изменена в базе данных\n");
         }
         else
         {
@@ -144,6 +149,7 @@ public class Controller
                 if (flag) {
                     var dom = new ParseDOM(filePath);
                     dom.setDomNodes(events);
+                    calendarArea.appendText("Запись № "+ searchId+" была успешно изменена в файле\n");
                 } else {
                     System.out.println("Такого события нет!");
                 }
@@ -162,9 +168,11 @@ public class Controller
         if (choose_BD.isSelected())
         {
             var mySqlObj = new ParseSQL();
+            var search= Integer.parseInt(searchId);
              try {
-                var result = mySqlObj.searchRecord(Integer.parseInt(searchId));
-                 while (result.next()) {
+                var result = mySqlObj.searchRecord(search);
+                 while (result.next())
+                 {
                      Eventlist eventlist = new Eventlist(
                              result.getInt("id"),
                              result.getString("event_name"),
@@ -175,7 +183,9 @@ public class Controller
                              result.getString("place")
                      );
                      calendarArea.appendText(eventlist.toString() + "\n");
+                     System.out.println(eventlist.toString());
                  }
+
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -194,9 +204,13 @@ public class Controller
 
     }
 @FXML
-    public void AddId(javafx.event.ActionEvent actionEvent) throws IOException {
+    public void AddId(javafx.event.ActionEvent actionEvent) throws IOException
+    {
+        if(calendarArea != null)
+        {
+            calendarArea.clear();
+        }
     var event_name = event_name_TA.getText();
-
     var event_type = event_type_CB.getSelectionModel().getSelectedItem().toString();
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -217,6 +231,7 @@ public class Controller
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        calendarArea.appendText( "Запись была успешно записана в Базу данных!\n Нажмите кнопку 'ПРОСМОТР'");
     } else {
         SetData set = new SetData();
         var sax = new ParseSAX();
@@ -231,7 +246,10 @@ public class Controller
 
         var dom = new ParseDOM(filePath);
         dom.setDomNodes(eventslist);
+        calendarArea.appendText( "Запись была успешно записана в файл!\n Нажмите кнопку 'ПРОСМОТР'");
     }
+
+
 }
 
  @FXML
@@ -243,6 +261,11 @@ public class Controller
         var sax = new ParseSAX();
         var parsing = new Parse(sax.readerSaxDocument(filePath));
         parsing.parseXMLtoDB();
+        if(calendarArea != null)
+        {
+            calendarArea.clear();
+        }
+        calendarArea.appendText( "Файл был успешно записан в базу данных!\n");
     }
     @FXML
     public void ConvertDBtoXML(javafx.event.ActionEvent actionEvent) throws IOException
@@ -255,6 +278,11 @@ public class Controller
         var dom = new ParseDOM(filePath);
         var parsing = new Parse(eventslist,dom);
         parsing.parseDBtoXML();
+        if(calendarArea != null)
+        {
+            calendarArea.clear();
+        }
+        calendarArea.appendText( "Данные были успешнно записаны в файл и доступны по адресу\n:"+filePath+"\n");
     }
 }
 
