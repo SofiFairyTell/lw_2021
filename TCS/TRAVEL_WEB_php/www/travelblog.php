@@ -1,4 +1,5 @@
 <?php
+$title_page = 'TravelBlog';
  require('header.php');
 ?>
 
@@ -114,6 +115,6 @@
 	}, 1000);
 	</script>
 
-
-</body>
-</html>
+<?php
+require("footer.php");
+?>

@@ -1,5 +1,5 @@
-
 <?php
+$title_page = 'Лайфхаки';
  require('header.php');
 ?>
 	
@@ -134,8 +134,5 @@
 
 <?php
  require('script.php');
+ require('footer.php');
 ?>
-
-
-</body>
-</html>

@@ -1,14 +1,13 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/validation.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/titleChange.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <title>
-   <?=
-        titleChange()
+   <?= $title_page
         ?>
     </title>
 	    <link rel="stylesheet" type="text/css" href="css/travelstyle.css">
@@ -41,8 +40,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/titleChange.php';
 					<a class="nav_link" href="https://travel-notes.club/" target="_blank">Гайды</a>
 					<a class="nav_link" href="travelblog.php">Повод</a>
 					<a class="nav_link" href="lifehack.php">Лайфхаки</a>
-					<a class="nav_link" href="aboutus.php">О нас</a>
-					<a class="nav_link" href="contacts.php"> Контакты </a>
+					<a class="nav_link" href="aboutus.php">	О нас</a>
+					<a class="nav_link" href="contacts.php">Контакты </a>
 				</nav> <!--nav-->
 			</div><!--header_inner-->
 		</div><!--contain-->

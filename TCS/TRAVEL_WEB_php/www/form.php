@@ -1,4 +1,3 @@
-
 <?php
 $validName = false;
 $validEmail = false;
@@ -22,7 +21,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 	if($validName && $validEmail)
 	{
 		$message = " Ваше сообщение отправлено!";
-		echo "<script type='text/javascript'>alert('$message');</script>";
+		//Из-за того, что в contacts.php на первой строке идет подключение неизвестного заголовка 
+		//применяется изменение ссылки через javascript. Тот же редирект, но без header
+		echo "	<script type='text/javascript'>alert('$message');</script>
+		<script type='text/javascript'>window.location.href = './contacts.php';</script>";
 	}
 	else
 	{
@@ -33,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 ?>
 
 <div class="form-popup" id="myForm">
-	  <form action = ""  class="form-container" method = 'post'>
+	  <form action = "./contacts.php"  class="form-container" method = 'post'>
 		<h1>Связаться</h1>
         <label for="login"><b>Ваше имя</b></label>
         <input type="text" name="login" value="<?= isset($_POST['login']) ? $_POST['login']: ""; ?>">
@@ -60,8 +62,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
                         <label for="email"> </label> 
                     <?php endif; ?>
                 <?php }?>
-		
-		
+
 	<label for="msg"><b>Ваше сообщение</b></label>
 		<textarea class="input2" placeholder="Ваше сообщение" id='msg' oninput="getCount()" name="message"><?= !empty($_POST['message']) ? $_POST['message'] : '' ?></textarea>
 

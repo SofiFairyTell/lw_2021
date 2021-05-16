@@ -1,16 +1,8 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/phpQuery/phpQuery.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
-
-
+$title_page = 'Подсчет размера файла';
+ require('header.php');
 ?>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-</head>
-<body>
-<section class="section"> 
+<section class="section_hack">
 <div >
         <h1>Подсчёт размера файла</h1>
         <form action="" method="GET">
@@ -23,21 +15,18 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
             <?= !empty($_GET) ? getRes($_GET['path'])  : '' ?>
         </div>
 </div>
-</section>
-<section class = "section">
-
     <span> <h1> Фотография с Watermark </h1></span>
     <form enctype="multipart/form-data" action="filesizeform.php" method="post">
 			Выберите файл: <input name="uploadedFile" type="file" />
 			<input type="submit" name = "uploadBtn" value="Загрузить" />
             <input type="submit" name = "dowlandBtn" value="Скачать" />
 		</form>
-<?php
- require('./scriptphp/upload.php');
+		<?php 
+		    require('./scriptphp/upload.php');	
+		?>
+</section> <!--section-hack-->
 
- ?>      
-  
-</section>
-
-</body>
-</html>
+<?php 
+require('script.php');
+require('footer.php');
+?>

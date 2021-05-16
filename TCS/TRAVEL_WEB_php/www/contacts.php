@@ -1,5 +1,5 @@
-
 <?php
+$title_page = 'Контакты';
 require("header.php");
 ?>
 	<section class="section" >
@@ -103,7 +103,5 @@ require("header.php");
 <?php 
 require('form.php');
 require('script.php');  
+require('footer.php');
 ?>
-
-</body>
-</html>

@@ -1,6 +1,6 @@
-
 <!-- Обращение к файлу с шапкой -->
 <?php
+$title_page = 'О нас';
  require('header.php');
 ?>
 
@@ -37,7 +37,5 @@
 
 <?php
  require('script.php');
+ require('footer.php');
  ?>
-
-</body>
-</html>
