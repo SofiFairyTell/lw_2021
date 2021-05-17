@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72308e6a-23ff-40d7-93dd-1d3ae0a32a09" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../LW_SAPR/Детали/OldVersions/lw_6_part1.0007.ipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LW_SAPR/Детали/OldVersions/lw_6_part2.0003.ipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LW_SAPR/Детали/lw_6_part1.ipt" beforeDir="false" afterPath="$PROJECT_DIR$/../LW_SAPR/Детали/lw_6_part1.ipt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LW_SAPR/Детали/lw_6_part2.ipt" beforeDir="false" afterPath="$PROJECT_DIR$/../LW_SAPR/Детали/lw_6_part2.ipt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LW_SAPR/Сборки/lw_6_сборка/Мастер проектирования/lockfile.lck" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mmc_3_coordinatdown.py" beforeDir="false" afterPath="$PROJECT_DIR$/mmc_3_coordinatdown.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TCS/TRAVEL_WEB_php/www/lifehack.php" beforeDir="false" afterPath="$PROJECT_DIR$/../TCS/TRAVEL_WEB_php/www/lifehack.php" afterDir="false" />
-    </list>
+    <list default="true" id="72308e6a-23ff-40d7-93dd-1d3ae0a32a09" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
