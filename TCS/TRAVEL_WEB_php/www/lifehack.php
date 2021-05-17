@@ -127,7 +127,6 @@ $title_page = 'Лайфхаки';
 				</div>	<!--product-card-->	
 			</div><!--make-3D-space-->
 		</div> <!--carusel_item-->
-	
 	</div><!--photo-->
 </div> <!--contain-->
 </section> <!--section-hack-->
