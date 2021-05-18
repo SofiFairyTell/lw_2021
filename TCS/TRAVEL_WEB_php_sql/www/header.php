@@ -2,6 +2,7 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/validation.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
