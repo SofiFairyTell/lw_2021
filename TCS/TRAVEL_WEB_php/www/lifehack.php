@@ -44,7 +44,7 @@ $title_page = 'Лайфхаки';
 								<li><img src="./img/lifehacks/document.jpg" alt="document"/>
 								<p>	Среди документов всегда паспорт и билеты</p>
 								</li>
-								<li><img src="./img/lifehacks/scale_1200 (1).jpeg" alt="" />
+								<li><img src="./img/lifehacks/food.jpeg" alt="" />
 								<p> Для перекуса подойдет вода, сухое печенье. </p>
 								</li>
 							</ul>

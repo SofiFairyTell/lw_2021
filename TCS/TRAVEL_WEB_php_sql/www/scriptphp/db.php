@@ -24,7 +24,7 @@ function clearSession()
 function getSliderIMG()
 {
     $mysql = connect();
-    $result = $mysql->query("select * from content where name like 'slider'");
+    $result = $mysql->query("select * from img_store where img_name like 'plan'");
     $mysql->close();
     return $result;
 }
