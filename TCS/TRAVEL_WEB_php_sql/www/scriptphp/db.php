@@ -2,7 +2,7 @@
 const DB_HOST = 'localhost';
 const DB_USER = 'root';
 const DB_PASSWORD = 'root';
-const DB_NAME = 'mystore';
+const DB_NAME = 'travelblog';
 // Функция для подключения к базе данных
 function connect()
 {
@@ -19,4 +19,12 @@ function clearSession()
             unset($_SESSION[$key]);
         }
     }
+}
+
+function getSliderIMG()
+{
+    $mysql = connect();
+    $result = $mysql->query("select * from content where name like 'slider'");
+    $mysql->close();
+    return $result;
 }

@@ -8,10 +8,14 @@ $title_page = 'Лайфхаки';
 	<div class="photo">
 		<div class="carusel_item">
 			<div class ="make-3D-space">
+			<?php
+				$result = getgetSliderIMG();
+				while($row = mysqli_fetch_assoc($result))
+				{ ?>
 				<div class ="product-card" id = "prd_1">
 					<div  class ="product-front" >
 						<div class="shadow"></div> <!--shadow-->
-						<img src="./img/lifehacks/plan.jpg" alt="plan" />
+						<img src=<?=$row['img_path']?> alt="" />
 						<div class="image_overlay"></div> <!--image_overlay-->
 						<div class="view_details">Узнать больше</div>
 						<div class="stats">        	
@@ -37,16 +41,16 @@ $title_page = 'Лайфхаки';
 						<div class="shadow"></div>
 						<div class ="carousel">
 							<ul>
-								<li><img src="./img/lifehacks/medicinebag.jpg" alt="medicinebag" />
-									<p>В аптечке должны быть лекарства первой необходимости</p>
-									<p> Например: обезболиваюшее, спирт и йод.</p>
+								<li><img src=<?=$row['img_path']?> alt="" />
+									<p><?= $row['paragraph']?></p>
+									<!-- <p> Например: обезболиваюшее, спирт и йод.</p> -->
 								</li>
-								<li><img src="./img/lifehacks/document.jpg" alt="document"/>
+								<!-- <li><img src="./img/lifehacks/document.jpg" alt="document"/>
 								<p>	Среди документов всегда паспорт и билеты</p>
 								</li>
 								<li><img src="./img/lifehacks/scale_1200 (1).jpeg" alt="" />
 								<p> Для перекуса подойдет вода, сухое печенье. </p>
-								</li>
+								</li> -->
 							</ul>
 							<div class="arrows-perspective">
 								<div class="carouselPrev">
@@ -65,6 +69,9 @@ $title_page = 'Лайфхаки';
 						</div> <!--flip-back-->
 					</div>	 <!--product-back-->
 				</div>	<!--product-card-->	
+				<?php}?>
+			
+			
 			</div><!--make-3D-space-->
 		</div> <!--carusel_item-->
 		<div class="carusel_item">
