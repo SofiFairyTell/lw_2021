@@ -21,10 +21,11 @@ function clearSession()
     }
 }
 
-function getSliderIMG()
+//Функция для поиска изображений и информации к ним для публикации на сайте
+function getSliderIMG($slide)
 {
     $mysql = connect();
-    $result = $mysql->query("select * from img_store where img_name like 'plan'");
+    $result = $mysql->query("select * from img_store where img_slide like '$slide'");
     $mysql->close();
     return $result;
 }

@@ -8,14 +8,14 @@ $title_page = 'Лайфхаки';
 	<div class="photo">
 		<div class="carusel_item">
 			<div class ="make-3D-space">
-			<?php
-				$result = getSliderIMG();
-				while($row = mysqli_fetch_assoc($result)){ 
-				?>
 				<div class ="product-card" id = "prd_1">
 					<div  class ="product-front" >
 						<div class="shadow"></div> <!--shadow-->
-						<img src="<?=$row['img_path']?>" alt="" />
+				<?php			
+				$result = getSliderIMG("prd1");
+				$row = mysqli_fetch_assoc($result);		
+				?>	
+						<img src="<?=$row['img_path']?>" alt="<?=$row['img_name']?>"/>
 						<div class="image_overlay"></div> <!--image_overlay-->
 						<div class="view_details">Узнать больше</div>
 						<div class="stats">        	
@@ -24,15 +24,7 @@ $title_page = 'Лайфхаки';
 								<span class="product_name">Собираем вещи</span>    
 								<p>Что взять с собой?</p>   		
 								<div class="product-options">
-									<strong>Сняряжение</strong>
-									<span>
-										<ul>
-											<li> Документы </li>
-											<li> Деньги </li>
-											<li> Еда </li>
-											<li> Аптечка </li>
-										</ul>
-									</span>		
+								<?= $row['img_paragraph']?>
 								</div> <!--product-options-->
 							</div><!--stats-container-->
 						</div> <!--stats-->
@@ -41,18 +33,14 @@ $title_page = 'Лайфхаки';
 						<div class="shadow"></div>
 						<div class ="carousel">
 							<ul>
+							<?php
+							while($row = mysqli_fetch_assoc($result))
+							{?>
 								<li><img src="<?=$row['img_path']?>" alt=<?=$row['img_name']?> />
 									<p><?= $row['img_paragraph']?></p>
-									<!-- <p> Например: обезболиваюшее, спирт и йод.</p> -->
 								</li>
-								<!-- <li><img src="./img/lifehacks/document.jpg" alt="document"/>
-								<p>	Среди документов всегда паспорт и билеты</p>
-								</li>
-								<li><img src="./img/lifehacks/food.jpeg" alt="" />
-								<p> Для перекуса подойдет вода, сухое печенье. </p>
-								</li> -->
-							</ul>
-				<?php } ?>							
+							<?php } ?>
+							</ul>					
 							<div class="arrows-perspective">
 								<div class="carouselPrev">
 									<div class="y"></div>
@@ -70,10 +58,6 @@ $title_page = 'Лайфхаки';
 						</div> <!--flip-back-->
 					</div>	 <!--product-back-->
 				</div>	<!--product-card-->	
-				
-
-			
-			
 			</div><!--make-3D-space-->
 		</div> <!--carusel_item-->
 		<div class="carusel_item">
@@ -81,7 +65,11 @@ $title_page = 'Лайфхаки';
 				<div class ="product-card" id = "prd_2">
 					<div  class ="product-front">
 						<div class="shadow"></div> <!--shadow-->
-						<img src="./img/lifehacks/map.jpg" alt="map" />
+				<?php			
+				$result = getSliderIMG("prd2");
+				$row = mysqli_fetch_assoc($result);	
+				?>							
+						<img src="<?=$row['img_path']?>" alt="<?=$row['img_name']?>"/>					
 						<div class="image_overlay"></div> <!--image_overlay-->
 						<div class="view_details">Узнать больше</div> <!--view_details-->
 						<div class="stats">        	
@@ -89,17 +77,8 @@ $title_page = 'Лайфхаки';
 								<span class="product_price">2</span>
 								<span class="product_name">Строим маршрут</span>    
 								<p>А куда мы едем?</p>   		
-								<div class="product-options">
-									<strong>Понадобиться следующий набор:</strong>
-									<span>
-										<ul>
-											<li> Интернет </li>
-											<li> Карта </li>
-											<li> Атлас автодорог </li>
-											<li> Блокнот </li>
-											<li> Знающий дорогу </li>
-										</ul>
-									</span>		
+								<div class="product-options">	
+								<?= $row['img_paragraph']?>						
 								</div> <!--product-options-->
 							</div><!--stats-container-->
 						</div> <!--stats-->
@@ -108,14 +87,13 @@ $title_page = 'Лайфхаки';
 						<div class="shadow"></div>
 						<div class ="carousel">
 							<ul>
-								<li><img src="./img/lifehacks/map.jpg" alt="map" /></li>
-								<li><img src="./img/lifehacks/roadmap.jpg" alt="roadmap" /></li>
-								<li><img src="./img/lifehacks/friend.jpeg" alt="friend" />
-								<p>Верный друг это всегда очень важно,<br>
-									особенно если собрался в дальную дорогу</p>
-								<p><strong>ВАЖНО!</strong><br>Хотя бы один должен знать куда Вы идёте</p>
-								
-								</li>
+								<?php
+								while($row = mysqli_fetch_assoc($result))
+								{?>
+									<li><img src="<?=$row['img_path']?>" alt="<?=$row['img_name']?>"/>
+										<p><?= $row['img_paragraph']?></p>
+									</li>
+								<?php } ?>
 							</ul>
 							<div class="arrows-perspective">
 								<div class="carouselPrev">
