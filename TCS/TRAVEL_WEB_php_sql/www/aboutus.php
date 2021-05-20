@@ -14,33 +14,23 @@ $title_page = 'О нас';
 	<input type="radio" name="point" id="slide5">
 	<div class="slider">
 	<?php			
-				$result = getSliderIMG("sld");
-				$row = mysqli_fetch_assoc($result);		
+	$result = getSliderIMG("sld");
+	while($row = mysqli_fetch_assoc($result))
+	{
+		$imgn = $row['img_name'];
 	?>	
-		<div class="slides slide1">
+		<div class="slides <?= $imgn?>">
 			<div class="photo_txt">
-
-				<!-- Путешествие это всегда приятное дело, если есть компания. 
-				<br>Мы команда исследователей,<br>фотографов <br>и просто хороших людей.  -->
 				<?= $row['img_paragraph']?>
 			</div>
 		</div>
-		<div class="slides slide2">
-
-		</div>
-		<div class="slides slide3">
-			<div class="photo_txt">
-				Наше кредо: 
-				<br>Видеть необычное в обычном. 
-			</div>
-		</div>
-
-		<?php
+		<?
 			$path2 = $row['img_path'];
-			$path = "../img/photo2.jpg";
-			echo "<script>	$('.slide1').css('background-image','url($path2)');	</script>";
+			echo "<script>	$('.$imgn').css('background-image','url($path2)');	</script>";
 		?>
-	</div>	<!--slider-->
+	<?php } ?>
+
+</div>	<!--slider-->
 	<div class="controls">
 		<label for="slide1"></label>
 		<label for="slide2"></label>
