@@ -12,6 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
         ?>
     </title>
 	    <link rel="stylesheet" type="text/css" href="css/travelstyle.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body >
 <div class="preloader">
