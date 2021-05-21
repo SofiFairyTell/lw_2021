@@ -49,17 +49,17 @@ require("header.php");
 													        </tr>
 												        </thead> <!--thead-->
 												        <tbody>
-												        <tr>
-												            <td>Sofi Fairy Tell</td>
-												            <td>+99999999</td>
-												            <td>+998999</td>
-												            <td>fairytellsblog@gmail.com</td>
-												        <tr>
-												            <td>Digital Assintem</td>
-												            <td>+9999909</td>
-												            <td>+99909</td>
-												             <td>Digital@gmail.com</td>
-												        </tr>
+														<?php			
+															$result = getContactINFO();
+															while($row = mysqli_fetch_assoc($result))
+															{?>
+																<tr>
+																	<td> <?=$row['contact_name']?></td>
+																	<td> <?=$row['contact_phone']?></td>
+																	<td> <?=$row['contact_phonework']?></td>
+																	<td> <?=$row['contact_mail']?></td>
+																<tr>
+																<?php } ?>
 												        </tbody> <!--tbody-->
 												    </table><!--fl-table-->
 												</div> <!--table-wrapper-->
@@ -75,30 +75,6 @@ require("header.php");
     </section><!--section-->	
 
 	<button class="open-button" onclick="openForm()">Отправить сообщение</button>
-
-	<!-- <div class="form-popup" id="myForm">
-	  <form action="../action_page.php" class="form-container">
-		<h1>Связаться</h1>
-	
-		<label for="email"><b>Ваше имя</b></label>
-
-		<input type="text" placeholder="Ваша имя" id="name" >
-
-		<label for="email"><b>Почта</b></label>
-
-		<input type="text" placeholder="Ваша почта" id="email" >
-	
-		<label for="psw"><b>Сообщение</b></label>
-		<textarea class="input2" placeholder="Ваше сообщение" id="msg" oninput="getCount()" ></textarea>
-
-		<div class="under">
-			<p class="counter"><span id="count"></span> /10 знаков</p>
-		</div>
-
-		<button type="submit" class="btn" onclick="">Отправить</button>
-		<button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
-	  </form>
-	</div> -->
 
 <?php 
 require('form.php');

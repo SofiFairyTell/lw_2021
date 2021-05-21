@@ -29,3 +29,11 @@ function getSliderIMG($slide)
     $mysql->close();
     return $result;
 }
+
+function getContactINFO()
+{
+    $mysql = connect();
+    $result = $mysql->query("select * from contact_store");
+    $mysql->close();
+    return $result;
+}
