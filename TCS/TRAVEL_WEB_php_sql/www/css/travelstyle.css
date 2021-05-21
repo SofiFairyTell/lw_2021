@@ -937,6 +937,10 @@ header
 .form-container .cancel {
   background-color: rgba(221, 109, 90, 0.829);
 }
+.form-container .registration {
+	background-color: rgba(201, 231, 64, 0.829);
+  }
+  
 
 /* Добавьте некоторые эффекты наведения на кнопки */
 .form-container .btn:hover, .open-button:hover {

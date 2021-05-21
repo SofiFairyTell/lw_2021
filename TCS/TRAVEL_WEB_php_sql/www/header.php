@@ -43,7 +43,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 					<a class="nav_link" href="travelblog.php">Повод</a>
 					<a class="nav_link" href="lifehack.php">Лайфхаки</a>
 					<a class="nav_link" href="aboutus.php">	О нас</a>
-					<a class="nav_link" href="contacts.php">Контакты </a>
+					<a class="nav_link" href="contacts.php">Контакты</a>
+					<a class="nav_link" href="authorize.php">Войти</a>
 				</nav> <!--nav-->
 			</div><!--header_inner-->
 		</div><!--contain-->
