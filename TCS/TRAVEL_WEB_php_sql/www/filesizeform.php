@@ -20,17 +20,18 @@ $title_page = 'Подсчет размера файла';
     
     <form enctype="multipart/form-data" class="form-contain" action="filesizeform.php" method="post">
 			<span> <h1> Фотография с Watermark </h1></span>
-			<label for="uploadedFile" class="btn">
-			<input  type="file" id="uploadedFile"/> 
-			</label>
-			<span></span>
+					<input class="btn" type="file" id="uploadedFile" size="50"/> 
 			<hr>
 			<input type="submit" name = "uploadBtn" class="btn" value="Загрузить" />
             <input type="submit" name = "dowlandBtn" class="btn" value="Скачать" />
-		<?php 
-		    require('./scriptphp/upload.php');	
-		?>
-		
+			<span></span>
+			<hr>
+			<button class="btn">
+			<?php 
+			require('./scriptphp/upload.php');	
+			?>
+			</button>
+
 		</form>
 
 </div>
