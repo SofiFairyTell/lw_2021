@@ -44,7 +44,13 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 					<a class="nav_link" href="lifehack.php">Лайфхаки</a>
 					<a class="nav_link" href="aboutus.php">	О нас</a>
 					<a class="nav_link" href="contacts.php">Контакты</a>
-					<a class="nav_link" href="authorize.php">Войти</a>
+					<div class="dropdown">     					
+						<a class="nav_link" href="authorize.php">Войти</a>	
+						<div class="dropdown-content">
+							<a href="scriptphp/logout.php">Выход из профиля</a>
+						</div> <!--dropdown-content-->
+					</div>	<!--dropdown-->	
+					
 				</nav> <!--nav-->
 			</div><!--header_inner-->
 		</div><!--contain-->
