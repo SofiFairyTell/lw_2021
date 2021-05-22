@@ -938,7 +938,7 @@ header
 }
 .form-contain
 {
-		max-width: 300px;
+		max-width: 500px;
 		padding: 10px;
 		background-color: white;
 		margin-left: auto;
@@ -970,7 +970,7 @@ header
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 99%;
   margin-bottom:10px;
   opacity: 0.8;
 }

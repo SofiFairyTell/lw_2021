@@ -59,3 +59,14 @@ function addUser($login = null, $password =null, $email=null,$role=null)
     $mysql->close();
     return $result;
 }
+
+function editUser($id = null, $name = null, $surname = null, $phone = null, $email = null, $password = null, $avatar = null, $role = null)
+{
+    $mysql = connect();
+    $result = $mysql->query("
+    REPLACE INTO `users` (`Id`,`surname`, `name`, `phone`, `email`, `password`, `avatar`, `role`)
+    VALUES ('$id','$surname', '$name', '$phone', '$email', '$password', '$avatar', '$role')
+    ");
+    $mysql->close();
+    return $result;
+}

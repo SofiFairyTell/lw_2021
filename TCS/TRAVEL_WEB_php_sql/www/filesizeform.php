@@ -3,27 +3,38 @@ $title_page = 'Подсчет размера файла';
  require('header.php');
 ?>
 <section class="section_hack">
-<div >
-        <h1>Подсчёт размера файла</h1>
-        <form action="" method="GET">
-            <label for="">Введите путь</label>
+<div class="contain">
+        
+        <form action="" method="GET" class="form-contain">
+            <h1>Подсчёт размера файла</h1>
+			<label for="">Введите путь</label>
             <input type="text" value="<?= $_GET['path'] ?? '' ?>" name="path" placeholder="/от корня...">
-            <input type="submit">
-        </form>
-		<div>
-            <span>Результат: </span>
-            <?= !empty($_GET) ? getRes($_GET['path'])  : '' ?>
-        </div>
-</div>
-    <span> <h1> Фотография с Watermark </h1></span>
-    <form enctype="multipart/form-data" action="filesizeform.php" method="post">
-			Выберите файл: <input name="uploadedFile" type="file" />
-			<input type="submit" name = "uploadBtn" value="Загрузить" />
-            <input type="submit" name = "dowlandBtn" value="Скачать" />
+            <input type="submit" class="btn">
+        	<div>
+				<span>Результат: </span>
+					<?= !empty($_GET) ? getRes($_GET['path'])  : '' ?>
+			</div>
+		
 		</form>
+
+    
+    <form enctype="multipart/form-data" class="form-contain" action="filesizeform.php" method="post">
+			<span> <h1> Фотография с Watermark </h1></span>
+			<label for="uploadedFile" class="btn">
+			<input  type="file" id="uploadedFile"/> 
+			</label>
+			<span></span>
+			<hr>
+			<input type="submit" name = "uploadBtn" class="btn" value="Загрузить" />
+            <input type="submit" name = "dowlandBtn" class="btn" value="Скачать" />
 		<?php 
 		    require('./scriptphp/upload.php');	
 		?>
+		
+		</form>
+
+</div>
+
 </section> <!--section-hack-->
 
 <?php 
