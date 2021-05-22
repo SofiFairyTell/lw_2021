@@ -889,7 +889,38 @@ header
   right: 28px;
   width: 280px;
 }
-
+.form-registration
+{
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+}
+.input_registration
+{
+	margin:10px 0;
+	padding: 10px;
+    border: unset;
+    border-bottom: 2px solid #e3e3e3;
+    outline: none;
+}
+.button_registration
+{
+	padding: 10px;
+    background: #e3e3e3;
+    border: unset;
+    cursor: pointer;
+}
+.msg_registration
+{
+	border: 2px solid #ffa908;
+    border-radius: 3px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+.logout {
+    color: #b7625c;
+}
 /* Всплывающая форма-скрыта по умолчанию */
 .form-popup {
   display: none;
@@ -905,9 +936,17 @@ header
   padding: 10px;
   background-color: white;
 }
-
+.form-contain
+{
+		max-width: 300px;
+		padding: 10px;
+		background-color: white;
+		margin-left: auto;
+		margin-right: auto;
+}
 /* Поля ввода полной ширины */
-.form-container input[type=text], .form-container input[type=password] {
+.form-container input[type=text], .form-container input[type=password], 
+.form-contain input[type=text], .form-contain input[type=password]{
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -916,13 +955,16 @@ header
 }
 
 /* Когда входы получают фокус, сделайте что-нибудь */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+.form-container input[type=text]:focus, .form-container input[type=password]:focus
+.form-contain input[type=text]:focus, .form-contain input[type=password]:focus
+{
   background-color: #ddd;
   outline: none;
 }
 
 /* Установите стиль для кнопки отправить/кнопка */
-.form-container .btn {
+.form-container .btn, 
+	.form-contain .btn{
   background-color: #4CAF50;
   color: white;
   padding: 16px 20px;
@@ -934,16 +976,17 @@ header
 }
 
 /* Добавьте красный цвет фона к кнопке отмена */
-.form-container .cancel {
+.form-container .cancel, .form-contain .cancel{
   background-color: rgba(221, 109, 90, 0.829);
 }
-.form-container .registration {
-	background-color: rgba(201, 231, 64, 0.829);
+.form-container .registration,.form-contain .registration {
+	background-color: rgba(7, 126, 105, 0.829);
   }
   
 
 /* Добавьте некоторые эффекты наведения на кнопки */
-.form-container .btn:hover, .open-button:hover {
+.form-container .btn:hover, .open-button:hover,
+.form-contain .btn:hover {
   opacity: 1;
 }
 
