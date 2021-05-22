@@ -54,7 +54,7 @@ $title_page = 'Войти';
             }
             unset ($_SESSION['message']);
             ?>
-        </p>
+
     </form>    
                     </div>
 </section> <!--section-hack-->

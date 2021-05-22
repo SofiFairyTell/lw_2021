@@ -59,3 +59,13 @@ function addUser($login = null, $password =null, $email=null,$role=null)
     $mysql->close();
     return $result;
 }
+
+function uploadIMG($upload_name,$upload_path,$upload_user)
+{
+    $mysql = connect();
+    $result = $mysql->query(
+        "INSERT INTO `upload_store` (`upload_imgname`,`upload_path`,
+        `upload_user`) values ('$upload_name', '$upload_path', '$upload_user')");
+    $mysql->close();
+    return $result;
+}

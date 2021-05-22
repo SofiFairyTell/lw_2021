@@ -18,7 +18,7 @@
             "user_name" => $user['user_name'],
             "user_role" => $user['user_role']
         ];
-        $_SESSION['message'] = 'Пользователь найден';
+        $_SESSION['message'] = 'Добро пожаловать,'. $_SESSION['user_store']['user_name'];
        echo "<script type='text/javascript'>window.location.href = '../filesizeform.php';</script>";
     }
     else

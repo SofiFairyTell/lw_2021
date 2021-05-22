@@ -1,4 +1,7 @@
 <?php
+session_start();
+$user_name = $_SESSION['user_store']['user_name'];
+$user_role =$_SESSION['user_store']['user_role'];
 $title_page = 'Подсчет размера файла';
  require('header.php');
 ?>
@@ -20,7 +23,15 @@ $title_page = 'Подсчет размера файла';
     
     <form enctype="multipart/form-data" class="form-contain" action="filesizeform.php" method="post">
 			<span> <h1> Фотография с Watermark </h1></span>
-					<input class="btn" type="file" id="uploadedFile" size="50"/> 
+			<?php
+            if($_SESSION['message'])
+            {
+                echo '<p class = "msg_registration">'.$_SESSION['message'] . '</p>';
+            }
+            unset ($_SESSION['message']);
+            ?>
+			
+			<input class="btn" type="file" name="uploadedFile" size="50"/> 
 			<hr>
 			<input type="submit" name = "uploadBtn" class="btn" value="Загрузить" />
             <input type="submit" name = "dowlandBtn" class="btn" value="Скачать" />
