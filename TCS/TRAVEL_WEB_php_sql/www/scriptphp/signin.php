@@ -4,11 +4,11 @@
     $connect = connect();
     $login_post = $_POST['login'];
     $email_post = $_POST['email'];
-    $password_post = $_POST['password'];
+    $password_post = md5($_POST['password']);
 
     //$check_user = checkUser($login_post,$password_post);
     $check_user = checkUser($login_post, $password_post);
-    var_dump($check_user);
+
     if(mysqli_num_rows($check_user) > 0)
     {
         $user = mysqli_fetch_assoc($check_user);

@@ -43,8 +43,19 @@ function checkUser($login, $password)
     $mysql = connect();
     $result = $mysql->query(
         "select * from `user_store`
-        WHERE `user_name` = '$login' AND `user_password` = '$password'"
+        where `user_name` = '$login' and `user_password` = '$password'"
     );
+    $mysql->close();
+    return $result;
+}
+
+function addUser($login = null, $password =null, $email=null,$role=null)
+{
+    $mysql = connect();
+
+    $result = $mysql->query(
+        "INSERT INTO `user_store` (`user_name`,`user_email`,
+        `user_password`,`user_role`) values ('$login', '$email', '$password', '$role')");
     $mysql->close();
     return $result;
 }
