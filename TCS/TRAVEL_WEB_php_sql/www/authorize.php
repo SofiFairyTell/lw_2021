@@ -1,11 +1,13 @@
 <?php
+session_start();
+
 $title_page = 'О нас';
  require('header.php');
 ?>
 
 <section class="section_hack">
     <div class="contain">
-<form action = "sriptphp/signup.php"  class="form-contain" method = 'post'>
+<form action = "scriptphp/signin.php"  class="form-contain" method = 'post'>
 		<h1>Связаться</h1>
         <label for="login"><b>Ваше имя</b></label>
         <input  type="text" name="login" value="<?= isset($_POST['login']) ? $_POST['login']: ""; ?>">
@@ -47,7 +49,16 @@ $title_page = 'О нас';
 
 		<input  type="submit" name = "btn_ok" class="btn" value = "Войти">
 		<button type="button" name = "btn_regist" class="btn registration" onclick="closeForm()">Регистрация</button>
-	  </form>    
+        <p>
+            <?php
+            if($_SESSION['message'])
+            {
+                echo '<p class = "msg_registration">'.$_SESSION['message'] . '</p>';
+            }
+            unset ($_SESSION['message']);
+            ?>
+        </p>
+    </form>    
                     </div>
 </section> <!--section-hack-->
 

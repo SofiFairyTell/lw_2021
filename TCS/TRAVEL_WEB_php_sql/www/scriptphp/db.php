@@ -37,3 +37,14 @@ function getContactINFO()
     $mysql->close();
     return $result;
 }
+
+function checkUser($login, $password)
+{
+    $mysql = connect();
+    $result = $mysql->query(
+        "select * from `user_store`
+        WHERE `user_name` = '$login' AND `user_password` = '$password'"
+    );
+    $mysql->close();
+    return $result;
+}
