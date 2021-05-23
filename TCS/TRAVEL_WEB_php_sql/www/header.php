@@ -27,9 +27,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 
 			<div class="header_inner">
 
-				<a class="logoref" href="travelblog.php"><img src="../img/logo.jpg" class="logo"> </a>
+				<a class="logoref" href="../travelblog.php"><img src="../img/logo.jpg" class="logo"> </a>
 
-				<div class="header_logo"> <a class="ref" href="travelblog.php">TRAVEL NOTES</a></div>	
+				<div class="header_logo"> <a class="ref" href="../travelblog.php">TRAVEL NOTES</a></div>	
 				
 				<nav class="nav">
 					<div class="dropdown">     					
@@ -46,7 +46,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 					<a class="nav_link" href="../aboutus.php">	О нас</a>
 					<a class="nav_link" href="../contacts.php">Контакты</a>
 					<div class="dropdown">     					
-						<a class="nav_link" href="authorize.php">Войти</a>					
+						<a class="nav_link" href="../authorize.php">Войти</a>					
 							<?php 
 							if($_SESSION['user_store']['user_name'] != "")
 							{
@@ -54,19 +54,19 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 								{
 									echo 
 										"<div class='dropdown-content'>
-												<a href='filesizeform.php'>Работа с контентом</a>
-												<a href='adminpanel/admin.php'>Администратор</a>
-												<a href='adminpanel/manageuser.php'>Управление пользователями</a>
-												<a href='adminpanel/managecontent.php'>Управление контентом</a>
-												<a href='scriptphp/logout.php'>Выход из профиля</a>
+												<a href='../filesizeform.php'>Работа с контентом</a>
+												<a href='../adminpanel/admin.php'>Администратор</a>
+												<a href='../adminpanel/admin.php?users=ok'>Управление пользователями</a>
+												<a href='../adminpanel/admin.php?content=ok'>Управление контентом</a>
+												<a href='../scriptphp/logout.php'>Выход из профиля</a>
 										</div> <!--dropdown-content-->";
 								}
 								else
 								{
 									echo 
 										"<div class='dropdown-content'>
-										<a href='filesizeform.php'>Работа с контентом</a>
-										<a href='scriptphp/logout.php'>Выход из профиля</a>
+										<a href='../filesizeform.php'>Работа с контентом</a>
+										<a href='../scriptphp/logout.php'>Выход из профиля</a>
 										</div> <!--dropdown-content-->";
 								}
 

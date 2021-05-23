@@ -1,4 +1,4 @@
-<script src="./js/travelblock.js"></script>
+<script src="../js/travelblock.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
 	document.body.classList.add('loaded_hiding');

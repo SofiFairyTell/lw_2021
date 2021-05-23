@@ -38,6 +38,27 @@ function getAllIMG()
     return $result;
 }
 
+function getAllUsers()
+{
+    $mysql = connect();
+    $result = $mysql->query("
+        select *
+        from user_store");
+    $mysql->close();
+    return $result;
+}
+
+function getUser($user_id = null)
+{
+    $mysql = connect();
+    $result = $mysql->query("
+        select *
+        from user_store
+        where id='$user_id'");
+    $mysql->close();
+    return $result;
+}
+
 function getContactINFO()
 {
     $mysql = connect();
@@ -53,6 +74,16 @@ function checkUser($login, $password)
         "select * from `user_store`
         where `user_name` = '$login' and `user_password` = '$password'"
     );
+    $mysql->close();
+    return $result;
+}
+
+function editUser($id = null, $name = null, $email = null,$role = null, $password = null)
+{
+    $mysql = connect();
+    $result = $mysql->query("
+    REPLACE INTO `user_store` (`user_id`,`user_name`, `user_email`, `user_password`, `user_role`)
+    VALUES ('$id','$name', '$email', '$password','$role')");
     $mysql->close();
     return $result;
 }
@@ -77,3 +108,4 @@ function uploadIMG($upload_name,$upload_path,$upload_user)
     $mysql->close();
     return $result;
 }
+
