@@ -30,6 +30,14 @@ function getSliderIMG($slide)
     return $result;
 }
 
+function getAllIMG()
+{
+    $mysql = connect();
+    $result = $mysql->query("select * from img_store ");
+    $mysql->close();
+    return $result;
+}
+
 function getContactINFO()
 {
     $mysql = connect();

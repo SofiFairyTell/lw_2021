@@ -6,7 +6,6 @@
     $email_post = $_POST['email'];
     $password_post = md5($_POST['password']);
 
-    //$check_user = checkUser($login_post,$password_post);
     $check_user = checkUser($login_post, $password_post);
 
     if(mysqli_num_rows($check_user) > 0)
@@ -21,7 +20,7 @@
         $_SESSION['message'] = 'Добро пожаловать,'. $_SESSION['user_store']['user_name'];
         if($_SESSION['user_store']['user_role']==="admin")
         {
-            echo "<script type='text/javascript'>window.location.href = '../admin.php';</script>";
+            echo "<script type='text/javascript'>window.location.href = '../adminpanel/admin.php';</script>";
         }
         else
         {

@@ -55,6 +55,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 									echo 
 										"<div class='dropdown-content'>
 												<a href='filesizeform.php'>Работа с контентом</a>
+												<a href='adminpanel/admin.php'>Администратор</a>
 												<a href='adminpanel/manageuser.php'>Управление пользователями</a>
 												<a href='adminpanel/managecontent.php'>Управление контентом</a>
 												<a href='scriptphp/logout.php'>Выход из профиля</a>
