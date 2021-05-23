@@ -1,6 +1,6 @@
 <?php
-$title_page = 'Контакты';
-require("header.php");
+$title_page = $_SESSION['pages_store'][3]['pages_name'];
+require("./header.php");
 ?>
 	<section class="section" >
 		<div class="contain">

@@ -2,6 +2,7 @@
 session_start();
 $user_name = $_SESSION['user_store']['user_name'];
 $user_role =$_SESSION['user_store']['user_role'];
+
 $title_page = 'Подсчет размера файла';
  require('header.php');
 ?>

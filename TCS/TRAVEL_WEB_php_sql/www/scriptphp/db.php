@@ -156,3 +156,31 @@ function deleteUpload($upload_id)
     $mysql->close();
     return $result;
 }
+
+function getPages()
+{
+    $mysql = connect();
+    $result = $mysql->query("select * from pages_store");
+    $mysql->close();
+    return $result;
+}
+function getPage($pages_id = null)
+{
+    $mysql = connect();
+    $result = $mysql->query("
+        select *
+        from pages_store
+        where pages_id='$pages_id'");
+    $mysql->close();
+    return $result;
+}
+
+function editPages($id = null, $pagename = null)
+{
+	$mysql = connect();
+    $result = $mysql->query("
+    REPLACE INTO `pages_store` (`pages_id`,`pages_name`)
+    VALUES ('$id','$pagename')");
+    $mysql->close();
+    return $result;
+}

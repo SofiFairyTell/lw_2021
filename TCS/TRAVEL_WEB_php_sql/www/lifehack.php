@@ -1,5 +1,5 @@
 <?php
-$title_page = 'Лайфхаки';
+$title_page = $_SESSION['pages_store'][1]['pages_name'];
  require('header.php');
 ?>
 	

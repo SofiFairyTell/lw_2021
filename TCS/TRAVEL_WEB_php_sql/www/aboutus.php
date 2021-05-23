@@ -1,7 +1,7 @@
-<!-- Обращение к файлу с шапкой -->
 <?php
-$title_page = 'О нас';
- require('header.php');
+session_start();
+$title_page = $_SESSION['pages_store'][2]['pages_name'];
+ require('./header.php');
 ?>
 
 <section class="section"> 
@@ -40,6 +40,6 @@ $title_page = 'О нас';
 </section>
 
 <?php
- require('script.php');
- require('footer.php');
+ require('./script.php');
+ require('./footer.php');
  ?>

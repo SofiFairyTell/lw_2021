@@ -1,8 +1,7 @@
 <?php
 session_start();
-
-$title_page = 'Авторизация';
- require('header.php');
+$title_page = $_SESSION['pages_store'][4]['pages_name'];
+require('./header.php');
 ?>
 
 <section class="section_hack">

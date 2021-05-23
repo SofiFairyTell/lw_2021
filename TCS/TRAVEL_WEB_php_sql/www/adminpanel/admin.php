@@ -5,7 +5,7 @@ if (empty($_SESSION['user_store']))
     echo "<script type='text/javascript'>window.location.href = '../travelblog.php';</script>";
     exit();
 }
-$title_page = 'Управление сайтом';
+$title_page = $_SESSION['pages_store'][6]['pages_name'];
 require('../header.php');
 ?>
 
@@ -23,6 +23,7 @@ require('../header.php');
     <a class="nav_link" href="./admin.php?upload=ok">Управление загрузками</a>
     <a class="nav_link" href="./admin.php?content=ok">Управление контентом</a>
 	<a class="nav_link" href="./admin.php?users=ok">Управление пользователями</a>
+    <a class="nav_link" href="./admin.php?pages=ok">Управление страницами</a>
     </div><!--contain -->
 <?php
     switch ($_GET) {
@@ -128,6 +129,36 @@ require('../header.php');
                 </div><!--inner-content-->
                 <?php
                 break;          
+        case ($_GET['pages'] === 'ok'):
+            ?>               
+                <div class="inner-content">
+                    <h3>Страницы сайта</h3>
+                    <div class="table-wrapper">
+                        <table class="fl-table">
+                            <thead>
+                                <tr>
+                                    <th>Номер страницы</th>
+                                    <th>Название страницы</th>
+                                </tr>
+                            </thead> <!--thead-->
+                            <tbody>
+                            <?php			
+                                $result = getPages();
+                                while($row = mysqli_fetch_assoc($result))
+                                {?>
+                                    <tr>
+                                        <td> <?=$row['pages_id']?></td>
+                                        <td> <?=$row['pages_name']?></td>
+                                        <td> <a href="./editPage.php?id=<?= $row['pages_id'] ?>">Редактировать</a></td>
+                                        <td> <a href="./delete.php?id=<?= $row['pages_id']?>&case=user">Удалить</a></td>
+                                    <tr>
+                                    <?php } ?>
+                            </tbody> <!--tbody-->
+                        </table><!--fl-table-->
+                    </div> <!--table-wrapper-->
+                </div><!--inner-content-->
+                <?php
+                break;
         default:
             ?>     <div class="inner-content"></div>
         <?php

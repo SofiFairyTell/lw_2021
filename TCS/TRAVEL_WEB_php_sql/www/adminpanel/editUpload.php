@@ -5,7 +5,7 @@ if (empty($_SESSION['user_store']))
     echo "<script type='text/javascript'>window.location.href = '../travelblog.php';</script>";
     exit();
 }
-$title_page = 'Управление сайтом';
+$title_page = $_SESSION['pages_store'][8]['pages_name'];
 require('../header.php');
 
     $upload = getUpload($_GET['id']);
@@ -20,7 +20,7 @@ require('../header.php');
 
 <section class="section_hack">
     <div class="contain">
-<form action = "./changeUpload.php"  class="form-contain" method = 'post'>
+<form action = "./change.php?case=upload"  class="form-contain" method = 'post'>
 		<h1>Изменение данных загруженном изображении</h1>
         <label for="uploadname"><b>Название изображения</b></label>
         <input  type="text" name="uploadname" value="<?= !empty( $_SESSION['upload_imgname']) ?  $_SESSION['upload_imgname'] : '' ?>">    

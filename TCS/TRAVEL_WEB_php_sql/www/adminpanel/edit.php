@@ -5,7 +5,7 @@ if (empty($_SESSION['user_store']))
     echo "<script type='text/javascript'>window.location.href = '../travelblog.php';</script>";
     exit();
 }
-$title_page = 'Управление сайтом';
+$title_page = $_SESSION['pages_store'][8]['pages_name'];
 require('../header.php');
 
     $user = getUser($_GET['id']);

@@ -4,12 +4,19 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/validation.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
+
+if (empty($_SESSION['pages_store'])) {
+    $pages = getPages();
+    while ($row = mysqli_fetch_assoc($pages)) {
+        $_SESSION['pages_store'][] = $row;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <title>
-   <?= $title_page
+   <?= $title_page && strlen($title_page) !== 0 ? $title_page : $_SESSION['pages_store'][0]['pages_name']
         ?>
     </title>
 	    <link rel="stylesheet" type="text/css" href="../css/travelstyle.css">
@@ -58,6 +65,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 												<a href='../adminpanel/admin.php'>Администратор</a>
 												<a href='../adminpanel/admin.php?users=ok'>Управление пользователями</a>
 												<a href='../adminpanel/admin.php?content=ok'>Управление контентом</a>
+												<a href='../adminpanel/admin.php?pages=ok'>Управление страницами</a>
 												<a href='../scriptphp/logout.php'>Выход из профиля</a>
 										</div> <!--dropdown-content-->";
 								}
