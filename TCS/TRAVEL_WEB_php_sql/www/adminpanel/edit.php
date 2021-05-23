@@ -80,7 +80,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
                     <?php endif; ?>
                 <?php }?>
 
-        <label for="Role"><b>Пароль</b></label>
+        <label for="Role"><b>Роль</b></label>
 		<input type="text" placeholder="Ваша роль" name="role" value="<?=!empty($_SESSION['user_role']) ? $_SESSION['user_role'] : '' ?>">
 
 		<label for="Password"><b>Пароль</b></label>
@@ -109,5 +109,5 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 
 <?php
 require('../script.php');
-require('../foot.php');
+require('../footer.php');
 ?>

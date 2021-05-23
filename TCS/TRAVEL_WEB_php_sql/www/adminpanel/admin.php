@@ -46,10 +46,10 @@ require('../header.php');
                             {?>
                                 <tr>
                                     <td> <?=$row['upload_imgname']?></td>
-                                    <td> <?=$row['upload_path']?></td>
+                                    <td> <a href="../scriptphp/dowland.php?path=<?=$row['upload_path']?>">Скачать</a></td>
                                     <td> <?=$row['upload_user']?></td>
-                                    <td> <a href="./editUpload.php?id=<?= $row['upload_id'] ?>">Редактировать</a></td>
-                                    <td> <a href="./delete.php?id=<?= $row['upload_id'] ?>">Удалить</a></td>
+                                    <td> <a href="./editUpload.php?id=<?= $row['upload_id']?>">Редактировать</a></td>
+                                    <td> <a href="./delete.php?id=<?= $row['upload_id']?>&case=upload">Удалить</a></td>
                                 <tr>
                                 <?php } ?>
                         </tbody> <!--tbody-->
@@ -119,7 +119,7 @@ require('../header.php');
                                         <td> <?=$row['user_password']?></td>
                                         <td> <?=$row['user_role']?></td>
                                         <td> <a href="./edit.php?id=<?= $row['user_id'] ?>">Редактировать</a></td>
-                                        <td> <a href="./delete.php?id=<?= $row['user_id'] ?>">Удалить</a></td>
+                                        <td> <a href="./delete.php?id=<?= $row['user_id']?>&case=user">Удалить</a></td>
                                     <tr>
                                     <?php } ?>
                             </tbody> <!--tbody-->

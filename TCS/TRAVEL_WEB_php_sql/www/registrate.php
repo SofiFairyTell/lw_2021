@@ -55,6 +55,6 @@ $title_page = 'Регистрация';
 </section> <!--section-hack-->
 
 <?php
-require('script.php');  
-require('footer.php');
+require('../script.php');  
+require('../footer.php');
 ?>

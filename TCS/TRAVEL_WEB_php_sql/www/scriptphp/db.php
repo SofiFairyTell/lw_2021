@@ -61,7 +61,7 @@ function getUser($user_id = null)
     $result = $mysql->query("
         select *
         from user_store
-        where id='$user_id'");
+        where user_id='$user_id'");
     $mysql->close();
     return $result;
 }
@@ -133,6 +133,26 @@ function getUpload($upload_id = null)
         select *
         from upload_store
         where upload_id='$upload_id'");
+    $mysql->close();
+    return $result;
+}
+
+function deleteUser($user_id)
+{
+    $mysql = connect();
+    $result = $mysql->query("
+        delete from user_store
+        where user_id = '$user_id'");
+    $mysql->close();
+    return $result;
+}
+
+function deleteUpload($upload_id)
+{
+    $mysql = connect();
+    $result = $mysql->query("
+        delete from upload_store
+        where upload_id = '$upload_id'");
     $mysql->close();
     return $result;
 }
