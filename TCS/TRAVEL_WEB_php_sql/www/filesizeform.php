@@ -3,7 +3,7 @@ session_start();
 $user_name = $_SESSION['user_store']['user_name'];
 $user_role =$_SESSION['user_store']['user_role'];
 
-$title_page = 'Подсчет размера файла';
+$title_page = $_SESSION['pages_store'][8]['pages_name'];	
  require('header.php');
 ?>
 <section class="section_hack">
