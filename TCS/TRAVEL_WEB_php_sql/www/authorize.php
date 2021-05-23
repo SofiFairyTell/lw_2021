@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$title_page = 'Войти';
+$title_page = 'Авторизация';
  require('header.php');
 ?>
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/validation.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/filesize.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/watermark.php';
@@ -45,10 +46,32 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 					<a class="nav_link" href="aboutus.php">	О нас</a>
 					<a class="nav_link" href="contacts.php">Контакты</a>
 					<div class="dropdown">     					
-						<a class="nav_link" href="authorize.php">Войти</a>	
-						<div class="dropdown-content">
-							<a href="scriptphp/logout.php">Выход из профиля</a>
-						</div> <!--dropdown-content-->
+						<a class="nav_link" href="authorize.php">Войти</a>					
+							<?php 
+							if($_SESSION['user_store']['user_name'] != "")
+							{
+								if($_SESSION['user_store']['user_role'] === "admin")
+								{
+									echo 
+										"<div class='dropdown-content'>
+												<a href='filesizeform.php'>Работа с контентом</a>
+												<a href='adminpanel/manageuser.php'>Управление пользователями</a>
+												<a href='adminpanel/managecontent.php'>Управление контентом</a>
+												<a href='scriptphp/logout.php'>Выход из профиля</a>
+										</div> <!--dropdown-content-->";
+								}
+								else
+								{
+									echo 
+										"<div class='dropdown-content'>
+										<a href='filesizeform.php'>Работа с контентом</a>
+										<a href='scriptphp/logout.php'>Выход из профиля</a>
+										</div> <!--dropdown-content-->";
+								}
+
+							}
+						?>				
+												
 					</div>	<!--dropdown-->	
 					
 				</nav> <!--nav-->

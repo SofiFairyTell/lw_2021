@@ -19,7 +19,15 @@
             "user_role" => $user['user_role']
         ];
         $_SESSION['message'] = 'Добро пожаловать,'. $_SESSION['user_store']['user_name'];
-       echo "<script type='text/javascript'>window.location.href = '../filesizeform.php';</script>";
+        if($_SESSION['user_store']['user_role']==="admin")
+        {
+            echo "<script type='text/javascript'>window.location.href = '../admin.php';</script>";
+        }
+        else
+        {
+            echo "<script type='text/javascript'>window.location.href = '../filesizeform.php';</script>";
+        }
+       
     }
     else
     {
