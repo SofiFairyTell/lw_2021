@@ -20,15 +20,14 @@ require('../header.php');
             unset ($_SESSION['message']);
             ?>
     </h1></span>
-    <a class="nav_link" href="adminpanel/managecontent.php?content=ok">Управление контентом</a>
-	<a class="nav_link" href="adminpanel/manageuser.php">Управление пользователями</a>
-    </div><!--contain -->``
-</section> <!-- section_hack -->
+    <a class="nav_link" href="./managecontent.php?content=ok">Управление контентом</a>
+	<a class="nav_link" href="./manageuser.php">Управление пользователями</a>
+    </div><!--contain -->
 <?php
     switch ($_GET) {
         case ($_GET['content'] === 'ok'):
             ?>
-            <a class="add" href="./managecontent.php">Управление контентом</a>
+            <a class="nav_link"  href="./managecontent.php">Управление контентом</a>
             <div class="inner-content">
                 <h3>Изображения на сайте</h3>
                 <div class="table-wrapper">
@@ -66,3 +65,8 @@ require('../header.php');
         <?php
     }
     ?>
+</section> <!-- section_hack -->
+<?php
+require('../script.php');  
+require('../footer.php');
+?>

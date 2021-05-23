@@ -12,7 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
    <?= $title_page
         ?>
     </title>
-	    <link rel="stylesheet" type="text/css" href="css/travelstyle.css">
+	    <link rel="stylesheet" type="text/css" href="../css/travelstyle.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body >
@@ -27,7 +27,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 
 			<div class="header_inner">
 
-				<a class="logoref" href="travelblog.php"><img src="img/logo.jpg" class="logo"> </a>
+				<a class="logoref" href="travelblog.php"><img src="../img/logo.jpg" class="logo"> </a>
 
 				<div class="header_logo"> <a class="ref" href="travelblog.php">TRAVEL NOTES</a></div>	
 				
@@ -41,10 +41,10 @@ include_once $_SERVER['DOCUMENT_ROOT'] . './scriptphp/db.php';
 						</div> <!--dropdown-content-->
 					</div>	<!--dropdown-->	
 					<a class="nav_link" href="https://travel-notes.club/" target="_blank">Гайды</a>
-					<a class="nav_link" href="travelblog.php">Повод</a>
-					<a class="nav_link" href="lifehack.php">Лайфхаки</a>
-					<a class="nav_link" href="aboutus.php">	О нас</a>
-					<a class="nav_link" href="contacts.php">Контакты</a>
+					<a class="nav_link" href="../travelblog.php">Повод</a>
+					<a class="nav_link" href="../lifehack.php">Лайфхаки</a>
+					<a class="nav_link" href="../aboutus.php">	О нас</a>
+					<a class="nav_link" href="../contacts.php">Контакты</a>
 					<div class="dropdown">     					
 						<a class="nav_link" href="authorize.php">Войти</a>					
 							<?php 
