@@ -14,8 +14,15 @@
         $role = 'ordinary';
         addUser($login_post, $password_post, $email_post, $role);
         $_SESSION['message'] = 'Регистрация прошла успешно!';
-
-        echo "<script type='text/javascript'>window.location.href = '../authorize.php';</script>";
+        if( $_SESSION['user_store']['user_role']==="admin")
+        {
+            echo "<script type='text/javascript'>window.location.href = '../adminpanel/admin.php';</script>";
+        }
+        else
+        {
+           echo "<script type='text/javascript'>window.location.href = '../authorize.php';</script>"; 
+        }
+        
     }
     else
     {

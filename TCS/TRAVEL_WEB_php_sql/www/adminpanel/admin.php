@@ -20,11 +20,44 @@ require('../header.php');
             unset ($_SESSION['message']);
             ?>
     </h1></span>
+    <a class="nav_link" href="./admin.php?upload=ok">Управление загрузками</a>
     <a class="nav_link" href="./admin.php?content=ok">Управление контентом</a>
 	<a class="nav_link" href="./admin.php?users=ok">Управление пользователями</a>
     </div><!--contain -->
 <?php
     switch ($_GET) {
+        case ($_GET['upload'] === 'ok'):
+            ?>
+            <div class="inner-content">
+                <h3>Загружено пользователями</h3>
+                <div class="table-wrapper">
+                    <table class="fl-table">
+                        <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Путь</th>
+                                <th>Пользователь</th>
+                            </tr>
+                        </thead> <!--thead-->
+                        <tbody>
+                        <?php			
+                            $result = getAllUpload();
+                            while($row = mysqli_fetch_assoc($result))
+                            {?>
+                                <tr>
+                                    <td> <?=$row['upload_imgname']?></td>
+                                    <td> <?=$row['upload_path']?></td>
+                                    <td> <?=$row['upload_user']?></td>
+                                    <td> <a href="./editUpload.php?id=<?= $row['upload_id'] ?>">Редактировать</a></td>
+                                    <td> <a href="./delete.php?id=<?= $row['upload_id'] ?>">Удалить</a></td>
+                                <tr>
+                                <?php } ?>
+                        </tbody> <!--tbody-->
+                    </table><!--fl-table-->
+                </div> <!--table-wrapper-->
+            </div><!--inner-content-->
+            <?php
+            break;
         case ($_GET['content'] === 'ok'):
             ?>
             <div class="inner-content">
@@ -63,6 +96,7 @@ require('../header.php');
             ?>               
                 <div class="inner-content">
                     <h3>Пользователи сайта</h3>
+                    <a href="../registrate.php">Добавить нового пользователя</a>
                     <div class="table-wrapper">
                         <table class="fl-table">
                             <thead>
@@ -76,6 +110,7 @@ require('../header.php');
                             <tbody>
                             <?php			
                                 $result = getAllUsers();
+
                                 while($row = mysqli_fetch_assoc($result))
                                 {?>
                                     <tr>
