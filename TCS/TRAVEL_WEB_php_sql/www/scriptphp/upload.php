@@ -4,9 +4,10 @@ $message = '';
 
 if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Загрузить')
 {
-  if($user_role != "manager")
+  if($user_role === "ordinary")
   {
       $_SESSION['message'] = 'Нет прав на отправку изображений';
+      echo "<script type='text/javascript'>window.location.href = '../filesizeform.php';</script>";
   }
   else
   {
@@ -65,7 +66,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Загрузить')
     //Добавление изображения в таблицу
     uploadIMG($newFileName, $dowland_path, $user_name);
     echo "<p> Скачать изображение по ссылке:</p> <a href= ./scriptphp/dowland.php?path=$dowland_path> Скачать изображение </a></p>";
-    unset ($_SESSION['message']);
+    //unset ($_SESSION['message']);
     }
  
 }

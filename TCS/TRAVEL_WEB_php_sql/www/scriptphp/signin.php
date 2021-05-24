@@ -6,6 +6,8 @@
     $email_post = $_POST['email'];
     $password_post = md5($_POST['password']);
 
+
+    
     $check_user = checkUser($login_post, $password_post);
 
     if(mysqli_num_rows($check_user) > 0)

@@ -53,10 +53,11 @@ if (empty($_SESSION['pages_store'])) {
 					<a class="nav_link" href="../aboutus.php">	О нас</a>
 					<a class="nav_link" href="../contacts.php">Контакты</a>
 					<div class="dropdown">     					
-						<a class="nav_link" href="../authorize.php">Войти</a>					
+										
 							<?php 
 							if($_SESSION['user_store']['user_name'] != "")
 							{
+								echo "<a class='nav_link' href='../authorize.php'>".$_SESSION['user_store']['user_name']."</a>";
 								if($_SESSION['user_store']['user_role'] === "admin")
 								{
 									echo 
@@ -78,6 +79,10 @@ if (empty($_SESSION['pages_store'])) {
 										</div> <!--dropdown-content-->";
 								}
 
+							}
+							else
+							{
+								echo "<a class='nav_link' href='../authorize.php'>Войти</a>	";
 							}
 						?>				
 												

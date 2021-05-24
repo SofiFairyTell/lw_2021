@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (empty($_SESSION['user_store'])) 
+if (empty($_SESSION['user_store'])|| $_SESSION['user_store']['user_role']!=="admin" ) 
 {
     echo "<script type='text/javascript'>window.location.href = '../travelblog.php';</script>";
     exit();
@@ -35,9 +35,11 @@ require('../header.php');
                     <table class="fl-table">
                         <thead>
                             <tr>
+                                <th>ID </th>
                                 <th>Название</th>
                                 <th>Путь</th>
                                 <th>Пользователь</th>
+                                <th colspan="2"> Действия</th>
                             </tr>
                         </thead> <!--thead-->
                         <tbody>
@@ -46,11 +48,12 @@ require('../header.php');
                             while($row = mysqli_fetch_assoc($result))
                             {?>
                                 <tr>
+                                <td> <?=$row['upload_id']?></td>
                                     <td> <?=$row['upload_imgname']?></td>
                                     <td> <a href="../scriptphp/dowland.php?path=<?=$row['upload_path']?>">Скачать</a></td>
                                     <td> <?=$row['upload_user']?></td>
                                     <td> <a href="./editUpload.php?id=<?= $row['upload_id']?>">Редактировать</a></td>
-                                    <td> <a href="./delete.php?id=<?= $row['upload_id']?>&case=upload">Удалить</a></td>
+                                    <td> <a href="./delete.php?id=<?= $row['upload_id']?>&action=delete_info">Удалить</a></td>
                                 <tr>
                                 <?php } ?>
                         </tbody> <!--tbody-->
@@ -71,6 +74,7 @@ require('../header.php');
                                 <th>Название</th>
                                 <th>Путь</th>
                                 <th>Подпись</th>
+                                <th colspan="2"> Действия</th>
                             </tr>
                         </thead> <!--thead-->
                         <tbody>
@@ -83,8 +87,8 @@ require('../header.php');
                                     <td> <?=$row['img_name']?></td>
                                     <td> <?=$row['img_path']?></td>
                                     <td> <?=$row['img_paragraph']?></td>
-                                    <td> <a href="./edit.php?id=<?= $row['img_id'] ?>">Редактировать</a></td>
-                                    <td> <a href="./delete.php?id=<?= $row['img_id'] ?>">Удалить</a></td>
+                                    <td> <a href="./editSlide.php?id=<?= $row['img_id'] ?>">Редактировать</a></td>
+                                    <td> <a href="./delete.php?id=<?= $row['img_id'] ?>&action=delete_img">Удалить</a></td>
                                 <tr>
                                 <?php } ?>
                         </tbody> <!--tbody-->
@@ -97,7 +101,7 @@ require('../header.php');
             ?>               
                 <div class="inner-content">
                     <h3>Пользователи сайта</h3>
-                    <a href="../registrate.php">Добавить нового пользователя</a>
+                    
                     <div class="table-wrapper">
                         <table class="fl-table">
                             <thead>
@@ -105,7 +109,9 @@ require('../header.php');
                                     <th>Имя пользователя</th>
                                     <th>E-mail</th>
                                     <th>Пароль</th>
-                                    <th>Роль</th>
+                                    <th>Роль</th>                                     
+                                    <th colspan="2"> Действия</th>
+                                    <th><a class="nav_link" href="../registrate.php">Добавить нового пользователя</a></th>
                                 </tr>
                             </thead> <!--thead-->
                             <tbody>
@@ -120,7 +126,7 @@ require('../header.php');
                                         <td> <?=$row['user_password']?></td>
                                         <td> <?=$row['user_role']?></td>
                                         <td> <a href="./edit.php?id=<?= $row['user_id'] ?>">Редактировать</a></td>
-                                        <td> <a href="./delete.php?id=<?= $row['user_id']?>&case=user">Удалить</a></td>
+                                        <td> <a href="./delete.php?id=<?= $row['user_id']?>&action=delete_user">Удалить</a></td>
                                     <tr>
                                     <?php } ?>
                             </tbody> <!--tbody-->
@@ -139,6 +145,7 @@ require('../header.php');
                                 <tr>
                                     <th>Номер страницы</th>
                                     <th>Название страницы</th>
+                                    <th colspan="2"> Действия</th>
                                 </tr>
                             </thead> <!--thead-->
                             <tbody>
@@ -150,7 +157,7 @@ require('../header.php');
                                         <td> <?=$row['pages_id']?></td>
                                         <td> <?=$row['pages_name']?></td>
                                         <td> <a href="./editPage.php?id=<?= $row['pages_id'] ?>">Редактировать</a></td>
-                                        <td> <a href="./delete.php?id=<?= $row['pages_id']?>&case=user">Удалить</a></td>
+                                        <td> <a href="./delete.php?id=<?= $row['pages_id']?>&action=delete_page">Удалить</a></td>
                                     <tr>
                                     <?php } ?>
                             </tbody> <!--tbody-->

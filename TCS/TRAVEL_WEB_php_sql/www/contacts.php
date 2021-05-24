@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title_page = $_SESSION['pages_store'][3]['pages_name'];
 require("./header.php");
 ?>

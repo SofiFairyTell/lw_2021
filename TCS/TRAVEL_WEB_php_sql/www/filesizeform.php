@@ -3,6 +3,11 @@ session_start();
 $user_name = $_SESSION['user_store']['user_name'];
 $user_role =$_SESSION['user_store']['user_role'];
 
+if (empty($_SESSION['user_store']) ) 
+{
+    echo "<script type='text/javascript'>window.location.href = '../travelblog.php';</script>";
+    exit();
+}
 $title_page = $_SESSION['pages_store'][8]['pages_name'];	
  require('header.php');
 ?>

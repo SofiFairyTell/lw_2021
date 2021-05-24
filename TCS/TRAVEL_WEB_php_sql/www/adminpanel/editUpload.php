@@ -20,7 +20,7 @@ require('../header.php');
 
 <section class="section_hack">
     <div class="contain">
-<form action = "./change.php?case=upload"  class="form-contain" method = 'post'>
+<form action = "./change.php?action=upload"  class="form-contain" method = 'post'>
 		<h1>Изменение данных загруженном изображении</h1>
         <label for="uploadname"><b>Название изображения</b></label>
         <input  type="text" name="uploadname" value="<?= !empty( $_SESSION['upload_imgname']) ?  $_SESSION['upload_imgname'] : '' ?>">    

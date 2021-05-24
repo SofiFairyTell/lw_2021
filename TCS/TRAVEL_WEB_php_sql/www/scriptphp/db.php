@@ -30,6 +30,14 @@ function getSliderIMG($slide)
     return $result;
 }
 
+function getSlide($img_id)
+{
+    $mysql = connect();
+    $result = $mysql->query("select * from img_store where img_id='$img_id'");
+    $mysql->close();
+    return $result;
+}
+
 function getAllIMG()
 {
     $mysql = connect();
@@ -126,6 +134,17 @@ function editUpload($id = null, $upload_imgname = null, $upload_path = null,$upl
     return $result;
 }
 
+function editSlide($id = null, $img_slide = null, $paragraph = null)
+{
+    $mysql = connect();
+    $result = $mysql->query("
+    REPLACE INTO `img_store` (`img_id`,`img_slide`, `img_paragraph`)
+    VALUES ('$id','$img_slide', '$paragraph')");
+    $mysql->close();
+    return $result;
+}
+
+
 function getUpload($upload_id = null)
 {
     $mysql = connect();
@@ -146,7 +165,15 @@ function deleteUser($user_id)
     $mysql->close();
     return $result;
 }
-
+function deleteIMG($img_id)
+{
+    $mysql = connect();
+    $result = $mysql->query("
+        delete from img_store
+        where img_id = '$img_id'");
+    $mysql->close();
+    return $result;
+}
 function deleteUpload($upload_id)
 {
     $mysql = connect();

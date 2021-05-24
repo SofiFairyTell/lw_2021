@@ -2,11 +2,12 @@
 session_start();
 $title_page = $_SESSION['pages_store'][5]['pages_name'];
 require('./header.php');
+
 ?>
 
 <section class="section_hack">
     <div class="contain">
-<form action = "scriptphp/signup.php"  class="form-contain" method = 'post'>
+<form action = "../scriptphp/signup.php"  class="form-contain" method = 'post'>
 		<h1>Регистрация</h1>
         <label for="login"><b>Ваше имя</b></label>
         <input  type="text" name="login" value="<?= isset($_POST['login']) ? $_POST['login']: ""; ?>">
@@ -54,6 +55,6 @@ require('./header.php');
 </section> <!--section-hack-->
 
 <?php
-require('../script.php');  
-require('../footer.php');
+require('./script.php');  
+require('./footer.php');
 ?>
